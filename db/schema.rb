@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123145619) do
+ActiveRecord::Schema.define(version: 20180123150639) do
 
   create_table "equipment", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -75,6 +75,17 @@ ActiveRecord::Schema.define(version: 20180123145619) do
     t.integer "continuity_tested"
     t.integer "grounded_by_electrical"
     t.integer "checked_by_eng"
+  end
+
+  create_table "rfi_tables", force: :cascade do |t|
+    t.string "client_document_number"
+    t.string "client_document_title"
+    t.string "client_document_revision"
+    t.string "client_document_section"
+    t.string "zeton_clarification"
+    t.integer "answered"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

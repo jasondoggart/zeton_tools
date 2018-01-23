@@ -1,0 +1,2 @@
+class RfiTable < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class RfiTablesController < ApplicationController
+end
