@@ -11,17 +11,17 @@ RSpec.describe Equipment, type: :model do
     end
 
     it 'cannot be created without a tag number' do
-      @equipment.tag = '';
+      @equipment.tag = ''
       expect(@equipment).to_not be_valid
     end
 
     it 'cannot be created without a description' do
-      @equipment.description = '';
+      @equipment.description = ''
       expect(@equipment).to_not be_valid
     end
 
     it 'cannot be created without a equipment type' do
-      @equipment.equipment_type = '';
+      @equipment.equipment_type = ''
       expect(@equipment).to_not be_valid
     end
 
