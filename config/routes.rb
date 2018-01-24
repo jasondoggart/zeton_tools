@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :rfi_responses
   resources :projects
   resources :information_requests
   resources :instruments

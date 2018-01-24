@@ -1,0 +1,2 @@
+class RfiResponsesController < ApplicationController
+end

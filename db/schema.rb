@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180124170954) do
+ActiveRecord::Schema.define(version: 20180124173402) do
 
   create_table "equipment", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -113,6 +113,16 @@ ActiveRecord::Schema.define(version: 20180124170954) do
     t.string "project_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "rfi_responses", force: :cascade do |t|
+    t.text "response"
+    t.integer "information_request_id"
+    t.string "organization"
+    t.string "responder"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["information_request_id"], name: "index_rfi_responses_on_information_request_id"
   end
 
 end
