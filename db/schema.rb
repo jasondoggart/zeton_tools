@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180124173402) do
+ActiveRecord::Schema.define(version: 20180124181913) do
 
   create_table "equipment", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -113,6 +113,8 @@ ActiveRecord::Schema.define(version: 20180124173402) do
     t.string "project_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "rfi_responses", force: :cascade do |t|
@@ -123,6 +125,17 @@ ActiveRecord::Schema.define(version: 20180124173402) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["information_request_id"], name: "index_rfi_responses_on_information_request_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "email", null: false
+    t.string "encrypted_password", limit: 128, null: false
+    t.string "confirmation_token", limit: 128
+    t.string "remember_token", limit: 128, null: false
+    t.index ["email"], name: "index_users_on_email"
+    t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
 end

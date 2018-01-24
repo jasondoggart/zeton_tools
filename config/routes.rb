@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'pages/home'
+
+  root to: 'pages#home'
   resources :rfi_responses
   resources :projects
   resources :information_requests

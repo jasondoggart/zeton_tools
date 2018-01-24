@@ -24,6 +24,8 @@ group :development do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'clearance', '~> 1.16', '>= 1.16.1'
+gem 'popper_js', '~> 1.12.9'
+
