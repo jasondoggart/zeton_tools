@@ -1,6 +1,6 @@
-class CreateRfiTables < ActiveRecord::Migration[5.1]
+class CreateInformationRequests < ActiveRecord::Migration[5.1]
   def change
-    create_table :rfi_tables do |t|
+    create_table :information_requests do |t|
       t.string :client_document_number
       t.string :client_document_title
       t.string :client_document_revision

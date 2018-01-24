@@ -19,5 +19,10 @@ RSpec.describe Instrument, type: :model do
       @instrument.loop = ''
       expect(@instrument).to_not be_valid
     end
+
+    it 'cannot be created without a project number' do
+      @instrument.project = nil
+      expect(@instrument).to_not be_valid
+    end
   end
 end

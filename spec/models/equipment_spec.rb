@@ -24,5 +24,10 @@ RSpec.describe Equipment, type: :model do
       @equipment.equipment_type = '';
       expect(@equipment).to_not be_valid
     end
+
+    it 'cannot be created without a project' do
+      @equipment.project = nil
+      expect(@equipment).to_not be_valid
+    end
   end
 end

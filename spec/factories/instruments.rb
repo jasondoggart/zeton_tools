@@ -16,5 +16,6 @@ FactoryBot.define do
     dcs_io_type "AI"
     range "0 - 10 kg/hr"
     zeton_po "18.000001"
+    project
   end
 end

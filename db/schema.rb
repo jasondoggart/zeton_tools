@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123150639) do
+ActiveRecord::Schema.define(version: 20180124170954) do
 
   create_table "equipment", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -38,6 +38,33 @@ ActiveRecord::Schema.define(version: 20180123150639) do
     t.integer "item_installed_by_mech"
     t.integer "item_grounded_by_elec"
     t.integer "item_inspected_by_eng"
+    t.integer "project_id"
+    t.index ["project_id"], name: "index_equipment_on_project_id"
+  end
+
+  create_table "equipment_information_requests", id: false, force: :cascade do |t|
+    t.integer "equipment_id", null: false
+    t.integer "information_request_id", null: false
+  end
+
+  create_table "information_requests", force: :cascade do |t|
+    t.string "client_document_number"
+    t.string "client_document_title"
+    t.string "client_document_revision"
+    t.string "client_document_section"
+    t.string "zeton_clarification"
+    t.integer "answered"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "equipment_id"
+    t.integer "instrument_id"
+    t.index ["equipment_id"], name: "index_information_requests_on_equipment_id"
+    t.index ["instrument_id"], name: "index_information_requests_on_instrument_id"
+  end
+
+  create_table "information_requests_instruments", id: false, force: :cascade do |t|
+    t.integer "instrument_id", null: false
+    t.integer "information_request_id", null: false
   end
 
   create_table "instruments", force: :cascade do |t|
@@ -75,15 +102,15 @@ ActiveRecord::Schema.define(version: 20180123150639) do
     t.integer "continuity_tested"
     t.integer "grounded_by_electrical"
     t.integer "checked_by_eng"
+    t.integer "instrument_id"
+    t.integer "project_id"
+    t.index ["instrument_id"], name: "index_instruments_on_instrument_id"
+    t.index ["project_id"], name: "index_instruments_on_project_id"
   end
 
-  create_table "rfi_tables", force: :cascade do |t|
-    t.string "client_document_number"
-    t.string "client_document_title"
-    t.string "client_document_revision"
-    t.string "client_document_section"
-    t.string "zeton_clarification"
-    t.integer "answered"
+  create_table "projects", force: :cascade do |t|
+    t.string "project_number"
+    t.string "project_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -21,5 +21,6 @@ FactoryBot.define do
     item_installed_by_mech 0
     item_grounded_by_elec 0
     item_inspected_by_eng 0
+    project
   end
 end
