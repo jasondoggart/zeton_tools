@@ -1,0 +1,35 @@
+<h1><%= @project.project_number %></h1>
+<h5><%= @project.project_name %></h5>
+<h3>Instrument List</h3>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col" class="text-center"></th>
+        <th scope="col" class="text-center">Tag Number</th>
+        <th scope="col" class="text-center">PID</th>
+        <th scope="col" class="text-center">Skid Number</th>
+        <th scope="col" class="text-center">Skid Level</th>
+        <th scope="col" class="text-center">Scope</th>
+        <th scope="col" class="text-center">M,E,M/E</th>
+        <th scope="col" class="text-center">Supplier</th>
+        <th scope="col" class="text-center">Manufacturer</th>
+        <th scope="col" class="text-center">Model Number</th>
+        <th scope="col" class="text-center">Process Connection</th>
+        <th scope="col" class="text-center">MOC</th>
+        <th scope="col" class="text-center">Item Type</th>
+        <th scope="col" class="text-center">Installation Location</th>
+        <th scope="col" class="text-center">I/O Type</th>
+        <th scope="col" class="text-center">Range</th>
+        <th scope="col" class="text-center">Zeton PO</th>
+        <th scope="col" class="text-center">Tracking Number</th>
+        <th scope="col" class="text-center">Receiving Info</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @instruments.each do |inst| %>
+        <%= render partial: "instruments", locals: {instrument: inst} %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

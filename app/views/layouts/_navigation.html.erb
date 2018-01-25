@@ -1,31 +1,29 @@
-<nav class="navbar navbar-inverse">
-  <div class="container">
-    <div class="navbar-header">
-      <%= link_to 'Tutsplus-Clearance', root_path, class: 'navbar-brand' %>
-    </div>
-    <div id="navbar">
-      <% if signed_in? %>
-        <ul class="nav navbar-nav">
-        <li><%= current_user.email %></li>
-        </ul>
-      <% end %>
-   
-      <ul class="nav navbar-nav pull-right">
-        <% if signed_in? %>
-        <li><span><%= current_user.email %></span></li>
-        <li><%= link_to 'Sign out', sign_out_path, method: :delete %></li>
-        <% else %>
-        <li><%= link_to 'Sign in', sign_in_path %></li>
-      <% end %>
-      </ul>
-    </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Project Tools</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Tools
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Instruments</a>
+          <a class="dropdown-item" href="#">Equipment</a>
+          <a class="dropdown-item" href="#">RFI Log</a>
+          <a class="dropdown-item" href="#">Transmittals</a>
+          <a class="dropdown-item" href="#">Action Items</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Sign out', sign_out_path, class: 'nav-link', method: :delete %>
+      </li>
+    </ul>
   </div>
 </nav>
- 
-<div class="container">
-  <% flash.each do |key, value| %>
-    <div class="alert alert-<%= key %>">
-      <%= value %>
-    </div>
-  <% end %>
-</div>

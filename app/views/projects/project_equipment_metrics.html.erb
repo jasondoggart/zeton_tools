@@ -1,0 +1,33 @@
+<h1><%= @project.project_number %></h1>
+<h5><%= @project.project_name %></h5>
+<h3>Equipment Metrics</h3>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col" class="text-center"></th>
+        <th scope="col" class="text-center">Tag</th>
+        <th scope="col" class="text-center">PID</th>
+        <th scope="col" class="text-center">Datasheet Complete</th>
+        <th scope="col" class="text-center">Datasheet Approved</th>
+        <th scope="col" class="text-center">RFQ Sent</th>
+        <th scope="col" class="text-center">PO Placed</th>
+        <th scope="col" class="text-center">Dwg Received</th>
+        <th scope="col" class="text-center">Dwg Reviewed</th>
+        <th scope="col" class="text-center">Client Review</th>
+        <th scope="col" class="text-center">Dwg Approved</th>
+        <th scope="col" class="text-center">Item Received</th>
+        <th scope="col" class="text-center">Item Released</th>
+        <th scope="col" class="text-center">Item Installed</th>
+        <th scope="col" class="text-center">Item Grounded</th>
+        <th scope="col" class="text-center">Engineering Check</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @equipment.each do |equip| %>
+        <%= render partial: 'equipment_metrics', locals: {equipment: equip} %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
