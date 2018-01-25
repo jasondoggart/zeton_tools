@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'projects/:id/instruments/metrics', to: 'projects#project_instruments_metrics'
   get 'projects/:id/equipment', to: 'projects#project_equipment'
   get 'projects/:id/equipment/metrics', to: 'projects#project_equipment_metrics'
+  get 'projects/:id/rfis', to: 'projects#project_rfis'
 
   root to: 'pages#home'
   resources :rfi_responses

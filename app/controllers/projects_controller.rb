@@ -23,4 +23,9 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @equipment = @project.equipment
   end
+
+  def project_rfis
+    @project = Project.find(params[:id])
+    @rfis = @project.information_requests
+  end
 end
