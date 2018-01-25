@@ -1,6 +1,11 @@
 <h1><%= @project.project_number %></h1>
 <h5><%= @project.project_name %></h5>
 <hr>
+<%= link_to 'Instrument List', project_instruments_path(@project) %>
+<%= link_to 'Instrument Metrics', project_instruments_metrics_path(@project) %>
+<%= link_to 'Equipment List', project_equipment_path(@project) %>
+<%= link_to 'Equipment Metrics', project_equipment_metrics_path(@project) %>
+<%= link_to 'RFI Log', project_rfis_path(@project) %>
 <h3>Project Metrics</h3>
 <p>Will have all the project metrics</p>
 <h3>Outstanding RFIs</h3>

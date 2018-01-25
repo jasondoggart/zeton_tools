@@ -1,5 +1,5 @@
 <tr>
-  <td class="text-center">edit | delete</td>
+  <td class="text-center"><%= link_to 'edit', edit_instrument_path(instrument), id: "edit_instrument_#{instrument.id}" %> | delete</td>
   <td class="text-center"><%= instrument.tag %></td>
   <td class="text-center">PID number</td>
   <td class="text-center"><%= instrument.zeton_skid_number %></td>

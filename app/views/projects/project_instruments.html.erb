@@ -1,6 +1,7 @@
 <h1><%= @project.project_number %></h1>
 <h5><%= @project.project_name %></h5>
 <h3>Instrument List</h3>
+<p><%= link_to 'Add New Instrument', new_instrument_path(:project => @project), class: 'btn btn-outline-primary', id: 'new_instrument_link' %>
 <div class="table-responsive">
   <table class="table table-hover">
     <thead>

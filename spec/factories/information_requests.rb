@@ -8,5 +8,6 @@ FactoryBot.define do
     answered 0
     instruments {[FactoryBot.create(:instrument)]}
     equipment {[FactoryBot.create(:equipment)]}
+    project
   end
 end
