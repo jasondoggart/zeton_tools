@@ -1,0 +1,59 @@
+<h1>Project <%= @information_request.project.project_number %></h1>
+<h3><%= @information_request.rfi_number %></h3>
+<hr>
+<div class="row">
+  <div class="col-sm-12">
+    <h5>Client Document</h5>
+  </div>
+  <div class="col-sm-4">
+    Client Document Number: 
+  </div>
+  <div class="col-sm-4">
+    <%= @information_request.client_document_number %>
+  </div>
+  <div class="col-sm-2">
+    Rev.
+  </div>
+  <div class="col-sm-2">
+    <%= @information_request.client_document_revision %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4">
+    Client Document Title:
+  </div>
+  <div class="col-sm-8">
+    <%= @information_request.client_document_title %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4">
+    Client Document Section:
+  </div>
+  <div class="col-sm-8">
+    <%= @information_request.client_document_section %>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-sm-12">
+    <h5>Zeton Clarification</h5>
+  </div>
+  <div class="col-sm-12">
+    <%= @information_request.zeton_clarification %>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-sm-12">
+    <h5>RFI Responses</h5>
+    <%= link_to 'New', new_rfi_response_path(:rfi => @information_request), id: 'new_rfi_response', class: 'btn btn-outline-primary btn-sm' %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <% @information_request.rfi_responses.each do |resp| %>
+      <%= render partial: 'rfi_response', locals: {rfi_response: resp} %>
+    <% end %>
+  </div>
+</div>

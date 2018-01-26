@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180125032956) do
+ActiveRecord::Schema.define(version: 20180126194029) do
 
   create_table "equipment", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -90,20 +90,20 @@ ActiveRecord::Schema.define(version: 20180125032956) do
     t.string "receiving_info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "datasheet_submitted_for_approval"
-    t.integer "datasheet_approved"
-    t.integer "rfq_sent"
-    t.integer "po_placed"
-    t.integer "item_received"
-    t.integer "item_inspected_and_released"
-    t.integer "mounted_by_mechanical"
-    t.integer "plumbed_by_mechanical"
-    t.integer "cable_pulled"
-    t.integer "cable_terminated_at_source"
-    t.integer "cable_terminated_at_destination"
-    t.integer "continuity_tested"
-    t.integer "grounded_by_electrical"
-    t.integer "checked_by_eng"
+    t.integer "datasheet_submitted_for_approval", default: 0
+    t.integer "datasheet_approved", default: 0
+    t.integer "rfq_sent", default: 0
+    t.integer "po_placed", default: 0
+    t.integer "item_received", default: 0
+    t.integer "item_inspected_and_released", default: 0
+    t.integer "mounted_by_mechanical", default: 0
+    t.integer "plumbed_by_mechanical", default: 0
+    t.integer "cable_pulled", default: 0
+    t.integer "cable_terminated_at_source", default: 0
+    t.integer "cable_terminated_at_destination", default: 0
+    t.integer "continuity_tested", default: 0
+    t.integer "grounded_by_electrical", default: 0
+    t.integer "checked_by_eng", default: 0
     t.integer "instrument_id"
     t.integer "project_id"
     t.index ["instrument_id"], name: "index_instruments_on_instrument_id"

@@ -28,4 +28,4 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'clearance', '~> 1.16', '>= 1.16.1'
 gem 'popper_js', '~> 1.12.9'
-
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.3'

@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-11">
+    <div class="row">
+      <div class="col-sm-12">
+        <%= rfi_response.response %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        Response from: <%= rfi_response.organization %>
+      </div>
+      <div class="col-sm-6">
+        Response by: <%= rfi_response.responder %>
+      </div>
+    </div>
+    <div class=row>
+      <%= link_to 'Edit', edit_rfi_response_path(rfi_response), id: "edit_rfi_response_#{rfi_response.id}" %>
+    </div>
+  </div>
+</div>

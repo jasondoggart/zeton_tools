@@ -1,6 +1,6 @@
 <tr>
-  <td>edit | delete</td>
-  <td><%= rfi.rfi_number %></td>
+  <td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_information_request_path(rfi), id: "edit_rfi_#{rfi.id}" %>|<%= link_to '<i class="fa fa-trash"></i>'.html_safe, information_request_path(rfi), method: :delete, id: "delete_rfi_#{rfi.id}" %></td>
+  <td><%= link_to rfi.rfi_number, information_request_path(rfi), id: "show_rfi_#{rfi.id}" %></td>
   <td><%= rfi.client_document_number %></td>
   <td><%= rfi.client_document_title %></td>
   <td><%= rfi.client_document_revision %></td>

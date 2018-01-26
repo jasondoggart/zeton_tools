@@ -1,0 +1,36 @@
+<%= form_for @rfi_response do |f| %>
+  <% if @rfi_response.errors.any? %>
+    <h2><%= pluralize(@rfi_response.errors.count, 'error') %> prohibited this response from being added.</h2>
+    <ul>
+      <% @rfi_response.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= f.hidden_field :information_request_id, value: @rfi.id %>
+
+  <div class="form-group row">
+    <%= f.label :response, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :response, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :organization, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :organization, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :responder, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :responder, class: 'form-control' %>
+    </div>
+  </div>
+
+  <%= f.submit @rfi_response.new_record? ? 'Add Response' : 'Update Response', class: 'btn btn-outline-primary' %>
+<% end %>
+

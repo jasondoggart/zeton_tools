@@ -1,5 +1,5 @@
 <tr>
-  <td>edit | delete</td>
+  <td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_equipment_path(equipment), id: "edit_equipment_#{equipment.id}" %>|<%= link_to '<i class="fa fa-trash"></i>'.html_safe, equipment_path(equipment), method: :delete, id: "delete_equipment_#{equipment.id}", data: { confirm: "Are you sure?" } %></td>
   <td><%= equipment.tag %></td>
   <td>PID Number</td>
   <td><%= equipment.datasheet_complete %></td>
