@@ -16,6 +16,7 @@
     </div>
     <div class=row>
       <%= link_to 'Edit', edit_rfi_response_path(rfi_response), id: "edit_rfi_response_#{rfi_response.id}" %>
+      <%= link_to 'Delete', rfi_response_path(rfi_response), method: :delete, id: "delete_rfi_response_#{rfi_response.id}", data: { confirm: "Are you sure?" } %>
     </div>
   </div>
 </div>

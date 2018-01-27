@@ -32,6 +32,14 @@ class RfiResponsesController < ApplicationController
     end
   end
 
+  def destroy
+    @rfi_response = RfiResponse.find(params[:id])
+    @rfi = @rfi_response.information_request
+    @rfi_response.delete
+    flash[:info] = "RFI response deleted"
+    redirect_to information_request_path(@rfi)
+  end
+
   private
 
     def rfi_response_params
