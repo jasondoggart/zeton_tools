@@ -3,5 +3,6 @@ class Project < ApplicationRecord
   has_many :equipment
   has_many :instruments
   has_many :information_requests
+  has_many :team_members
   belongs_to :user
 end

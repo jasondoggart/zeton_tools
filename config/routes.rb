@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :team_members
   get 'pages/home'
   get 'projects/:id/instruments', to: 'projects#project_instruments', as: :project_instruments
   get 'projects/:id/instruments/metrics', to: 'projects#project_instruments_metrics', as: :project_instruments_metrics
