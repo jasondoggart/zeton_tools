@@ -1,19 +1,22 @@
-<div class='header'>
-  <h1>Welcome to Zeton Project Tools</h1>
-  <h4>Please Sign in</h4>
+<div class="sign-in">
+  <h3 class="sign-in-title">Please Sign In</h3>
   <%= form_for :session, url: session_path do |form| %>
-    <div class="text-field">
-      <%= form.label :email %>
-      <%= form.text_field :email, type: 'email' %>
+    <div class="form-group row">
+      <%= form.label :email, class: 'col-sm-2 col-form-label' %>
+      <div class="col-sm-10">
+        <%= form.text_field :email, type: 'email', class: 'form-control' %>
+      </div>
     </div>
 
-    <div class="password-field">
-      <%= form.label :password %>
-      <%= form.password_field :password %>
+    <div class="form-group row">
+      <%= form.label :password, class: 'col-sm-2 col-form-label' %>
+      <div class='col-sm-10'>
+        <%= form.password_field :password, class: 'form-control' %>
+      </div>
     </div>
 
     <div class="submit-field">
-      <%= form.submit %>
+      <%= form.submit 'Sign in', id: 'sign_in', class: 'btn btn-outline-primary btn-block sign-in-button' %>
     </div>
 
     <div class="other-links">

@@ -20,23 +20,25 @@ module Features
     end
 
     def sign_out
-      click_button I18n.t("layouts.application.sign_out")
+      click_link('Sign out')
     end
 
-    def sign_up_with(email, password)
+    def sign_up_with(email, password, first_name, last_name)
       visit sign_up_path
       fill_in "user_email", with: email
       fill_in "user_password", with: password
+      fill_in "user_first_name", with: first_name
+      fill_in "user_last_name", with: last_name
       click_button I18n.t("helpers.submit.user.create")
     end
 
     def expect_user_to_be_signed_in
       visit root_path
-      expect(page).to have_button I18n.t("layouts.application.sign_out")
+      expect(page).to have_selector(:link_or_button, 'Sign out')
     end
 
     def expect_user_to_be_signed_out
-      expect(page).to have_content I18n.t("layouts.application.sign_in")
+      expect(page).to have_selector(:link_or_button, 'Sign in')
     end
 
     def user_with_reset_password

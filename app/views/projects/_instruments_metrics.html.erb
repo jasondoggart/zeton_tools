@@ -1,19 +1,19 @@
 <tr>
-  <td class="text-center"><%= link_to 'edit', edit_instrument_path(instrument), id: "edit_instrument_#{instrument.id}" %> | <%= link_to 'delete', instrument_path(instrument), method: :delete, id: "delete_instrument_#{instrument.id}" %></td>
-  <td class="text-center"><%= instrument.tag %></td>
-  <td class="text-center">PID number</td>
-  <td class="text-center"><%= instrument.datasheet_submitted_for_approval %></td>
-  <td class="text-center"><%= instrument.datasheet_approved %></td>
-  <td class="text-center"><%= instrument.rfq_sent %></td>
-  <td class="text-center"><%= instrument.po_placed %></td>
-  <td class="text-center"><%= instrument.item_received %></td>
-  <td class="text-center"><%= instrument.item_inspected_and_released %></td>
-  <td class="text-center"><%= instrument.mounted_by_mechanical %></td>
-  <td class="text-center"><%= instrument.plumbed_by_mechanical %></td>
-  <td class="text-center"><%= instrument.cable_pulled %></td>
-  <td class="text-center"><%= instrument.cable_terminated_at_source %></td>
-  <td class="text-center"><%= instrument.cable_terminated_at_destination %></td>
-  <td class="text-center"><%= instrument.continuity_tested %></td>
-  <td class="text-center"><%= instrument.grounded_by_electrical %></td>
-  <td class="text-center"><%= instrument.checked_by_eng %></td>
+  <td class="align-middle text-center"><%= link_to 'edit', edit_instrument_path(instrument), id: "edit_instrument_#{instrument.id}" %> | <%= link_to 'delete', instrument_path(instrument), method: :delete, id: "delete_instrument_#{instrument.id}" %></td>
+  <td class="align-middle text-center"><%= instrument.tag %></td>
+  <td class="align-middle text-center">PID number</td>
+  <td class="align-middle text-center"><%= instrument.datasheet_submitted_for_approval %></td>
+  <td class="align-middle text-center"><%= instrument.datasheet_approved %></td>
+  <td class="align-middle text-center"><%= instrument.rfq_sent %></td>
+  <td class="align-middle text-center"><%= instrument.po_placed %></td>
+  <td class="align-middle text-center"><%= instrument.item_received %></td>
+  <td class="align-middle text-center"><%= instrument.item_inspected_and_released %></td>
+  <td class="align-middle text-center"><%= instrument.mounted_by_mechanical %></td>
+  <td class="align-middle text-center"><%= instrument.plumbed_by_mechanical %></td>
+  <td class="align-middle text-center"><%= instrument.cable_pulled %></td>
+  <td class="align-middle text-center"><%= instrument.cable_terminated_at_source %></td>
+  <td class="align-middle text-center"><%= instrument.cable_terminated_at_destination %></td>
+  <td class="align-middle text-center"><%= instrument.continuity_tested %></td>
+  <td class="align-middle text-center"><%= instrument.grounded_by_electrical %></td>
+  <td class="align-middle text-center"><%= instrument.checked_by_eng %></td>
 </tr>

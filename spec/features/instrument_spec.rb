@@ -57,4 +57,11 @@ describe 'Instruments' do
     expect(current_path).to eq(project_instruments_path(@project))
     expect(Instrument.count).to eq(before_count - 1)
   end
+
+  it 'has a show page that redirects back to the project instrument list' do
+    instrument = Instrument.create(type_code: "FE", loop: "1234", project: @project)
+    visit instrument_path(instrument)
+    click_link('back_to_instrument_list')
+    expect(current_path).to eq(project_instrument_list(@project))
+  end
 end

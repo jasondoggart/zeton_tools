@@ -1,36 +1,32 @@
-<h1><%= @project.project_number %></h1>
-<h5><%= @project.project_name %></h5>
-<h3>Instrument List</h3>
-<p><%= link_to 'Add New Instrument', new_instrument_path(:project => @project), class: 'btn btn-outline-primary', id: 'new_instrument_link' %>
-<div class="table-responsive">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col" class="text-center"></th>
-        <th scope="col" class="text-center">Tag Number</th>
-        <th scope="col" class="text-center">PID</th>
-        <th scope="col" class="text-center">Skid Number</th>
-        <th scope="col" class="text-center">Skid Level</th>
-        <th scope="col" class="text-center">Scope</th>
-        <th scope="col" class="text-center">M,E,M/E</th>
-        <th scope="col" class="text-center">Supplier</th>
-        <th scope="col" class="text-center">Manufacturer</th>
-        <th scope="col" class="text-center">Model Number</th>
-        <th scope="col" class="text-center">Process Connection</th>
-        <th scope="col" class="text-center">MOC</th>
-        <th scope="col" class="text-center">Item Type</th>
-        <th scope="col" class="text-center">Installation Location</th>
-        <th scope="col" class="text-center">I/O Type</th>
-        <th scope="col" class="text-center">Range</th>
-        <th scope="col" class="text-center">Zeton PO</th>
-        <th scope="col" class="text-center">Tracking Number</th>
-        <th scope="col" class="text-center">Receiving Info</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @instruments.each do |inst| %>
-        <%= render partial: "instruments", locals: {instrument: inst} %>
-      <% end %>
-    </tbody>
-  </table>
+<div class="main">
+  <h4><%= @project.project_number %></h4>
+  <h6 class="mt-3 mb-4 text-muted"><%= @project.project_name %></h6>
+  <h5>
+    Instrument List<br />
+    <small class="text-muted"><%= link_to 'View Metrics', project_instruments_metrics_path(@project) %></small>
+  </h5>
+  <div class="table-responsive">
+    <table class="mt-3 table table-hover">
+      <thead>
+        <tr>
+          <th scope="col" class="border-top-0 align-middle text-center"></th>
+          <th scope="col" class="border-top-0 align-middle text-center">Tag</th>
+          <th scope="col" class="border-top-0 align-middle text-center">P&ID</th>
+          <th scope="col" class="border-top-0 align-middle text-center">Scope</th>
+          <th scope="col" class="border-top-0 align-middle text-center">M,E,M/E</th>
+          <th scope="col" class="border-top-0 align-middle text-center">Manufacturer</th>
+          <th scope="col" class="border-top-0 align-middle text-center">Model Number</th>
+          <th scope="col" class="border-top-0 align-middle text-center">Process Connection</th>
+          <th scope="col" class="border-top-0 align-middle text-center">MOC</th>
+          <th scope="col" class="border-top-0 align-middle text-center">Range</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @instruments.each do |inst| %>
+          <%= render partial: "instruments", locals: {instrument: inst} %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <%= link_to 'Add New Instrument', new_instrument_path(:project => @project), class: 'btn btn-outline-primary btn-block', id: 'new_instrument_link' %>
 </div>

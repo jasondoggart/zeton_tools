@@ -6,6 +6,7 @@ RSpec.feature "User signs out" do
     sign_in
     sign_out
 
+    byebug
     expect_user_to_be_signed_out
   end
 end

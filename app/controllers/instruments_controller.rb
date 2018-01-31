@@ -35,6 +35,10 @@ class InstrumentsController < ApplicationController
     end
   end
 
+  def show
+    @instrument = Instrument.find(params[:id])
+  end
+
   def destroy
     @instrument = Instrument.find(params[:id])
     @project = @instrument.project

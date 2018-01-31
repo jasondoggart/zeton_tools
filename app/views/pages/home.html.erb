@@ -1,6 +1,15 @@
 <% if signed_in? %>
-  Signed in as: <%= current_user.email %>
-  <%= button_to 'Sign out', sign_out_path, method: :delete %>
+  <div class="main">
+    <h3>Welcome, <%= current_user.first_name %></h3>
+    <h5 class="mt-3 mb-3">Select a project</h5>
+    <div class="row mb-5 mt-5">
+      <% current_user.all_projects.each do |project| %>
+        <%= render partial: 'user_projects', locals: {project: project} %>
+      <% end %>
+    </div>
+    <%= link_to 'New Project', new_project_path, class: 'btn btn-outline-primary', id: 'create_project' %>
+  </div>
+
 <% else %>
   <%= render 'sessions/form' %>
 <% end %>
