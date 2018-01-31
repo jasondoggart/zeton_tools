@@ -10,12 +10,13 @@ class InstrumentsController < ApplicationController
 
   def create
     @instrument = Instrument.new(instrument_params)
+    @project = @instrument.project
     if @instrument.save
       flash[:success] = "Instrument created"
       redirect_to project_instruments_path(@instrument.project)
     else
       flash[:danger] = "Instrument could not be created"
-      redirect_to new_instrument_path(:project => @instrument.project)
+      render :new
     end
   end
 
@@ -26,12 +27,13 @@ class InstrumentsController < ApplicationController
 
   def update
     @instrument = Instrument.find(params[:id])
+    @project = @instrument.project
     if @instrument.update(instrument_params)
       flash[:success] = "Instrument updated successfully"
       redirect_to project_instruments_path(@instrument.project)
     else
       flash[:danger] = "Instrument could not be updated"
-      redirect_to edit_instrument_path(@instrument)
+      render :edit
     end
   end
 

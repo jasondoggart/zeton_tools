@@ -6,4 +6,5 @@ class Instrument < ApplicationRecord
   def tag
     type_code + "-" + loop
   end
+
 end

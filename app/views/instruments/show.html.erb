@@ -1,6 +1,9 @@
 <div class="main">
   <h4><%= @instrument.project.project_number %></h4>
-  <h6 class="mt-3 mb-4 text-muted"><%= @instrument.tag %></h6>
+  <h6 class="mt-3 mb-4 text-muted">
+    <%= @instrument.tag %><br />
+    <small><%= link_to 'Edit Instrument', edit_instrument_path(@instrument) %></small>
+  </h6>
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
@@ -54,11 +57,74 @@
       </div>
     </div>
     <div class="col-sm-8">
-      <div class="col-sm-6">
-        Type: <%= @instrument.type_code %>
-      </div>
-      <div class="col-sm-6">
-        Type: <%= @instrument.loop %>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Instrument Data</h5>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <ul class="list-group ml-3 border-0">
+              <li class="list-group-item border-0">
+                <b>Type:</b> <%= @instrument.type_code %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Skid Number:</b> <%= @instrument.zeton_skid_number %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Scope:</b> <%= @instrument.scope %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Supplier:</b> <%= @instrument.supplier %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Model Number:</b> <%= @instrument.model %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Material of Construction:</b> <%= @instrument.model %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Installation Location:</b> <%= @instrument.location %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>DCS I/O Type:</b> <%= @instrument.dcs_io_type %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Tracking Number:</b> <%= @instrument.tracking_number %>
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <ul class="list-group mr-3">
+              <li class="list-group-item border-0">
+                <b>Loop:</b> <%= @instrument.loop %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Skid Level:</b> <%= @instrument.zeton_skid_level %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>M, M/E, E:</b> <%= @instrument.mech_elec %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Manufacturer:</b> <%= @instrument.manufacturer %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Process Connection:</b> <%= @instrument.process_connection %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Item Type:</b> <%= @instrument.item_type %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Instrument Range:</b> <%= @instrument.range %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Zeton PO Number:</b> <%= @instrument.zeton_po %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Receiving Info:</b> <%= @instrument.receiving_info %>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
