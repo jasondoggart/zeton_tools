@@ -1,0 +1,4 @@
+<%= form_for @instrument, remote: true do |f| %>
+  <%= f.hidden_field :item_received, value: metrics_increment(@instrument.item_received) %>
+  <%= f.button icon_select(@instrument.item_received).html_safe, class: 'metrics-button' %>
+<% end %>

@@ -12,46 +12,116 @@
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <span class="float-sm-left">Datasheet Submitted</span><span class="float-sm-right"><i class="fa fa-check-circle text-success"></i></span>
+            <span class="float-sm-left">Datasheet Submitted</span>
+            <span class="align-middle float-sm-right">
+              <div id="datasheet_submitted_status">
+                <%= render 'datasheet_submitted_status' %>
+              </div>
+            </span>
           </li>
           <li class="list-group-item">
-            <span class="float-sm-left">Datasheet Approved</span><span class="float-sm-right"><i class="fa fa-check-circle text-success"></i></span>
+            <span class="float-sm-left">Datasheet Approved</span>
+            <span class="float-sm-right">
+              <div id="datasheet_approved_status">
+                <%= render 'datasheet_approved_status' %>
+              </div>
+            </span>
           </li>
           <li class="list-group-item">
-            <span class="float-sm-left">RFQ Sent</span><span class="float-sm-right"><i class="fa fa-check-circle text-success"></i></span>
+            <span class="float-sm-left">RFQ Sent</span>
+            <span class="float-sm-right">
+              <div id="rfq_sent_status">
+                <%= render 'rfq_sent_status' %>
+              </div>
+            </span>
           </li>
           <li class="list-group-item">
-            <span class="float-sm-left">PO Placed</span><span class="float-sm-right"><i class="fa fa-check-circle text-success"></i></span>
+            <span class="float-sm-left">PO Placed</span>
+            <span class="float-sm-right">
+              <div id="po_placed_status">
+                <%= render 'po_placed_status' %>
+              </div>
+            </span>
           </li>
           <li class="list-group-item">
-            <span class="float-sm-left">Item Received</span><span class="float-sm-right"><i class="fa fa-check-circle text-success"></i></span>
+            <span class="float-sm-left">Item Received</span>
+            <span class="float-sm-right">
+              <div id="item_received_status">
+                <%= render 'item_received_status' %>
+              </div>
+            </span>
           </li>
           <li class="list-group-item">
-            <span class="float-sm-left">Item Released</span><span class="float-sm-right"><i class="fa fa-check-circle text-success"></i></span>
+            <span class="float-sm-left">Item Released</span>
+            <span class="float-sm-right">
+              <div id="item_released_status">
+                <%= render 'item_released_status' %>
+              </div>
+            </span>
           </li>
           <li class="list-group-item">
-            <span class="float-sm-left">Mounted by Mechanical</span><span class="float-sm-right"><i class="fa fa-check-circle text-success"></i></span>
+            <span class="float-sm-left">Mounted by Mechanical</span>
+            <span class="float-sm-right">
+              <div id='mounted_status'>
+                <%= render 'mounted_status' %>
+              </div>
+            </span>
           </li>
           <li class="list-group-item">
-            <span class="float-sm-left">Plumbed by Mechanical</span><span class="float-sm-right"><i class="fa fa-check-circle text-success"></i></span>
+            <span class="float-sm-left">Plumbed by Mechanical</span>
+            <span class="float-sm-right">
+              <div id="plumbed_status">
+                <%= render 'plumbed_status' %>
+              </div>
+            </span>
           </li>
           <li class="list-group-item">
-            <span class="float-sm-left">Cable Pulled</span><span class="float-sm-right"><i class="fa fa-check-circle text-success"></i></span>
+            <span class="float-sm-left">Cable Pulled</span>
+            <span class="float-sm-right">
+              <div id="cable_pulled_status">
+                <%= render 'cable_pulled_status' %>
+              </div>
+            </span>
           </li>
           <li class="list-group-item">
-            <span class="float-sm-left">Terminated at Source</span><span class="float-sm-right"><i class="fa fa-check-circle text-success"></i></span>
+            <span class="float-sm-left">Terminated at Source</span>
+            <span class="float-sm-right">
+              <div id="cable_terminated_at_source_status">
+                <%= render 'cable_terminated_at_source_status' %>
+              </div>
+            </span>
           </li>
           <li class="list-group-item">
-            <span class="float-sm-left">Terminated at Dest.</span><span class="float-sm-right"><i class="fa fa-check-circle text-success"></i></span>
+            <span class="float-sm-left">Terminated at Dest.</span>
+            <span class="float-sm-right">
+              <div id="cable_terminated_at_dest_status">
+                <%= render 'cable_terminated_at_dest_status' %>
+              </div>
+            </span>
           </li>
           <li class="list-group-item">
-            <span class="float-sm-left">Continuity Tested</span><span class="float-sm-right"><i class="fa fa-check-circle text-success"></i></span>
+            <span class="float-sm-left">Continuity Tested</span>
+            <span class="float-sm-right">
+              <div id="continuity_tested_status">
+                <%= render 'continuity_tested_status' %>
+              </div>
+            </span>
           </li>
           <li class="list-group-item">
-            <span class="float-sm-left">Grounded by Electrical</span><span class="float-sm-right"><i class="fa fa-check-circle text-success"></i></span>
+            <span class="float-sm-left">Grounded by Electrical</span>
+            <span class="float-sm-right">
+              <div id="grounded_status">
+                <%= render 'grounded_status' %>
+              </div>
+            </span>
           </li>
           <li class="list-group-item">
-            <span class="float-sm-left">Checked by Engineering</span><span class="float-sm-right"><i class="fa fa-check-circle text-success"></i></span>
+            <span class="float-sm-left">Checked by Engineering</span>
+            <span class="float-sm-right">
+              <div id="eng_check_status">
+                <%= render 'eng_check_status' %>
+              </div>
+            </span>
           </li>
         </ul>
       </div>

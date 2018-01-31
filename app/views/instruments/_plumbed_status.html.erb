@@ -1,0 +1,4 @@
+<%= form_for @instrument, remote: true do |f| %>
+  <%= f.hidden_field :plumbed_by_mechanical, value: metrics_increment(@instrument.plumbed_by_mechanical) %>
+  <%= f.button icon_select(@instrument.plumbed_by_mechanical).html_safe, class: 'metrics-button' %>
+<% end %>

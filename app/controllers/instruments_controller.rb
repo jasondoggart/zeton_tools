@@ -29,8 +29,13 @@ class InstrumentsController < ApplicationController
     @instrument = Instrument.find(params[:id])
     @project = @instrument.project
     if @instrument.update(instrument_params)
-      flash[:success] = "Instrument updated successfully"
-      redirect_to project_instruments_path(@instrument.project)
+      respond_to do |format|
+        format.html {
+          flash[:success] = "Instrument updated successfully"
+          redirect_to project_instruments_path(@instrument.project)
+        }
+        format.js
+      end
     else
       flash[:danger] = "Instrument could not be updated"
       render :edit
