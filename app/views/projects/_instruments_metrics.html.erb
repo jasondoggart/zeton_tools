@@ -2,18 +2,74 @@
   <td class="align-middle text-center"><%= link_to 'edit', edit_instrument_path(instrument), id: "edit_instrument_#{instrument.id}" %> | <%= link_to 'delete', instrument_path(instrument), method: :delete, id: "delete_instrument_#{instrument.id}" %></td>
   <td class="align-middle text-center"><%= instrument.tag %></td>
   <td class="align-middle text-center">PID number</td>
-  <td class="align-middle text-center"><%= instrument.datasheet_submitted_for_approval %></td>
-  <td class="align-middle text-center"><%= instrument.datasheet_approved %></td>
-  <td class="align-middle text-center"><%= instrument.rfq_sent %></td>
-  <td class="align-middle text-center"><%= instrument.po_placed %></td>
-  <td class="align-middle text-center"><%= instrument.item_received %></td>
-  <td class="align-middle text-center"><%= instrument.item_inspected_and_released %></td>
-  <td class="align-middle text-center"><%= instrument.mounted_by_mechanical %></td>
-  <td class="align-middle text-center"><%= instrument.plumbed_by_mechanical %></td>
-  <td class="align-middle text-center"><%= instrument.cable_pulled %></td>
-  <td class="align-middle text-center"><%= instrument.cable_terminated_at_source %></td>
-  <td class="align-middle text-center"><%= instrument.cable_terminated_at_destination %></td>
-  <td class="align-middle text-center"><%= instrument.continuity_tested %></td>
-  <td class="align-middle text-center"><%= instrument.grounded_by_electrical %></td>
-  <td class="align-middle text-center"><%= instrument.checked_by_eng %></td>
+  <td class="align-middle text-center">
+    <div id="datasheet_submitted_status_instrument_<%= instrument.id %>">
+      <%= render partial: 'instruments/datasheet_submitted_status', locals: {instrument: instrument} %>
+    </div>
+  </td>
+  <td class="align-middle text-center">
+    <div id="datasheet_approved_status_instrument_<%= instrument.id %>">
+      <%= render partial: 'instruments/datasheet_approved_status', locals: {instrument: instrument} %>
+    </div>
+  </td>
+  <td class="align-middle text-center">
+    <div id="rfq_sent_status_instrument_<%= instrument.id %>">
+      <%= render partial: 'instruments/rfq_sent_status', locals: {instrument: instrument} %>
+    </div>
+  </td>
+  <td class="align-middle text-center">
+    <div id="po_placed_status_instrument_<%= instrument.id %>">
+      <%= render partial: 'instruments/po_placed_status', locals: {instrument: instrument} %>
+    </div>
+  </td>
+  <td class="align-middle text-center">
+    <div id="item_received_status_instrument_<%= instrument.id %>">
+      <%= render partial: 'instruments/item_received_status', locals: {instrument: instrument} %>
+    </div>
+  </td>
+  <td class="align-middle text-center">
+    <div id="item_released_status_instrument_<%= instrument.id %>">
+      <%= render partial: 'instruments/item_released_status', locals: {instrument: instrument} %>
+    </div>
+  </td>
+  <td class="align-middle text-center">
+    <div id='mounted_status_instrument_<%= instrument.id %>'>
+      <%= render partial: 'instruments/mounted_status', locals: {instrument: instrument} %>
+    </div>
+  </td>
+  <td class="align-middle text-center">
+    <div id="plumbed_status_instrument_<%= instrument.id %>">
+      <%= render partial: 'instruments/plumbed_status', locals: {instrument: instrument} %>
+    </div>
+  </td>
+  <td class="align-middle text-center">
+    <div id="cable_pulled_status_instrument_<%= instrument.id %>">
+      <%= render partial: 'instruments/cable_pulled_status', locals: {instrument: instrument} %>
+    </div>
+  </td>
+  <td class="align-middle text-center">
+    <div id="cable_terminated_at_source_status_instrument_<%= instrument.id %>">
+      <%= render partial: 'instruments/cable_terminated_at_source_status', locals: {instrument: instrument} %>
+    </div>
+  </td>
+  <td class="align-middle text-center">
+    <div id="cable_terminated_at_dest_status_instrument_<%= instrument.id %>">
+      <%= render partial: 'instruments/cable_terminated_at_dest_status', locals: {instrument: instrument} %>
+    </div>
+  </td>
+  <td class="align-middle text-center">
+    <div id="continuity_tested_status_instrument_<%= instrument.id %>">
+      <%= render partial: 'instruments/continuity_tested_status', locals: {instrument: instrument} %>
+    </div>
+  </td>
+  <td class="align-middle text-center">
+    <div id="grounded_status_instrument_<%= instrument.id %>">
+      <%= render partial: 'instruments/grounded_status', locals: {instrument: instrument} %>
+    </div>
+  </td>
+  <td class="align-middle text-center">
+    <div id="eng_check_status_instrument_<%= instrument.id %>">
+      <%= render partial: 'instruments/eng_check_status', locals: {instrument: instrument} %>
+    </div>
+  </td>
 </tr>

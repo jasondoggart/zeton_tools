@@ -17,18 +17,6 @@ describe 'Instruments' do
     expect(Instrument.last.project).to eq(@project)
   end
 
-  it 'can be created from the instruments metrics list' do
-    visit project_instruments_metrics_path(@project)
-    click_link('new_instrument_link')
-    fill_in('Type', with: "FE")
-    fill_in('Loop', with: "1234")
-    click_on('Add Instrument')
-    expect(current_path).to eq(project_instruments_path(@project))
-    expect(Instrument.last.type_code).to eq("FE")
-    expect(Instrument.last.loop).to eq("1234")
-    expect(Instrument.last.project).to eq(@project)
-  end
-
   it 'can be updated from the instrument list' do
     instrument = Instrument.create(type_code: "FE", loop: "1234", project: @project)
     visit project_instruments_path(@project)
@@ -62,6 +50,6 @@ describe 'Instruments' do
     instrument = Instrument.create(type_code: "FE", loop: "1234", project: @project)
     visit instrument_path(instrument)
     click_link('back_to_instrument_list')
-    expect(current_path).to eq(project_instrument_list(@project))
+    expect(current_path).to eq(project_instruments_path(@project))
   end
 end

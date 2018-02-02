@@ -1,0 +1,195 @@
+<div class="main">
+  <h4><%= link_to @equipment.project.project_number, project_path(@equipment.project) %></h4>
+  <h6 class="mt-3 mb-4 text-muted">
+    <%= @equipment.tag %></br>
+    <small>
+      <%= link_to 'Edit Equipment', edit_equipment_path(@equipment) %><br />
+      <%= link_to 'Back to Equipment List', project_equipment_path(@equipment.project), id: 'back_to_equipment_list' %>
+    </small>
+  </h6>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            Metrics<br />
+            <small class="text-muted">Click below to update</small>
+          </h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <span class="float-sm-left">Datasheet Complete</span>
+            <span class="float-sm-right">
+              <div id="datasheet_complete_status_equipment_<%= @equipment.id %>">
+                <%= render partial: 'datasheet_complete_status', locals: {equipment: @equipment} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-sm-left">Datasheet Released</span>
+            <span class="float-sm-right">
+              <div id="datasheet_released_status_equipment_<%= @equipment.id %>">
+                <%= render partial: 'datasheet_released_status', locals: {equipment: @equipment} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-sm-left">RFQ Sent</span>
+            <span class="float-sm-right">
+              <div id="rfq_sent_status_equipment_<%= @equipment.id %>">
+                <%= render partial: 'rfq_sent_status', locals: {equipment: @equipment} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-sm-left">PO Placed</span>
+            <span class="float-sm-right">
+              <div id="po_placed_status_equipment_<%= @equipment.id %>">
+                <%= render partial: 'po_placed_status', locals: {equipment: @equipment} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-sm-left">Approval Drawing Received</span>
+            <span class="float-sm-right">
+              <div id="approval_drawing_received_status_equipment_<%= @equipment.id %>">
+                <%= render partial: 'approval_drawing_received_status', locals: {equipment: @equipment} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-sm-left">Approval Drawing Marked Up</span>
+            <span class="float-sm-right">
+              <div id="approval_drawing_marked_up_status_equipment_<%= @equipment.id %>">
+                <%= render partial: 'approval_drawing_marked_up_status', locals: {equipment: @equipment} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-sm-left">Approval Drawing Sent to Client</span>
+            <span class="float-sm-right">
+              <div id="approval_drawing_sent_to_client_status_equipment_<%= @equipment.id %>">
+                <%= render partial: 'approval_drawing_sent_to_client_status', locals: {equipment: @equipment} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-sm-left">Approval Drawing Released</span>
+            <span class="float-sm-right">
+              <div id="approval_drawing_released_status_equipment_<%= @equipment.id %>">
+                <%= render partial: 'approval_drawing_released_status', locals: {equipment: @equipment} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-sm-left">Item Received</span>
+            <span class="float-sm-right">
+              <div id="item_received_status_equipment_<%= @equipment.id %>">
+                <%= render partial: 'item_received_status', locals: {equipment: @equipment} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-sm-left">Item Released</span>
+            <span class="float-sm-right">
+              <div id="item_released_status_equipment_<%= @equipment.id %>">
+                <%= render partial: 'item_released_status', locals: {equipment: @equipment} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-sm-left">Installed by Mechanical</span>
+            <span class="float-sm-right">
+              <div id="installed_by_mech_status_equipment_<%= @equipment.id %>">
+                <%= render partial: 'installed_by_mech_status', locals: {equipment: @equipment} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-sm-left">Grounded by Electrical</span>
+            <span class="float-sm-right">
+              <div id="grounded_by_elec_status_equipment_<%= @equipment.id %>">
+                <%= render partial: 'grounded_by_elec_status', locals: {equipment: @equipment} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-sm-left">Inspected by Engineering</span>
+            <span class="float-sm-right">
+              <div id="inspected_by_eng_status_equipment_<%= @equipment.id %>">
+                <%= render partial: 'inspected_by_eng_status', locals: {equipment: @equipment} %>
+              </div>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Equipment Data</h5>
+        </div>
+        <ul class="list group ml-3 border-0">
+          <li class="list-group-item border-0">
+            <div class="form-row">
+              <div class="col-sm-6">
+                <b>Tag:</b> <%= @equipment.tag %>
+              </div>
+              <div class="col-sm-6">
+                <b>Description:</b> <%= @equipment.description %>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item border-0">
+            <div class="form-row">
+              <div class="col-sm-6">
+                <b>Type:</b> <%= @equipment.equipment_type %>
+              </div>
+              <div class="col-sm-6">
+                <b>Scope:</b> <%= @equipment.scope %>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item border-0">
+            <div class="form-row">
+              <div class="col-sm-6">
+                <b>Supplier:</b> <%= @equipment.supplier %>
+              </div>
+              <div class="col-sm-6">
+                <b>Manufacturer:</b> <%= @equipment.manufacturer %>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item border-0">
+            <div class="form-row">
+              <div class="col-sm-6">
+                <b>Model Number:</b> <%= @equipment.model_number %>
+              </div>
+              <div class="col-sm-6">
+                <b>Zeton PO:</b> <%= @equipment.zeton_po %>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item border-0">
+            <div class="form-row">
+              <div class="col-sm-6">
+                <b>Tracking Number:</b> <%= @equipment.tracking_number %>
+              </div>
+              <div class="col-sm-6">
+                <b>Receiving Info:</b> <%= @equipment.receiving_info %>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="card mt-5">
+        <div class="card-body">
+          <h5 class="card-title">Related RFIs</h5>
+          <p class="card-text">
+            Will show related RFI's here
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

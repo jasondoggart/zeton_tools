@@ -39,4 +39,11 @@ describe "Equipment" do
     expect(current_path).to eq(project_equipment_path(@project))
     expect(Equipment.count).to eq(before_count - 1)
   end
+
+  it 'has a show page that redirects back to the project equipment list' do
+    equipment = Equipment.create(tag: "V-101", description: "A Vessel", equipment_type: "Vessel", project: @project)
+    visit equipment_path(equipment)
+    click_link('back_to_equipment_list')
+    expect(current_path).to eq(project_equipment_path(@project))
+  end
 end

@@ -1,0 +1,4 @@
+<%= form_for equipment, remote: true do |f| %>
+  <%= f.hidden_field :item_grounded_by_elec, value: metrics_increment(equipment.item_grounded_by_elec) %>
+  <%= f.button icon_select(equipment.item_grounded_by_elec).html_safe, class: 'metrics-button' %>
+<% end %>

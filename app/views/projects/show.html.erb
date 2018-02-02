@@ -32,12 +32,21 @@
       <div class="card mb-3">
         <div class="card-body">
           <h5 class="card-title">Project Team</h5>
+          <table class="w-100">
+            <thead>
+              <tr>
+                <th scope="col">Role</th>
+                <th scope="col">Name</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @project.team_members.each do |team_member| %>
+                <%= render partial: 'team_member', locals: {team_member: team_member} %>
+              <% end %>
+            </tbody>
+          </table>
         </div>
-        <ul>
-          <% @project.team_members.each do |team_member| %>
-            <%= render partial: 'team_member', locals: {team_member: team_member} %>
-          <% end %>
-        </ul>
         <div class="card-body">
           <%= link_to 'Add Team Member', new_team_member_path(:project => @project), id: 'add_team_member', class: 'btn btn-outline-primary' %>
         </div>

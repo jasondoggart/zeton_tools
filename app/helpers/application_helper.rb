@@ -2,6 +2,8 @@ module ApplicationHelper
 
   def icon_select(value)
     case value
+    when nil
+      content_tag(:i, nil, class: 'fa fa-times-circle text-warning fa-2x')
     when 0
       content_tag(:i, nil, class: 'fa fa-times-circle text-warning fa-2x')
     when 1
@@ -12,7 +14,7 @@ module ApplicationHelper
   end
 
   def metrics_increment(value)
-    if value == 0
+    if value == 0 or value == nil
       1
     elsif value == 1
       2

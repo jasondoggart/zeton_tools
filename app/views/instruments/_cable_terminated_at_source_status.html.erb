@@ -1,4 +1,4 @@
-<%= form_for @instrument, remote: true do |f| %>
-  <%= f.hidden_field :cable_terminated_at_source, value: metrics_increment(@instrument.cable_terminated_at_source) %>
-  <%= f.button icon_select(@instrument.cable_terminated_at_source).html_safe, class: 'metrics-button' %>
+<%= form_for instrument, remote: true do |f| %>
+  <%= f.hidden_field :cable_terminated_at_source, value: metrics_increment(instrument.cable_terminated_at_source) %>
+  <%= f.button icon_select(instrument.cable_terminated_at_source).html_safe, class: 'metrics-button' %>
 <% end %>

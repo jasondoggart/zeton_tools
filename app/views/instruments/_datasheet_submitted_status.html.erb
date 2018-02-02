@@ -1,4 +1,4 @@
-<%= form_for @instrument, remote: true do |f| %>
-  <%= f.hidden_field :datasheet_submitted_for_approval, value: metrics_increment(@instrument.datasheet_submitted_for_approval) %>
-  <%= f.button icon_select(@instrument.datasheet_submitted_for_approval).html_safe, class: 'metrics-button' %>
+<%= form_for instrument, remote: true do |f| %>
+  <%= f.hidden_field :datasheet_submitted_for_approval, value: metrics_increment(instrument.datasheet_submitted_for_approval) %>
+  <%= f.button icon_select(instrument.datasheet_submitted_for_approval).html_safe, class: 'metrics-button' %>
 <% end %>

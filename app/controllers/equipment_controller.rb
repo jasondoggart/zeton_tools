@@ -24,8 +24,13 @@ class EquipmentController < ApplicationController
   def update
     @equipment = Equipment.find(params[:id])
     if @equipment.update(equipment_params)
-      flash[:success] = "Equipment updated"
-      redirect_to project_equipment_path(@equipment.project)
+      respond_to do |format|
+        format.html {
+          flash[:success] = "Equipment updated"
+          redirect_to project_equipment_path(@equipment.project)
+        }
+        format.js
+      end
     else
       flash[:danger] = "Equipment could not be updated"
       redirect_to edit_equipment_path(@equipment)
@@ -38,6 +43,10 @@ class EquipmentController < ApplicationController
     @equipment.delete
     flash[:info] = "Equipment removed"
     redirect_to project_equipment_path(@project)
+  end
+
+  def show
+    @equipment = Equipment.find(params[:id])
   end
   private
     
@@ -58,9 +67,10 @@ class EquipmentController < ApplicationController
                                         :po_placed,
                                         :drawing_for_approval_received,
                                         :drawing_for_approval_marked_up,
-                                        :drawing_for_approval_to_client,
+                                        :drawing_for_approval_sent_to_client,
                                         :drawing_for_approval_released_for_construction,
                                         :item_received_at_zeton,
+                                        :item_inspected_and_released,
                                         :item_installed_by_mech,
                                         :item_grounded_by_elec,
                                         :item_inspected_by_eng,

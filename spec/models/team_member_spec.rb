@@ -10,9 +10,9 @@ RSpec.describe TeamMember, type: :model do
       expect(@team_member).to be_valid
     end
 
-    it 'cannot be created without a user' do
+    it 'can be created without a user' do
       @team_member.user = nil
-      expect(@team_member).to_not be_valid
+      expect(@team_member).to be_valid
     end
 
     it 'cannot be created without a project' do

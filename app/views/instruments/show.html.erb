@@ -2,124 +2,130 @@
   <h4><%= @instrument.project.project_number %></h4>
   <h6 class="mt-3 mb-4 text-muted">
     <%= @instrument.tag %><br />
-    <small><%= link_to 'Edit Instrument', edit_instrument_path(@instrument) %></small>
+    <small>
+      <%= link_to 'Edit Instrument', edit_instrument_path(@instrument) %><br />
+      <%= link_to 'Back to Instrument List', project_instruments_path(@instrument.project), id: 'back_to_instrument_list' %>
+    </small>
   </h6>
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Metrics</h5>
+          <h5 class="card-title">
+            Metrics<br />
+            <small class="text-muted">Click below to update</small>
+          </h5>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <span class="float-sm-left">Datasheet Submitted</span>
             <span class="align-middle float-sm-right">
-              <div id="datasheet_submitted_status">
-                <%= render 'datasheet_submitted_status' %>
+              <div id="datasheet_submitted_status_instrument_<%= @instrument.id %>">
+                <%= render partial: 'datasheet_submitted_status', locals: {instrument: @instrument} %>
               </div>
             </span>
           </li>
           <li class="list-group-item">
             <span class="float-sm-left">Datasheet Approved</span>
             <span class="float-sm-right">
-              <div id="datasheet_approved_status">
-                <%= render 'datasheet_approved_status' %>
+              <div id="datasheet_approved_status_instrument_<%= @instrument.id %>">
+                <%= render partial: 'datasheet_approved_status', locals: {instrument: @instrument} %>
               </div>
             </span>
           </li>
           <li class="list-group-item">
             <span class="float-sm-left">RFQ Sent</span>
             <span class="float-sm-right">
-              <div id="rfq_sent_status">
-                <%= render 'rfq_sent_status' %>
+              <div id="rfq_sent_status_instrument_<%= @instrument.id %>">
+                <%= render partial: 'rfq_sent_status', locals: {instrument: @instrument} %>
               </div>
             </span>
           </li>
           <li class="list-group-item">
             <span class="float-sm-left">PO Placed</span>
             <span class="float-sm-right">
-              <div id="po_placed_status">
-                <%= render 'po_placed_status' %>
+              <div id="po_placed_status_instrument_<%= @instrument.id %>">
+                <%= render partial: 'po_placed_status', locals: {instrument: @instrument} %>
               </div>
             </span>
           </li>
           <li class="list-group-item">
             <span class="float-sm-left">Item Received</span>
             <span class="float-sm-right">
-              <div id="item_received_status">
-                <%= render 'item_received_status' %>
+              <div id="item_received_status_instrument_<%= @instrument.id %>">
+                <%= render partial: 'item_received_status', locals: {instrument: @instrument} %>
               </div>
             </span>
           </li>
           <li class="list-group-item">
             <span class="float-sm-left">Item Released</span>
             <span class="float-sm-right">
-              <div id="item_released_status">
-                <%= render 'item_released_status' %>
+              <div id="item_released_status_instrument_<%= @instrument.id %>">
+                <%= render partial: 'item_released_status', locals: {instrument: @instrument} %>
               </div>
             </span>
           </li>
           <li class="list-group-item">
             <span class="float-sm-left">Mounted by Mechanical</span>
             <span class="float-sm-right">
-              <div id='mounted_status'>
-                <%= render 'mounted_status' %>
+              <div id='mounted_status_instrument_<%= @instrument.id %>'>
+                <%= render partial: 'mounted_status', locals: {instrument: @instrument} %>
               </div>
             </span>
           </li>
           <li class="list-group-item">
             <span class="float-sm-left">Plumbed by Mechanical</span>
             <span class="float-sm-right">
-              <div id="plumbed_status">
-                <%= render 'plumbed_status' %>
+              <div id="plumbed_status_instrument_<%= @instrument.id %>">
+                <%= render partial: 'plumbed_status', locals: {instrument: @instrument} %>
               </div>
             </span>
           </li>
           <li class="list-group-item">
             <span class="float-sm-left">Cable Pulled</span>
             <span class="float-sm-right">
-              <div id="cable_pulled_status">
-                <%= render 'cable_pulled_status' %>
+              <div id="cable_pulled_status_instrument_<%= @instrument.id %>">
+                <%= render partial: 'cable_pulled_status', locals: {instrument: @instrument} %>
               </div>
             </span>
           </li>
           <li class="list-group-item">
             <span class="float-sm-left">Terminated at Source</span>
             <span class="float-sm-right">
-              <div id="cable_terminated_at_source_status">
-                <%= render 'cable_terminated_at_source_status' %>
+              <div id="cable_terminated_at_source_status_instrument_<%= @instrument.id %>">
+                <%= render partial: 'cable_terminated_at_source_status', locals: {instrument: @instrument} %>
               </div>
             </span>
           </li>
           <li class="list-group-item">
             <span class="float-sm-left">Terminated at Dest.</span>
             <span class="float-sm-right">
-              <div id="cable_terminated_at_dest_status">
-                <%= render 'cable_terminated_at_dest_status' %>
+              <div id="cable_terminated_at_dest_status_instrument_<%= @instrument.id %>">
+                <%= render partial: 'cable_terminated_at_dest_status', locals: {instrument: @instrument} %>
               </div>
             </span>
           </li>
           <li class="list-group-item">
             <span class="float-sm-left">Continuity Tested</span>
             <span class="float-sm-right">
-              <div id="continuity_tested_status">
-                <%= render 'continuity_tested_status' %>
+              <div id="continuity_tested_status_instrument_<%= @instrument.id %>">
+                <%= render partial: 'continuity_tested_status', locals: {instrument: @instrument} %>
               </div>
             </span>
           </li>
           <li class="list-group-item">
             <span class="float-sm-left">Grounded by Electrical</span>
             <span class="float-sm-right">
-              <div id="grounded_status">
-                <%= render 'grounded_status' %>
+              <div id="grounded_status_instrument_<%= @instrument.id %>">
+                <%= render partial: 'grounded_status', locals: {instrument: @instrument} %>
               </div>
             </span>
           </li>
           <li class="list-group-item">
             <span class="float-sm-left">Checked by Engineering</span>
             <span class="float-sm-right">
-              <div id="eng_check_status">
-                <%= render 'eng_check_status' %>
+              <div id="eng_check_status_instrument_<%= @instrument.id %>">
+                <%= render partial: 'eng_check_status', locals: {instrument: @instrument} %>
               </div>
             </span>
           </li>
@@ -194,6 +200,16 @@
               </li>
             </ul>
           </div>
+        </div>
+      </div>
+      <div class="card mt-5">
+        <div class="card-body">
+          <h5 class="card-title">
+            Related RFI's
+          </h5>
+          <p class="card-text">
+            Will list related RFI's here
+          </p>
         </div>
       </div>
     </div>

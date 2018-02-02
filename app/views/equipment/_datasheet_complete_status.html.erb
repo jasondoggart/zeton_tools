@@ -1,0 +1,4 @@
+<%= form_for equipment, remote: true do |f| %>
+  <%= f.hidden_field :datasheet_complete, value: metrics_increment(equipment.datasheet_complete) %>
+  <%= f.button icon_select(equipment.datasheet_complete).html_safe, class: 'metrics-button' %>
+<% end %>

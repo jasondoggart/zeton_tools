@@ -1,0 +1,4 @@
+<%= form_for equipment, remote: true do |f| %>
+  <%= f.hidden_field :drawing_for_approval_received, value: metrics_increment(equipment.drawing_for_approval_received) %>
+  <%= f.button icon_select(equipment.drawing_for_approval_received).html_safe, class: 'metrics-button' %>
+<% end %>
