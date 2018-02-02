@@ -30,5 +30,9 @@ RSpec.describe Project, type: :model do
     it 'has team members created when the new project is created' do
       expect(@project.team_members.count).to be > 0
     end
+
+    it 'has documents created when the new project is created' do
+      expect(@project.documents.count).to be > 0
+    end
   end
 end

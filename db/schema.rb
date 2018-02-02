@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180202183020) do
+ActiveRecord::Schema.define(version: 20180202201439) do
+
+  create_table "documents", force: :cascade do |t|
+    t.string "name"
+    t.string "phase"
+    t.string "timing"
+    t.string "file_location"
+    t.string "document_type"
+    t.string "revision_name"
+    t.string "revision_type"
+    t.string "revision_frequency"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "project_id"
+    t.integer "prepared_by_id"
+    t.integer "delivered_to_id"
+    t.string "prepared_by_role"
+    t.string "delivered_to_role"
+    t.index ["delivered_to_id"], name: "index_documents_on_delivered_to_id"
+    t.index ["prepared_by_id"], name: "index_documents_on_prepared_by_id"
+    t.index ["project_id"], name: "index_documents_on_project_id"
+  end
 
   create_table "equipment", force: :cascade do |t|
     t.datetime "created_at", null: false

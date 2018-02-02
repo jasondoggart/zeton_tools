@@ -29,6 +29,11 @@ class ProjectsController < ApplicationController
     @rfis = @project.information_requests
   end
 
+  def project_documents
+    @project = Project.find(params[:id])
+    @documents = @project.documents
+  end
+
   def new
     @project = Project.new
     @users = User.all

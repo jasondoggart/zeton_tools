@@ -1,0 +1,30 @@
+<div class="main">
+  <h4><%= @project.project_number %></h4>
+  <h6 class="mt-3 mb-4 text-muted"><%= @project.project_name %></h6>
+  <h5>
+    Documents List
+  </h5>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center"></th>
+          <th scope="col" class="text-center">Document Name</th>
+          <th scope="col" class="text-center">Project Phase</th>
+          <th scope="col" class="text-center">Documebnt Timing</th>
+          <th scope="col" class="text-center">File Location</th>
+          <th scope="col" class="text-center">Document Type</th>
+          <th scope="col" class="text-center">Revision Name</th>
+          <th scope="col" class="text-center">Revision Type</th>
+          <th scope="col" class="text-center">Revision Frequency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @project.documents.each do |doc| %>
+          <%= render partial: 'document', locals: {document: doc} %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
