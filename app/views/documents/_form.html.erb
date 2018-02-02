@@ -1,0 +1,88 @@
+<%= form_for @document do |f| %>
+  <% if @document.errors.any? %>
+    <div class="alert alert-warning">
+      The form contains <%= pluralize(@document.errors.count, 'error') %>
+    </div>
+    <ul>
+      <%= @document.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= f.hidden_field :project_id, value: @project.id %>
+  <div class="row mb-5">
+    <div class="col-sm-12">
+      <div class="card">
+        <ul class="list-group ml-3 border-0">
+          <li class="list-group-item border-0">
+            <div class="form-group row mb-0">
+              <%= f.label :name, 'Document Name', class: 'pr-0 mr-0 col-sm-2 col-form-label' %>
+              <div class="col-sm-10">
+                <%= f.text_field :name, class: 'form-control' %>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item border-0">
+            <div class="form-group row mb-0">
+              <%= f.label :phase, 'Project Phase', class: 'pr-0 mr-0 col-sm-2 col-form-label' %>
+              <div class="col-sm-10">
+                <%= f.text_field :phase, class: 'form-control' %>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item border-0">
+            <div class="form-group row mb-0">
+              <%= f.label :timing, 'Project Timing', class: 'pr-0 mr-0 col-sm-2 col-form-label' %>
+              <div class="col-sm-10">
+                <%= f.text_field :timing, class: 'form-control' %>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item border-0">
+            <div class="form-group row mb-0">
+              <%= f.label :file_location, 'File Location', class: 'pr-0 mr-0 col-sm-2 col-form-label' %>
+              <div class="col-sm-10">
+                <%= f.text_field :file_location, class: 'form-control' %>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item border-0">
+            <div class="form-group row mb-0">
+              <%= f.label :document_type, 'Document Type', class: 'pr-0 mr-0 col-sm-2 col-form-label' %>
+              <div class="col-sm-10">
+                <%= f.text_field :document_type, class: 'form-control' %>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item border-0">
+            <div class="form-group row mb-0">
+              <%= f.label :revision_name, 'Revision Name', class: 'pr-0 mr-0 col-sm-2 col-form-label' %>
+              <div class="col-sm-10">
+                <%= f.text_field :revision_name, class: 'form-control' %>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item border-0">
+            <div class="form-group row mb-0">
+              <%= f.label :revision_type, 'Revision Type', class: 'pr-0 mr-0 col-sm-2 col-form-label' %>
+              <div class="col-sm-10">
+                <%= f.text_field :revision_type, class: 'form-control' %>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item border-0">
+            <div class="form-group row mb-0">
+              <%= f.label :revision_frequency, 'Revision Frequency', class: 'pr-0 mr-0 col-sm-2 col-form-label' %>
+              <div class="col-sm-10">
+                <%= f.text_field :revision_frequency, class: 'form-control' %>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <%= f.submit @document.new_record? ? 'Add Document' : 'Update Document', class: 'btn btn-outline-primary btn-block' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
