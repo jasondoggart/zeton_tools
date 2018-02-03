@@ -22,4 +22,12 @@ module ApplicationHelper
       0
     end
   end
+
+  def documents_metrics_increment(value)
+    if value == 0 or value == nil
+      1
+    elsif value == 1
+      0
+    end
+  end
 end

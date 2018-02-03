@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180202201439) do
+ActiveRecord::Schema.define(version: 20180203005145) do
 
   create_table "documents", force: :cascade do |t|
     t.string "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20180202201439) do
     t.integer "delivered_to_id"
     t.string "prepared_by_role"
     t.string "delivered_to_role"
+    t.integer "status", default: 0
     t.index ["delivered_to_id"], name: "index_documents_on_delivered_to_id"
     t.index ["prepared_by_id"], name: "index_documents_on_prepared_by_id"
     t.index ["project_id"], name: "index_documents_on_project_id"

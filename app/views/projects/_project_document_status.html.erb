@@ -1,0 +1,5 @@
+<%= form_for document, remote: true do |f| %>
+  <%= f.hidden_field :status, value: documents_metrics_increment(document.status) %>
+  <%= f.button icon_select(document.status).html_safe, class: 'metrics-button' %>
+<% end %>
+
