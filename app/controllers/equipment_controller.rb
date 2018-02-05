@@ -1,24 +1,22 @@
 class EquipmentController < ApplicationController
 
   def new
-    @project = Project.find(params[:project])
     @equipment = Equipment.new
   end
 
   def create
-    @equipment = Equipment.new(equipment_params)
+    @equipment = current_project.equipment.build(equipment_params)
     if @equipment.save
       flash[:success] = "Equipment added"
-      redirect_to project_equipment_path(@equipment.project)
+      redirect_to project_equipment_path
     else
       flash[:danger] = "Equipment could not be added"
-      redirect_to new_equipment_path(:project => @equipment.project)
+      render :new
     end
   end
 
   def edit
     @equipment = Equipment.find(params[:id])
-    @project = @equipment.project
   end
 
   def update
@@ -27,22 +25,21 @@ class EquipmentController < ApplicationController
       respond_to do |format|
         format.html {
           flash[:success] = "Equipment updated"
-          redirect_to project_equipment_path(@equipment.project)
+          redirect_to project_equipment_path
         }
         format.js
       end
     else
       flash[:danger] = "Equipment could not be updated"
-      redirect_to edit_equipment_path(@equipment)
+      render :edit
     end
   end
 
   def destroy
     @equipment = Equipment.find(params[:id])
-    @project = @equipment.project
     @equipment.delete
     flash[:info] = "Equipment removed"
-    redirect_to project_equipment_path(@project)
+    redirect_to project_equipment_path
   end
 
   def show

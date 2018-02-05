@@ -1,28 +1,28 @@
-<h1><%= @project.project_number %></h1>
-<h5><%= @project.project_name %></h5>
-<h3>RFI Log</h3>
-<p><%= link_to 'New RFI', new_information_request_path(:project => @project), id: 'new_rfi', class: 'btn btn-outline-primary' %>
-<div class="table-responsive">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col" class="text-center"></th>
-        <th scope="col" class="text-center">RFI Number</th>
-        <th scope="col" class="text-center">Client Document Number</th>
-        <th scope="col" class="text-center">Client Document Title</th>
-        <th scope="col" class="text-center">Client Document Revision</th>
-        <th scope="col" class="text-center">Client Document Section</th>
-        <th scope="col" class="text-center">Zeton Clarification</th>
-        <th scope="col" class="text-center">Associated Instruments</th>
-        <th scope="col" class="text-center">Associated Equipment</th>
-        <th scope="col" class="text-center">Latest Update</th>
-        <th scope="col" class="text-center">Answered?</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @rfis.each do |rfi| %>
-        <%= render partial: 'rfis', locals: {rfi: rfi} %>
-      <% end %>
-    </tbody>
-  </table>
+<div class="main">
+  <h3>RFI Log</h3>
+  <p><%= link_to 'New RFI', new_information_request_path(:project => @project), id: 'new_rfi', class: 'btn btn-outline-primary' %>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center"></th>
+          <th scope="col" class="text-center">RFI Number</th>
+          <th scope="col" class="text-center">Client Document Number</th>
+          <th scope="col" class="text-center">Client Document Title</th>
+          <th scope="col" class="text-center">Client Document Revision</th>
+          <th scope="col" class="text-center">Client Document Section</th>
+          <th scope="col" class="text-center">Zeton Clarification</th>
+          <th scope="col" class="text-center">Associated Instruments</th>
+          <th scope="col" class="text-center">Associated Equipment</th>
+          <th scope="col" class="text-center">Latest Update</th>
+          <th scope="col" class="text-center">Answered?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @rfis.each do |rfi| %>
+          <%= render partial: 'rfis', locals: {rfi: rfi} %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

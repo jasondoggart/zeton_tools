@@ -1,10 +1,9 @@
 <div class="main">
-  <h4><%= @instrument.project.project_number %></h4>
   <h6 class="mt-3 mb-4 text-muted">
     <%= @instrument.tag %><br />
     <small>
       <%= link_to 'Edit Instrument', edit_instrument_path(@instrument) %><br />
-      <%= link_to 'Back to Instrument List', project_instruments_path(@instrument.project), id: 'back_to_instrument_list' %>
+      <%= link_to 'Back to Instrument List', project_instruments_path, id: 'back_to_instrument_list' %>
     </small>
   </h6>
   <div class="row">

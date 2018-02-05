@@ -1,6 +1,6 @@
 <div class="main">
-  <h4><%= @project.project_number %></h4>
-  <h6 class="mt-3 mb-4 text-muted"><%= @project.project_name %></h6>
+  <h4><%= current_project.project_number %></h4>
+  <h6 class="mt-3 mb-4 text-muted"><%= current_project.project_name %></h6>
   <div class="row">
     <div class="col-sm-3">
       <div class="card">
@@ -8,12 +8,12 @@
           <h5 class="card-title mb-0">Project Tools</h5>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"><%= link_to 'Instrument List', project_instruments_path(@project) %></li>
-          <li class="list-group-item"><%= link_to 'Instrument Metrics', project_instruments_metrics_path(@project) %></li>
-          <li class="list-group-item"><%= link_to 'Equipment List', project_equipment_path(@project) %></li>
-          <li class="list-group-item"><%= link_to 'Equipment Metrics', project_equipment_metrics_path(@project) %></li>
-          <li class="list-group-item"><%= link_to 'RFI Log', project_rfis_path(@project) %></li>
-          <li class="list-group-item"><%= link_to 'Documentation Tracking', project_documents_path(@project) %></li>
+          <li class="list-group-item"><%= link_to 'Instrument List', project_instruments_path %></li>
+          <li class="list-group-item"><%= link_to 'Instrument Metrics', project_instruments_metrics_path %></li>
+          <li class="list-group-item"><%= link_to 'Equipment List', project_equipment_path %></li>
+          <li class="list-group-item"><%= link_to 'Equipment Metrics', project_equipment_metrics_path %></li>
+          <li class="list-group-item"><%= link_to 'RFI Log', project_rfis_path %></li>
+          <li class="list-group-item"><%= link_to 'Documentation Tracking', project_documents_path %></li>
         </ul>
       </div>
     </div>

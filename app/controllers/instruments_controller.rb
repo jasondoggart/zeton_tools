@@ -4,16 +4,14 @@ class InstrumentsController < ApplicationController
   end
 
   def new
-    @project = Project.find(params[:project])
-    @instrument = @project.instruments.new
+    @instrument = Instrument.new
   end
 
   def create
-    @instrument = Instrument.new(instrument_params)
-    @project = @instrument.project
+    @instrument = current_project.instruments.build(instrument_params)
     if @instrument.save
       flash[:success] = "Instrument created"
-      redirect_to project_instruments_path(@instrument.project)
+      redirect_to project_instruments_path
     else
       flash[:danger] = "Instrument could not be created"
       render :new
@@ -22,17 +20,15 @@ class InstrumentsController < ApplicationController
 
   def edit
     @instrument = Instrument.find(params[:id])
-    @project = @instrument.project
   end
 
   def update
     @instrument = Instrument.find(params[:id])
-    @project = @instrument.project
     if @instrument.update(instrument_params)
       respond_to do |format|
         format.html {
           flash[:success] = "Instrument updated successfully"
-          redirect_to project_instruments_path(@instrument.project)
+          redirect_to project_instruments_path
         }
         format.js
       end
@@ -48,10 +44,9 @@ class InstrumentsController < ApplicationController
 
   def destroy
     @instrument = Instrument.find(params[:id])
-    @project = @instrument.project
     @instrument.delete
     flash[:info] = "Instrument deleted"
-    redirect_to project_instruments_path(@project)
+    redirect_to project_instruments_path
   end
 
   private

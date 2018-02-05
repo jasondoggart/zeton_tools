@@ -1,9 +1,7 @@
 <div class="main">
-  <h4><%= @project.project_number %></h4>
-  <h6 class="mt-3 mb-4 text-muted"><%= @project.project_name %></h6>
-  <h5>
+  <h3>
     Documents List
-  </h5>
+  </h3>
   <%= link_to "Add New Document", new_document_path(:project => @project), class: 'mb-5 btn btn-outline-primary', id: 'new_document_link' %>
   <div class="table-responsive">
     <table class="table table-hover">

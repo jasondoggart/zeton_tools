@@ -2,15 +2,13 @@ class DocumentsController < ApplicationController
 
   def new
     @document = Document.new
-    @project = Project.find(params[:project])
   end
 
   def create
-    @document = Document.new(document_params)
-    @project = @document.project
+    @document = current_project.documents.build(document_params)
     if @document.save
       flash[:success] = "Document successfully added"
-      redirect_to project_documents_path(@project)
+      redirect_to project_documents_path
     else
       flash[:danger] = "Document could not be added"
       render :new
@@ -19,17 +17,15 @@ class DocumentsController < ApplicationController
 
   def edit
     @document = Document.find(params[:id])
-    @project = @document.project
   end
 
   def update
     @document = Document.find(params[:id])
-    @project = @document.project
     if @document.update(document_params)
       respond_to do |format|
         format.html {
           flash[:success] = "Document successfully updated"
-          redirect_to project_documents_path(@project)
+          redirect_to project_documents_path
         }
         format.js
       end
@@ -41,10 +37,9 @@ class DocumentsController < ApplicationController
 
   def destroy
     @document = Document.find(params[:id])
-    @project = @document.project
     @document.delete
     flash[:info] = "The document was removed"
-    redirect_to project_documents_path(@project)
+    redirect_to project_documents_path
 
   end
 
@@ -64,4 +59,5 @@ class DocumentsController < ApplicationController
                                     :delivered_to_role,
                                     :status)
   end
+
 end

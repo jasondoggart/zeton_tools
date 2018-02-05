@@ -3,13 +3,17 @@ require "support/features/clearance_helpers"
 
 describe 'Team Members' do
   before do
-    @project = FactoryBot.create(:project)
+    @user = FactoryBot.create(:user)
+    @project = Project.create(project_number: "123-45", project_name: "a name", client: "a client", user: @user)
     @user1 = FactoryBot.create(:user)
     @user2 = FactoryBot.create(:user)
     @user3 = FactoryBot.create(:user)
   end
 
   it 'can be created from the project dashboard' do
+    sign_in_with(@user.email, @user.password)
+    visit root_path
+    click_link("project_#{@project.id}")
     visit project_path(@project)
     before_count = @project.team_members.count
     click_link('add_team_member')
@@ -27,6 +31,9 @@ describe 'Team Members' do
   end
 
   it 'can be removed from the project dashboard' do
+    sign_in_with(@user.email, @user.password)
+    visit root_path
+    click_link("project_#{@project.id}")
     team_member = TeamMember.create(user: @user1, project: @project)
     visit project_path(@project)
     before_count = @project.team_members.count

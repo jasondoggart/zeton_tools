@@ -1,36 +1,38 @@
 class ProjectsController < ApplicationController
+  before_action :set_project, only: [:show,
+                                     :edit,
+                                     :update,
+                                     :project_instruments,
+                                     :project_instruments_metrics,
+                                     :project_equipment,
+                                     :project_equipment_metrics,
+                                     :project_rfis,
+                                     :project_documents]
 
   def show
-    @project = Project.find(params[:id])
   end
 
   def project_instruments
-    @project = Project.find(params[:id])
     @instruments = @project.instruments.paginate(:page => params[:page], :per_page => 15)
   end
 
   def project_instruments_metrics
-    @project = Project.find(params[:id])
     @instruments = @project.instruments
   end
 
   def project_equipment
-    @project = Project.find(params[:id])
     @equipment = @project.equipment
   end
 
   def project_equipment_metrics
-    @project = Project.find(params[:id])
     @equipment = @project.equipment
   end
 
   def project_rfis
-    @project = Project.find(params[:id])
     @rfis = @project.information_requests
   end
 
   def project_documents
-    @project = Project.find(params[:id])
     @documents = @project.documents
   end
 
@@ -51,19 +53,17 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:id])
     @users = User.all
   end
 
   def update
-    @project = Project.find(params[:id])
     @users = User.all
     if @project.update(project_params)
       flash[:success] = "Project updated successfully"
       redirect_to project_path(@project)
     else
       flash[:danger] = "Project could not be updated"
-      redirect_to edit_project_path(@projet)
+      redirect_to edit_project_path(@project)
     end
   end
 
@@ -71,5 +71,10 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:project_number, :project_name, :user_id, :client)
+  end
+
+  def set_project
+    # TODO - Redirect user to select project if nothing set as current_project
+    @project = current_project
   end
 end

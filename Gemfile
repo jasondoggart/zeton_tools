@@ -14,6 +14,7 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_bot_rails', '~> 4.0'
+  gem 'rack_session_access', '~> 0.1.1'
 end
 
 group :development do

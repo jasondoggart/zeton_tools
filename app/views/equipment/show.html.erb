@@ -1,10 +1,9 @@
 <div class="main">
-  <h4><%= link_to @equipment.project.project_number, project_path(@equipment.project) %></h4>
   <h6 class="mt-3 mb-4 text-muted">
     <%= @equipment.tag %></br>
     <small>
       <%= link_to 'Edit Equipment', edit_equipment_path(@equipment) %><br />
-      <%= link_to 'Back to Equipment List', project_equipment_path(@equipment.project), id: 'back_to_equipment_list' %>
+      <%= link_to 'Back to Equipment List', project_equipment_path, id: 'back_to_equipment_list' %>
     </small>
   </h6>
   <div class="row">
