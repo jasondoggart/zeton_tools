@@ -6,6 +6,7 @@
     <small class="text-muted"><%= link_to 'View Metrics', project_instruments_metrics_path(@project) %></small>
   </h5>
   <div class="table-responsive">
+    <%= will_paginate(@instruments, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
     <table class="mt-3 table table-hover">
       <thead>
         <tr>

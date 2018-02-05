@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
 
   def project_instruments
     @project = Project.find(params[:id])
-    @instruments = @project.instruments
+    @instruments = @project.instruments.paginate(:page => params[:page], :per_page => 15)
   end
 
   def project_instruments_metrics
@@ -70,6 +70,6 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:project_number, :project_name, :user_id)
+    params.require(:project).permit(:project_number, :project_name, :user_id, :client)
   end
 end

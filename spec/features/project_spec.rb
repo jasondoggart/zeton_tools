@@ -21,6 +21,7 @@ describe "Project" do
     expect(current_path).to eq(new_project_path)
     fill_in('Project number', with: "145-45")
     fill_in('Project name', with: "A project")
+    fill_in('Client', with: "A client")
     select(user.email, from: 'project_user_id')
     click_on('Add')
     expect(current_path).to eq(root_path)

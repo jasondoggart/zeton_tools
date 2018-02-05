@@ -1,5 +1,5 @@
 class Project < ApplicationRecord
-  validates_presence_of :project_number, :project_name
+  validates_presence_of :project_number, :project_name, :client
   has_many :equipment
   has_many :instruments
   has_many :information_requests

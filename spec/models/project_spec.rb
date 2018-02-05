@@ -27,6 +27,11 @@ RSpec.describe Project, type: :model do
       expect(@project).to_not be_valid
     end
 
+    it 'cannot be created without a client' do
+      @project.client = ''
+      expect(@project).to_not be_valid
+    end
+
     it 'has team members created when the new project is created' do
       expect(@project.team_members.count).to be > 0
     end

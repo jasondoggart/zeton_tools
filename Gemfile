@@ -21,6 +21,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'faker', '~> 1.8', '>= 1.8.7'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
@@ -29,3 +30,5 @@ gem 'jquery-rails'
 gem 'clearance', '~> 1.16', '>= 1.16.1'
 gem 'popper_js', '~> 1.12.9'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.3'
+gem 'will_paginate', '~> 3.1', '>= 3.1.6'
+gem 'bootstrap-will_paginate', '~> 1.0'

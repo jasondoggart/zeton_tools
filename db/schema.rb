@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180203005145) do
+ActiveRecord::Schema.define(version: 20180203021118) do
 
   create_table "documents", force: :cascade do |t|
     t.string "name"
@@ -126,9 +126,7 @@ ActiveRecord::Schema.define(version: 20180203005145) do
     t.integer "continuity_tested", default: 0
     t.integer "grounded_by_electrical", default: 0
     t.integer "checked_by_eng", default: 0
-    t.integer "instrument_id"
     t.integer "project_id"
-    t.index ["instrument_id"], name: "index_instruments_on_instrument_id"
     t.index ["project_id"], name: "index_instruments_on_project_id"
   end
 
@@ -138,6 +136,7 @@ ActiveRecord::Schema.define(version: 20180203005145) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.string "client"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
