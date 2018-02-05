@@ -42,20 +42,20 @@
               </tr>
             </thead>
             <tbody>
-              <% @project.team_members.each do |team_member| %>
+              <% current_project.team_members.each do |team_member| %>
                 <%= render partial: 'team_member', locals: {team_member: team_member} %>
               <% end %>
             </tbody>
           </table>
         </div>
         <div class="card-body">
-          <%= link_to 'Add Team Member', new_team_member_path(:project => @project), id: 'add_team_member', class: 'btn btn-outline-primary' %>
+          <%= link_to 'Add Team Member', new_team_member_path(:project => current_project), id: 'add_team_member', class: 'btn btn-outline-primary' %>
         </div>
       </div>
     </div>
   </div>
   <div class="mt-5">
-  <% if @project.user == current_user %>
-    <%= link_to 'Update Project Details', edit_project_path(@project), class: 'btn btn-outline-primary btn-block', id: "update_project_#{@project.id}" %>
+  <% if current_project.user == current_user %>
+    <%= link_to 'Update Project Details', edit_project_path(current_project), class: 'btn btn-outline-primary btn-block', id: "update_project_#{current_project.id}" %>
   <% end %>
 </div>

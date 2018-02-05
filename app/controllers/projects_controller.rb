@@ -1,39 +1,40 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show,
-                                     :edit,
-                                     :update,
-                                     :project_instruments,
-                                     :project_instruments_metrics,
-                                     :project_equipment,
-                                     :project_equipment_metrics,
-                                     :project_rfis,
-                                     :project_documents]
+  before_action :require_login
+  before_action :set_project, only: [:show, :edit, :update]
+  before_action :must_select_project, only: [
+                                            :project_instruments,
+                                            :project_instruments_metrics,
+                                            :project_equipment,
+                                            :project_equipment_metrics,
+                                            :project_rfis,
+                                            :project_documents
+                                             ]
 
   def show
   end
 
   def project_instruments
-    @instruments = @project.instruments.paginate(:page => params[:page], :per_page => 15)
+    @instruments = current_project.instruments.paginate(:page => params[:page], :per_page => 15)
   end
 
   def project_instruments_metrics
-    @instruments = @project.instruments
+    @instruments = current_project.instruments
   end
 
   def project_equipment
-    @equipment = @project.equipment
+    @equipment = current_project.equipment
   end
 
   def project_equipment_metrics
-    @equipment = @project.equipment
+    @equipment = current_project.equipment
   end
 
   def project_rfis
-    @rfis = @project.information_requests
+    @rfis = current_project.information_requests
   end
 
   def project_documents
-    @documents = @project.documents
+    @documents = current_project.documents
   end
 
   def new
@@ -54,16 +55,18 @@ class ProjectsController < ApplicationController
 
   def edit
     @users = User.all
+    @project = current_project
   end
 
   def update
+    @project = current_project
     @users = User.all
-    if @project.update(project_params)
+    if current_project.update(project_params)
       flash[:success] = "Project updated successfully"
-      redirect_to project_path(@project)
+      redirect_to project_path(current_project)
     else
       flash[:danger] = "Project could not be updated"
-      redirect_to edit_project_path(@project)
+      render :edit
     end
   end
 
@@ -74,7 +77,8 @@ class ProjectsController < ApplicationController
   end
 
   def set_project
-    # TODO - Redirect user to select project if nothing set as current_project
-    @project = current_project
+    if !(current_project == Project.find(params[:id]))
+      set_current_project(Project.find(params[:id]))
+    end
   end
 end

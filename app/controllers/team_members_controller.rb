@@ -1,13 +1,13 @@
 class TeamMembersController < ApplicationController
+  before_action require_login
 
   def new
-    @project = Project.find(params[:project])
     @users = User.all
     @team_member = TeamMember.new
   end
 
   def create
-    @team_member = TeamMember.new(team_member_params)
+    @team_member = current_project.team_members.build(team_member_params)
     if @team_member.save
       flash[:success] = "Team member added"
       redirect_to project_path(@team_member.project)
@@ -19,10 +19,9 @@ class TeamMembersController < ApplicationController
 
   def destroy
     @team_member = TeamMember.find(params[:id])
-    @project = @team_member.project
     @team_member.destroy
     flash[:info] = "Team member was removed"
-    redirect_to project_path(@project)
+    redirect_to project_path(current_project)
   end
 
   private

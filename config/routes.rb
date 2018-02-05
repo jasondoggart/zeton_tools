@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   get 'projects/rfis', to: 'projects#project_rfis', as: :project_rfis
   get 'projects/documents', to: 'projects#project_documents', as: :project_documents
   post 'select_project', to: 'project_sessions#create'
-  delete 'change_project', to: 'project_sessions#destroy'
 
   root to: 'pages#home'
   resources :rfi_responses

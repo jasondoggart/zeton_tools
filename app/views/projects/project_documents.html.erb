@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @project.documents.each do |doc| %>
+        <% current_project.documents.each do |doc| %>
           <%= render partial: 'document', locals: {document: doc} %>
         <% end %>
       </tbody>

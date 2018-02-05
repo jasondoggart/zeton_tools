@@ -1,4 +1,5 @@
 class EquipmentController < ApplicationController
+  before_action require_login
 
   def new
     @equipment = Equipment.new
