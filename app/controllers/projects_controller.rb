@@ -15,9 +15,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_metrics_summary
-    @total_instrument_count = total_instrument_count
-   
-
   end
 
   def project_instruments
