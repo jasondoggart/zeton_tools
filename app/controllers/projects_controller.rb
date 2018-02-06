@@ -7,10 +7,17 @@ class ProjectsController < ApplicationController
                                             :project_equipment,
                                             :project_equipment_metrics,
                                             :project_rfis,
-                                            :project_documents
+                                            :project_documents,
+                                            :project_metrics_summary
                                              ]
 
   def show
+  end
+
+  def project_metrics_summary
+    @total_instrument_count = total_instrument_count
+   
+
   end
 
   def project_instruments

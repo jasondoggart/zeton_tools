@@ -60,6 +60,8 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (>= 2.0, < 4.0)
+    chart-js-rails (0.1.4)
+      railties (> 3.1)
     clearance (1.16.1)
       bcrypt
       email_validator (~> 1.4)
@@ -225,6 +227,7 @@ DEPENDENCIES
   bootstrap-will_paginate (~> 1.0)
   byebug
   capybara
+  chart-js-rails (~> 0.1.4)
   clearance (~> 1.16, >= 1.16.1)
   coffee-rails (~> 4.2)
   database_cleaner
