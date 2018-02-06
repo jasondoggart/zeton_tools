@@ -1,5 +1,5 @@
 class InstrumentsController < ApplicationController
-  before_action require_login
+  before_action :require_login
   def index
     @instruments = Instrument.all
   end

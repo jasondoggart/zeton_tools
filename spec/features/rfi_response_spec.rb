@@ -3,12 +3,16 @@ require "support/features/clearance_helpers"
 
 describe 'RFI Responses' do
   before do
-    @project = FactoryBot.create(:project)
+    @user = FactoryBot.create(:user)
+    @project = Project.create(project_number: "123-45", project_name: "a name", client: "a client", user: @user)
     @rfi = InformationRequest.create(zeton_clarification: "clarification", project: @project)
+    sign_in_with(@user.email, @user.password)
   end
 
   it 'can be created from the RFI show page' do
     before_count = @rfi.rfi_responses.count
+    visit root_path
+    click_link("project_#{@project.id}")
     visit information_request_path(@rfi)
     click_link('new_rfi_response')
     fill_in('Response', with: "a response")
@@ -22,6 +26,8 @@ describe 'RFI Responses' do
 
   it 'can be updated from the RFI show page' do
     rfi_response = RfiResponse.create(response: "a response", organization: "client", responder: 'jd', information_request: @rfi)
+    visit root_path
+    click_link("project_#{@project.id}")
     visit information_request_path(@rfi)
     click_link("edit_rfi_response_#{rfi_response.id}")
     fill_in('Response', with: 'a new response')
@@ -32,6 +38,8 @@ describe 'RFI Responses' do
   end
    it 'can be deleted from the RFI show page' do
     rfi_response = RfiResponse.create(response: "a response", organization: "client", responder: 'jd', information_request: @rfi)
+    visit root_path
+    click_link("project_#{@project.id}")
     before_count = RfiResponse.count
     visit information_request_path(@rfi)
     click_link("delete_rfi_response_#{rfi_response.id}")

@@ -1,5 +1,5 @@
 class TeamMembersController < ApplicationController
-  before_action require_login
+  before_action :require_login
 
   def new
     @users = User.all

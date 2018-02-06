@@ -1,5 +1,5 @@
 class RfiResponsesController < ApplicationController
-  before_action require_login
+  before_action :require_login
   def new
     @rfi = InformationRequest.find(params[:rfi])
     @rfi_response = RfiResponse.new
