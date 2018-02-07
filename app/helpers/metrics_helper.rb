@@ -12,7 +12,7 @@ module MetricsHelper
   end
 
   def datasheet_submitted_for_approval_complete
-
+    current_project.instruments.where(datasheet_submitted_for_approval: 1).count
   end
 
   def datasheet_approved_required

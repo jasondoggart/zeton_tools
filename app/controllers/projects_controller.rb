@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
   def show
   end
 
-  def project_metrics_summary
+  def project_metrics
   end
 
   def project_instruments

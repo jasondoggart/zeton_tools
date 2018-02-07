@@ -46,4 +46,13 @@ describe "Project" do
     expect(current_path).to eq(project_path(project))
     expect(project.reload.project_number).to eq("999-99")
   end
+
+  it 'has a project metrics view' do
+    user = User.create(first_name: "test", last_name: "user", email: 'test@test.com', password: "password")
+    project = FactoryBot.create(:project, user: user)
+    sign_in_with('test@test.com', 'password')
+    visit root_path
+    click_link("project_#{project.id}")
+    visit project_metrics_path
+  end
 end
