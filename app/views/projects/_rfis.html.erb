@@ -6,7 +6,15 @@
   <td><%= rfi.client_document_revision %></td>
   <td><%= rfi.client_document_section %></td>
   <td><%= rfi.zeton_clarification %></td>
-  <td>Show associated instruments</td>
-  <td>Show associated equipment</td>
+  <td>
+    <% rfi.instruments.each do |inst| %>
+      <%= link_to inst.tag, instrument_path(inst) %><br />
+    <% end %>
+  </td>
+  <td>
+    <% rfi.equipment.each do |equip| %>
+      <%= link_to equip.tag, equipment_path(equip) %><br />
+    <% end %>
+  </td>
   <td><%= rfi.answered %></td>
 </tr>

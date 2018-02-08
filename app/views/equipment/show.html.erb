@@ -184,9 +184,24 @@
       <div class="card mt-5">
         <div class="card-body">
           <h5 class="card-title">Related RFIs</h5>
-          <p class="card-text">
-            Will show related RFI's here
-          </p>
+          <% if @equipment.information_requests.any? %>
+            <table>
+              <thead>
+                <th>Number</th>
+                <th>Zeton Clarification</th>
+                <th>Responses</th>
+              </thead>
+              <tbody>
+                <% @equipment.information_requests.each do |rfi| %>
+                  <td><%= link_to rfi.rfi_number, information_request_path(rfi) %></td>
+                  <td><%= rfi.zeton_clarification %></td>
+                  <td><%= link_to rfi.rfi_responses.count, information_request_path(rfi) %></td>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            No related RFIs
+          <% end %>
         </div>
       </div>
     </div>
