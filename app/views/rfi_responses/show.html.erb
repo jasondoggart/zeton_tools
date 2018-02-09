@@ -1,0 +1,36 @@
+<div class="main">
+  <h3>Response to <%= @rfi_response.information_request.rfi_number %></h3>
+  <h5><%= link_to "Project #{@rfi_response.information_request.project.project_number}", project_path(@rfi_response.information_request.project) %></h5>
+  <%= link_to 'Edit', edit_rfi_response_path(@rfi_response), class: 'btn btn-sm btn-outline-primary', id: "edit_rfi_response_#{@rfi_response.id}" %>
+  <%= link_to 'Delete', rfi_response_path(@rfi_response), class: 'btn btn-sm btn-outline-danger', id: "delete_rfi_reponse_#{@rfi_response.id}" %>
+  <div class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Responder Information</h5>
+      <div class="row">
+        <div class="col-sm-6">
+          <b>Organization</b>
+          <span class="ml-4">
+            <%= @rfi_response.organization %>
+          </span>
+        </div>
+        <div class="col-sm-6">
+          <b>Responder</b>
+          <span class="ml-4">
+            <%= @rfi_response.responder %>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Response</h5>
+      <div class="row">
+        <div class="col-sm-12">
+          <%= @rfi_response.response %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

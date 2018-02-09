@@ -22,15 +22,15 @@ class ProjectsController < ApplicationController
   end
 
   def project_instruments_metrics
-    @instruments = current_project.instruments
+    @instruments = current_project.instruments.paginate(:page => params[:page], :per_page => 15)
   end
 
   def project_equipment
-    @equipment = current_project.equipment
+    @equipment = current_project.equipment.paginate(:page => params[:page], :per_page => 15)
   end
 
   def project_equipment_metrics
-    @equipment = current_project.equipment
+    @equipment = current_project.equipment.paginate(:page => params[:page], :per_page => 15)
   end
 
   def project_rfis

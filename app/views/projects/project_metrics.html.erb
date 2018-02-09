@@ -1,5 +1,5 @@
 <div class="main">
-  <h3 class="mb-3">Project <%= current_project.project_number %></h3>
+  <h3 class="mb-3"><%= link_to 'Project ' + current_project.project_number, project_path(current_project) %></h3>
   <h5 class="mb-5">Metrics Summary</h5>
   <div class="card mt-3">
     <div class="card-body">
@@ -172,7 +172,7 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="progress" style="height: 2px;">
-            <div class="progress-bar" role="progressbar" style="width: <%= equipment_in_zeton_scope_percent %>%;" %>%;" aria-valuenow="<%= equipment_in_zeton_scope_percent %>"  aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar" role="progressbar" style="width: <%= equipment_in_zeton_scope_percent %>%;" aria-valuenow="<%= equipment_in_zeton_scope_percent %>"  aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </div>
         <div class="col-sm-6">

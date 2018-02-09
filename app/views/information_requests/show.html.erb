@@ -80,7 +80,7 @@
               <tbody>
                 <% @information_request.rfi_responses.each do |response| %>
                   <tr class="mt-3">
-                    <td class="p-3"><%= response.created_at.strftime("%b %-d, %Y") %></td>
+                    <td class="p-3"><%= link_to response.created_at.strftime("%b %-d, %Y"), rfi_response_path(response) %></td>
                     <td class="p-3"><%= response.organization %></td>
                     <td class="p-3"><%= response.response %></td>
                     <td class="p-3">

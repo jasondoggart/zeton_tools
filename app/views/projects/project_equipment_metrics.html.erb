@@ -33,6 +33,7 @@
         <% end %>
       </tbody>
     </table>
+    <%= will_paginate(@equipment, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
   </div>
 </div>
 
