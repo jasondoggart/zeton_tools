@@ -65,8 +65,21 @@ describe "Information Request" do
     visit project_rfis_path
     click_link('new_rfi')
     fill_in('Zeton Clarification', with: "Clar")
-    select(@project.instruments.last.tag, from: 'Assoicated Instruments')
+    select(@project.instruments.last.tag, from: 'Associated Instruments')
     click_on('Add RFI')
-    expect(@project.information_requests.instruments.last).to eq(Instrument.last)
+    expect(@project.information_requests.last.instruments.last).to eq(Instrument.last)
+  end
+
+  it 'can have equipment associated with it through the new path' do
+    @project.equipment.create(tag: "V-101", description: "Vessel", equipment_type: "Vessel")
+    sign_in_with(@user.email, @user.password)
+    visit root_path
+    click_link("project_#{@project.id}")
+    visit project_rfis_path
+    click_link('new_rfi')
+    fill_in('Zeton Clarification', with: "Clar")
+    select(@project.equipment.last.tag, from: 'Associated Equipment')
+    click_on('Add RFI')
+    expect(@project.information_requests.last.equipment.last).to eq(Equipment.last)
   end
 end

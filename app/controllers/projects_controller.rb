@@ -34,7 +34,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_rfis
-    @rfis = current_project.information_requests
+    @rfis = current_project.information_requests.paginate(:page => params[:page], :per_page => 15)
   end
 
   def project_documents

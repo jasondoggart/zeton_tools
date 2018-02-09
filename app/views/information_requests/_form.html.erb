@@ -46,12 +46,20 @@
     <div class="card-body">
       <h5 class="card-title">Add Associations</h5>
       <div class="row">
-        <%= hidden_field_tag "information_request[instrument_ids][]", nil %>
-        <%= f.select :instrument_ids, @instruments.map{ |i| [i.tag, i.id]}, {}, multiple: true, class: "col-sm-6" %>
-      </div>
-      <div class="row mt-3">
-        <%= hidden_field_tag "information_request[equipment_ids][]", nil %>
-        <%= f.select :equipment_ids, @equipment.map{ |i| [i.tag, i.id]}, {}, multiple: true, class: "col-sm-6" %>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <%= hidden_field_tag "information_request[instrument_ids][]", nil %>
+            <%= f.label :instrument_ids, '<b>Associated Instruments</b>'.html_safe %>
+            <%= f.select :instrument_ids, @instruments.map{ |i| [i.tag, i.id]}, {}, multiple: true, class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <%= hidden_field_tag "information_request[equipment_ids][]", nil %>
+            <%= f.label :equipment_ids, '<b>Associated Equipment</b>'.html_safe %>
+            <%= f.select :equipment_ids, @equipment.map{ |i| [i.tag, i.id]}, {}, multiple: true, class: "form-control" %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

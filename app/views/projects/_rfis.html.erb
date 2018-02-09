@@ -1,16 +1,23 @@
 <tr>
-  <td><%= link_to rfi.rfi_number, information_request_path(rfi), id: "show_rfi_#{rfi.id}" %></td>
+  <td class="text-center"><%= link_to rfi.rfi_number, information_request_path(rfi), id: "show_rfi_#{rfi.id}" %></td>
   <td><%= rfi.zeton_clarification %></td>
-  <td>
+  <td class="text-center">
     <% rfi.instruments.each do |inst| %>
       <%= link_to inst.tag, instrument_path(inst) %><br />
     <% end %>
   </td>
-  <td>
+  <td class="text-center">
     <% rfi.equipment.each do |equip| %>
       <%= link_to equip.tag, equipment_path(equip) %><br />
     <% end %>
   </td>
-  <td>Will insert latest response</td>
-  <td><%= rfi.answered %></td>
+  <td class="text-center">
+    <% if rfi.rfi_responses.any? %>
+      <%= link_to rfi.rfi_responses.last.created_at.strftime("%b %-d, %Y") +' from ' + rfi.rfi_responses.last.organization, rfi_response_path(rfi.rfi_responses.last) %><br />
+      Total: <%= rfi.rfi_responses.count %>
+    <% else %>
+      None Received
+    <% end %>
+  </td>
+  <td class="text-centered"><%= rfi.answered %></td>
 </tr>

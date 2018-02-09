@@ -70,14 +70,14 @@ equip_types = ["V", "P", "C", "B", "X"]
 
 # Create instruments and equipment for all projects
 Project.all.each do |project|
-  num_inst = rand(75..2500)
+  num_inst = rand(75..700)
   puts "Will generate #{num_inst} instruments for project #{project.project_number}"
   num_inst.times do
     project.instruments.create(type_code: inst_types[rand(inst_types.length)], loop: Faker::Number.number(4), scope: "Zeton")
   end
   puts "Generated #{project.instruments.count} instruments"
 
-  num_equip = rand(5..300)
+  num_equip = rand(5..150)
   puts "Will generate #{num_equip} pieces of equipment for project #{project.project_number}"
   num_equip.times do
     tag = equip_types[rand(equip_types.length)]
@@ -199,7 +199,7 @@ end
 
 Project.all.each do |project|
   puts "creating rfis for project #{project.id} of #{Project.count}"
-  num_rfis = rand(15..550)
+  num_rfis = rand(15..200)
   puts "will create #{num_rfis} for project #{project.id}"
   num_rfis.times do
     doc_number = "CLIENT-DOC-" + Faker::Number.number(4)
@@ -213,17 +213,29 @@ Project.all.each do |project|
                              zeton_clarification: zeton_clarification)
     # add instrument associations
     num_assoc_inst = rand(0..3)
-    puts "adding #{num_assoc_inst} instruments to rfi"
     num_assoc_inst.times do
       project.information_requests.last.instruments << project.instruments.sample
     end
 
     # add equipmebt associations
     num_assoc_equip = rand(0..2)
-    puts "adding #{num_assoc_equip} pieces of equipment to rfi"
     num_assoc_equip.times do
       project.information_requests.last.equipment << project.equipment.sample
     end
   end
-  puts "created #{project.information_requests.count}"
+end
+
+# add RFI responses
+organizations = ["Client", "Zeton"]
+Project.all.each do |project|
+  puts "creating rfi responses for project #{project.id} of #{Project.count}"
+  project.information_requests.each do |rfi|
+    num_responses = rand(0..3)
+    num_responses.times do
+      organization = organizations.sample
+      responder = Faker::Name.name
+      response_text = Faker::Lorem.paragraph(2)
+      rfi.rfi_responses.create(organization: organization, responder: responder, response: response_text)
+    end
+  end
 end

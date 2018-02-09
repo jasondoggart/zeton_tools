@@ -65,6 +65,10 @@
         <div class="col-sm-12 mt-2 mb-3">
           <% if @information_request.rfi_responses.any? %>
             <table>
+              <col style="width: 100px">
+              <col style="width: 80px">
+              <col>
+              <col style="width: 80px">
               <thead>
                 <tr>
                   <th class="p-3">Date</th>
@@ -80,8 +84,8 @@
                     <td class="p-3"><%= response.organization %></td>
                     <td class="p-3"><%= response.response %></td>
                     <td class="p-3">
-                      <%= link_to 'Edit', edit_rfi_response_path(response), id: "edit_rfi_response_#{response.id}" %> | 
-                      <%= link_to 'Delete', rfi_response_path(response), method: :delete, id: "delete_rfi_response_#{response.id}", class: 'text-danger' %>
+                      <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_rfi_response_path(response), id: "edit_rfi_response_#{response.id}" %> | 
+                      <%= link_to '<i class="fa fa-trash"></i>'.html_safe, rfi_response_path(response), method: :delete, id: "delete_rfi_response_#{response.id}", class: 'text-danger' %>
                     </td>
                   </tr>
                 <% end %>

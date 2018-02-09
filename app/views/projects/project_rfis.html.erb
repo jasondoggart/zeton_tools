@@ -3,6 +3,12 @@
   <p><%= link_to 'New RFI', new_information_request_path(:project => @project), id: 'new_rfi', class: 'btn btn-outline-primary' %>
   <div class="table-responsive">
     <table class="table table-hover">
+      <col style="width: 80px">
+      <col style="width: 350px">
+      <col style="width: 80px">
+      <col style="width: 80px">
+      <col style="width: 80px">
+      <col style="width: 80px">
       <thead>
         <tr>
           <th scope="col" class="text-center">RFI Number</th>
@@ -19,5 +25,6 @@
         <% end %>
       </tbody>
     </table>
+    <%= will_paginate(@rfis, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
   </div>
 </div>

@@ -41,6 +41,10 @@ class RfiResponsesController < ApplicationController
     redirect_to information_request_path(@rfi)
   end
 
+  def show
+    @rfi_response = RfiResponse.find(params[:id])
+  end
+
   private
 
     def rfi_response_params
