@@ -215,9 +215,11 @@
               </thead>
               <tbody>
                 <% @instrument.information_requests.each do |rfi| %>
-                  <td><%= link_to rfi.rfi_number, information_request_path(rfi) %></td>
-                  <td><%= rfi.zeton_clarification %></td>
-                  <td><%= link_to rfi.rfi_responses.count, information_request_path(rfi) %></td>
+                  <tr class="mb-3">
+                    <td><%= link_to rfi.rfi_number, information_request_path(rfi) %></td>
+                    <td><%= rfi.zeton_clarification %></td>
+                    <td><%= link_to rfi.rfi_responses.count, information_request_path(rfi) %></td>
+                  </tr>
                 <% end %>
               </tbody>
             </table>

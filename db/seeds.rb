@@ -70,14 +70,14 @@ equip_types = ["V", "P", "C", "B", "X"]
 
 # Create instruments and equipment for all projects
 Project.all.each do |project|
-  num_inst = rand(75..500)
+  num_inst = rand(75..2500)
   puts "Will generate #{num_inst} instruments for project #{project.project_number}"
   num_inst.times do
     project.instruments.create(type_code: inst_types[rand(inst_types.length)], loop: Faker::Number.number(4), scope: "Zeton")
   end
   puts "Generated #{project.instruments.count} instruments"
 
-  num_equip = rand(5..50)
+  num_equip = rand(5..300)
   puts "Will generate #{num_equip} pieces of equipment for project #{project.project_number}"
   num_equip.times do
     tag = equip_types[rand(equip_types.length)]
@@ -92,13 +92,13 @@ Project.all.each do |project|
     elsif tag == "X"
       equip_type = "Packaged Unit"
     end
-    project.equipment.create(tag: tag + "-" + Faker::Number.number(3) , description: "Very Important Piece of Equipment", equipment_type: equip_type)
+    project.equipment.create(tag: tag + "-" + Faker::Number.number(3) , description: "Very Important Piece of Equipment", equipment_type: equip_type, scope: "Zeton")
   end
   puts "Generated #{project.equipment.count} pieces of equipment"
 end
 
 # Fill in metrics for all instruments
-odds = [1,1,1,1,1,0]
+odds = [1,1,1,1,1,1,1,1,1,0]
 
 Project.all.each do |project|
   puts "Updating Instrument Metrics for project #{project.id} of #{Project.count}"
@@ -199,7 +199,7 @@ end
 
 Project.all.each do |project|
   puts "creating rfis for project #{project.id} of #{Project.count}"
-  num_rfis = rand(15..55)
+  num_rfis = rand(15..550)
   puts "will create #{num_rfis} for project #{project.id}"
   num_rfis.times do
     doc_number = "CLIENT-DOC-" + Faker::Number.number(4)

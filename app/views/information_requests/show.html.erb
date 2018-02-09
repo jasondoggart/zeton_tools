@@ -1,58 +1,98 @@
-<h3><%= @information_request.rfi_number %></h3>
-<hr>
-<div class="row">
-  <div class="col-sm-12">
-    <h5>Client Document</h5>
+<div class="main">
+  <h3><%= @information_request.rfi_number %></h3>
+  <h5><%= link_to "Project #{@information_request.project.project_number}", project_path(@information_request.project) %></h5>
+  <%= link_to 'Edit', edit_information_request_path(@information_request), class: 'btn btn-sm btn-outline-primary', id: "edit_rfi_#{@information_request.id}" %>
+  <%= link_to 'Delete', information_request_path(@information_request), method: :delete, class: 'btn btn-sm btn-outline-danger', id: "delete_rfi_#{@information_request.id}" %>
+  <div class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Client Document</h5>
+      <div class="row">
+        <div class="col-sm-6">
+          <b>Document Number</b>
+          <span class="ml-4">
+            <%= @information_request.client_document_number %>
+          </span>
+        </div>
+        <div class="col-sm-6">
+          <b>Revision Number</b>
+          <span class="ml-4">
+            <%= @information_request.client_document_revision %>
+          </span>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-6">
+          <b>Title</b>
+          <span class="ml-4">
+            <%= @information_request.client_document_title %>
+          </span>
+        </div>
+        <div class="col-sm-6">
+          <b>Section</b>
+          <span class="ml-4">
+            <%= @information_request.client_document_section %>
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="col-sm-4">
-    Client Document Number: 
+  <div class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Associations</h5>
+      <% @information_request.instruments.each do |inst| %>
+        <%= link_to inst.tag, instrument_path(inst), class: 'badge badge-pill badge-primary' %>
+      <% end %>
+      <% @information_request.equipment.each do |equip| %>
+        <%= link_to equip.tag, equipment_path(equip), class: 'badge badge-pill badge-primary' %>
+      <% end %>
+    </div>
   </div>
-  <div class="col-sm-4">
-    <%= @information_request.client_document_number %>
+  <div class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Zeton Clarification</h5>
+      <div class="row">
+        <div class="col-sm-12 mt-2">
+          <%= @information_request.zeton_clarification %>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="col-sm-2">
-    Rev.
-  </div>
-  <div class="col-sm-2">
-    <%= @information_request.client_document_revision %>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-4">
-    Client Document Title:
-  </div>
-  <div class="col-sm-8">
-    <%= @information_request.client_document_title %>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-4">
-    Client Document Section:
-  </div>
-  <div class="col-sm-8">
-    <%= @information_request.client_document_section %>
-  </div>
-</div>
-<hr>
-<div class="row">
-  <div class="col-sm-12">
-    <h5>Zeton Clarification</h5>
-  </div>
-  <div class="col-sm-12">
-    <%= @information_request.zeton_clarification %>
-  </div>
-</div>
-<hr>
-<div class="row">
-  <div class="col-sm-12">
-    <h5>RFI Responses</h5>
-    <%= link_to 'New', new_rfi_response_path(:rfi => @information_request), id: 'new_rfi_response', class: 'btn btn-outline-primary btn-sm' %>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-12">
-    <% @information_request.rfi_responses.each do |resp| %>
-      <%= render partial: 'rfi_response', locals: {rfi_response: resp} %>
-    <% end %>
+
+  <div class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">RFI Responses</h5>
+      <div class="row">
+        <div class="col-sm-12 mt-2 mb-3">
+          <% if @information_request.rfi_responses.any? %>
+            <table>
+              <thead>
+                <tr>
+                  <th class="p-3">Date</th>
+                  <th class="p-3">From</th>
+                  <th class="p-3">Response</th>
+                  <th class="p-3"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @information_request.rfi_responses.each do |response| %>
+                  <tr class="mt-3">
+                    <td class="p-3"><%= response.created_at.strftime("%b %-d, %Y") %></td>
+                    <td class="p-3"><%= response.organization %></td>
+                    <td class="p-3"><%= response.response %></td>
+                    <td class="p-3">
+                      <%= link_to 'Edit', edit_rfi_response_path(response), id: "edit_rfi_response_#{response.id}" %> | 
+                      <%= link_to 'Delete', rfi_response_path(response), method: :delete, id: "delete_rfi_response_#{response.id}", class: 'text-danger' %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            No responses added yet.
+          <% end %>
+        </div>
+      </div>
+      <%= link_to 'Add new response', new_rfi_response_path(:rfi => @information_request), id: 'new_rfi_response', class: 'btn btn-outline-primary btn-sm' %>
+    </div>
   </div>
 </div>

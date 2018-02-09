@@ -1,10 +1,5 @@
 <tr>
-  <td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_information_request_path(rfi), id: "edit_rfi_#{rfi.id}" %>|<%= link_to '<i class="fa fa-trash"></i>'.html_safe, information_request_path(rfi), method: :delete, id: "delete_rfi_#{rfi.id}" %></td>
   <td><%= link_to rfi.rfi_number, information_request_path(rfi), id: "show_rfi_#{rfi.id}" %></td>
-  <td><%= rfi.client_document_number %></td>
-  <td><%= rfi.client_document_title %></td>
-  <td><%= rfi.client_document_revision %></td>
-  <td><%= rfi.client_document_section %></td>
   <td><%= rfi.zeton_clarification %></td>
   <td>
     <% rfi.instruments.each do |inst| %>
@@ -16,5 +11,6 @@
       <%= link_to equip.tag, equipment_path(equip) %><br />
     <% end %>
   </td>
+  <td>Will insert latest response</td>
   <td><%= rfi.answered %></td>
 </tr>

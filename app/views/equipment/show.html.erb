@@ -183,19 +183,23 @@
       </div>
       <div class="card mt-5">
         <div class="card-body">
-          <h5 class="card-title">Related RFIs</h5>
+          <h5 class="card-title">Related RFIs (<%= @equipment.information_requests.count %>)</h5>
           <% if @equipment.information_requests.any? %>
             <table>
               <thead>
-                <th>Number</th>
-                <th>Zeton Clarification</th>
-                <th>Responses</th>
+                <tr>
+                  <th class="p-3">Number</th>
+                  <th class="p-3">Zeton Clarification</th>
+                  <th class="p-3">Responses</th>
+                </tr>
               </thead>
               <tbody>
                 <% @equipment.information_requests.each do |rfi| %>
-                  <td><%= link_to rfi.rfi_number, information_request_path(rfi) %></td>
-                  <td><%= rfi.zeton_clarification %></td>
-                  <td><%= link_to rfi.rfi_responses.count, information_request_path(rfi) %></td>
+                  <tr>
+                    <td class="p-3"><%= link_to rfi.rfi_number, information_request_path(rfi) %></td>
+                    <td class="p-3"><%= rfi.zeton_clarification %></td>
+                    <td class="p-3"><%= link_to rfi.rfi_responses.count, information_request_path(rfi) %></td>
+                  </tr>
                 <% end %>
               </tbody>
             </table>

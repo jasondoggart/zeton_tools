@@ -8,36 +8,77 @@
     </ul>
   <% end %>
 
-  <div class="form-group row">
-    <%= f.label :client_document_number, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= f.text_field :client_document_number, class: 'form-control' %>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Client Document</h5>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <%= f.label :client_document_number, '<b>Document Number</b>'.html_safe %>
+            <%= f.text_field :client_document_number, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <%= f.label :client_document_title, '<b>Title</b>'.html_safe %>
+            <%= f.text_field :client_document_title, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <%= f.label :client_document_revision, '<b>Revision Number</b>'.html_safe %>
+            <%= f.text_field :client_document_revision, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <%= f.label :client_document_section, '<b>Section</b>'.html_safe %>
+            <%= f.text_field :client_document_section, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="form-group row">
-    <%= f.label :client_document_title, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= f.text_field :client_document_title, class: 'form-control' %>
+  
+  <div class="card mt-3 mb-3">
+    <div class="card-body">
+      <h5 class="card-title">Add Associations</h5>
+      <div class="row">
+        <%= hidden_field_tag "information_request[instrument_ids][]", nil %>
+        <%= f.select :instrument_ids, @instruments.map{ |i| [i.tag, i.id]}, {}, multiple: true, class: "col-sm-6" %>
+      </div>
+      <div class="row mt-3">
+        <%= hidden_field_tag "information_request[equipment_ids][]", nil %>
+        <%= f.select :equipment_ids, @equipment.map{ |i| [i.tag, i.id]}, {}, multiple: true, class: "col-sm-6" %>
+      </div>
     </div>
   </div>
-  <div class="form-group row">
-    <%= f.label :client_document_revision, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= f.text_field :client_document_revision, class: 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group row">
-    <%= f.label :client_document_section, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= f.text_field :client_document_section, class: 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group row">
-    <%= f.label :zeton_clarification, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= f.text_field :zeton_clarification, class: 'form-control' %>
+
+
+  <div class="card mt-3 mb-3">
+    <div class="card-body">
+      <h5 class="card-title"><%= f.label :zeton_clarification, 'Zeton Clarification' %></h5>
+      <div class="form-group">
+        <%= f.text_area :zeton_clarification, class: 'form-control', rows: "3" %>
+      </div>
     </div>
   </div>
 
   <%= f.submit @information_request.new_record? ? 'Add RFI' : 'Update RFI', class: 'btn btn-outline-primary' %>
+  or <%= link_to 'Cancel', :back %>
 <% end %>
+
+<script>
+  $(document).ready(function() {
+    $('#information_request_instrument_ids').select2({
+      placeholder: "Select associated instruments",
+      theme: "bootstrap"
+    });
+    $('#information_request_equipment_ids').select2({
+      placeholder: "Select associated equipment",
+      theme: "bootstrap"
+    });
+  });
+</script>

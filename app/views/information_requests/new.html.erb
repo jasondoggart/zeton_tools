@@ -1,3 +1,5 @@
-<h3>Create New RFI</h3>
-<hr>
-<%= render 'form' %>
+<div class="main">
+  <h3>Create New RFI</h3>
+  <h5><%= link_to "Project #{current_project.project_number}", project_path(current_project) %></h5>
+  <%= render 'form' %>
+</div>

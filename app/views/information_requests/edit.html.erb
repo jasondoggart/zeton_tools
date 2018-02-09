@@ -1,3 +1,5 @@
-<h3>Update RFI</h3>
-<hr>
-<%= render 'form' %>
+<div class="main">
+  <h3><%= @information_request.rfi_number %></h3>
+  <h5><%= link_to "Project #{@information_request.project.project_number}", project_path(@information_request.project) %></h5>
+  <%= render 'form' %>
+</div>
