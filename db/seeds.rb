@@ -67,13 +67,46 @@ end
 
 inst_types = ["AE", "FIT", "FI", "FV", "LIT", "LI", "LV", "PI", "PIT", "PV", "PSV", "PSE", "SE", "TI", "TE", "TV", "TY", "VT", "XY", "XV", "ZSC", "ZSO", "FY", "PY", "LY"]
 equip_types = ["V", "P", "C", "B", "X"]
-
-# Create instruments and equipment for all projects
-Project.all.each do |project|
-  num_inst = rand(75..700)
-  puts "Will generate #{num_inst} instruments for project #{project.project_number}"
-  num_inst.times do
-    project.instruments.create(type_code: inst_types[rand(inst_types.length)], loop: Faker::Number.number(4), scope: "Zeton")
+skids = ["A", "B", "C", "D", "E", "F", "G"]
+m_e = ["M", "E", "M/E"]
+connections = ['1/2 in. 150# RF Flange', '3 in. 900# RF Flange', '1/2 in. FNPT', '3/4 in. Swagelok', '1/4 in. Swagelok', '1/4 in. MNPT']
+materials = ["316SS", "304SS", "C276", "CS", "Brass", "Unobtainium"]
+item_types = ["ITUBE", "IWELD", "ISCRD", "IOTHR"]
+locations = ["LTUBE", "LPIPE", "EQUIP"]
+io_types = ["AI", "AO", "DI", "DO", "MODBUS"] 
+units = ["BARG", "Deg C", "inH2O", "BAR"]
+# Create instruments and equipment for all projects 
+Project.all.each do |project| 
+  num_inst = rand(75..700) 
+  puts "Will generate #{num_inst} instruments for project #{project.project_number}" 
+  num_inst.times do 
+    skid_number = skids.sample 
+    skid_level = rand(1..4) 
+    mech_elec = m_e.sample 
+    supplier = Faker::Name.name + "'s instrument vending" 
+    manufacturer = Faker::Name.name + "'s instruments"
+    model = Faker::Number.number(4) + '-' + Faker::Number.number(3) + '-' + Faker::Number.number(5)
+    process_connection = connections.sample
+    material_of_construction = materials.sample
+    item_type = item_types.sample
+    location = locations.sample
+    dcs_io_type = io_types.sample
+    range = "0 - " + rand(10..1000).to_s + " " + units.sample
+    project.instruments.create(type_code: inst_types[rand(inst_types.length)], 
+                               loop: Faker::Number.number(4), 
+                               zeton_skid_number: skid_number,
+                               zeton_skid_level: skid_level,
+                               scope: "Zeton",
+                               mech_elec: mech_elec,
+                               supplier: supplier,
+                               manufacturer: manufacturer,
+                               model: model,
+                               process_connection: process_connection,
+                               material_of_construction: material_of_construction,
+                               item_type: item_type,
+                               location: location,
+                               dcs_io_type: dcs_io_type,
+                               range: range)
   end
   puts "Generated #{project.instruments.count} instruments"
 
@@ -92,7 +125,10 @@ Project.all.each do |project|
     elsif tag == "X"
       equip_type = "Packaged Unit"
     end
-    project.equipment.create(tag: tag + "-" + Faker::Number.number(3) , description: "Very Important Piece of Equipment", equipment_type: equip_type, scope: "Zeton")
+    supplier = Faker::Name.name + "'s Equipment Vending"
+    manufacturer = Faker::Name.name + "'s Fab Shop"
+    model_number = Faker::Number.number(4) + '-' + Faker::Number.number(3) + '-' + Faker::Number.number(5)
+    project.equipment.create(tag: tag + "-" + Faker::Number.number(3) , description: "Very Important Piece of Equipment", equipment_type: equip_type, scope: "Zeton", manufacturer: manufacturer, model_number: model_number, supplier: supplier)
   end
   puts "Generated #{project.equipment.count} pieces of equipment"
 end
@@ -111,6 +147,7 @@ Project.all.each do |project|
         if inst.rfq_sent == 1
           inst.po_placed = odds.sample
           if inst.po_placed == 1
+            inst.zeton_po = "18." + Faker::Number.number(5)
             inst.item_received = odds.sample
             if inst.item_received == 1
               inst.item_inspected_and_released = odds.sample
@@ -161,6 +198,7 @@ Project.all.each do |project|
         if equip.rfq_sent == 1
           equip.po_placed = odds.sample
           if equip.po_placed == 1
+            equip.zeton_po = "18." + Faker::Number.number(5)
             equip.drawing_for_approval_received = odds.sample
             if equip.drawing_for_approval_received == 1
               equip.drawing_for_approval_marked_up = odds.sample

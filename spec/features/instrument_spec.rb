@@ -27,6 +27,7 @@ describe 'Instruments' do
     click_link("project_#{@project.id}")
     instrument = Instrument.create(type_code: "FE", loop: "1234", project: @project)
     visit project_instruments_path
+    click_link("show_instrument_#{instrument.id}")
     click_link("edit_instrument_#{instrument.id}")
     fill_in('Type', with: "TE")
     click_on('Update Instrument')
@@ -40,6 +41,7 @@ describe 'Instruments' do
     click_link("project_#{@project.id}")
     instrument = Instrument.create(type_code: "FE", loop: "1234", project: @project)
     visit project_instruments_metrics_path
+    click_link("show_instrument_#{instrument.id}")
     click_link("edit_instrument_#{instrument.id}")
     fill_in('Type', with: "TE")
     click_on('Update Instrument')
@@ -53,6 +55,7 @@ describe 'Instruments' do
     click_link("project_#{@project.id}")
     instrument = Instrument.create(type_code: "FE", loop: "1234", project: @project)
     visit project_instruments_path
+    click_link("show_instrument_#{instrument.id}")
     before_count = Instrument.count
     click_link("delete_instrument_#{instrument.id}")
     expect(current_path).to eq(project_instruments_path)

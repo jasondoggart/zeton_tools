@@ -3,11 +3,68 @@
     Instrument Metrics
   </h3>
   <p class="text-muted"><%= link_to 'View Instrument List', project_instruments_path %></p>
-  <div class="table-responsive">
-    <table class="mt-3 table table-hover">
+  <div class="dropdown mt-3 mb-3">
+    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="loop_dropdown_button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Sort By
+    </button>
+    <div class="dropdown-menu" style="height: 200px; overflow: scroll;" aria-labelledby="loop_dropdown_button">
+      <%= link_to 'Type', request.query_parameters.merge(:sorted_by => 'type_' + sort_direction(@sorted_by)), class: 'dropdown-item' %>
+      <%= link_to 'Loop', request.query_parameters.merge(:sorted_by => 'loop_' + sort_direction(@sorted_by)), class: 'dropdown-item' %>
+      <%= link_to 'Scope', project_instruments_path(:sorted_by => 'scope_' + sort_direction(@sorted_by)), class: 'dropdown-item' %>
+    </div>
+  </div>
+  <a class="btn btn-outline-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Filters<span class="ml-3"><i class="fa fa-caret-down"></i></span>
+  </a>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      <div class="row">
+        <div class="col-4">
+          <%= link_to 'Clear all', project_instruments_path(:sorted_by => 'type_code asc'), class: 'btn btn-outline-primary btn-sm' %>
+        </div>
+        <div class="col-4">
+          <div class="dropdown">
+            <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="type_code_dropdown_button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Type
+              <% if params[:with_type_code].present? %>
+                <i class="fa fa-filter"></i>
+              <% end %>
+            </button>
+            <div class="dropdown-menu" style="height: 200px; overflow: scroll;" aria-labelledby="type_code_dropdown_button">
+              <%= link_to "Show All", project_instruments_path(:with_type_code => nil), class: 'dropdown-item' %>
+              <% @type_codes.each do |type| %>
+                <%= link_to type, request.query_parameters.merge(:with_type_code => type), class: "dropdown-item" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="dropdown">
+            <button class="btn-sm btn btn-outline-primary dropdown-toggle" type="button" id="loop_dropdown_button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Loop
+              <% if params[:with_loop].present? %>
+                <i class="fa fa-filter"></i>
+              <% end %>
+            </button>
+            <div class="dropdown-menu" style="height: 200px; overflow: scroll;" aria-labelledby="loop_dropdown_button">
+              <%= link_to "Show All", project_instruments_path(:with_loop => nil), class: 'dropdown-item' %>
+              <% @loops.each do |loop| %>
+                <%= link_to loop, project_instruments_path(:with_loop => loop), class: "dropdown-item" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive table-header-column mb-5">
+    <table class="mt-3 table table-hover table-fixed-tags">
       <thead>
         <tr>
-          <th scope="col" class="border-top-0"></th>
           <th scope="col" class="border-top-0 align-middle text-center">Tag</th>
           <th scope="col" class="border-top-0 align-middle text-center">PID</th>
           <th scope="col" class="border-top-0 align-middle text-center">Datasheet Submitted</th>
@@ -32,6 +89,6 @@
         <% end %>
       </tbody>
     </table>
-    <%= will_paginate(@instruments, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
   </div>
+  <%= will_paginate(@instruments, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
 </div>

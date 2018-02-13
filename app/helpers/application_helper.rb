@@ -30,4 +30,20 @@ module ApplicationHelper
       0
     end
   end
+
+  def sort_direction(current_sort)
+    current_direction = (current_sort =~ /asc$/) ? 'asc' : 'desc'
+    current_direction == "asc" ? 'desc' : 'asc'
+  end
+
+  def metrics_color(value)
+    case value
+    when 0
+      "text-warning"
+    when 1
+      "text-success"
+    when 2
+      "text-info"
+    end
+  end
 end

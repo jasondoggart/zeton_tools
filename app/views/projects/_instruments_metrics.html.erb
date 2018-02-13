@@ -1,6 +1,5 @@
 <tr>
-  <td class="align-middle text-center"><%= link_to 'edit', edit_instrument_path(instrument), id: "edit_instrument_#{instrument.id}" %> | <%= link_to 'delete', instrument_path(instrument), method: :delete, id: "delete_instrument_#{instrument.id}" %></td>
-  <td class="align-middle text-center"><%= instrument.tag %></td>
+  <td class="align-middle text-center"><%= link_to instrument.tag, instrument_path(instrument), id: "show_instrument_#{instrument.id}" %></td>
   <td class="align-middle text-center">PID number</td>
   <td class="align-middle text-center">
     <div id="datasheet_submitted_status_instrument_<%= instrument.id %>">

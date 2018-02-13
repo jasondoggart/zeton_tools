@@ -3,7 +3,7 @@ body {
 }
 
 .navbar {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 .main {
@@ -47,4 +47,32 @@ body {
 
 .metrics-button:hover {
   cursor: pointer;
+}
+
+
+.table-responsive {
+  overflow-y: scroll;
+  height: 500px;
+}
+
+.table-fixed-tags td:first-child, th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 0;
+  background-color: white;
+}
+
+.table-fixed-tags thead tr th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: white;
+}
+
+.table-fixed-tags thead tr th:first-child {
+  z-index: 2;
+}
+
+.dropdown {
+  display: inline-block;
 }

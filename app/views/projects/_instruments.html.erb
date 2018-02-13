@@ -1,12 +1,292 @@
-<tr>
-  <td class="align-middle text-center"><%= link_to 'edit', edit_instrument_path(instrument), id: "edit_instrument_#{instrument.id}" %> | <%= link_to 'delete', instrument_path(instrument), method: :delete, id: "delete_instrument_#{instrument.id}" %></td>
-  <td class="align-middle text-center"><%= link_to instrument.tag, instrument_path(instrument) %></td>
-  <td class="align-middle text-center">PID number</td>
-  <td class="align-middle text-center"><%= instrument.scope %></td>
-  <td class="align-middle text-center"><%= instrument.mech_elec %></td>
-  <td class="align-middle text-center"><%= instrument.manufacturer %></td>
-  <td class="align-middle text-center"><%= instrument.model %></td>
-  <td class="align-middle text-center"><%= instrument.process_connection %></td>
-  <td class="align-middle text-center"><%= instrument.material_of_construction %></td>
-  <td class="align-middle text-center"><%= instrument.range %></td>
-</tr>
+<div class="row mb-3">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body pt-1 pb-0">
+        <h3 class="card-title">
+          <span class="p-2 mt-2">
+            <%= link_to instrument.tag, instrument_path(instrument), id: "show_instrument_#{instrument.id}" %>
+          </span>
+          <span class="float-right">
+            <a data-toggle="collapse" href="#instrument_<%= instrument.id %>_details" role="button" aria-expanded="false" aria-controls="instrument_<%= instrument.id %>_details" class="btn btn-outline-primary"> Details
+              <i class="fa fa-caret-down"></i>
+            </a>
+            <a data-toggle="collapse" href="#instrument_<%= instrument.id %>_metrics" role="button" aria-expanded="false" aria-controls="instrument_<%= instrument.id %>_metrics" class="btn btn-outline-primary">
+              Metrics
+              <i class="fa fa-caret-down"></i>
+            </a>
+          </span>
+        </h3>
+
+        <div class="mt-3 row collapse" id="instrument_<%= instrument.id %>_details">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-md-4 col-2">
+                <i class="fa fa-map-marker"></i>
+                <span class="ml-2 d-none d-md-inline"><b>Zeton Skid:</b></span>
+              </div>
+              <div class="col-md-8 col-10">
+                <span>Skid <%= instrument.zeton_skid_number %></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-md-4 col-2">
+                <i class="fa fa-level-up"></i>
+                <span class="ml-2 d-none d-md-inline"><b>Skid Level:</b></span>
+              </div>
+              <div class="col-md-8 col-10">
+                <span>Level <%= instrument.zeton_skid_level %></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-md-4 col-2">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="ml-2 d-none d-md-inline"><b>Supplier:</b></span>
+              </div>
+              <div class="col-md-8 col-10">
+                <span><%= instrument.supplier %></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-md-4 col-2">
+                <i class="fa fa-cog"></i>
+                <span class="ml-2 d-none d-md-inline"><b>Manufacturer:</b></span>
+              </div>
+              <div class="col-md-8 col-10">
+                <span><%= instrument.manufacturer %></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-md-4 col-2">
+                <i class="fa fa-hashtag"></i>
+                <span class="ml-2 d-none d-md-inline"><b>Model:</b></span>
+              </div>
+              <div class="col-md-8 col-10">
+                <span><%= instrument.model %></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-md-4 col-2">
+                <i class="fa fa-handshake-o"></i>
+                <span class="ml-2 d-none d-md-inline"><b>Connection:</b></span>
+              </div>
+              <div class="col-md-8 col-10">
+                <span><%= instrument.process_connection %></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-md-4 col-2">
+                <i class="fa fa-flask"></i>
+                <span class="ml-2 d-none d-md-inline"><b>MOC:</b></span>
+              </div>
+              <div class="col-md-8 col-10">
+                <span><%= instrument.material_of_construction %></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-md-4 col-2">
+                <i class="fa fa-angle-double-right"></i>
+                <span class="ml-2 d-none d-md-inline"><b>Item Type:</b></span>
+              </div>
+              <div class="col-md-8 col-10">
+                <span><%= instrument.item_type %></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-md-4 col-2">
+                <i class="fa fa-search"></i>
+                <span class="ml-2 d-none d-md-inline"><b>Location:</b></span>
+              </div>
+              <div class="col-md-8 col-10">
+                <span><%= instrument.location %></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-md-4 col-2">
+                <i class="fa fa-code"></i>
+                <span class="ml-2 d-none d-md-inline"><b>I/O Type:</b></span>
+              </div>
+              <div class="col-md-8 col-10">
+                <span><%= instrument.dcs_io_type %></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-md-4 col-2">
+                <i class="fa fa-tachometer"></i>
+                <span class="ml-2 d-none d-md-inline"><b>Range:</b></span>
+              </div>
+              <div class="col-md-8 col-10">
+                <span><%= instrument.range %></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-md-4 col-2">
+                <i class="fa fa-usd"></i>
+                <span class="ml-2 d-none d-md-inline"><b>Zeton PO:</b></span>
+              </div>
+              <div class="col-md-8 col-10">
+                <span><%= instrument.zeton_po %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 row collapse" id="instrument_<%= instrument.id %>_metrics">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <span class="float-sm-left">Datasheet Submitted</span>
+              <span class="align-middle float-sm-right">
+                <div id="datasheet_submitted_status_instrument_<%= instrument.id %>">
+                  <%= render partial: 'instruments/datasheet_submitted_status', locals: {instrument: instrument} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Datasheet Approved</span>
+              <span class="float-sm-right">
+                <div id="datasheet_approved_status_instrument_<%= instrument.id %>">
+                  <%= render partial: 'instruments/datasheet_approved_status', locals: {instrument: instrument} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">RFQ Sent</span>
+              <span class="float-sm-right">
+                <div id="rfq_sent_status_instrument_<%= instrument.id %>">
+                  <%= render partial: 'instruments/rfq_sent_status', locals: {instrument: instrument} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">PO Placed</span>
+              <span class="float-sm-right">
+                <div id="po_placed_status_instrument_<%= instrument.id %>">
+                  <%= render partial: 'instruments/po_placed_status', locals: {instrument: instrument} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Item Received</span>
+              <span class="float-sm-right">
+                <div id="item_received_status_instrument_<%= instrument.id %>">
+                  <%= render partial: 'instruments/item_received_status', locals: {instrument: instrument} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Item Released</span>
+              <span class="float-sm-right">
+                <div id="item_released_status_instrument_<%= instrument.id %>">
+                  <%= render partial: 'instruments/item_released_status', locals: {instrument: instrument} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Mounted by Mechanical</span>
+              <span class="float-sm-right">
+                <div id='mounted_status_instrument_<%= instrument.id %>'>
+                  <%= render partial: 'instruments/mounted_status', locals: {instrument: instrument} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Plumbed by Mechanical</span>
+              <span class="float-sm-right">
+                <div id="plumbed_status_instrument_<%= instrument.id %>">
+                  <%= render partial: 'instruments/plumbed_status', locals: {instrument: instrument} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Cable Pulled</span>
+              <span class="float-sm-right">
+                <div id="cable_pulled_status_instrument_<%= instrument.id %>">
+                  <%= render partial: 'instruments/cable_pulled_status', locals: {instrument: instrument} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Terminated at Source</span>
+              <span class="float-sm-right">
+                <div id="cable_terminated_at_source_status_instrument_<%= instrument.id %>">
+                  <%= render partial: 'instruments/cable_terminated_at_source_status', locals: {instrument: instrument} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Terminated at Dest.</span>
+              <span class="float-sm-right">
+                <div id="cable_terminated_at_dest_status_instrument_<%= instrument.id %>">
+                  <%= render partial: 'instruments/cable_terminated_at_dest_status', locals: {instrument: instrument} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Continuity Tested</span>
+              <span class="float-sm-right">
+                <div id="continuity_tested_status_instrument_<%= instrument.id %>">
+                  <%= render partial: 'instruments/continuity_tested_status', locals: {instrument: instrument} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Grounded by Electrical</span>
+              <span class="float-sm-right">
+                <div id="grounded_status_instrument_<%= instrument.id %>">
+                  <%= render partial: 'instruments/grounded_status', locals: {instrument: instrument} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Checked by Engineering</span>
+              <span class="float-sm-right">
+                <div id="eng_check_status_instrument_<%= instrument.id %>">
+                  <%= render partial: 'instruments/eng_check_status', locals: {instrument: instrument} %>
+                </div>
+              </span>
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-sm-4">
+            <i class="fa fa-image"></i>
+            <span class="ml-4">710-39-110</span>
+          </div>
+          <div class="col-sm-4">
+            <i class="fa fa-wrench"></i>
+            <span class="ml-4"><%= instrument.mech_elec %></span>
+          </div>
+          <div class="col-sm-4">
+            <i class="fa fa-building"></i>
+            <span class="ml-4"><%= instrument.scope %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
