@@ -48,7 +48,16 @@ class ProjectsController < ApplicationController
   end
 
   def project_equipment
-    @equipment = current_project.equipment.paginate(:page => params[:page], :per_page => 15)
+    @equipment = current_project.equipment
+    @equipment = @equipment.with_type(params[:with_type]) if params[:with_type].present?
+    if params[:sorted_by].present?
+      @equipment = @equipment.sorted_by(params[:sorted_by])
+    else
+      @equipment = @equipment.order(tag: :asc)
+    end
+    @sorted_by = params[:sorted_by] if params[:sorted_by].present?
+    @types = @equipment.distinct.pluck(:equipment_type).sort
+    @equipment = @equipment.paginate(:page => params[:page], :per_page => 10)
   end
 
   def project_equipment_metrics

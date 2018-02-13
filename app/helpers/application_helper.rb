@@ -3,13 +3,13 @@ module ApplicationHelper
   def icon_select(value)
     case value
     when nil
-      content_tag(:i, nil, class: 'fa fa-times-circle text-warning fa-2x')
+      content_tag(:i, nil, class: 'fa fa-times text-warning fa-1x')
     when 0
-      content_tag(:i, nil, class: 'fa fa-times-circle text-warning fa-2x')
+      content_tag(:i, nil, class: 'fa fa-times text-warning fa-1x')
     when 1
-      content_tag(:i, nil, class: 'fa fa-check-circle text-success fa-2x')
+      content_tag(:i, nil, class: 'fa fa-check text-success fa-1x')
     when 2
-      content_tag(:i, nil, class: 'fa fa-circle text-info fa-2x')
+      content_tag(:i, nil, class: 'fa fa-circle text-info fa-1x')
     end
   end
 

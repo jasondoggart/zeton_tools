@@ -1,33 +1,53 @@
 <div class="main">
-  <h3>
-    Equipment List<br />
-  </h3>
-    <p class="text-muted"><%= link_to 'View Metrics', project_equipment_metrics_path %></p>
-  <p><%= link_to 'Add Equipment', new_equipment_path(:project => @project), id: 'new_equipment_link', class: 'btn btn-outline-primary btn-block' %>
-  <div class="table-responsive">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col" class="text-center"></th>
-          <th scope="col" class="text-center">Tag</th>
-          <th scope="col" class="text-center">Description</th>
-          <th scope="col" class="text-center">Type</th>
-          <th scope="col" class="text-center">Scope</th>
-          <th scope="col" class="text-center">Supplier</th>
-          <th scope="col" class="text-center">Manufacturer</th>
-          <th scope="col" class="text-center">Model</th>
-          <th scope="col" class="text-center">Zeton PO</th>
-          <th scope="col" class="text-center">Tracking Number</th>
-          <th scope="col" class="text-center">Receiving Info</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @equipment.each do |equip| %>
-          <%= render partial: 'equipment', locals: {equipment: equip} %>
-        <% end %>
-      </tbody>
-    </table>
-    <%= will_paginate(@equipment, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+  <div class="row">
+    <div class="col-12">
+      <span class="h3 mr-3">
+        Equipment List
+      </span>
+      <%= link_to '<i class="fa fa-plus-circle fa-2x"></i>'.html_safe, new_equipment_path(:project => @project), id: 'new_equipment_link' %>
+    </div>
   </div>
+  <p class="text-muted"><%= link_to 'View Metrics', project_equipment_metrics_path %></p>
+  <div class="dropdown mt-3 mb-3">
+    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="loop_dropdown_button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Sort By
+    </button>
+    <div class="dropdown-menu" style="height: 200px; overflow: scroll;" aria-labelledby="loop_dropdown_button">
+      <%= link_to 'Type', request.query_parameters.merge(:sorted_by => 'type_' + sort_direction(@sorted_by)), class: 'dropdown-item' %>
+      <%= link_to 'Tag', request.query_parameters.merge(:sorted_by => 'tag_' + sort_direction(@sorted_by)), class: 'dropdown-item' %>
+    </div>
+  </div>
+  <a class="btn btn-outline-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Filters<span class="ml-3"><i class="fa fa-caret-down"></i></span>
+  </a>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      <div class="row">
+        <div class="col-4">
+          <%= link_to 'Clear all', project_instruments_path(:sorted_by => 'type_code asc'), class: 'btn btn-outline-primary btn-sm' %>
+        </div>
+        <div class="col-4">
+          <div class="dropdown">
+            <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="type_code_dropdown_button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Type
+              <% if params[:with_type].present? %>
+                <i class="fa fa-filter"></i>
+              <% end %>
+            </button>
+            <div class="dropdown-menu" style="height: 200px; overflow: scroll;" aria-labelledby="type_code_dropdown_button">
+              <%= link_to "Show All", project_equipment_path(:with_type => nil), class: 'dropdown-item' %>
+              <% @types.each do |type| %>
+                <%= link_to type, request.query_parameters.merge(:with_type => type), class: "dropdown-item" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% @equipment.each do |equip| %>
+    <%= render partial: 'equipment', locals: {equipment: equip} %>
+  <% end %>
+  <%= will_paginate(@equipment, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
 </div>
 

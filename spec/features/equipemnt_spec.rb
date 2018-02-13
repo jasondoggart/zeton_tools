@@ -31,6 +31,7 @@ describe "Equipment" do
     click_link("project_#{@project.id}")
     equipment = Equipment.create(tag: "V-101", description: "A Vessel", equipment_type: "Vessel", project: @project)
     visit project_equipment_path
+    click_link("show_equipment_#{equipment.id}")
     click_link("edit_equipment_#{equipment.id}")
     fill_in('Tag', with: "V-123")
     click_on('Update Equipment')
@@ -45,6 +46,7 @@ describe "Equipment" do
     equipment = Equipment.create(tag: "V-101", description: "A Vessel", equipment_type: "Vessel", project: @project)
     before_count = Equipment.count
     visit project_equipment_path
+    click_link("show_equipment_#{equipment.id}")
     click_link("delete_equipment_#{equipment.id}")
     expect(current_path).to eq(project_equipment_path)
     expect(Equipment.count).to eq(before_count - 1)

@@ -1,13 +1,213 @@
-<tr>
-  <td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_equipment_path(equipment), id: "edit_equipment_#{equipment.id}" %> | <%= link_to '<i class="fa fa-trash"></i>'.html_safe, equipment_path(equipment), method: :delete, id: "delete_equipment_#{equipment.id}", data: { confirm: "Are you sure?" } %></td>
-  <td><%= equipment.tag %></td>
-  <td><%= equipment.description %></td>
-  <td><%= equipment.equipment_type %></td>
-  <td><%= equipment.scope %></td>
-  <td><%= equipment.supplier %></td>
-  <td><%= equipment.manufacturer %></td>
-  <td><%= equipment.model_number %></td>
-  <td><%= equipment.zeton_po %></td>
-  <td><%= equipment.tracking_number %></td>
-  <td><%= equipment.receiving_info %></td>
-</tr>
+<div class="row mb-3">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body pt-1 pb-0">
+        <div class="row">
+          <div class="col-12 col-md-6 p-1">
+            <h5 class="card-title">
+              <%= link_to equipment.tag, equipment_path(equipment), id: "show_equipment_#{equipment.id}" %>
+            </h5>
+          </div>
+          <div class="col-12 col-md-6">
+            <span class="float-md-right">
+              <a data-toggle="collapse" href="#equipment_<%= equipment.id %>_details" role="button" aria-expanded="false" aria-controls="equipment_<%= equipment.id %>_details" class="btn btn-outline-primary"> 
+                Details
+                <i class="fa fa-caret-down"></i>
+              </a>
+              <a data-toggle="collapse" href="#equipment_<%= equipment.id %>_metrics" role="button" aria-expanded="false" aria-controls="equipment_<%= equipment.id %>_metrics" class="btn btn-outline-primary">
+                Metrics
+                <i class="fa fa-caret-down"></i>
+              </a>
+            </span>
+          </div>
+        </div>
+
+        <div class="mt-3 row collapse" id="equipment_<%= equipment.id %>_details">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                <span>Description:</span>
+              </div>
+              <div class="col-lg-10 col-md-9 col-sm-8 col-6">
+                <span><%= equipment.description %></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                <span>Type:</span>
+              </div>
+              <div class="col-lg-10 col-md-9 col-sm-8 col-6">
+                <span><%= equipment.equipment_type %></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                <span>Supplier:</span>
+              </div>
+              <div class="col-lg-10 col-md-9 col-sm-8 col-6">
+                <span><%= equipment.supplier %></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                <span>Manufacturer:</span>
+              </div>
+              <div class="col-lg-10 col-md-9 col-sm-8 col-6">
+                <span><%= equipment.manufacturer %></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                <span>Model:</span>
+              </div>
+              <div class="col-lg-10 col-md-9 col-sm-8 col-6">
+                <span><%= equipment.model_number %></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                <span>Zeton PO:</span>
+              </div>
+              <div class="col-lg-10 col-md-9 col-sm-8 col-6">
+                <span><%= equipment.zeton_po %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 row collapse" id="equipment_<%= equipment.id %>_metrics">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <span class="float-sm-left">Datasheet Complete</span>
+              <span class="float-sm-right">
+                <div id="datasheet_complete_status_equipment_<%= equipment.id %>">
+                  <%= render partial: 'equipment/datasheet_complete_status', locals: {equipment: equipment} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Datasheet Released</span>
+              <span class="float-sm-right">
+                <div id="datasheet_released_status_equipment_<%= equipment.id %>">
+                  <%= render partial: 'equipment/datasheet_released_status', locals: {equipment: equipment} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">RFQ Sent</span>
+              <span class="float-sm-right">
+                <div id="rfq_sent_status_equipment_<%= equipment.id %>">
+                  <%= render partial: 'equipment/rfq_sent_status', locals: {equipment: equipment} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">PO Placed</span>
+              <span class="float-sm-right">
+                <div id="po_placed_status_equipment_<%= equipment.id %>">
+                  <%= render partial: 'equipment/po_placed_status', locals: {equipment: equipment} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Approval Drawing Received</span>
+              <span class="float-sm-right">
+                <div id="approval_drawing_received_status_equipment_<%= equipment.id %>">
+                  <%= render partial: 'equipment/approval_drawing_received_status', locals: {equipment: equipment} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Approval Drawing Marked Up</span>
+              <span class="float-sm-right">
+                <div id="approval_drawing_marked_up_status_equipment_<%= equipment.id %>">
+                  <%= render partial: 'equipment/approval_drawing_marked_up_status', locals: {equipment: equipment} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Approval Drawing Sent to Client</span>
+              <span class="float-sm-right">
+                <div id="approval_drawing_sent_to_client_status_equipment_<%= equipment.id %>">
+                  <%= render partial: 'equipment/approval_drawing_sent_to_client_status', locals: {equipment: equipment} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Approval Drawing Released</span>
+              <span class="float-sm-right">
+                <div id="approval_drawing_released_status_equipment_<%= equipment.id %>">
+                  <%= render partial: 'equipment/approval_drawing_released_status', locals: {equipment: equipment} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Item Received</span>
+              <span class="float-sm-right">
+                <div id="item_received_status_equipment_<%= equipment.id %>">
+                  <%= render partial: 'equipment/item_received_status', locals: {equipment: equipment} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Item Released</span>
+              <span class="float-sm-right">
+                <div id="item_released_status_equipment_<%= equipment.id %>">
+                  <%= render partial: 'equipment/item_released_status', locals: {equipment: equipment} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Installed by Mechanical</span>
+              <span class="float-sm-right">
+                <div id="installed_by_mech_status_equipment_<%= equipment.id %>">
+                  <%= render partial: 'equipment/installed_by_mech_status', locals: {equipment: equipment} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Grounded by Electrical</span>
+              <span class="float-sm-right">
+                <div id="grounded_by_elec_status_equipment_<%= equipment.id %>">
+                  <%= render partial: 'equipment/grounded_by_elec_status', locals: {equipment: equipment} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-sm-left">Inspected by Engineering</span>
+              <span class="float-sm-right">
+                <div id="inspected_by_eng_status_equipment_<%= equipment.id %>">
+                  <%= render partial: 'equipment/inspected_by_eng_status', locals: {equipment: equipment} %>
+                </div>
+              </span>
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-sm-4">
+            <i class="fa fa-image"></i>
+            <span class="ml-4">710-39-110</span>
+          </div>
+          <div class="col-sm-4">
+            <i class="fa fa-building"></i>
+            <span class="ml-4"><%= equipment.scope %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

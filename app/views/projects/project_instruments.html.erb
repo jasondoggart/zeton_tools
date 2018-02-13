@@ -1,7 +1,12 @@
 <div class="main">
-  <h3>
-    Instrument List<br />
-  </h3>
+  <div class="row align-middle">
+    <div class="col-12 align-middle">
+      <span class="h3 mr-3">
+        Instrument List
+      </span>
+      <%= link_to '<i class="fa fa-plus-circle fa-2x"></i>'.html_safe, new_instrument_path(:project => @project), id: 'new_instrument_link' %>
+    </div>
+  </div>
   <p class="text-muted"><%= link_to 'View Metrics', project_instruments_metrics_path %></p>
   <div class="dropdown mt-3 mb-3">
     <button class="btn btn-outline-primary dropdown-toggle" type="button" id="loop_dropdown_button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -65,5 +70,4 @@
     <%= render partial: "instruments", locals: {instrument: inst} %>
   <% end %>
   <%= will_paginate(@instruments, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
-  <%= link_to 'Add New Instrument', new_instrument_path(:project => @project), class: 'btn btn-outline-primary btn-block', id: 'new_instrument_link' %>
 </div>

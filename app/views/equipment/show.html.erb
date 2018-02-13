@@ -2,7 +2,8 @@
   <h6 class="mt-3 mb-4 text-muted">
     <%= @equipment.tag %></br>
     <small>
-      <%= link_to 'Edit Equipment', edit_equipment_path(@equipment) %><br />
+      <%= link_to 'Edit Equipment', edit_equipment_path(@equipment), id: "edit_equipment_#{@equipment.id}" %><br />
+      <%= link_to 'Delete Equipment', equipment_path(@equipment), method: :delete, id: "delete_equipment_#{@equipment.id}" %><br />
       <%= link_to 'Back to Equipment List', project_equipment_path, id: 'back_to_equipment_list' %>
     </small>
   </h6>
