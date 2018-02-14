@@ -5,6 +5,7 @@ class Project < ApplicationRecord
   has_many :information_requests
   has_many :team_members
   has_many :documents
+  has_many :handvalves
   belongs_to :user
   after_create :initialize_team_members
   after_create :initialize_documents

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180203021118) do
+ActiveRecord::Schema.define(version: 20180214195436) do
 
   create_table "documents", force: :cascade do |t|
     t.string "name"
@@ -67,6 +67,29 @@ ActiveRecord::Schema.define(version: 20180203021118) do
   create_table "equipment_information_requests", id: false, force: :cascade do |t|
     t.integer "equipment_id", null: false
     t.integer "information_request_id", null: false
+  end
+
+  create_table "handvalves", force: :cascade do |t|
+    t.string "tag"
+    t.string "valve_code"
+    t.string "valve_type"
+    t.string "size"
+    t.string "line_number"
+    t.string "zeton_skid_number"
+    t.string "zeton_skid_level"
+    t.string "scope"
+    t.string "supplier"
+    t.string "manufacturer"
+    t.string "model"
+    t.string "process_connection"
+    t.string "material_of_construction"
+    t.string "valve_counting_code"
+    t.string "valve_location"
+    t.string "zeton_po"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "project_id"
+    t.index ["project_id"], name: "index_handvalves_on_project_id"
   end
 
   create_table "information_requests", force: :cascade do |t|

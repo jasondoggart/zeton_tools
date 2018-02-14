@@ -1,0 +1,30 @@
+<div class="row mb-3">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body pt-1 pb-0">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <h3 class="card-title">
+              <span class="p-2 mt-2">
+                <%= link_to handvalve.tag, handvalve_path(handvalve), id: "show_handvalve_#{handvalve.id}" %>
+              </span>
+            </h3>
+          </div>
+          <div class="col-12 col-md-6">
+            <span class="float-md-right">
+              <a data-toggle="collapse" href="#handvalve_<%= handvalve.id %>_details" role="button" aria-expanded="false" aria-controls="handvalve_<%= handvalve.id %>_details" class="btn btn-outline-primary">
+                Details
+                <i class="fa fa-caret-down"></i>
+              </a>
+              <a data-toggle="collapse" href="#handvalve_<%= handvalve.id %>_metrics" role="button" aria-expanded="false" aria-controls="handvalve_<%= handvalve.id %>_metrics" class="btn btn-outline-primary">
+                Metrics
+                <i class="fa fa-caret-down"></i>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -72,6 +72,11 @@ class ProjectsController < ApplicationController
     @documents = current_project.documents
   end
 
+  def project_handvalves
+    @handvalves = current_project.handvalves
+
+  end
+
   def new
     @project = Project.new
     @users = User.all

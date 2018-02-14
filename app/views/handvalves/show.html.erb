@@ -1,0 +1,10 @@
+<div class="main">
+  <h6 class="mt-3 mb-4 text-muted">
+    <%= @handvalve.tag %><br />
+    <small>
+      <%= link_to 'Edit Handvalve', edit_handvalve_path(@handvalve), id: "edit_handvalve_#{@handvalve.id}" %><br />
+      <%= link_to 'Delete Handvalve', handvalve_path(@handvalve), method: :delete, id: "delete_handvalve_#{@handvalve.id}" %><br />
+      <%= link_to 'Back to Handvalve List', project_handvalves_path, id: 'back_to_handvalve_list' %>
+    </small>
+  </h6>
+</div>

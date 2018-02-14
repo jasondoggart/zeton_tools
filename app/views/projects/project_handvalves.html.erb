@@ -1,0 +1,13 @@
+<div class="main">
+  <div class="row align-middle">
+    <div class="col-12 align-middle">
+      <span class="h3 mr-3">
+        Handvalve List
+      </span>
+      <%= link_to '<i class="fa fa-plus-circle fa-2x"></i>'.html_safe, new_handvalve_path(:project => @project), id: 'new_handvalve_link' %>
+    </div>
+  </div>
+  <% @handvalves.each do |valve| %>
+    <%= render partial: "handvalves", locals: {handvalve: valve} %>
+  <% end %>
+</div>

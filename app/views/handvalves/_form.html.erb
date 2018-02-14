@@ -1,0 +1,158 @@
+<%= form_for @handvalve do |f| %>
+  <% if @handvalve.errors.any? %>
+    <div class="alert alert-warning">
+      The form contains <%= pluralize(@handvalve.errors.count, "error") %>
+    </div>
+    <ul>
+      <% @handvalve.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="row mb-5">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul class="list-group ml-3 border-0">
+              <li class="list-group-item border-0">
+                <div class="form-group row mb-0">
+                  <%= f.label :tag, 'Tag', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
+                  <div class="col-sm-8">
+                    <%= f.text_field :tag, class: 'form-control' %>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item border-0">
+                <div class="form-group row mb-0">
+                  <%= f.label :valve_code, 'Valve Code', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
+                  <div class="col-sm-8">
+                    <%= f.text_field :valve_code, class: 'form-control' %>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item border-0">
+                <div class="form-group row mb-0">
+                  <%= f.label :valve_type, 'Type', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
+                  <div class="col-sm-8">
+                    <%= f.text_field :valve_type, class: 'form-control' %>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item border-0">
+                <div class="form-group row mb-0">
+                  <%= f.label :size, 'Size', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
+                  <div class="col-sm-8">
+                    <%= f.text_field :size, class: 'form-control' %>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item border-0">
+                <div class="form-group row mb-0">
+                  <%= f.label :line_number, 'Line or Equipment No.', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
+                  <div class="col-sm-8">
+                    <%= f.text_field :line_number, class: 'form-control' %>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item border-0">
+                <div class="form-group row mb-0">
+                  <%= f.label :zeton_skid_number, 'Skid', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
+                  <div class="col-sm-8">
+                    <%= f.text_field :zeton_skid_level, class: 'form-control' %>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item border-0">
+                <div class="form-group row mb-0">
+                  <%= f.label :zeton_skid_level, 'Skid Level', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
+                  <div class="col-sm-8">
+                    <%= f.text_field :zeton_skid_level, class: 'form-control' %>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item border-0">
+                <div class="form-group row mb-0">
+                  <%= f.label :scope, 'Scope', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
+                  <div class="col-sm-8">
+                    <%= f.text_field :scope, class: 'form-control' %>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <ul class="list-group ml-3 border-0">
+              <li class="list-group-item border-0">
+                <div class="form-group row mb-0">
+                  <%= f.label :supplier, 'Supplier', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
+                  <div class="col-sm-8">
+                    <%= f.text_field :supplier, class: 'form-control' %>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item border-0">
+                <div class="form-group row mb-0">
+                  <%= f.label :manufacturer, 'Manufacturer', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
+                  <div class="col-sm-8">
+                    <%= f.text_field :manufacturer, class: 'form-control' %>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item border-0">
+                <div class="form-group row mb-0">
+                  <%= f.label :model, 'Model Number', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
+                  <div class="col-sm-8">
+                    <%= f.text_field :model, class: 'form-control' %>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item border-0">
+                <div class="form-group row mb-0">
+                  <%= f.label :process_connection, 'Process Connection', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
+                  <div class="col-sm-8">
+                    <%= f.text_field :process_connection, class: 'form-control' %>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item border-0">
+                <div class="form-group row mb-0">
+                  <%= f.label :material_of_construction, 'MOC', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
+                  <div class="col-sm-8">
+                    <%= f.text_field :material_of_construction, class: 'form-control' %>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item border-0">
+                <div class="form-group row mb-0">
+                  <%= f.label :valve_counting_code, 'Item Type', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
+                  <div class="col-sm-8">
+                    <%= f.text_field :valve_counting_code, class: 'form-control' %>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item border-0">
+                <div class="form-group row mb-0">
+                  <%= f.label :valve_location, 'Installation Location', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
+                  <div class="col-sm-8">
+                    <%= f.text_field :valve_location, class: 'form-control' %>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item border-0">
+                <div class="form-group row mb-0">
+                  <%= f.label :zeton_po, 'Zeton PO Number', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
+                  <div class="col-sm-8">
+                    <%= f.text_field :zeton_po, class: 'form-control' %>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+  <%= f.submit @handvalve.new_record? ? 'Add Handvalve' : 'Update Handvalve', class: 'btn btn-outline-primary' %>
+<% end %>
