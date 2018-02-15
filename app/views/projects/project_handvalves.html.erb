@@ -10,4 +10,5 @@
   <% @handvalves.each do |valve| %>
     <%= render partial: "handvalves", locals: {handvalve: valve} %>
   <% end %>
+  <%= will_paginate(@handvalves, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
 </div>

@@ -7,4 +7,159 @@
       <%= link_to 'Back to Handvalve List', project_handvalves_path, id: 'back_to_handvalve_list' %>
     </small>
   </h6>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            Metrics<br />
+            <small class="text-muted">Click below to update</small>
+          </h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <span class="float-left">
+              Description Complete
+            </span>
+            <span class="float-right">
+              <div id="description_complete_status_handvalve_<%= @handvalve.id %>">
+                <%= render partial: 'description_complete_status', locals: {handvalve: @handvalve} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-left">Description Approved</span>
+            <span class="float-right">
+              <div id="description_approved_status_handvalve_<%= @handvalve.id %>">
+                <%= render partial: 'description_approved_status', locals: {handvalve: @handvalve} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-left">PO Placed</span>
+            <span class="float-right">
+              <div id="po_placed_status_handvalve_<%= @handvalve.id %>">
+                <%= render partial: 'po_placed_status', locals: {handvalve: @handvalve} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-left">Item Received</span>
+            <span class="float-right">
+              <div id="item_received_status_handvalve_<%= @handvalve.id %>">
+                <%= render partial: 'item_received_status', locals: {handvalve: @handvalve} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-left">Item Released</span>
+            <span class="float-right">
+              <div id="item_released_status_handvalve_<%= @handvalve.id %>">
+                <%= render partial: 'item_released_status', locals: {handvalve: @handvalve} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-left">Item Mounted</span>
+            <span class="float-right">
+              <div id="item_mounted_status_handvalve_<%= @handvalve.id %>">
+                <%= render partial: 'item_mounted_status', locals: {handvalve: @handvalve} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-left">Item Plumbed</span>
+            <span class="float-right">
+              <div id="item_plumbed_status_handvalve_<%= @handvalve.id %>">
+                <%= render partial: 'item_plumbed_status', locals: {handvalve: @handvalve} %>
+              </div>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="float-left">Checked By Engineer</span>
+            <span class="float-right">
+              <div id="checked_by_eng_status_handvalve_<%= @handvalve.id %>">
+                <%= render partial: 'checked_by_eng_status', locals: {handvalve: @handvalve} %>
+              </div>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Handvalve Data</h5>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <ul class="list-group ml-3 border-0">
+              <li class="list-group-item border-0">
+                <b>Tag:</b> <%= @handvalve.tag %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Valve Code:</b> <%= @handvalve.valve_code %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Valve Type:</b> <%= @handvalve.valve_type %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Size:</b> <%= @handvalve.size %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Line/Equipment Number:</b> <%= @handvalve.line_number %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Skid:</b> <%= @handvalve.zeton_skid_number %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Level:</b> <%= @handvalve.zeton_skid_level %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Scope:</b> <%= @handvalve.scope %>
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <ul class="list-group ml-3 border-0">
+              <li class="list-group-item border-0">
+                <b>Supplier:</b> <%= @handvalve.supplier %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Manufacturer:</b> <%= @handvalve.manufacturer %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Model:</b> <%= @handvalve.model %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Process Connection:</b> <%= @handvalve.process_connection %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Material of Construction:</b> <%= @handvalve.material_of_construction %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Valve Type:</b> <%= @handvalve.valve_counting_code %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Installation Location:</b> <%= @handvalve.valve_location %>
+              </li>
+              <li class="list-group-item border-0">
+                <b>Zeton PO:</b> <%= @handvalve.zeton_po %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card mt-5">
+        <div class="card-body">
+          <h5 class="card-title">
+            Related RFI's
+          </h5>
+          <p class="card-text">
+          Will show RFI's here
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

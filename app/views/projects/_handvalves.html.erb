@@ -41,7 +41,7 @@
                 <span>Skid Level:</span>
               </div>
               <div class="col-lg-10 col-md-9 col-sm-8 col-6">
-                <span>Skid <%= handvalve.zeton_skid_level %></span>
+                <span><%= handvalve.zeton_skid_level %></span>
               </div>
             </div>
           </div>
@@ -51,7 +51,7 @@
                 <span>Valve Code:</span>
               </div>
               <div class="col-lg-10 col-md-9 col-sm-8 col-6">
-                <span>Skid <%= handvalve.valve_code %></span>
+                <span><%= handvalve.valve_code %></span>
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@
                 <span>Valve Type:</span>
               </div>
               <div class="col-lg-10 col-md-9 col-sm-8 col-6">
-                <span>Skid <%= handvalve.valve_type %></span>
+                <span><%= handvalve.valve_type %></span>
               </div>
             </div>
           </div>
@@ -71,7 +71,7 @@
                 <span>Size:</span>
               </div>
               <div class="col-lg-10 col-md-9 col-sm-8 col-6">
-                <span>Skid <%= handvalve.size %></span>
+                <span><%= handvalve.size %></span>
               </div>
             </div>
           </div>
@@ -81,7 +81,7 @@
                 <span>Line/Equipment Tag:</span>
               </div>
               <div class="col-lg-10 col-md-9 col-sm-8 col-6">
-                <span>Skid <%= handvalve.line_number %></span>
+                <span><%= handvalve.line_number %></span>
               </div>
             </div>
           </div>
@@ -91,7 +91,7 @@
                 <span>Scope:</span>
               </div>
               <div class="col-lg-10 col-md-9 col-sm-8 col-6">
-                <span>Skid <%= handvalve.scope %></span>
+                <span><%= handvalve.scope %></span>
               </div>
             </div>
           </div>
@@ -101,7 +101,7 @@
                 <span>Supplier:</span>
               </div>
               <div class="col-lg-10 col-md-9 col-sm-8 col-6">
-                <span>Skid <%= handvalve.supplier %></span>
+                <span><%= handvalve.supplier %></span>
               </div>
             </div>
           </div>
@@ -111,7 +111,7 @@
                 <span>Manufacturer:</span>
               </div>
               <div class="col-lg-10 col-md-9 col-sm-8 col-6">
-                <span>Skid <%= handvalve.manufacturer %></span>
+                <span><%= handvalve.manufacturer %></span>
               </div>
             </div>
           </div>
@@ -121,7 +121,7 @@
                 <span>Model Number:</span>
               </div>
               <div class="col-lg-10 col-md-9 col-sm-8 col-6">
-                <span>Skid <%= handvalve.model %></span>
+                <span><%= handvalve.model %></span>
               </div>
             </div>
           </div>
@@ -131,7 +131,7 @@
                 <span>Process Connection:</span>
               </div>
               <div class="col-lg-10 col-md-9 col-sm-8 col-6">
-                <span>Skid <%= handvalve.process_connection %></span>
+                <span><%= handvalve.process_connection %></span>
               </div>
             </div>
           </div>
@@ -141,7 +141,7 @@
                 <span>MOC:</span>
               </div>
               <div class="col-lg-10 col-md-9 col-sm-8 col-6">
-                <span>Skid <%= handvalve.material_of_construction %></span>
+                <span><%= handvalve.material_of_construction %></span>
               </div>
             </div>
           </div>
@@ -151,7 +151,7 @@
                 <span>Valve Code:</span>
               </div>
               <div class="col-lg-10 col-md-9 col-sm-8 col-6">
-                <span>Skid <%= handvalve.valve_counting_code %></span>
+                <span><%= handvalve.valve_counting_code %></span>
               </div>
             </div>
           </div>
@@ -161,7 +161,7 @@
                 <span>Installation Location:</span>
               </div>
               <div class="col-lg-10 col-md-9 col-sm-8 col-6">
-                <span>Skid <%= handvalve.valve_location %></span>
+                <span><%= handvalve.valve_location %></span>
               </div>
             </div>
           </div>
@@ -171,9 +171,91 @@
                 <span>Zeton PO:</span>
               </div>
               <div class="col-lg-10 col-md-9 col-sm-8 col-6">
-                <span>Skid <%= handvalve.zeton_po %></span>
+                <span><%= handvalve.zeton_po %></span>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="mt-3 row collapse" id="handvalve_<%= handvalve.id %>_metrics">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <span class="float-left">
+                Description Complete
+              </span>
+              <span class="float-right">
+                <div id="description_complete_status_handvalve_<%= handvalve.id %>">
+                  <%= render partial: 'handvalves/description_complete_status', locals: {handvalve: handvalve} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-left">Description Approved</span>
+              <span class="float-right">
+                <div id="description_approved_status_handvalve_<%= handvalve.id %>">
+                  <%= render partial: 'handvalves/description_approved_status', locals: {handvalve: handvalve} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-left">PO Placed</span>
+              <span class="float-right">
+                <div id="po_placed_status_handvalve_<%= handvalve.id %>">
+                  <%= render partial: 'handvalves/po_placed_status', locals: {handvalve: handvalve} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-left">Item Received</span>
+              <span class="float-right">
+                <div id="item_received_status_handvalve_<%= handvalve.id %>">
+                  <%= render partial: 'handvalves/item_received_status', locals: {handvalve: handvalve} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-left">Item Released</span>
+              <span class="float-right">
+                <div id="item_released_status_handvalve_<%= handvalve.id %>">
+                  <%= render partial: 'handvalves/item_released_status', locals: {handvalve: handvalve} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-left">Item Mounted</span>
+              <span class="float-right">
+                <div id="item_mounted_status_handvalve_<%= handvalve.id %>">
+                  <%= render partial: 'handvalves/item_mounted_status', locals: {handvalve: handvalve} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-left">Item Plumbed</span>
+              <span class="float-right">
+                <div id="item_plumbed_status_handvalve_<%= handvalve.id %>">
+                  <%= render partial: 'handvalves/item_plumbed_status', locals: {handvalve: handvalve} %>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="float-left">Checked By Engineer</span>
+              <span class="float-right">
+                <div id="checked_by_eng_status_handvalve_<%= handvalve.id %>">
+                  <%= render partial: 'handvalves/checked_by_eng_status', locals: {handvalve: handvalve} %>
+                </div>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-sm-4">
+            <i class="fa fa-image"></i>
+            <span class="ml-4">710-39-110</span>
+          </div>
+          <div class="col-sm-4">
+            <i class="fa fa-building"></i>
+            <span class="ml-4"><%= handvalve.scope %></span>
           </div>
         </div>
       </div>

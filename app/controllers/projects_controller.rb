@@ -73,7 +73,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_handvalves
-    @handvalves = current_project.handvalves
+    @handvalves = current_project.handvalves.paginate(:page => params[:page], :per_page => 15)
 
   end
 

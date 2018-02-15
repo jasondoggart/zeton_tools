@@ -64,6 +64,14 @@ class HandvalvesController < ApplicationController
                                      :material_of_construction,
                                      :valve_counting_code,
                                      :valve_location,
-                                     :zeton_po)
+                                     :zeton_po,
+                                     :valve_description_complete,
+                                     :valve_description_approved,
+                                     :po_placed,
+                                     :item_received,
+                                     :item_inspected_and_released,
+                                     :item_mounted,
+                                     :item_plumbed,
+                                     :item_checked_by_eng)
   end
 end

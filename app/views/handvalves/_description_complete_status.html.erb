@@ -1,0 +1,4 @@
+<%= form_for handvalve, remote: true do |f| %>
+  <%= f.hidden_field :valve_description_complete, value: metrics_increment(handvalve.valve_description_complete) %>
+  <%= f.button icon_select(handvalve.valve_description_complete).html_safe, class: 'metrics-button' %>
+<% end %>
