@@ -43,4 +43,17 @@ describe "Handvalve" do
     expect(current_path).to eq(project_handvalves_path)
     expect(handvalve.reload.tag).to eq("CK-1001")
   end
+
+  it 'can be destroyed from the handvalve show page' do
+    handvalve = @project.handvalves.create(tag: "HV-1002")
+    sign_in_with(@user.email, @user.password)
+    visit root_path
+    click_link("project_#{@project.id}")
+    visit project_handvalves_path
+    click_link("show_handvalve_#{handvalve.id}")
+    before_count = @project.handvalves.count
+    click_link("delete_handvalve_#{handvalve.id}")
+    expect(current_path).to eq(project_handvalves_path)
+    expect(@project.handvalves.count).to eq(before_count - 1)
+  end
 end

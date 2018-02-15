@@ -75,6 +75,12 @@ item_types = ["ITUBE", "IWELD", "ISCRD", "IOTHR"]
 locations = ["LTUBE", "LPIPE", "EQUIP"]
 io_types = ["AI", "AO", "DI", "DO", "MODBUS"] 
 units = ["BARG", "Deg C", "inH2O", "BAR"]
+valve_prefixes = ["HV", "CK"]
+valve_codes = ["T1L", "T3L", "T6L", "T9L", "WS1", "WS3", "WS6", "WS9"]
+valve_types = ["Ball", "Needle", "Check", "Butterfly"]
+sizes = ["1/4 in.", "1/2 in.", "3/4 in.", "1 in.", "1.5 in.", "2 in.", "3 in."]
+valve_counting_codes = ["VTUBE", "VSCRD", "VWELD", "VOTHR"]
+
 # Create instruments and equipment for all projects 
 Project.all.each do |project| 
   num_inst = rand(75..700) 
@@ -131,7 +137,32 @@ Project.all.each do |project|
     project.equipment.create(tag: tag + "-" + Faker::Number.number(3) , description: "Very Important Piece of Equipment", equipment_type: equip_type, scope: "Zeton", manufacturer: manufacturer, model_number: model_number, supplier: supplier)
   end
   puts "Generated #{project.equipment.count} pieces of equipment"
+
+  num_valves = rand(100..750)
+  puts "Will generate #{num_valves} handvalves for project #{project.project_number}"
+  num_valves.times do
+    tag = valve_prefixes.sample + "-" + Faker::Number.number(4)
+    valve_code = valve_codes.sample
+    valve_type = valve_types.sample
+    size = sizes.sample
+    line_number = Faker::Number.number(4)
+    zeton_skid_number = skids.sample
+    zeton_skid_level = rand(1..4)
+    scope = "Zeton"
+    supplier = Faker::Name.name + "'s valve supply"
+    manufacturer = Faker::Name.name + "'valve builder"
+    model = Faker::Number.number(3) + "-" + Faker::Number.number(4) + "-" + Faker::Number.number(4)
+    process_connection = connections.sample
+    material_of_construction = materials.sample
+    valve_counting_code = valve_counting_codes.sample
+    valve_location = locations.sample
+    zeton_po = "18." + Faker::Number.number(5)
+    project.handvalves.create(tag: tag, valve_code: valve_code, valve_type: valve_type, size: size, line_number: line_number, zeton_skid_number: zeton_skid_number, zeton_skid_level: zeton_skid_level, scope: scope, supplier: supplier, manufacturer: manufacturer, model: model, process_connection: process_connection, material_of_construction: material_of_construction, valve_counting_code: valve_counting_code, valve_location: valve_location, zeton_po: zeton_po)
+  end
+  puts "Generated #{project.handvalves.count} handvalves"
+
 end
+
 
 # Fill in metrics for all instruments
 odds = [1,1,1,1,1,1,1,1,1,0]

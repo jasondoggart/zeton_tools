@@ -39,6 +39,11 @@ class HandvalvesController < ApplicationController
   end
 
   def destroy
+    @handvalve = Handvalve.find(params[:id])
+    @handvalve.delete
+    flash[:info] = "Handvalve deleted"
+    redirect_to project_handvalves_path
+
   end
 
   private 
