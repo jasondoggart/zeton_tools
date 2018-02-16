@@ -87,6 +87,21 @@ class ProjectsController < ApplicationController
     @handvalves = @handvalves.paginate(:page => params[:page], :per_page => 10)
   end
 
+  def project_handvalves_metrics
+    @handvalves = current_project.handvalves
+    @handvalves = @handvalves.with_type(params[:with_type]) if params[:with_type].present?
+    @handvalves = @handvalves.with_size(params[:with_size]) if params[:with_size].present?
+    if params[:sorted_by].present?
+      @handvalves = @handvalves.sorted_by(params[:sorted_by])
+    else
+      @handvalves = @handvalves.order(tag: :asc)
+    end
+    @sorted_by = params[:sorted_by] if params[:sorted_by].present?
+    @types = @handvalves.distinct.pluck(:valve_type).sort
+    @sizes = @handvalves.distinct.pluck(:size).sort
+    @handvalves = @handvalves.paginate(:page => params[:page], :per_page => 10)
+  end
+
   def new
     @project = Project.new
     @users = User.all

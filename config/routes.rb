@@ -1,12 +1,4 @@
 Rails.application.routes.draw do
-  get 'handvalves/new'
-
-  get 'handvalves/create'
-
-  get 'handvalves/show'
-
-  get 'handvalves/destroy'
-
   resources :documents
   resources :team_members
   resources :handvalves
@@ -19,6 +11,7 @@ Rails.application.routes.draw do
   get 'projects/documents', to: 'projects#project_documents', as: :project_documents
   get 'projects/metrics', to: 'projects#project_metrics', as: :project_metrics
   get 'projects/handvalves', to: 'projects#project_handvalves', as: :project_handvalves
+  get 'projects/handvalves/metrics', to: 'projects#project_handvalves_metrics',as: :project_handvalves_metrics
   post 'select_project', to: 'project_sessions#create'
 
   root to: 'pages#home'
