@@ -377,5 +377,113 @@ module MetricsHelper
     item_inspected_by_eng_complete.to_f/item_inspected_by_eng_required.to_f * 100
   end
 
+  # Handvalve Metrics
+  def handvalves_in_zeton_scope
+    current_project.handvalves.where(scope: "Zeton").count
+  end
 
+  def total_handvalve_count
+    current_project.handvalves.count
+  end
+
+  def handvalves_in_zeton_scope_percent
+    handvalves_in_zeton_scope.to_f/total_handvalve_count.to_f * 100
+  end
+
+  def description_complete_required
+    not_required = current_project.handvalves.where(valve_description_complete: 2).count
+    return total_equipment_count - not_required
+  end
+
+  def description_complete_complete
+    current_project.handvalves.where(valve_description_complete: 1).count
+  end
+
+  def description_complete_percent
+    description_complete_complete.to_f/description_complete_required.to_f * 100
+  end
+  def description_approved_required
+    not_required = current_project.handvalves.where(valve_description_approved: 2).count
+    return total_equipment_count - not_required
+  end
+
+  def description_approved_complete
+    current_project.handvalves.where(valve_description_approved: 1).count
+  end
+
+  def description_approved_percent
+    description_approved_complete.to_f/description_approved_required.to_f * 100
+  end
+  def handvalve_po_placed_required
+    not_required = current_project.handvalves.where(po_placed: 2).count
+    return total_equipment_count - not_required
+  end
+
+  def handvalve_po_placed_complete
+    current_project.handvalves.where(po_placed: 1).count
+  end
+
+  def handvalve_po_placed_percent
+    handvalve_po_placed_complete.to_f/handvalve_po_placed_required.to_f * 100
+  end
+  def handvalve_item_received_required
+    not_required = current_project.handvalves.where(item_received: 2).count
+    return total_equipment_count - not_required
+  end
+
+  def handvalve_item_received_complete
+    current_project.handvalves.where(item_received: 1).count
+  end
+
+  def handvalve_item_received_percent
+    handvalve_item_received_complete.to_f/handvalve_item_received_required.to_f * 100
+  end
+  def handvalve_item_released_required
+    not_required = current_project.handvalves.where(item_inspected_and_released: 2).count
+    return total_equipment_count - not_required
+  end
+
+  def handvalve_item_released_complete
+    current_project.handvalves.where(item_inspected_and_released: 1).count
+  end
+
+  def handvalve_item_released_percent
+    handvalve_item_released_complete.to_f/handvalve_item_released_required.to_f * 100
+  end
+  def handvalve_item_mounted_required
+    not_required = current_project.handvalves.where(item_plumbed: 2).count
+    return total_equipment_count - not_required
+  end
+
+  def handvalve_item_mounted_complete
+    current_project.handvalves.where(item_plumbed: 1).count
+  end
+
+  def handvalve_item_mounted_percent
+    handvalve_item_mounted_complete.to_f/handvalve_item_mounted_required.to_f * 100
+  end
+  def handvalve_item_plumbed_required
+    not_required = current_project.handvalves.where(item_plumbed: 2).count
+    return total_equipment_count - not_required
+  end
+
+  def handvalve_item_plumbed_complete
+    current_project.handvalves.where(item_plumbed: 1).count
+  end
+
+  def handvalve_item_plumbed_percent
+    handvalve_item_plumbed_complete.to_f/handvalve_item_plumbed_required.to_f * 100
+  end
+  def handvalve_checked_by_eng_required
+    not_required = current_project.handvalves.where(item_checked_by_eng: 2).count
+    return total_equipment_count - not_required
+  end
+
+  def handvalve_checked_by_eng_complete
+    current_project.handvalves.where(item_checked_by_eng: 1).count
+  end
+
+  def handvalve_checked_by_eng_percent
+    handvalve_checked_by_eng_complete.to_f/handvalve_checked_by_eng_required.to_f * 100
+  end
 end
