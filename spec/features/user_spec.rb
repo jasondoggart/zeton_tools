@@ -15,4 +15,10 @@ describe 'User' do
     expect(page).to have_content("Team Member")
   end
 
+  it 'has a show page that can be accessed' do
+    user = FactoryBot.create(:user)
+    sign_in_with(user.email, user.password)
+    visit user_path(user)
+  end
+
 end

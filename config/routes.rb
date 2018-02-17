@@ -20,5 +20,5 @@ Rails.application.routes.draw do
   resources :information_requests
   resources :instruments
   resources :equipment
-  resources :users, controller: :users, only: :create
+  resources :users, controller: :users, only: [:create, :show]
 end

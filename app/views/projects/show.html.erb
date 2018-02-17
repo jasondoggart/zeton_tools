@@ -1,48 +1,207 @@
-<div class="main">
-  <h4><%= current_project.project_number %></h4>
-  <h6 class="mt-3 mb-4 text-muted"><%= current_project.project_name %></h6>
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Metrics</h5>
-          <p class="card-text">Total Instrument Count: <%= total_instrument_count %></p>
-          <p class="card-text">Instruments Requiring a datasheet approved: <%= datasheet_submitted_for_approval_required %></p>
-          <p class="card-text">Datasheet submitted to client: <%= datasheet_submitted_for_approval_complete %></p>
+<div class="row pl-5 pr-5 pb-5">
+  <div class="col-sm-4">
+    <div class="card card-box-shadow">
+      <div class="card-body">
+        <div class="col-sm-12 text-muted">
+          Equipment
         </div>
-      </div>
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Recent RFI's</h5>
-          <p class="card-text">Will show recent RFI's</p>
+        <div class="col-sm-12 pt-5 mb-1">
+          Purchased
+          <span class="float-right">
+            <%= equipment_po_placed_complete %> out of <%= equipment_po_placed_required %> (<%= equipment_po_placed_percent.round(1) %>%)
+          </span>
         </div>
-      </div>
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Project Team</h5>
-          <table class="w-100">
-            <thead>
-              <tr>
-                <th scope="col">Role</th>
-                <th scope="col">Name</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% current_project.team_members.each do |team_member| %>
-                <%= render partial: 'team_member', locals: {team_member: team_member} %>
-              <% end %>
-            </tbody>
-          </table>
+        <div class="col-sm-12">
+          <div class="progress" style="height: 5px;">
+            <div class="progress-bar" role="progressbar" style="width: <%= equipment_po_placed_percent %>%;" aria-valuenow="<%= equipment_po_placed_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
         </div>
-        <div class="card-body">
-          <%= link_to 'Add Team Member', new_team_member_path(:project => current_project), id: 'add_team_member', class: 'btn btn-outline-primary' %>
+        <div class="col-sm-12 pt-3 mb-1">
+          Received
+          <span class="float-right">
+            <%= equipment_item_inspected_and_released_complete %> out of <%= equipment_item_inspected_and_released_required %> (<%= equipment_item_inspected_and_released_percent.round(1) %>%)
+          </span>
+        </div>
+        <div class="col-sm-12">
+          <div class="progress" style="height: 5px;">
+            <div class="progress-bar" role="progressbar" style="width: <%= equipment_item_inspected_and_released_percent %>%;" aria-valuenow="<%= equipment_item_inspected_and_released_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="col-sm-12 pt-3 mb-1">
+          Installed
+          <span class="float-right">
+            <%= item_installed_by_mech_complete %> out of <%= item_installed_by_mech_required %> (<%= item_installed_by_mech_percent.round(1) %>%)
+          </span>
+        </div>
+        <div class="col-sm-12">
+          <div class="progress" style="height: 5px;">
+            <div class="progress-bar" role="progressbar" style="width: <%= item_installed_by_mech_percent %>%;" aria-valuenow="<%= item_installed_by_mech_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="col-sm-12 pt-3 mb-1">
+          Grounded
+          <span class="float-right">
+            <%= item_grounded_by_elec_complete %> out of <%= item_grounded_by_elec_required %> (<%= item_grounded_by_elec_percent.round(1) %>%)
+          </span>
+        </div>
+        <div class="col-sm-12">
+          <div class="progress" style="height: 5px;">
+            <div class="progress-bar" role="progressbar" style="width: <%= item_grounded_by_elec_percent %>%;" aria-valuenow="<%= item_grounded_by_elec_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="col-sm-12 pt-5">
+          <%= link_to 'View Metrics', project_equipment_metrics_path %>
         </div>
       </div>
     </div>
   </div>
-  <div class="mt-5">
-  <% if current_project.user == current_user %>
-    <%= link_to 'Update Project Details', edit_project_path(current_project), class: 'btn btn-outline-primary btn-block', id: "update_project_#{current_project.id}" %>
-  <% end %>
+  <div class="col-sm-4">
+    <div class="card card-box-shadow">
+      <div class="card-body">
+        <div class="col-sm-12 text-muted">
+          Instruments
+        </div>
+        <div class="col-sm-12 pt-5 mb-1">
+          Purchased
+          <span class="float-right">
+            <%= po_placed_complete %> out of <%= po_placed_required %> (<%= po_placed_percent.round(1) %>%)
+          </span>
+        </div>
+        <div class="col-sm-12">
+          <div class="progress" style="height: 5px;">
+            <div class="progress-bar" role="progressbar" style="width: <%= po_placed_percent %>%;" aria-valuenow="<%= po_placed_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="col-sm-12 pt-3 mb-1">
+          Received
+          <span class="float-right">
+            <%= item_inspected_and_released_complete %> out of <%= item_inspected_and_released_required %> (<%= item_inspected_and_released_percent.round(1) %>%)
+          </span>
+        </div>
+        <div class="col-sm-12">
+          <div class="progress" style="height: 5px;">
+            <div class="progress-bar" role="progressbar" style="width: <%= item_inspected_and_released_percent %>%;" aria-valuenow="<%= item_inspected_and_released_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="col-sm-12 pt-3 mb-1">
+          Installed
+          <span class="float-right">
+            <%= plumbed_by_mechanical_complete %> out of <%= plumbed_by_mechanical_required %> (<%= plumbed_by_mechanical_percent.round(1) %>%)
+          </span>
+        </div>
+        <div class="col-sm-12">
+          <div class="progress" style="height: 5px;">
+            <div class="progress-bar" role="progressbar" style="width: <%= plumbed_by_mechanical_percent %>%;" aria-valuenow="<%= plumbed_by_mechanical_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="col-sm-12 pt-3 mb-1">
+          Wired
+          <span class="float-right">
+            <%= cable_terminated_at_destination_complete %> out of <%= cable_terminated_at_destination_required %> (<%= cable_terminated_at_destination_percent.round(1) %>%)
+          </span>
+        </div>
+        <div class="col-sm-12">
+          <div class="progress" style="height: 5px;">
+            <div class="progress-bar" role="progressbar" style="width: <%= cable_terminated_at_destination_percent %>%;" aria-valuenow="<%= cable_terminated_at_destination_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="col-sm-12 pt-5">
+          <%= link_to 'View Metrics', project_instruments_metrics_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card card-box-shadow">
+      <div class="card-body">
+        <div class="col-sm-12 text-muted">
+          Handvalves
+        </div>
+        <div class="col-sm-12 pt-5 mb-1">
+          Purchased
+          <span class="float-right">
+            <%= handvalve_po_placed_complete %> out of <%= handvalve_po_placed_required %> (<%= handvalve_po_placed_percent.round(1) %>%)
+          </span>
+        </div>
+        <div class="col-sm-12">
+          <div class="progress" style="height: 5px;">
+            <div class="progress-bar" role="progressbar" style="width: <%= handvalve_po_placed_percent %>%;" aria-valuenow="<%= handvalve_po_placed_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="col-sm-12 pt-3 mb-1">
+          Received
+          <span class="float-right">
+            <%= handvalve_item_released_complete %> out of <%= handvalve_item_released_required %> (<%= handvalve_item_released_percent.round(1) %>%)
+          </span>
+        </div>
+        <div class="col-sm-12">
+          <div class="progress" style="height: 5px;">
+            <div class="progress-bar" role="progressbar" style="width: <%= handvalve_item_released_percent %>%;" aria-valuenow="<%= handvalve_item_released_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="col-sm-12 pt-3 mb-1">
+          Installed
+          <span class="float-right">
+            <%= handvalve_item_plumbed_complete %> out of <%= handvalve_item_plumbed_required %> (<%= handvalve_item_plumbed_percent.round(1) %>%)
+          </span>
+        </div>
+        <div class="col-sm-12">
+          <div class="progress" style="height: 5px;">
+            <div class="progress-bar" role="progressbar" style="width: <%= handvalve_item_plumbed_percent %>%;" aria-valuenow="<%= handvalve_item_plumbed_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="col-sm-12 pt-5">
+          <%= link_to 'View Metrics', project_handvalves_metrics_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row pl-5 pr-5 pt-1">
+  <div class="col-sm-12">
+    <div class="card card-box-shadow mb-5">
+      <div class="card-body mt-0">
+        <div class="col-sm-12 text-muted">
+          Requests for Information
+        </div>
+        <% @rfis.each do |rfi| %>
+          <div class="border-bottom">
+            <div class="pt-3 mt-0">
+              <div class="row pl-3 pr-3">
+                <div class="col-sm-12">
+                  <span class="h6 float-left"><%= rfi.rfi_number %></span>
+                  <span class="float-right">
+                    <%= rfi.created_at.strftime("%b %-d, %Y") %>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="pb-3">
+              <div class="row pl-3 pr-3">
+                <div class="col-sm-12">
+                  <%= rfi.zeton_clarification %>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <% rfi.instruments.each do |inst| %>
+                  <span class="badge badge-pill badge-primary">
+                    <%= inst.tag %>
+                  </span>
+                <% end %>
+                <% rfi.equipment.each do |inst| %>
+                  <span class="badge badge-pill badge-primary">
+                    <%= inst.tag %>
+                  </span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="col-sm-12 pt-5">
+          <%= link_to 'View RFIs', project_metrics_path %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

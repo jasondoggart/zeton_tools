@@ -12,6 +12,7 @@ class ProjectsController < ApplicationController
                                              ]
 
   def show
+    @rfis = current_project.information_requests.take(3)
   end
 
   def project_metrics
