@@ -5,6 +5,7 @@ class InformationRequestsController < ApplicationController
     @information_request = InformationRequest.new
     @instruments = current_project.instruments
     @equipment = current_project.equipment
+    @handvalves = current_project.handvalves
   end
 
   def create
@@ -22,6 +23,7 @@ class InformationRequestsController < ApplicationController
     @information_request = InformationRequest.find(params[:id])
     @instruments = current_project.instruments
     @equipment = current_project.equipment
+    @handvalves = current_project.handvalves
   end
 
   def update
@@ -56,7 +58,8 @@ class InformationRequestsController < ApplicationController
                                                   :zeton_clarification,
                                                   :project_id,
                                                   instrument_ids: [],
-                                                  equipment_ids: []
+                                                  equipment_ids: [],
+                                                  handvalve_ids: []
                                                  )
     end
 end

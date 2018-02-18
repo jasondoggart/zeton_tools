@@ -170,7 +170,7 @@
             <div class="pt-3 mt-0">
               <div class="row pl-3 pr-3">
                 <div class="col-sm-12">
-                  <span class="h6 float-left"><%= rfi.rfi_number %></span>
+                  <span class="h6 float-left"><%= link_to rfi.rfi_number, information_request_path(rfi) %></span>
                   <span class="float-right">
                     <%= rfi.created_at.strftime("%b %-d, %Y") %>
                   </span>
@@ -199,7 +199,7 @@
           </div>
         <% end %>
         <div class="col-sm-12 pt-5">
-          <%= link_to 'View RFIs', project_metrics_path %>
+          <%= link_to 'View RFI Log', project_rfis_path %>
         </div>
       </div>
     </div>

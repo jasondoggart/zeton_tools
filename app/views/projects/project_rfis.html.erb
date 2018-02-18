@@ -1,30 +1,123 @@
-<div class="main">
-  <h3>RFI Log</h3>
-  <p><%= link_to 'New RFI', new_information_request_path(:project => @project), id: 'new_rfi', class: 'btn btn-outline-primary' %>
-  <div class="table-responsive">
-    <table class="table table-hover">
-      <col style="width: 80px">
-      <col style="width: 350px">
-      <col style="width: 80px">
-      <col style="width: 80px">
-      <col style="width: 80px">
-      <col style="width: 80px">
-      <thead>
-        <tr>
-          <th scope="col" class="text-center">RFI Number</th>
-          <th scope="col" class="text-center">Zeton Clarification</th>
-          <th scope="col" class="text-center">Associated Instruments</th>
-          <th scope="col" class="text-center">Associated Equipment</th>
-          <th scope="col" class="text-center">Latest Update</th>
-          <th scope="col" class="text-center">Answered?</th>
-        </tr>
-      </thead>
-      <tbody>
+<div class="row pl-5 pr-5 mb-3 mt-5">
+  <div class="col-sm-12">
+    <h3>
+      Requests for Information
+    </h3>
+  </div>
+</div>
+<div class="row pl-5 pr-5">
+  <div class="col-sm-3">
+    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+      <div class="col-sm-12 h3 text-info">
+        <i class="fa fa-hashtag text-centered"></i>
+      </div>
+      <div class="col-sm-12">
+        <h2>
+          <%= @rfis.count %>
+        </h2>
+      </div>
+      <div class="col-sm-12 text-muted">
+        RFI Count
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+      <div class="col-sm-12 h3 text-warning">
+        <i class="fa fa-exclamation text-centered"></i>
+      </div>
+      <div class="col-sm-12">
+        <h2>
+          <%= @rfis.count %>
+        </h2>
+      </div>
+      <div class="col-sm-12 text-muted">
+        Open RFIs
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+      <div class="col-sm-12 h3 text-success">
+        <i class="fa fa-calendar-plus-o text-centered"></i>
+      </div>
+      <div class="col-sm-12">
+        <h2>
+          <%= @rfis.count %>
+        </h2>
+      </div>
+      <div class="col-sm-12 text-muted">
+        New RFIs This Week
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+      <div class="col-sm-12 h1 text-primary">
+        <%= link_to '<i class="fa fa-plus text-centered"></i>'.html_safe, new_information_request_path, id: 'new_rfi' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row pl-5 pr-5">
+  <div class="col-sm-12">
+    <div class="card card-box-shadow mb-5">
+      <div class="card-body mt-0">
         <% @rfis.each do |rfi| %>
-          <%= render partial: 'rfis', locals: {rfi: rfi} %>
+          <div class="border-bottom">
+            <div class="pt-3 mt-0">
+              <div class="row pl-3 pr-3">
+                <div class="col-sm-12">
+                  <h5 class="mb-0">
+                    <%= link_to rfi.rfi_number, information_request_path(rfi) %>
+                  </h5>
+                  <% if rfi.answered == 1 %>
+                    <span class="badge badge-pill badge-success">
+                      Closed
+                    </span>
+                  <% end %>
+                  <div class="text-muted mb-3">
+                    <%= rfi.created_at.strftime("%b %-d, %Y") %>
+                    <% if rfi.rfi_responses.any? %>
+                      <span class="text-info">
+                        | Updated <%= rfi.rfi_responses.last.created_at.strftime("%b %-d, %Y") %> by <%= rfi.rfi_responses.last.organization %>
+                      </span>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pb-3">
+              <div class="row pl-3 pr-3">
+                <div class="col-sm-12 pb-2">
+                  <%= rfi.zeton_clarification %>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <% rfi.instruments.each do |inst| %>
+                    <%= link_to inst.tag, instrument_path(inst),class: 'badge badge-pill badge-primary' %>
+                <% end %>
+                <% rfi.equipment.each do |equip| %>
+                  <span >
+                    <%= link_to equip.tag, equipment_path(equip), class: 'badge badge-pill badge-primary' %>
+                  </span>
+                <% end %>
+                <% rfi.handvalves.each do |valve| %>
+                  <span >
+                    <%= link_to valve.tag, handvalve_path(valve), class: 'badge badge-pill badge-primary' %>
+                  </span>
+                <% end %>
+              </div>
+            </div>
+          </div>
         <% end %>
-      </tbody>
-    </table>
-    <%= will_paginate(@rfis, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+        <div class="pt-3">
+          <%= will_paginate(@rfis, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -155,9 +155,24 @@
           <h5 class="card-title">
             Related RFI's
           </h5>
-          <p class="card-text">
-          Will show RFI's here
-          </p>
+          <% if @handvalve.information_requests.any? %>
+            <table>
+              <thead>
+                <th class="p-3">Number</th>
+                <th class="p-3">Zeton Clarification</th>
+              </thead>
+              <tbody>
+                <% @handvalve.information_requests.each do |rfi| %>
+                  <tr class="mb-3">
+                    <td class="p-3"><%= link_to rfi.rfi_number, information_request_path(rfi) %></td>
+                    <td class="p-3"><%= rfi.zeton_clarification %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            No related RFIs
+          <% end %>
         </div>
       </div>
     </div>

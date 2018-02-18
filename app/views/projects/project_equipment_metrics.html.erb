@@ -1,38 +1,90 @@
-<div class="main">
-  <h3>
-    Equipment Metrics<br />
-  </h3>
-  <p class="text-muted">
-    <%= link_to 'View Equipment List', project_equipment_path %>
-  </p>
-  <div class="table-responsive table-header-column mb-5">
-    <table class="mt-3 table table-hover table-fixed-tags">
-      <thead>
-        <tr>
-          <th scope="col" class="text-center align-middle">Tag</th>
-          <th scope="col" class="text-center align-middle">PID</th>
-          <th scope="col" class="text-center align-middle">Datasheet Complete</th>
-          <th scope="col" class="text-center align-middle">Datasheet Approved</th>
-          <th scope="col" class="text-center align-middle">RFQ Sent</th>
-          <th scope="col" class="text-center align-middle">PO Placed</th>
-          <th scope="col" class="text-center align-middle">Dwg Received</th>
-          <th scope="col" class="text-center align-middle">Dwg Reviewed</th>
-          <th scope="col" class="text-center align-middle">Client Review</th>
-          <th scope="col" class="text-center align-middle">Dwg Approved</th>
-          <th scope="col" class="text-center align-middle">Item Received</th>
-          <th scope="col" class="text-center align-middle">Item Released</th>
-          <th scope="col" class="text-center align-middle">Item Installed</th>
-          <th scope="col" class="text-center align-middle">Item Grounded</th>
-          <th scope="col" class="text-center align-middle">Engineering Check</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @equipment.each do |equip| %>
-          <%= render partial: 'equipment_metrics', locals: {equipment: equip} %>
-        <% end %>
-      </tbody>
-    </table>
+<div class="row pl-5 pr-5 mb-3 mt-5">
+  <div class="col-sm-12">
+    <h3>
+      Equipment Metrics
+    </h3>
   </div>
-  <%= will_paginate(@equipment, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+</div>
+<div class="row pl-5 pr-5">
+  <div class="col-sm-12">
+    <div class="card card-box-shadow mb-3">
+      <div class="card-body mt-0">
+        <div class="dropdown mt-3 mb-3">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="loop_dropdown_button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sort By
+          </button>
+          <div class="dropdown-menu" style="height: 200px; overflow: scroll;" aria-labelledby="loop_dropdown_button">
+            <%= link_to 'Type', request.query_parameters.merge(:sorted_by => 'type_' + sort_direction(@sorted_by)), class: 'dropdown-item' %>
+            <%= link_to 'Tag', request.query_parameters.merge(:sorted_by => 'tag_' + sort_direction(@sorted_by)), class: 'dropdown-item' %>
+          </div>
+        </div>
+        <a class="btn btn-outline-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Filters<span class="ml-3"><i class="fa fa-caret-down"></i></span>
+        </a>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <div class="row">
+              <div class="col-4">
+                <%= link_to 'Clear all', project_equipment_metrics_path(:sorted_by => 'type asc'), class: 'btn btn-outline-primary btn-sm' %>
+              </div>
+              <div class="col-4">
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="type_code_dropdown_button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Type
+                    <% if params[:with_type].present? %>
+                      <i class="fa fa-filter"></i>
+                    <% end %>
+                  </button>
+                  <div class="dropdown-menu" style="height: 200px; overflow: scroll;" aria-labelledby="type_code_dropdown_button">
+                    <%= link_to "Show All", project_equipment_metrics_path(:with_type => nil), class: 'dropdown-item' %>
+                    <% @types.each do |type| %>
+                      <%= link_to type, request.query_parameters.merge(:with_type => type), class: "dropdown-item" %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<div class="row pl-5 pr-5">
+  <div class="col-sm-12">
+    <div class="card card-box-shadow mb-3">
+      <div class="card-body mt-0">
+        <div class="table-responsive table-header-column mb-5">
+          <table class="mt-3 table table-hover table-fixed-tags border-top-0">
+            <thead class="border-top-0">
+              <tr class="border-top-0">
+                <th scope="col" class="text-center align-middle border-top-0">Tag</th>
+                <th scope="col" class="text-center align-middle border-top-0">PID</th>
+                <th scope="col" class="text-center align-middle border-top-0">Datasheet Complete</th>
+                <th scope="col" class="text-center align-middle border-top-0">Datasheet Approved</th>
+                <th scope="col" class="text-center align-middle border-top-0">RFQ Sent</th>
+                <th scope="col" class="text-center align-middle border-top-0">PO Placed</th>
+                <th scope="col" class="text-center align-middle border-top-0">Dwg Received</th>
+                <th scope="col" class="text-center align-middle border-top-0">Dwg Reviewed</th>
+                <th scope="col" class="text-center align-middle border-top-0">Client Review</th>
+                <th scope="col" class="text-center align-middle border-top-0">Dwg Approved</th>
+                <th scope="col" class="text-center align-middle border-top-0">Item Received</th>
+                <th scope="col" class="text-center align-middle border-top-0">Item Released</th>
+                <th scope="col" class="text-center align-middle border-top-0">Item Installed</th>
+                <th scope="col" class="text-center align-middle border-top-0">Item Grounded</th>
+                <th scope="col" class="text-center align-middle">Engineering Check</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @equipment.each do |equip| %>
+                <%= render partial: 'equipment_metrics', locals: {equipment: equip} %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <%= will_paginate(@equipment, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+      </div>
+    </div>
+  </div>
+</div>

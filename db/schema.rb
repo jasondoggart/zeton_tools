@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180215203903) do
+ActiveRecord::Schema.define(version: 20180218024241) do
 
   create_table "documents", force: :cascade do |t|
     t.string "name"
@@ -98,6 +98,11 @@ ActiveRecord::Schema.define(version: 20180215203903) do
     t.integer "item_plumbed"
     t.integer "item_checked_by_eng"
     t.index ["project_id"], name: "index_handvalves_on_project_id"
+  end
+
+  create_table "handvalves_information_requests", id: false, force: :cascade do |t|
+    t.integer "handvalve_id", null: false
+    t.integer "information_request_id", null: false
   end
 
   create_table "information_requests", force: :cascade do |t|
