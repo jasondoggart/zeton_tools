@@ -29,8 +29,13 @@ class InformationRequestsController < ApplicationController
   def update
     @information_request = InformationRequest.find(params[:id])
     if @information_request.update(information_request_params)
-      flash[:success] = "RFI successfully updated"
-      redirect_to project_rfis_path
+      respond_to do |format|
+        format.html {
+          flash[:success] = "RFI successfully updated"
+          redirect_to project_rfis_path
+        }
+        format.js
+      end
     else
       flash[:danger] = "RFI could not be updated"
       render :edit
@@ -57,6 +62,7 @@ class InformationRequestsController < ApplicationController
                                                   :client_document_section,
                                                   :zeton_clarification,
                                                   :project_id,
+                                                  :answered,
                                                   instrument_ids: [],
                                                   equipment_ids: [],
                                                   handvalve_ids: []

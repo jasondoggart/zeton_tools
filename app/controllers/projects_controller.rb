@@ -75,7 +75,10 @@ class ProjectsController < ApplicationController
   end
 
   def project_rfis
-    @rfis = current_project.information_requests.paginate(:page => params[:page], :per_page => 15)
+    @rfis = current_project.information_requests
+    @rfis = @rfis.with_status(params[:with_status]) if params[:with_status].present?
+    @rfis = @rfis.paginate(:page => params[:page], :per_page => 15)
+    @open_rfis = current_project.information_requests.where(answered: 0)
   end
 
   def project_documents

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180218024241) do
+ActiveRecord::Schema.define(version: 20180219125039) do
 
   create_table "documents", force: :cascade do |t|
     t.string "name"
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20180218024241) do
     t.string "client_document_revision"
     t.string "client_document_section"
     t.string "zeton_clarification"
-    t.integer "answered"
+    t.integer "answered", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "equipment_id"

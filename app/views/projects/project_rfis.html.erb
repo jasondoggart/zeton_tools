@@ -28,7 +28,7 @@
       </div>
       <div class="col-sm-12">
         <h2>
-          <%= @rfis.count %>
+          <%= @open_rfis.count %>
         </h2>
       </div>
       <div class="col-sm-12 text-muted">
@@ -43,7 +43,7 @@
       </div>
       <div class="col-sm-12">
         <h2>
-          <%= @rfis.count %>
+          <%= @open_rfis.count %>
         </h2>
       </div>
       <div class="col-sm-12 text-muted">
@@ -60,6 +60,41 @@
   </div>
 </div>
 
+<div class="row pl-5 pr-5">
+  <div class="col-sm-12">
+    <div class="card card-box-shadow mb-3">
+      <div class="card-body mt-0">
+        <a class="btn btn-outline-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Filters<span class="ml-3"><i class="fa fa-caret-down"></i></span>
+        </a>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <div class="row">
+              <div class="col-4">
+                <%= link_to 'Clear all', project_rfis_path, class: 'btn btn-outline-primary btn-sm' %>
+              </div>
+              <div class="col-4">
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="type_code_dropdown_button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Status
+                    <% if params[:with_status].present? %>
+                      <i class="fa fa-filter"></i>
+                    <% end %>
+                  </button>
+                  <div class="dropdown-menu" style="height: 200px; overflow: scroll;" aria-labelledby="type_code_dropdown_button">
+                    <%= link_to "Show All", project_rfis_path, class: 'dropdown-item' %>
+                    <%= link_to "Open", project_rfis_path(:with_status => 0), class: "dropdown-item" %>
+                    <%= link_to "Closed", project_rfis_path(:with_status => 1), class: "dropdown-item" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <div class="row pl-5 pr-5">
@@ -74,11 +109,9 @@
                   <h5 class="mb-0">
                     <%= link_to rfi.rfi_number, information_request_path(rfi) %>
                   </h5>
-                  <% if rfi.answered == 1 %>
-                    <span class="badge badge-pill badge-success">
-                      Closed
-                    </span>
-                  <% end %>
+                  <div id="rfi_status_form_rfi_<%= rfi.id %>">
+                    <%= render partial: 'information_requests/rfi_status_form', locals: {rfi: rfi} %>
+                  </div>
                   <div class="text-muted mb-3">
                     <%= rfi.created_at.strftime("%b %-d, %Y") %>
                     <% if rfi.rfi_responses.any? %>

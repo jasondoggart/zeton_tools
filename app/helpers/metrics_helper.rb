@@ -392,7 +392,7 @@ module MetricsHelper
 
   def description_complete_required
     not_required = current_project.handvalves.where(valve_description_complete: 2).count
-    return total_equipment_count - not_required
+    return total_handvalve_count - not_required
   end
 
   def description_complete_complete
@@ -404,7 +404,7 @@ module MetricsHelper
   end
   def description_approved_required
     not_required = current_project.handvalves.where(valve_description_approved: 2).count
-    return total_equipment_count - not_required
+    return total_handvalve_count - not_required
   end
 
   def description_approved_complete
@@ -416,7 +416,7 @@ module MetricsHelper
   end
   def handvalve_po_placed_required
     not_required = current_project.handvalves.where(po_placed: 2).count
-    return total_equipment_count - not_required
+    return total_handvalve_count - not_required
   end
 
   def handvalve_po_placed_complete
@@ -428,7 +428,7 @@ module MetricsHelper
   end
   def handvalve_item_received_required
     not_required = current_project.handvalves.where(item_received: 2).count
-    return total_equipment_count - not_required
+    return total_handvalve_count - not_required
   end
 
   def handvalve_item_received_complete
@@ -440,7 +440,7 @@ module MetricsHelper
   end
   def handvalve_item_released_required
     not_required = current_project.handvalves.where(item_inspected_and_released: 2).count
-    return total_equipment_count - not_required
+    return total_handvalve_count - not_required
   end
 
   def handvalve_item_released_complete
@@ -452,7 +452,7 @@ module MetricsHelper
   end
   def handvalve_item_mounted_required
     not_required = current_project.handvalves.where(item_plumbed: 2).count
-    return total_equipment_count - not_required
+    return total_handvalve_count - not_required
   end
 
   def handvalve_item_mounted_complete
@@ -464,7 +464,7 @@ module MetricsHelper
   end
   def handvalve_item_plumbed_required
     not_required = current_project.handvalves.where(item_plumbed: 2).count
-    return total_equipment_count - not_required
+    return total_handvalve_count - not_required
   end
 
   def handvalve_item_plumbed_complete
@@ -476,7 +476,7 @@ module MetricsHelper
   end
   def handvalve_checked_by_eng_required
     not_required = current_project.handvalves.where(item_checked_by_eng: 2).count
-    return total_equipment_count - not_required
+    return total_handvalve_count - not_required
   end
 
   def handvalve_checked_by_eng_complete

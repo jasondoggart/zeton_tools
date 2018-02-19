@@ -6,6 +6,10 @@ class InformationRequest < ApplicationRecord
   has_many :rfi_responses
   validates_presence_of :zeton_clarification
 
+  scope :with_status, -> (status) {
+    where(answered: status)
+  }
+
   def rfi_number
     'ZET-RFI-' + id.to_s
   end

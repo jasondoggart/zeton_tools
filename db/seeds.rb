@@ -264,6 +264,38 @@ Project.all.each do |project|
     puts "Completed Equipment Metrics"
 end
 
+# Fill in metrics for all handvalves
+
+Project.all.each do |project|
+  puts "Filling in metrics for project #{project.id} of #{Project.count}"
+  project.handvalves.each do |valve|
+    valve.valve_description_complete = odds.sample
+    if valve.valve_description_complete == 1
+      valve.valve_description_approved = odds.sample
+      if valve.valve_description_approved == 1
+        valve.po_placed = odds.sample
+        if valve.po_placed == 1
+          valve.item_received = odds.sample
+          if valve.item_received == 1
+            valve.item_inspected_and_released = odds.sample
+            if valve.item_inspected_and_released == 1
+              valve.item_mounted = odds.sample
+              if valve.item_mounted == 1
+                valve.item_plumbed = odds.sample
+                if valve.item_plumbed == 1
+                  valve.item_checked_by_eng = odds.sample
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+    valve.save
+  end
+  puts "Completed Handvalve Metrics"
+end
+
 # Add project RFI's
 
 Project.all.each do |project|

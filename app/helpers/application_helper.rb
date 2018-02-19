@@ -31,6 +31,30 @@ module ApplicationHelper
     end
   end
 
+  def rfi_status_update(value)
+    if value == 0 or value == nil
+      1
+    else
+      0
+    end
+  end
+
+  def rfi_status_button(value)
+    if value == 0 or value == nil
+      'Open'
+    else
+      'Closed'
+    end
+  end
+
+  def rfi_status_color(value)
+    if value == 0 or value == nil
+      'warning'
+    else
+      'success'
+    end
+  end
+
   def sort_direction(current_sort)
     current_direction = (current_sort =~ /asc$/) ? 'asc' : 'desc'
     current_direction == "asc" ? 'desc' : 'asc'
