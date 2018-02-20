@@ -28,7 +28,7 @@
       </div>
       <div class="col-sm-12">
         <h2>
-          <%= handvalve_po_placed_percent.round(0) %>%
+          <%= handvalve_po_placed_percent.to_f.nan? ? "0" : handvalve_po_placed_percent.round(0) %>%
         </h2>
       </div>
       <div class="col-sm-12 text-muted">
@@ -43,7 +43,7 @@
       </div>
       <div class="col-sm-12">
         <h2>
-          <%= handvalve_item_plumbed_percent.round(0) %>%
+          <%= handvalve_item_plumbed_percent.to_f.nan? ? "0" : handvalve_item_plumbed_percent.round(0) %>%
         </h2>
       </div>
       <div class="col-sm-12 text-muted">
@@ -54,7 +54,7 @@
   <div class="col-sm-3">
     <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
       <div class="col-sm-12 h1 text-info">
-        <%= link_to '<i class="fa fa-plus"></i>'.html_safe, new_handvalve_path %>
+        <%= link_to '<i class="fa fa-plus"></i>'.html_safe, new_handvalve_path, id: "new_handvalve_link" %>
       </div>
     </div>
   </div>
@@ -132,7 +132,7 @@
               <div class="row pl-3 pr-3">
                 <div class="col-sm-12">
                   <h5 class="mb-0">
-                    <%= link_to valve.tag, handvalve_path(valve) %>
+                    <%= link_to valve.tag, handvalve_path(valve), id: "show_handvalve_#{valve.id}" %>
                   </h5>
                   <span class="badge badge-pill badge-primary">
                     710-39-110

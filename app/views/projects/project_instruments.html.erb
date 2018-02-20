@@ -28,7 +28,7 @@
       </div>
       <div class="col-sm-12">
         <h2>
-          <%= po_placed_percent.round(0) %>%
+          <%= po_placed_percent.to_f.nan? ? "0" : po_placed_percent.round(0) %>%
         </h2>
       </div>
       <div class="col-sm-12 text-muted">
@@ -43,7 +43,7 @@
       </div>
       <div class="col-sm-12">
         <h2>
-          <%= cable_terminated_at_destination_percent.round(0) %>%
+          <%= cable_terminated_at_destination_percent.to_f.nan? ? "0" : cable_terminated_at_destination_percent.round(0) %>%
         </h2>
       </div>
       <div class="col-sm-12 text-muted">
@@ -54,7 +54,7 @@
   <div class="col-sm-3">
     <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
       <div class="col-sm-12 h1 text-info">
-        <%= link_to '<i class="fa fa-plus"></i>'.html_safe, new_instrument_path %>
+        <%= link_to '<i class="fa fa-plus"></i>'.html_safe, new_instrument_path, id: "new_instrument_link" %>
       </div>
     </div>
   </div>
@@ -137,7 +137,7 @@
               <div class="row pl-3 pr-3">
                 <div class="col-sm-12">
                   <h5 class="mb-0">
-                    <%= link_to inst.tag, instrument_path(inst) %>
+                    <%= link_to inst.tag, instrument_path(inst), id: "show_instrument_#{inst.id}" %>
                   </h5>
                   <span class="badge badge-pill badge-primary">
                     710-39-110

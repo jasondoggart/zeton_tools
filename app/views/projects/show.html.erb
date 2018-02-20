@@ -2,6 +2,7 @@
   <div class="col-sm-12">
     <h3>
       Project Dashboard
+      <%= link_to "(Update Project)", edit_project_path(current_project), id: "update_project_#{current_project.id}" %>
     </h3>
   </div>
 </div>
@@ -166,7 +167,7 @@
 </div>
 
 <div class="row pl-5 pr-5 pt-1">
-  <div class="col-sm-12">
+  <div class="col-sm-8">
     <div class="card card-box-shadow mb-5">
       <div class="card-body mt-0">
         <div class="col-sm-12 text-muted">
@@ -208,6 +209,27 @@
         <div class="col-sm-12 pt-5">
           <%= link_to 'View RFI Log', project_rfis_path %>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card card-box-shadow mb-5">
+      <div class="card-body mt-0">
+        <div class="col-sm-12 text-muted mb">
+          Team Members (
+          <%= link_to "Add new", new_team_member_path, id: 'add_team_member' %>)
+        </div>
+        <% @team_members.each do |member| %>
+          <div class="row border-bottom pt-3 mt-0 pl-3 pr-3">
+            <div class="col-sm-9">
+              <h5><%= member.user.present? ? member.user.full_name : "Currently Unassigned" %></h5>
+              <h6><%= member.role %>
+            </div>
+            <div class="col-sm-3">
+              <%= link_to "Remove", team_member_path(member), method: :delete, class: 'btn btn-sm btn-outline-danger', id: "remove_team_member_#{member.id}" %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
