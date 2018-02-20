@@ -1,0 +1,121 @@
+<div class="row pl-5 pr-5 mb-3 mt-5">
+  <div class="col-sm-12">
+    <h3>
+      Action Items
+    </h3>
+  </div>
+</div>
+
+<div class="row pl-5 pr-5">
+  <div class="col-sm-3">
+    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+      <div class="col-sm-12 h3 text-info">
+        <i class="fa fa-hashtag text-centered"></i>
+      </div>
+      <div class="col-sm-12">
+        <h2>
+          <%= @action_items.count %>
+        </h2>
+      </div>
+      <div class="col-sm-12 text-muted">
+        Action Items
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+      <div class="col-sm-12 h3 text-warning">
+        <i class="fa fa-exclamation text-centered"></i>
+      </div>
+      <div class="col-sm-12">
+        <h2>
+          <%= @action_items.count %>
+        </h2>
+      </div>
+      <div class="col-sm-12 text-muted">
+        Open Action Items
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+      <div class="col-sm-12 h3 text-success">
+        <i class="fa fa-calendar-plus-o text-centered"></i>
+      </div>
+      <div class="col-sm-12">
+        <h2>
+          <%= @action_items.count %>
+        </h2>
+      </div>
+      <div class="col-sm-12 text-muted">
+        New Action Items This Week
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+      <div class="col-sm-12 h1 text-primary">
+        <%= link_to '<i class="fa fa-plus text-centered"></i>'.html_safe,
+          new_action_item_path,
+          id: 'new_action_item' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row pl-5 pr-5">
+  <div class="col-sm-12">
+    <div class="card card-box-shadow mb-5">
+      <div class="card-body mt-0">
+        <% @action_items.each do |action_item| %>
+          <div class="border-bottom pt-3 mt-0 row pl-3 pr-3">
+            <div class="col-sm-12">
+              <h5 class="mb-0">
+                <%= link_to action_item.ai_number,
+                  action_item_path(action_item),
+                  id: "show_action_item_#{action_item.id}" %>
+              </h5>
+              <div class="text-muted mb-3">
+                Created: <%= action_item.created_at.strftime("%b %-d, %Y") %>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  Reponse Expected: 
+                  <% if action_item.target_date.present? %>
+                    <%= action_item.target_date.strftime("%b %-d, %Y") %>
+                  <% else %>
+                      No date entered
+                  <% end %>
+                </div>
+                <div class="col-sm-6">
+                  Response Received:
+                  <% if action_item.completion_date.present? %>
+                    <%= action_item.completion_date.strftime("%b %-d, %Y") %>
+                  <% else %>
+                    Not yet completed
+                  <% end %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 mb-0">
+                  Sent by: <%= action_item.sent_by %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  Description
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <%= action_item.description %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

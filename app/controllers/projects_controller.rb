@@ -116,6 +116,11 @@ class ProjectsController < ApplicationController
     @handvalves = @handvalves.paginate(:page => params[:page], :per_page => 10)
   end
 
+  def project_action_items
+    @action_items = current_project.action_items
+
+  end
+
   def new
     @project = Project.new
     @users = User.all

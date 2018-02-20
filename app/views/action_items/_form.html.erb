@@ -1,0 +1,75 @@
+<%= form_for @action_item do |f| %>
+  <% if @action_item.errors.any? %>
+    <div class="alert alert-warning">
+      The form contains <%= pluralize(@action_item.errors.count, "error") %>
+    </div>
+    <ul>
+      <% @action_item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="row pl-5 pr-5">
+    <div class="col-sm-12">
+      <div class="card card-box-shadow mb-3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <%= f.label :priority, '<b>Priority</b>'.html_safe %>
+                <%= f.text_field :priority, class: 'form-control' %>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <%= f.label :area, '<b>Area</b>'.html_safe %>
+                <%= f.text_field :area, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <%= f.label :title, '<b>Title</b>'.html_safe %>
+              <%= f.text_field :title, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <%= f.label :target_date, '<b>Target Date</b>'.html_safe %>
+              <%= f.text_field :target_date, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-sm-6">
+            <div class="forom-group">
+              <%= f.label :completion_date, '<b>Completion Date</b>'.html_safe %>
+              <%= f.text_field :completion_date, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <%= f.label :sent_by, '<b>Sent By</b>'.html_safe %>
+              <%= f.text_field :sent_by, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-sm-6">
+            <div class="from-group">
+              <%= f.label :description, '<b>Action Item</b>'.html_safe %>
+              <%= f.text_area :description, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%= f.submit @action_item.new_record? ? 'Add Action Item' : 'Update Action Item', class: 'btn btn-outline-primary' %>
+    </div>
+  </div>
+<% end %>
+
+
+
+
