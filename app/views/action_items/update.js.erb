@@ -1,0 +1,3 @@
+$("#action_item_status_form_action_item_<%= @action_item.id %>").html(
+  "<%= j render partial: 'action_item_status_form',
+  locals: {action_item: @action_item} %>");

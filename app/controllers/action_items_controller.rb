@@ -2,6 +2,9 @@ class ActionItemsController < ApplicationController
 
   def new
     @action_item = ActionItem.new
+    @instruments = current_project.instruments
+    @equipment = current_project.equipment
+    @handvalves = current_project.handvalves
   end
 
   def create
@@ -21,6 +24,9 @@ class ActionItemsController < ApplicationController
 
   def edit
     @action_item = ActionItem.find(params[:id])
+    @instruments = current_project.instruments
+    @equipment = current_project.equipment
+    @handvalves = current_project.handvalves
   end
 
   def update
@@ -40,6 +46,13 @@ class ActionItemsController < ApplicationController
 
   end
 
+  def destroy
+    @action_item = ActionItem.find(params[:id])
+    @action_item.delete
+    flash[:success] = "Action Item delete"
+    redirect_to project_action_items_path
+  end
+
 
   private
 
@@ -50,6 +63,10 @@ class ActionItemsController < ApplicationController
                                         :target_date,
                                         :completion_date,
                                         :sent_by,
-                                        :description)
+                                        :description,
+                                        :status,
+                                        instrument_ids: [],
+                                        equipment_ids: [],
+                                        handvalve_ids: [])
   end
 end

@@ -17,6 +17,20 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
+                <%= f.label :title, '<b>Title</b>'.html_safe %>
+                <%= f.text_field :title, class: 'form-control' %>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <%= f.label :target_date, '<b>Target Date</b>'.html_safe %>
+                <%= f.text_field :target_date, class: 'form-control' %>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-1">
+            <div class="col-sm-6">
+              <div class="form-group">
                 <%= f.label :priority, '<b>Priority</b>'.html_safe %>
                 <%= f.text_field :priority, class: 'form-control' %>
               </div>
@@ -25,51 +39,109 @@
               <div class="form-group">
                 <%= f.label :area, '<b>Area</b>'.html_safe %>
                 <%= f.text_field :area, class: 'form-control' %>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="row mt-1">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <%= f.label :title, '<b>Title</b>'.html_safe %>
-              <%= f.text_field :title, class: 'form-control' %>
+          <div class="row mt-1">
+            <div class="col-sm-6">
+              <div class="forom-group">
+                <%= f.label :completion_date, '<b>Completion Date</b>'.html_safe %>
+                <%= f.text_field :completion_date, class: 'form-control' %>
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <%= f.label :target_date, '<b>Target Date</b>'.html_safe %>
-              <%= f.text_field :target_date, class: 'form-control' %>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-1">
-          <div class="col-sm-6">
-            <div class="forom-group">
-              <%= f.label :completion_date, '<b>Completion Date</b>'.html_safe %>
-              <%= f.text_field :completion_date, class: 'form-control' %>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <%= f.label :sent_by, '<b>Sent By</b>'.html_safe %>
-              <%= f.text_field :sent_by, class: 'form-control' %>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-1">
-          <div class="col-sm-6">
-            <div class="from-group">
-              <%= f.label :description, '<b>Action Item</b>'.html_safe %>
-              <%= f.text_area :description, class: 'form-control' %>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <%= f.label :sent_by, '<b>Sent By</b>'.html_safe %>
+                <%= f.text_field :sent_by, class: 'form-control' %>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="row pl-5 pr-5">
+    <div class="col-sm-12">
+      <div class="card card-box-shadow mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Add Association</h5>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <%= hidden_field_tag "action_item[instrument_ids][]", nil %>
+                <%= f.label :instrument_ids,
+                  '<b>Associated Instruments</b>'.html_safe %>
+                <%= f.select :instrument_ids,
+                  @instruments.map{ |i| [i.tag, i.id]}, {},
+                  multiple: true,
+                  class: 'form-control' %>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <%= hidden_field_tag "action_item[equipment_ids][]", nil %>
+                <%= f.label :equipment_ids,
+                  '<b>Associated Equipment</b>'.html_safe %>
+                <%= f.select :equipment_ids,
+                  @equipment.map{ |i| [i.tag, i.id]}, {},
+                  multiple: true,
+                  class: 'form-control' %>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <%= hidden_field_tag "action_item[handvalve_ids][]", nil %>
+                <%= f.label :handvalve_ids,
+                  '<b>Associated Handvalves</b>'.html_safe %>
+                <%= f.select :handvalve_ids,
+                  @handvalves.map{ |i| [i.tag, i.id]}, {},
+                  multiple: true,
+                  class: 'form-control' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row pl-5 pr-5">
+    <div class="col-sm-12">
+      <div class="card card-box-shadow mb-3 pb-3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="from-group">
+                <%= f.label :description, '<b>Action Item</b>'.html_safe %>
+                <%= f.text_area :description, class: 'form-control' %>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="col-sm-3">
       <%= f.submit @action_item.new_record? ? 'Add Action Item' : 'Update Action Item', class: 'btn btn-outline-primary' %>
+      </div>
     </div>
   </div>
 <% end %>
 
 
+<script>
+  $(document).ready(function() {
+    $('#action_item_instrument_ids').select2({
+      placeholder: "Select associated instruments",
+      theme: "bootstrap"
+    });
+    $('#action_item_equipment_ids').select2({
+      placeholder: "Select associated equipment",
+      theme: "bootstrap"
+    });
+    $('#action_item_handvalve_ids').select2({
+      placeholder: "Select associated handvalves",
+      theme: "bootstrap"
+    });
+  });
+</script>
 
 

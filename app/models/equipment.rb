@@ -1,6 +1,7 @@
 class Equipment < ApplicationRecord
   validates_presence_of :tag, :description, :equipment_type
   has_and_belongs_to_many :information_requests
+  has_and_belongs_to_many :action_items
   belongs_to :project
 
   scope :sorted_by, -> (sort_option) {

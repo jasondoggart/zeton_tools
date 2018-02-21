@@ -118,6 +118,7 @@ class ProjectsController < ApplicationController
 
   def project_action_items
     @action_items = current_project.action_items
+    @open_action_items = current_project.action_items.where(status: 0)
 
   end
 

@@ -1,6 +1,7 @@
 class Handvalve < ApplicationRecord
   belongs_to :project
   has_and_belongs_to_many :information_requests
+  has_and_belongs_to_many :action_items
   validates_presence_of :tag
 
   scope :sorted_by, -> (sort_option) {

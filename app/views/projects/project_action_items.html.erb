@@ -29,7 +29,7 @@
       </div>
       <div class="col-sm-12">
         <h2>
-          <%= @action_items.count %>
+          <%= @open_action_items.count %>
         </h2>
       </div>
       <div class="col-sm-12 text-muted">
@@ -75,12 +75,16 @@
                   action_item_path(action_item),
                   id: "show_action_item_#{action_item.id}" %>
               </h5>
+              <div id="action_item_status_form_action_item_<%= action_item.id %>">
+                <%= render partial: 'action_items/action_item_status_form',
+                  locals: {action_item: action_item} %>
+              </div>
               <div class="text-muted mb-3">
                 Created: <%= action_item.created_at.strftime("%b %-d, %Y") %>
               </div>
-              <div class="row">
+              <div class="row mb-2">
                 <div class="col-sm-6">
-                  Reponse Expected: 
+                  <b>Reponse Expected:</b>
                   <% if action_item.target_date.present? %>
                     <%= action_item.target_date.strftime("%b %-d, %Y") %>
                   <% else %>
@@ -88,7 +92,7 @@
                   <% end %>
                 </div>
                 <div class="col-sm-6">
-                  Response Received:
+                  <b>Response Received:</b>
                   <% if action_item.completion_date.present? %>
                     <%= action_item.completion_date.strftime("%b %-d, %Y") %>
                   <% else %>
@@ -96,17 +100,17 @@
                   <% end %>
                 </div>
               </div>
-              <div class="row">
+              <div class="row mb-2">
                 <div class="col-sm-12 mb-0">
-                  Sent by: <%= action_item.sent_by %>
+                  <b>Sent by:</b> <%= action_item.sent_by %>
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-12">
-                  Description
+                  <b>Description</b>
                 </div>
               </div>
-              <div class="row">
+              <div class="row mb-3">
                 <div class="col-sm-12">
                   <%= action_item.description %>
                 </div>
