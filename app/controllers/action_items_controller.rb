@@ -2,9 +2,9 @@ class ActionItemsController < ApplicationController
 
   def new
     @action_item = ActionItem.new
-    @instruments = current_project.instruments
-    @equipment = current_project.equipment
-    @handvalves = current_project.handvalves
+    @instruments = current_project.instruments.sort
+    @equipment = current_project.equipment.sort
+    @handvalves = current_project.handvalves.sort
   end
 
   def create
