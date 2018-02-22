@@ -17,7 +17,7 @@ describe "Action Item" do
     click_link("project_#{@project.id}")
     visit project_action_items_path
     click_link("new_action_item")
-    fill_in('Area', with: "Equipment")
+    select('Process', from: "Area")
     fill_in('Title', with: "The title")
     fill_in('Action Item', with: "The action item text")
     click_on('Add Action Item')
@@ -65,7 +65,7 @@ describe "Action Item" do
     action_item = FactoryBot.create(:action_item, project: @project)
     visit project_action_items_path
     click_link('new_action_item')
-    fill_in('Area', with: "Equipment")
+    select('Process', from: "Area")
     fill_in('Title', with: "The title")
     fill_in('Action Item', with: "The action item text")
     select(@project.instruments.last.tag, from: 'Associated Instruments')
@@ -80,7 +80,7 @@ describe "Action Item" do
     action_item = FactoryBot.create(:action_item, project: @project)
     visit project_action_items_path
     click_link('new_action_item')
-    fill_in('Area', with: "Equipment")
+    select('Process', from: "Area")
     fill_in('Title', with: "The title")
     fill_in('Action Item', with: "The action item text")
     select(@project.equipment.last.tag, from: 'Associated Equipment')
@@ -95,7 +95,7 @@ describe "Action Item" do
     action_item = FactoryBot.create(:action_item, project: @project)
     visit project_action_items_path
     click_link('new_action_item')
-    fill_in('Area', with: "Equipment")
+    select('Process', from: "Area")
     fill_in('Title', with: "The title")
     fill_in('Action Item', with: "The action item text")
     select(@project.handvalves.last.tag, from: 'Associated Handvalves')

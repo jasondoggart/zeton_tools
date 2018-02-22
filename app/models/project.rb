@@ -4,6 +4,7 @@ class Project < ApplicationRecord
   has_many :instruments
   has_many :information_requests
   has_many :team_members
+  has_many :users, through: :team_members
   has_many :documents
   has_many :handvalves
   has_many :action_items

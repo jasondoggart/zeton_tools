@@ -7,6 +7,7 @@ class ActionItem < ApplicationRecord
   has_and_belongs_to_many :equipment
   has_and_belongs_to_many :handvalves
 
+  PRIORITIES = ["1", "2", "3"]
 
   def ai_number
     'ZET-AI-' + id.to_s

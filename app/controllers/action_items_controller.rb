@@ -5,6 +5,8 @@ class ActionItemsController < ApplicationController
     @instruments = current_project.instruments
     @equipment = current_project.equipment
     @handvalves = current_project.handvalves
+    @work_areas = WORK_AREAS
+    @priorities = ActionItem::PRIORITIES
   end
 
   def create
@@ -28,10 +30,14 @@ class ActionItemsController < ApplicationController
     @instruments = current_project.instruments
     @equipment = current_project.equipment
     @handvalves = current_project.handvalves
+    @work_areas = WORK_AREAS
+    @priorities = ActionItem::PRIORITIES
   end
 
   def update
     @action_item = ActionItem.find(params[:id])
+    @work_areas = WORK_AREAS
+    @priorities = ActionItem::PRIORITIES
     if @action_item.update(action_item_params)
       respond_to do |format|
         format.html {
@@ -66,6 +72,8 @@ class ActionItemsController < ApplicationController
                                         :sent_by,
                                         :description,
                                         :status,
+                                        :creator_id,
+                                        :assigned_to_id,
                                         instrument_ids: [],
                                         equipment_ids: [],
                                         handvalve_ids: [])

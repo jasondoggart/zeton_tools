@@ -15,44 +15,142 @@
       <div class="card card-box-shadow mb-3">
         <div class="card-body">
           <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-8">
               <div class="form-group">
                 <%= f.label :title, '<b>Title</b>'.html_safe %>
                 <%= f.text_field :title, class: 'form-control' %>
               </div>
             </div>
-            <div class="col-sm-6">
+            <% if !@action_item.new_record? %>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <%= f.label :creator_id, '<b>Created By</b>'.html_safe,
+                    for: 'action_item_creator' %>
+                  <%= f.collection_select :creator_id,
+                    current_project.users,
+                    :id,
+                    :full_name,
+                    {prompt: true, selected: @action_item.creator_id.to_i},
+                    {class: 'form-control'} %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <div class="row mt-4">
+            <div class="col-sm-3">
               <div class="form-group">
                 <%= f.label :target_date, '<b>Target Date</b>'.html_safe %>
-                <%= f.text_field :target_date, class: 'form-control' %>
+                <% if @action_item.new_record? %>
+                  <%= f.text_field :target_date,
+                    class: 'form-control',
+                    data: {
+                      provide: 'datepicker',
+                      'date-format' => 'yyyy-mm-dd',
+                      'date-autoclose' => 'true'
+                    } %>
+                <% else %>
+                  <%= f.text_field :target_date,
+                    class: 'form-control',
+                    data: {
+                      provide: 'datepicker',
+                      'date-format' => 'yyyy-mm-dd',
+                      'date-autoclose' => 'true'
+                    },
+                    value:  @action_item.target_date.strftime("%b %-d, %Y") %>
+                <% end %>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <%= f.label :priority,
+                  '<b>Priority</b>'.html_safe,
+                  for: 'action_item_priority' %>
+                <%= f.select :priority,
+                  @priorities,
+                  {},
+                  {class: 'form-control'} %>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <%= f.label :area,
+                  '<b>Area</b>'.html_safe,
+                  for: 'action_item_area' %>
+                <%= f.select :area,
+                  @work_areas,
+                  {},
+                  {class: 'form-control'} %>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <%= 
+                  f.label :sent_by,
+                    '<b>Sent By</b> (Email, Phone...)'.html_safe
+                  %>
+                <%=
+                  f.text_field :sent_by, class: 'form-control'
+                %>
               </div>
             </div>
           </div>
-          <div class="row mt-1">
-            <div class="col-sm-6">
-              <div class="form-group">
-                <%= f.label :priority, '<b>Priority</b>'.html_safe %>
-                <%= f.text_field :priority, class: 'form-control' %>
+          <div class="row mt-4">
+            <% if !@action_item.new_record? %>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <%= f.label :status, '<b>Status</b>'.html_safe,
+                    for: 'action_item_status' %>
+                  <%= f.select :status,
+                    [["Open", 0], ["Closed", 1]],
+                    {},
+                    {class: 'form-control'} %>
+                </div>
               </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <%= f.label :area, '<b>Area</b>'.html_safe %>
-                <%= f.text_field :area, class: 'form-control' %>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <%= f.label :completion_date,
+                    '<b>Date Completed</b>'.html_safe %>
+                  <% if @action_item.completion_date.present? %>
+                    <%= f.text_field :completion_date,
+                      class: 'form-control',
+                      data: {
+                        provide: 'datepicker',
+                        'date-format' => 'yyyy-mm-dd',
+                        'date-autoclose' => 'true'
+                      },
+                      value: @action_item.completion_date.strftime("%b %-d, %Y")%>
+                  <% else %>
+                    <%= f.text_field :completion_date,
+                      class: 'form-control',
+                      data: {
+                        provide: 'datepicker',
+                        'date-format' => 'yyyy-mm-dd',
+                        'date-autoclose' => 'true'
+                      } %>
+                <% end %>
+                        
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="row mt-1">
-            <div class="col-sm-6">
-              <div class="forom-group">
-                <%= f.label :completion_date, '<b>Completion Date</b>'.html_safe %>
-                <%= f.text_field :completion_date, class: 'form-control' %>
-              </div>
-            </div>
-            <div class="col-sm-6">
+            <% end %>
+            <div class="col-sm-4">
               <div class="form-group">
-                <%= f.label :sent_by, '<b>Sent By</b>'.html_safe %>
-                <%= f.text_field :sent_by, class: 'form-control' %>
+                <%= f.label :assigned_to_id,
+                  '<b>Assigned To</b>'.html_safe %>
+                <% if @action_item.assigned_to %>
+                  <%= f.collection_select :assigned_to_id,
+                    current_project.users,
+                    :id,
+                    :full_name,
+                    {selected: @action_item.assigned_to_id.to_i},
+                    {class: "form-control"} %>
+                <% else %>
+                  <%= f.collection_select :assigned_to_id,
+                    current_project.users,
+                    :id,
+                    :full_name,
+                    {prompt: true},
+                    {class: "form-control"} %>
+                <% end %>
               </div>
             </div>
           </div>
@@ -122,11 +220,13 @@
     <div class="col-sm-12">
       <div class="card card-box-shadow mb-3 pb-3">
         <div class="card-body">
+          <h5 class="card-title">
+            <%= f.label :description, '<b>Action Item</b>'.html_safe %>
+          </h5>
           <div class="row">
             <div class="col-sm-12">
               <div class="from-group">
-                <%= f.label :description, '<b>Action Item</b>'.html_safe %>
-                <%= f.text_area :description, class: 'form-control' %>
+                <%= f.text_area :description, class: 'form-control', rows: 5 %>
               </div>
             </div>
           </div>
@@ -157,3 +257,8 @@
 </script>
 
 
+<script type="text/javascript">
+            $(function () {
+                $('#target_datepicker').datetimepicker();
+            });
+        </script>

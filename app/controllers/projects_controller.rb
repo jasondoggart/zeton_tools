@@ -117,7 +117,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_action_items
-    @action_items = current_project.action_items
+    @action_items = current_project.action_items.paginate(:page => params[:page], :per_page => 10)
     @open_action_items = current_project.action_items.where(status: 0)
 
   end
