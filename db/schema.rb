@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180221035148) do
+ActiveRecord::Schema.define(version: 20180221211126) do
 
   create_table "action_items", force: :cascade do |t|
     t.integer "priority"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20180221035148) do
     t.datetime "updated_at", null: false
     t.integer "project_id"
     t.integer "status", default: 0
+    t.integer "creator_id"
+    t.integer "assigned_to_id"
     t.index ["project_id"], name: "index_action_items_on_project_id"
   end
 

@@ -72,10 +72,14 @@
                 <%= hidden_field_tag "action_item[instrument_ids][]", nil %>
                 <%= f.label :instrument_ids,
                   '<b>Associated Instruments</b>'.html_safe %>
-                <%= f.select :instrument_ids,
-                  @instruments.map{ |i| [i.tag, i.id]}, {},
-                  multiple: true,
-                  class: 'form-control' %>
+                <% if @instruments %>
+                  <%= f.select :instrument_ids,
+                    @instruments.map{ |i| [i.tag, i.id]}, {},
+                    multiple: true,
+                    class: 'form-control' %>
+                <% else %>
+                  No Instruments Added yet
+                <% end %>
               </div>
             </div>
             <div class="col-sm-4">
@@ -83,10 +87,14 @@
                 <%= hidden_field_tag "action_item[equipment_ids][]", nil %>
                 <%= f.label :equipment_ids,
                   '<b>Associated Equipment</b>'.html_safe %>
-                <%= f.select :equipment_ids,
-                  @equipment.map{ |i| [i.tag, i.id]}, {},
-                  multiple: true,
-                  class: 'form-control' %>
+                <% if @equipment %>
+                  <%= f.select :equipment_ids,
+                    @equipment.map{ |i| [i.tag, i.id]}, {},
+                    multiple: true,
+                    class: 'form-control' %>
+                  <% else %>
+                    No Equipment Added yet
+                  <% end %>
               </div>
             </div>
             <div class="col-sm-4">
@@ -94,10 +102,14 @@
                 <%= hidden_field_tag "action_item[handvalve_ids][]", nil %>
                 <%= f.label :handvalve_ids,
                   '<b>Associated Handvalves</b>'.html_safe %>
-                <%= f.select :handvalve_ids,
-                  @handvalves.map{ |i| [i.tag, i.id]}, {},
-                  multiple: true,
-                  class: 'form-control' %>
+                <% if @handvalves %>
+                  <%= f.select :handvalve_ids,
+                    @handvalves.map{ |i| [i.tag, i.id]}, {},
+                    multiple: true,
+                    class: 'form-control' %>
+                  <% else %>
+                    No Handvalves Added Yet
+                  <% end %>
               </div>
             </div>
           </div>

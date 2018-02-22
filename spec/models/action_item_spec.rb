@@ -24,6 +24,7 @@ RSpec.describe ActionItem, type: :model do
       @action_item.description = ''
       expect(@action_item).to_not be_valid
     end
+
   end
 end
 

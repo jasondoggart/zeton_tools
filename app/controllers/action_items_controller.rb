@@ -2,13 +2,14 @@ class ActionItemsController < ApplicationController
 
   def new
     @action_item = ActionItem.new
-    @instruments = current_project.instruments.sort
-    @equipment = current_project.equipment.sort
-    @handvalves = current_project.handvalves.sort
+    @instruments = current_project.instruments
+    @equipment = current_project.equipment
+    @handvalves = current_project.handvalves
   end
 
   def create
     @action_item = current_project.action_items.build(action_item_params)
+    @action_item.creator = current_user
     if @action_item.save
       flash[:success] = 'Action Item Created'
       redirect_to project_action_items_path

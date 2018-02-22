@@ -8,5 +8,7 @@ FactoryBot.define do
     sent_by "MyString"
     description "MyString"
     project
+    association :creator, factory: :user
+    association :assigned_to, factory: :user
   end
 end
