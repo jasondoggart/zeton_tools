@@ -232,7 +232,11 @@
           </div>
       </div>
       <div class="col-sm-3">
-      <%= f.submit @action_item.new_record? ? 'Add Action Item' : 'Update Action Item', class: 'btn btn-outline-primary' %>
+        <%= f.submit @action_item.new_record? ?
+          'Add Action Item' :
+          'Update Action Item',
+          class: 'btn btn-outline-primary' %>
+        <%= link_to "Cancel", :back, class: 'text-muted ml-3' %>
       </div>
     </div>
   </div>

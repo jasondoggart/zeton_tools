@@ -1,14 +1,104 @@
-<div class="main">
-  <h3><%= @action_item.ai_number %></h3>
-  <h5>
-    <%= link_to 'Edit',
-      edit_action_item_path(@action_item),
-      class: 'btn btn-sm btn-outline-primary',
-      id: "edit_action_item_#{@action_item.id}" %>
-    <%= link_to 'Delete',
-      action_item_path(@action_item),
-      method: :delete,
-      class: 'btn btn-sm btn-outline-primary',
-      id: "delete_action_item_#{@action_item.id}" %>
-  </h5>
+<div class="row pl-5 pr-5 mt-5 pb-2">
+  <div class="col-sm-12">
+    <%= link_to "<- Go back", :back %>
+  </div>
+</div>
+<div class="row pl-5 pr-5 mb-3">
+  <div class="col-sm-12">
+    <h3>
+      <%= @action_item.ai_number %> - <%= @action_item.title %>
+    </h3>
+    <p class="text-muted">
+    Created 
+    <%= @action_item.created_at.strftime("%b %-d, %Y") %> 
+    by <%= @action_item.creator.full_name %> and sent by 
+    <%= @action_item.sent_by.downcase %>
+    </p>
+  </div>
+</div>
+<div class="row pl-5 pr-5">
+  <div class="col-sm-12">
+    <div class="card card-box-shadow mb-3 p-4">
+      <div class="card-body">
+        <h5 class="card-title">
+          Summary
+        </h5>
+        <div class="row">
+          <div class="col-sm-6">
+            <dl class="row">
+              <dt class="col-sm-4">Assigned To</dt>
+              <dd class="col-sm-8">
+              <%= @action_item.assigned_to.full_name %>
+              </dd>
+              <dt class="col-sm-4">Target Date</dt>
+              <dd class="col-sm-8">
+              <%= @action_item.target_date.strftime("%b %-d, %Y") %>
+              </dd>
+              <dt class="col-sm-4">Priority</dt>
+              <dd class="col-sm-8"><%= @action_item.priority %></dd>
+            </dl>
+          </div>
+          <div class="col-sm-6">
+            <dl class="row">
+              <dt class="col-sm-4">Status</dt>
+              <dd class="col-sm-8">
+              <%= @action_item.status == 1 ? 'Closed' : 'Open' %>
+              </dd>
+              <dt class="col-sm-4">Completed</dt>
+              <dd class="col-sm-8">
+              <%= @action_item.status == 1 ?
+                @action_item.completion_date.strftime("%b %-d, %Y") :
+                'Not yet complete' %>
+              </dd>
+              <dt class="col-sm-4">Area</dt>
+              <dd class="col-sm-8"><%= @action_item.area %></dd>
+            </dl>
+          </div>
+        </div>
+        <h5 class="card-title mt-4 mb-3">
+          Associations
+        </h5>
+        <div class="row">
+          <div class="col-sm-12">
+            <% @action_item.instruments.each do |inst| %>
+              <%= link_to inst.tag,
+                instrument_path(inst),
+                class: 'badge badge-pill badge-primary' %>
+            <% end %>
+            <% @action_item.equipment.each do |equip| %>
+              <%= link_to equip.tag,
+                equipment_path(equip),
+                class: 'badge badge-pill badge-primary' %>
+            <% end %>
+            <% @action_item.handvalves.each do |valve| %>
+              <%= link_to valve.tag,
+                handvalve_path(valve),
+                class: 'badge badge-pill badge-primary' %>
+            <% end %>
+          </div>
+        </div>
+        <h5 class="card-title mt-4 pt-4">
+          Description
+        </h5>
+        <div class="row mt-3 pb-3 mb-3">
+          <div class="col-sm-12">
+            <%= @action_item.description %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <%= link_to 'Edit',
+              edit_action_item_path(@action_item),
+              class: 'btn btn-sm btn-outline-primary',
+              id: "edit_action_item_#{@action_item.id}" %>
+            <%= link_to 'Delete',
+              action_item_path(@action_item),
+              method: :delete,
+              class: 'btn btn-sm btn-outline-primary',
+              id: "delete_action_item_#{@action_item.id}" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

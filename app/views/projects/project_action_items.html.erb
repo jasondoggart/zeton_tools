@@ -96,13 +96,46 @@
                 <% end %>
               </div>
             </div>
-            <div class="row mb-3">
+            <div class="row mb-1">
               <div class="col-sm-12">
                 <b>Assigned To:</b>
                 <% if action_item.assigned_to.present? %>
                   <%= action_item.assigned_to.full_name %>
                 <% else %>
                   No one assigned
+                <% end %>
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-sm-12">
+                <b>Area</b>
+                <% if action_item.area.present? %>
+                  <%= action_item.area %>
+                <% else %>
+                  No one assigned
+                <% end %>
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-sm-12">
+                <% action_item.instruments.each do |inst| %>
+                  <%= link_to inst.tag,
+                    instrument_path(inst),
+                    class: 'badge badge-pill badge-primary' %>
+                <% end %>
+                <% action_item.equipment.each do |equip| %>
+                  <span >
+                    <%= link_to equip.tag,
+                      equipment_path(equip),
+                      class: 'badge badge-pill badge-primary' %>
+                  </span>
+                <% end %>
+                <% action_item.handvalves.each do |valve| %>
+                  <span >
+                    <%= link_to valve.tag,
+                      handvalve_path(valve),
+                      class: 'badge badge-pill badge-primary' %>
+                  </span>
                 <% end %>
               </div>
             </div>

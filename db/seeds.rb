@@ -413,6 +413,12 @@ Project.all.each do |project|
     num_assoc_equip.times do
       project.information_requests.last.equipment << project.equipment.sample
     end
+
+    # add handvalve associations
+    num_assoc_hv = rand(0..3)
+    num_assoc_hv.times do
+      project.information_requests.last.handvalves << project.handvalves.sample
+    end
   end
 end
 
@@ -434,7 +440,6 @@ Project.all.each do |project|
 end
 
 # Add project Action Items
-#
 
 areas = ["A - Process", "B - BOM", "C - Controls",
          "D - Drawings", "E - Electrical", "F - Databooks",
@@ -452,6 +457,8 @@ Project.all.each do |project|
     title = Faker::Lorem.paragraph(1)
     target_date = rand(3..200).days.from_now
     status = rand(0..1)
+    creator = project.user
+    assigned_to = project.team_members.sample.user
     if status == 1
       completion_date = rand(1..29).days.ago
     else
@@ -466,10 +473,26 @@ Project.all.each do |project|
                                 completion_date: completion_date,
                                 sent_by: sent_by,
                                 description: description,
-                                status: status)
+                                status: status,
+                                creator: creator,
+                                assigned_to: assigned_to)
+    # add instrument associations
+    num_assoc_inst = rand(0..3)
+    num_assoc_inst.times do
+      project.action_items.last.instruments << project.instruments.sample
+    end
 
+    # add equipment associations
+    num_assoc_equip = rand(0..3)
+    num_assoc_equip.times do
+      project.action_items.last.equipment << project.equipment.sample
+    end
 
-
+    # add handvalve associations
+    num_assoc_hv = rand(0..3)
+    num_assoc_hv.times do
+      project.action_items.last.handvalves << project.handvalves.sample
+    end
 
   end
 end
