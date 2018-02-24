@@ -1,0 +1,83 @@
+wb = xlsx_package.workbook
+
+# add styles
+
+wb.styles do |style|
+  title = style.add_style(:b=>true)
+
+
+  wb.add_worksheet(name: "Instruments") do |sheet|
+    sheet.add_row [
+      "ID",
+      "Type",
+      "Loop",
+      "Skid",
+      "Level",
+      "Scope",
+      "M, E, M/E",
+      "Supplier",
+      "Manufacturer",
+      "Model Number",
+      "Process Connection",
+      "Material of Construction",
+      "Item Type",
+      "Installation Location",
+      "DCS I/O Type",
+      "Range",
+      "Zeton PO",
+      "Tracking Number",
+      "Receiving Information",
+      "Datasheet Submitted for Approval",
+      "Datasheet Approved",
+      "RFQ Sent",
+      "PO Placed",
+      "Item Received",
+      "Item Inspected and Released",
+      "Mounted by Mechanical",
+      "Plumbed by Mechanical",
+      "Cable Pulled",
+      "Cable Terminated at Source",
+      "Cable Terminated at Destination",
+      "Continuity Tested",
+      "Grounded",
+      "Checked by Engineer"
+    ], :style=>title
+    @instruments.each do |i|
+      sheet.add_row [
+        i.id,
+        i.type_code,
+        i.loop,
+        i.zeton_skid_number,
+        i.zeton_skid_level,
+        i.scope,
+        i.mech_elec,
+        i.supplier,
+        i.manufacturer,
+        i.model,
+        i.process_connection,
+        i.material_of_construction,
+        i.item_type,
+        i.location,
+        i.dcs_io_type,
+        i.range,
+        i.zeton_po,
+        i.tracking_number,
+        i.receiving_info,
+        i.datasheet_submitted_for_approval,
+        i.datasheet_approved,
+        i.rfq_sent,
+        i.po_placed,
+        i.item_received,
+        i.item_inspected_and_released,
+        i.mounted_by_mechanical,
+        i.plumbed_by_mechanical,
+        i.cable_pulled,
+        i.cable_terminated_at_source,
+        i.cable_terminated_at_destination,
+        i.continuity_tested,
+        i.grounded_by_electrical,
+        i.checked_by_eng
+      ]
+    end
+  end
+end

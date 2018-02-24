@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get 'projects/instruments/metrics',
     to: 'projects#project_instruments_metrics',
     as: :project_instruments_metrics
+  get 'projects/instruments/excel',
+    to: 'projects#project_instruments_excel',
+    as: :project_instruments_excel
   get 'projects/equipment',
     to: 'projects#project_equipment',
     as: :project_equipment

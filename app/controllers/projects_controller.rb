@@ -21,8 +21,12 @@ class ProjectsController < ApplicationController
 
   def project_instruments
     @instruments = current_project.instruments
-    @instruments = @instruments.with_type_code(params[:with_type_code]) if params[:with_type_code].present?
-    @instruments = @instruments.with_loop(params[:with_loop]) if params[:with_loop].present?
+    @instruments = @instruments.with_type_code(params[
+        :with_type_code
+      ]) if params[:with_type_code].present?
+    @instruments = @instruments.with_loop(params[
+      :with_loop
+      ]) if params[:with_loop].present?
     if params[:sorted_by].present?
       @instruments = @instruments.sorted_by(params[:sorted_by]) if params[:sorted_by].present?
     else
@@ -32,6 +36,17 @@ class ProjectsController < ApplicationController
     @type_codes = @instruments.distinct.pluck(:type_code)
     @loops = @instruments.distinct.pluck(:loop).sort
     @instruments = @instruments.paginate(:page => params[:page], :per_page => 10)
+  end
+
+  def project_instruments_excel
+    @instruments = current_project.instruments
+    respond_to do |format|
+      format.xlsx {
+        response.headers[
+          'Content-Disposition'
+        ] = "attachment; filename='#{current_project.project_number} - all_instruments.xlsx'"
+      }
+    end
   end
 
   def project_instruments_metrics
