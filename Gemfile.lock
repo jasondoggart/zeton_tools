@@ -1,3 +1,14 @@
+GIT
+  remote: https://github.com/randym/axlsx.git
+  revision: c8ac844572b25fda358cc01d2104720c4c42f450
+  ref: c8ac844
+  specs:
+    axlsx (2.1.0.pre)
+      htmlentities (~> 4.3.4)
+      mimemagic (~> 0.3)
+      nokogiri (>= 1.6.6)
+      rubyzip (>= 1.2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -43,10 +54,6 @@ GEM
     arel (8.0.0)
     autoprefixer-rails (8.0.0)
       execjs
-    axlsx (2.0.1)
-      htmlentities (~> 4.3.1)
-      nokogiri (>= 1.4.1)
-      rubyzip (~> 1.0.0)
     axlsx_rails (0.5.1)
       actionpack (>= 3.1)
       axlsx (>= 2.0.1)
@@ -97,7 +104,7 @@ GEM
       railties (>= 3.0.0)
     faker (1.8.7)
       i18n (>= 0.7)
-    ffi (1.9.21)
+    ffi (1.9.22)
     font-awesome-rails (4.7.0.3)
       railties (>= 3.2, < 5.2)
     globalid (0.4.1)
@@ -122,6 +129,7 @@ GEM
     mail (2.7.0)
       mini_mime (>= 0.1.1)
     method_source (0.9.0)
+    mimemagic (0.3.2)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
@@ -183,7 +191,7 @@ GEM
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
     ruby_dep (1.5.0)
-    rubyzip (1.0.0)
+    rubyzip (1.2.1)
     sass (3.5.5)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -236,7 +244,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  axlsx_rails (~> 0.5.1)
+  axlsx!
+  axlsx_rails
   bootstrap (~> 4.0.0)
   bootstrap-datepicker-rails (~> 1.7, >= 1.7.1.1)
   bootstrap-will_paginate (~> 1.0)
@@ -257,6 +266,7 @@ DEPENDENCIES
   rack_session_access (~> 0.1.1)
   rails (~> 5.1.4)
   rspec-rails (~> 3.0)
+  rubyzip (>= 1.2.1)
   sass-rails (~> 5.0)
   select2-rails (~> 4.0, >= 4.0.3)
   spring

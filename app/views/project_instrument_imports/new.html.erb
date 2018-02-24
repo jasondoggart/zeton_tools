@@ -1,0 +1,42 @@
+<div class="row pl-5 pr-5 mb-3 mt-5">
+  <div class="col-sm-12">
+    <h3>
+      Import Instruments from Excel
+    </h3>
+  </div>
+</div>
+<div class="row pl-5 pr-5">
+  <div class="col-sm-12">
+    <div class="card card-box-shadow mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <p class="card-text">
+              Click below to upload instruments
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <%= form_for @project_instruments_import do |f| %>
+              <% if @project_instruments_import.errors.any? %>
+                <div class="alert alert-warning">
+                  <%= pluralize(@project_instrument_import.errors.count, 'error') %> stopped the import from proceeding
+                  <ul>
+                    <%= @project_instrument_import.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <div class="form-group">
+                <%= f.file_field :file %>
+                <%= f.submit "Import XLSX", class: 'btn btn-outline-primary' %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
