@@ -1,16 +1,5 @@
 Rails.application.routes.draw do
-  get 'project_instrument_imports/new'
 
-  get 'project_instrument_imports/create'
-
-  get 'project_instrument_imports_controller/new'
-
-  get 'project_instrument_imports_controller/create'
-
-  resources :documents
-  resources :team_members
-  resources :handvalves
-  resources :project_instrument_import
   get 'pages/home'
   get 'projects/instruments',
     to: 'projects#project_instruments',
@@ -55,4 +44,8 @@ Rails.application.routes.draw do
   resources :instruments
   resources :equipment
   resources :users, controller: :users, only: [:create, :show]
+  resources :documents
+  resources :team_members
+  resources :handvalves
+  resources :project_instrument_imports
 end

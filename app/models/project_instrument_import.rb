@@ -1,7 +1,8 @@
 class ProjectInstrumentImport
   include ActiveModel::Model
+  require 'roo'
 
-  attr_accessor :file
+  attr_accessor :file, :project
 
   def initialize(attributes={})
     attributes.each { |name, value| send("#{name}=", value) }
@@ -31,11 +32,12 @@ class ProjectInstrumentImport
 
   def load_imported_project_instruments
     spreadsheet = open_spreadsheet
-    header = spreadsheet.row(1)
-    (2..spreadsheet.last_row).map do |i|
+    header = spreadsheet.row(2)
+    (3..spreadsheet.last_row).map do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
       instrument = Instrument.find_by_id(row["id"]) || Instrument.new
-      instrument.attributes = row.to_hash.slice(*Instrument.accessible_attributes)
+      instrument.attributes = row.to_hash
+      instrument.project_id = project
       instrument
     end
   end
@@ -43,8 +45,8 @@ class ProjectInstrumentImport
   def open_spreadsheet
     case File.extname(file.original_filename)
     when ".csv" then Csv.new(file.path, nil, :ignore)
-    when ".xls" then Excel.new(file.path, nil, :ignore)
-    when ".xlsx" then Excelx.new(file.path, nil, :ignore)
+    when ".xls" then Roo::Excel.new(file.path, nil, :ignore)
+    when ".xlsx" then Roo::Excelx.new(file.path)
     else raise "Unknown file type: #{file.original_filename}"
     end
   end

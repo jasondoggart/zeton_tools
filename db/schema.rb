@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180221211126) do
+ActiveRecord::Schema.define(version: 20180224174833) do
 
   create_table "action_items", force: :cascade do |t|
     t.integer "priority"
@@ -171,8 +171,8 @@ ActiveRecord::Schema.define(version: 20180221211126) do
     t.string "model"
     t.string "process_connection"
     t.string "material_of_construction"
-    t.integer "item_type"
-    t.integer "location"
+    t.string "item_type"
+    t.string "location"
     t.string "dcs_io_type"
     t.string "range"
     t.string "zeton_po"

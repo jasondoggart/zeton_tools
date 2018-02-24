@@ -17,4 +17,5 @@
 #
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'handvalve', 'handvalves'
+  inflect.irregular 'project_instrument_import', 'project_instrument_imports'
 end
