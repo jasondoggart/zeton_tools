@@ -3,10 +3,24 @@ wb = xlsx_package.workbook
 # add styles
 
 wb.styles do |style|
-  title = style.add_style(:b=>true)
+  column_titles = style.add_style(:b=>true)
+  project_heading = style.add_style(:b=>true, :sz=>14)
+  project_name_heading = style.add_style(:b=>true, :sz=>12)
+  project_client = style.add_style(:b=>true, :sz=>12)
+  data = style.add_style(:border=>Axlsx::STYLE_THIN_BORDER)
+  attr_heading = style.add_style(:hidden=>true, :locked=>true)
 
 
   wb.add_worksheet(name: "Instruments") do |sheet|
+    sheet.add_row [
+      "Project #{current_project.project_number}"
+    ], :style=>project_heading
+    sheet.add_row [
+      "#{current_project.project_name}"
+    ], :style=>project_name_heading
+    sheet.add_row [
+      "Client: #{current_project.client}"
+    ], :style=>project_client
     sheet.add_row [
       "ID",
       "Type",
@@ -40,9 +54,8 @@ wb.styles do |style|
       "Cable Terminated at Destination",
       "Continuity Tested",
       "Grounded",
-      "Checked by Engineer",
-      "Project ID"
-    ], :style=>title
+      "Checked by Engineer"
+    ], :style=>column_titles
     sheet.add_row [
       "id",
       "type_code",
@@ -76,9 +89,8 @@ wb.styles do |style|
       "cable_terminated_at_destination",
       "continuity_tested",
       "grounded_by_electrical",
-      "checked_by_eng",
-      "project_id"
-    ]
+      "checked_by_eng"
+    ], :style=>attr_heading
     @instruments.each do |i|
       sheet.add_row [
         i.id,
@@ -113,9 +125,8 @@ wb.styles do |style|
         i.cable_terminated_at_destination,
         i.continuity_tested,
         i.grounded_by_electrical,
-        i.checked_by_eng,
-        i.project_id
-      ]
+        i.checked_by_eng
+      ], :style=>data
     end
   end
 end

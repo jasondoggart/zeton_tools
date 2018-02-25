@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180224174833) do
+ActiveRecord::Schema.define(version: 20180225015408) do
 
   create_table "action_items", force: :cascade do |t|
     t.integer "priority"
@@ -79,19 +79,19 @@ ActiveRecord::Schema.define(version: 20180224174833) do
     t.string "zeton_po"
     t.string "tracking_number"
     t.string "receiving_info"
-    t.integer "datasheet_complete"
-    t.integer "datasheet_released"
-    t.integer "rfq_sent"
-    t.integer "po_placed"
-    t.integer "drawing_for_approval_received"
-    t.integer "drawing_for_approval_marked_up"
-    t.integer "drawing_for_approval_sent_to_client"
-    t.integer "drawing_for_approval_released_for_construction"
-    t.integer "item_received_at_zeton"
-    t.integer "item_inspected_and_released"
-    t.integer "item_installed_by_mech"
-    t.integer "item_grounded_by_elec"
-    t.integer "item_inspected_by_eng"
+    t.integer "datasheet_complete", default: 0
+    t.integer "datasheet_released", default: 0
+    t.integer "rfq_sent", default: 0
+    t.integer "po_placed", default: 0
+    t.integer "drawing_for_approval_received", default: 0
+    t.integer "drawing_for_approval_marked_up", default: 0
+    t.integer "drawing_for_approval_sent_to_client", default: 0
+    t.integer "drawing_for_approval_released_for_construction", default: 0
+    t.integer "item_received_at_zeton", default: 0
+    t.integer "item_inspected_and_released", default: 0
+    t.integer "item_installed_by_mech", default: 0
+    t.integer "item_grounded_by_elec", default: 0
+    t.integer "item_inspected_by_eng", default: 0
     t.integer "project_id"
     t.index ["project_id"], name: "index_equipment_on_project_id"
   end
@@ -121,14 +121,14 @@ ActiveRecord::Schema.define(version: 20180224174833) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "project_id"
-    t.integer "valve_description_complete"
-    t.integer "valve_description_approved"
-    t.integer "po_placed"
-    t.integer "item_received"
-    t.integer "item_inspected_and_released"
-    t.integer "item_mounted"
-    t.integer "item_plumbed"
-    t.integer "item_checked_by_eng"
+    t.integer "valve_description_complete", default: 0
+    t.integer "valve_description_approved", default: 0
+    t.integer "po_placed", default: 0
+    t.integer "item_received", default: 0
+    t.integer "item_inspected_and_released", default: 0
+    t.integer "item_mounted", default: 0
+    t.integer "item_plumbed", default: 0
+    t.integer "item_checked_by_eng", default: 0
     t.index ["project_id"], name: "index_handvalves_on_project_id"
   end
 
