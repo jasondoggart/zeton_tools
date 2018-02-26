@@ -142,7 +142,9 @@
                     <% if rfi.rfi_responses.any? %>
                       <span class="text-info">
                         | Updated
-                        <%= rfi.rfi_responses.last.created_at.strftime("%b %-d, %Y") %>
+                        <%= rfi.rfi_responses.last.created_at.strftime(
+                          "%b %-d, %Y"
+                        ) %>
                         by <%= rfi.rfi_responses.last.organization %>
                       </span>
                     <% end %>
@@ -181,8 +183,10 @@
           </div>
         <% end %>
         <div class="pt-3">
-          <%= will_paginate(@rfis,
-                            :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+          <%= will_paginate(
+            @rfis,
+            :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer
+          ) %>
         </div>
       </div>
     </div>

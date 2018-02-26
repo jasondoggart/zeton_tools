@@ -142,7 +142,10 @@
           </div>
         <% end %>
         <div class="row pl-3 pr-3 mt-5">
-          <%= will_paginate(@action_items, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+          <%= will_paginate(
+            @action_items,
+            :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer
+          ) %>
         </div>
       </div>
     </div>

@@ -43,7 +43,8 @@
       </div>
       <div class="col-sm-12">
         <h2>
-          <%= cable_terminated_at_destination_percent.to_f.nan? ? "0" : cable_terminated_at_destination_percent.round(0) %>%
+          <%= cable_terminated_at_destination_percent.to_f.nan? ?
+            "0" : cable_terminated_at_destination_percent.round(0) %>%
         </h2>
       </div>
       <div class="col-sm-12 text-muted">
@@ -54,7 +55,9 @@
   <div class="col-sm-3">
     <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
       <div class="col-sm-12 h1 text-info">
-        <%= link_to '<i class="fa fa-plus"></i>'.html_safe, new_instrument_path, id: "new_instrument_link" %>
+        <%= link_to '<i class="fa fa-plus"></i>'.html_safe,
+          new_instrument_path,
+          id: "new_instrument_link" %>
       </div>
     </div>
   </div>
@@ -65,54 +68,120 @@
     <div class="card card-box-shadow mb-3">
       <div class="card-body mt-0">
         <div class="dropdown mt-3 mb-3">
-          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="loop_dropdown_button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button class="btn btn-outline-primary dropdown-toggle"
+                  type="button"
+                  id="loop_dropdown_button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false">
             Sort By
           </button>
-          <div class="dropdown-menu" style="height: 200px; overflow: scroll;" aria-labelledby="loop_dropdown_button">
-            <%= link_to 'Type', request.query_parameters.merge(:sorted_by => 'type_' + sort_direction(@sorted_by)), class: 'dropdown-item' %>
-            <%= link_to 'Loop', request.query_parameters.merge(:sorted_by => 'loop_' + sort_direction(@sorted_by)), class: 'dropdown-item' %>
-            <%= link_to 'Scope', project_instruments_path(:sorted_by => 'scope_' + sort_direction(@sorted_by)), class: 'dropdown-item' %>
+          <div class="dropdown-menu"
+               style="height: 200px;
+               overflow: scroll;"
+               aria-labelledby="loop_dropdown_button">
+            <%= link_to 'Type',
+              request.query_parameters.merge(
+                :sorted_by => 'type_' + sort_direction(@sorted_by)
+            ),
+            class: 'dropdown-item' %>
+          <%= link_to 'Loop',
+            request.query_parameters.merge(
+              :sorted_by => 'loop_' + sort_direction(@sorted_by)
+          ),
+          class: 'dropdown-item' %>
+        <%= link_to 'Scope',
+          project_instruments_path(
+            :sorted_by => 'scope_' + sort_direction(@sorted_by)
+        ),
+        class: 'dropdown-item' %>
           </div>
         </div>
-        <a class="btn btn-outline-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-          Filters<span class="ml-3"><i class="fa fa-caret-down"></i></span>
+        <a class="btn btn-outline-primary"
+           data-toggle="collapse"
+           href="#collapseExample"
+           role="button"
+           aria-expanded="false"
+           aria-controls="collapseExample">
+          Filters
+          <span class="ml-3"><i class="fa fa-caret-down"></i></span>
         </a>
-        <%= link_to 'Download as excel <i class="fa fa-download"></i>'.html_safe, project_instruments_excel_path(format: :xlsx), class: 'btn btn-outline-primary' %>
-        <%= link_to 'Upload from excel <i class="fa fa-upload"></i>'.html_safe, new_project_instrument_import_path, class: 'btn btn-outline-primary' %>
+        <%= link_to 'Download as excel <i class="fa fa-download"></i>'.html_safe,
+          project_instruments_excel_path(format: :xlsx),
+          class: 'btn btn-outline-primary' %>
+        <%= link_to 'Upload from excel <i class="fa fa-upload"></i>'.html_safe,
+          new_project_instrument_import_path,
+          class: 'btn btn-outline-primary' %>
         <div class="collapse" id="collapseExample">
           <div class="card card-body">
             <div class="row">
               <div class="col-4">
-                <%= link_to 'Clear all', project_instruments_path(:sorted_by => 'type_code asc'), class: 'btn btn-outline-primary btn-sm' %>
+                <%= link_to 'Clear all',
+                  project_instruments_path(
+                    :sorted_by => 'type_code asc'
+                ),
+                class: 'btn btn-outline-primary btn-sm' %>
               </div>
               <div class="col-4">
                 <div class="dropdown">
-                  <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="type_code_dropdown_button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button class="btn btn-sm btn-outline-primary dropdown-toggle"
+                          type="button"
+                          id="type_code_dropdown_button"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false">
                     Type
                     <% if params[:with_type_code].present? %>
                       <i class="fa fa-filter"></i>
                     <% end %>
                   </button>
-                  <div class="dropdown-menu" style="height: 200px; overflow: scroll;" aria-labelledby="type_code_dropdown_button">
-                    <%= link_to "Show All", project_instruments_path(:with_type_code => nil), class: 'dropdown-item' %>
+                  <div class="dropdown-menu"
+                       style="height: 200px;
+                       overflow: scroll;"
+                       aria-labelledby="type_code_dropdown_button">
+                       <%= link_to "Show All",
+                         project_instruments_path(
+                           :with_type_code => nil
+                       ),
+                       class: 'dropdown-item' %>
                     <% @type_codes.each do |type| %>
-                      <%= link_to type, request.query_parameters.merge(:with_type_code => type), class: "dropdown-item" %>
+                      <%= link_to type,
+                        request.query_parameters.merge(
+                          :with_type_code => type
+                      ),
+                      class: "dropdown-item" %>
                     <% end %>
                   </div>
                 </div>
               </div>
               <div class="col-4">
                 <div class="dropdown">
-                  <button class="btn-sm btn btn-outline-primary dropdown-toggle" type="button" id="loop_dropdown_button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button class="btn-sm btn btn-outline-primary dropdown-toggle"
+                          type="button"
+                          id="loop_dropdown_button"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false">
                     Loop
                     <% if params[:with_loop].present? %>
                       <i class="fa fa-filter"></i>
                     <% end %>
                   </button>
-                  <div class="dropdown-menu" style="height: 200px; overflow: scroll;" aria-labelledby="loop_dropdown_button">
-                    <%= link_to "Show All", project_instruments_path(:with_loop => nil), class: 'dropdown-item' %>
-                    <% @loops.each do |loop| %>
-                      <%= link_to loop, project_instruments_path(:with_loop => loop), class: "dropdown-item" %>
+                  <div class="dropdown-menu"
+                       style="height: 200px;
+                       overflow: scroll;"
+                       aria-labelledby="loop_dropdown_button">
+                    <%= link_to "Show All",
+                      project_instruments_path(
+                        :with_loop => nil
+                    ),
+                    class: 'dropdown-item' %>
+                    <% @loops.each do |loop_num| %>
+                      <%= link_to loop_num,
+                        project_instruments_path(
+                          :with_loop => loop
+                      ),
+                      class: "dropdown-item" %>
                     <% end %>
                   </div>
                 </div>
@@ -139,7 +208,9 @@
               <div class="row pl-3 pr-3">
                 <div class="col-sm-12">
                   <h5 class="mb-0">
-                    <%= link_to inst.tag, instrument_path(inst), id: "show_instrument_#{inst.id}" %>
+                    <%= link_to inst.tag,
+                      instrument_path(inst),
+                      id: "show_instrument_#{inst.id}" %>
                   </h5>
                   <span class="badge badge-pill badge-primary">
                     710-39-110
@@ -154,7 +225,8 @@
                   Location
                 </dt>
                 <dd class="col-sm-9">
-                Skid <%= inst.zeton_skid_number %>, Level <%= inst.zeton_skid_level %>
+                Skid <%= inst.zeton_skid_number %>,
+                Level <%= inst.zeton_skid_level %>
                 </dd>
                 <dt class="col-sm-3">
                   Manufacturer
@@ -204,10 +276,11 @@
         <% end %>
       </div>
       <div class="row pl-5 pr-5">
-        <%= will_paginate(@instruments, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+        <%= will_paginate(
+          @instruments,
+          :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer
+        ) %>
       </div>
     </div>
   </div>
 </div>
-
-        
