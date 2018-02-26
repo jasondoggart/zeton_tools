@@ -3,6 +3,15 @@ class Handvalve < ApplicationRecord
   has_and_belongs_to_many :information_requests
   has_and_belongs_to_many :action_items
   validates_presence_of :tag
+  validates :valve_description_complete,
+    :valve_description_approved,
+    :po_placed,
+    :item_received,
+    :item_inspected_and_released,
+    :item_mounted,
+    :item_plumbed,
+    :item_checked_by_eng,
+    inclusion: { in: [0,1,2] }
 
   scope :sorted_by, -> (sort_option) {
     direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'

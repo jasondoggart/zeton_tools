@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   get 'projects/equipment/metrics',
     to: 'projects#project_equipment_metrics',
     as: :project_equipment_metrics
+  get 'projects/equipment/excel',
+    to: 'projects#project_equipment_excel',
+    as: :project_equipment_excel
   get 'projects/rfis',
     to: 'projects#project_rfis',
     as: :project_rfis

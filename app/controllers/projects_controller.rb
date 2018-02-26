@@ -77,6 +77,17 @@ class ProjectsController < ApplicationController
     @equipment = @equipment.paginate(:page => params[:page], :per_page => 10)
   end
 
+  def project_equipment_excel
+    @equipment = current_project.equipment
+    respond_to do |format|
+      format.xlsx {
+        response.headers[
+          'Content-Disposition'
+        ] = "attachment; filename='#{current_project.project_number} - all_equipment.xlsx'"
+      }
+    end
+  end
+
   def project_equipment_metrics
     @equipment = current_project.equipment
     @equipment = @equipment.with_type(params[:with_type]) if params[:with_type].present?
