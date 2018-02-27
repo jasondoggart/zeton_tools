@@ -1,18 +1,81 @@
-<div class="main">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">
-            <%= current_user.full_name %>
-          </h5>
-          <h6 class="card-sub-title text-muted">
-            <%= current_user.email %>
-          </h6>
-          <p class="card-text">
-            Job Title: Project Engineer
-          </p>
+<div class="row pl-5 pr-5 mt-5 pb-2">
+  <div class="col-sm-12">
+    <%= link_to "<- Go back", :back %>
+  </div>
+</div>
+<div class="row pl-5 pr-5 mb-3">
+  <div class="col-sm-12">
+    <h3><%= current_user.full_name %></h3>
+  </div>
+</div>
+<div class="row pl-5 pr-5">
+  <div class="col-sm-12">
+    <div class="card card-box-shadow mb-3 p-4">
+      <div class="card-body">
+        <h5 class="card-title">
+          User Information
+        </h5>
+        <div class="row">
+          <div class="col-sm-12">
+            <dl class="row">
+              <dt class="col-sm-4">First Name</dt>
+              <dd class="col-sm-8">
+              <%= current_user.first_name %>
+              </dd>
+              <dt class="col-sm-4">Last Name</dt>
+              <dd class="col-sm-8">
+              <%= current_user.last_name %>
+              </dd>
+              <dt class="col-sm-4">Email</dt>
+              <dd class="col-sm-8">
+              <%= current_user.email %>
+              </dd>
+              <dt class="col-sm-4">Role</dt>
+              <dd class="col-sm-8">
+              Not yet added to database
+              </dd>
+            </dl>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row pl-5 pr-5">
+  <div class="col-sm-12">
+    <div class="card card-box-shadow mb-3 p-4">
+      <div class="card-body">
+        <h5 class="card-title">
+          Open Action Items
+        </h5>
+        <% current_user.all_projects.each do |project| %>
+          <div class="row p-3 mt-0 border-bottom">
+            <div class="col-sm-12">
+              <h6 class="mb-3">Project <%= project.project_number %></h6>
+              <% project.action_items.where(
+                assigned_to: current_user,
+                status: 0
+              ).each do |action| %>
+                  <div class="row mb-0 pb-0">
+                    <div class="col-sm-12">
+                      <span class="h6 float-left mb-0 pb-0">
+                        <%= link_to action.ai_number,
+                          action_item_path(action) %>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="row mb-4 mt-0 pt-0">
+                    <div class="col-sm-12">
+                      <b>
+                        <%= action.title %>
+                      </b>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+      </div>
       </div>
     </div>
   </div>
