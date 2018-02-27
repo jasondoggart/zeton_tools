@@ -127,6 +127,17 @@ class ProjectsController < ApplicationController
     @handvalves = @handvalves.paginate(:page => params[:page], :per_page => 10)
   end
 
+  def project_handvalves_excel
+    @handvalves = current_project.handvalves
+    respond_to do |format|
+      format.xlsx {
+        response.headers[
+          'Content-Disposition'
+        ] = "attachment; filename='#{current_project.project_number} - all_handvalves.xlsx'"
+      }
+    end
+  end
+
   def project_handvalves_metrics
     @handvalves = current_project.handvalves
     @handvalves = @handvalves.with_type(params[:with_type]) if params[:with_type].present?

@@ -1,0 +1,107 @@
+wb = xlsx_package.workbook
+
+# add styles
+
+wb.styles do |style|
+  column_titles = style.add_style(:b=>true)
+  project_heading = style.add_style(:b=>true, :sz=>14)
+  project_name_heading = style.add_style(:b=>true, :sz=>12)
+  project_client = style.add_style(:b=>true, :sz=>12)
+  data = style.add_style(:border=>Axlsx::STYLE_THIN_BORDER)
+  attr_heading = style.add_style(:hidden=>true, :locked=>true)
+
+  wb.add_worksheet(name: "Handvalves") do |sheet|
+    sheet.add_row [
+      "Project #{current_project.project_number}"
+    ], :style=>project_heading
+    sheet.add_row [
+      "#{current_project.project_name}"
+    ], :style=>project_name_heading
+    sheet.add_row [
+      "Client: #{current_project.client}"
+    ], :style=>project_client
+    sheet.add_row [
+      "ID",
+      "Tag",
+      "Pipe/Valve Specification",
+      "Valve Type",
+      "Size",
+      "Line or Equipment Number",
+      "Skid Number",
+      "Skid Level",
+      "Scope",
+      "Supplier",
+      "Manufacturer",
+      "Model Number",
+      "Process Connection",
+      "Material of Construction",
+      "Valve Code",
+      "Installation Location",
+      "Zeton PO Number",
+      "Description Complete",
+      "Description Approved",
+      "PO Placed",
+      "Item Received",
+      "Item Inspected and Released",
+      "Item Mounted",
+      "Item Plumbed",
+      "Checked by Engineer"
+    ], :style=>column_titles
+    sheet.add_row [
+      "id",
+      "tag",
+      "valve_code",
+      "valve_type",
+      "size",
+      "line_number",
+      "zeton_skid_number",
+      "zeton_skid_level",
+      "scope",
+      "supplier",
+      "manufacturer",
+      "model",
+      "process_connection",
+      "material_of_construction",
+      "valve_counting_code",
+      "valve_location",
+      "zeton_po",
+      "valve_description_complete",
+      "valve_description_approved",
+      "po_placed",
+      "item_received",
+      "item_inspected_and_released",
+      "item_mounted",
+      "item_plumbed",
+      "item_checked_by_eng"
+    ], :style=>attr_heading
+    @handvalves.each do |hv|
+      sheet.add_row [
+        hv.id,
+        hv.tag,
+        hv.valve_code,
+        hv.valve_type,
+        hv.size,
+        hv.line_number,
+        hv.zeton_skid_number,
+        hv.zeton_skid_level,
+        hv.scope,
+        hv.supplier,
+        hv.manufacturer,
+        hv.model,
+        hv.process_connection,
+        hv.material_of_construction,
+        hv.valve_counting_code,
+        hv.valve_location,
+        hv.zeton_po,
+        hv.valve_description_complete,
+        hv.valve_description_approved,
+        hv.po_placed,
+        hv.item_received,
+        hv.item_inspected_and_released,
+        hv.item_mounted,
+        hv.item_plumbed,
+        hv.item_checked_by_eng
+      ], :style=>data
+    end
+  end
+end

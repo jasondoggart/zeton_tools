@@ -34,6 +34,9 @@ Rails.application.routes.draw do
   get 'projects/handvalves/metrics',
     to: 'projects#project_handvalves_metrics',
     as: :project_handvalves_metrics
+  get 'projects/handvalves/excel',
+    to: 'projects#project_handvalves_excel',
+    as: :project_handvalves_excel
   get 'projects/action_items',
     to: 'projects#project_action_items',
     as: :project_action_items
