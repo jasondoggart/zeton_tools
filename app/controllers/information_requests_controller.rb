@@ -6,6 +6,7 @@ class InformationRequestsController < ApplicationController
     @instruments = current_project.instruments
     @equipment = current_project.equipment
     @handvalves = current_project.handvalves
+    @work_areas = WORK_AREAS
   end
 
   def create
@@ -24,10 +25,12 @@ class InformationRequestsController < ApplicationController
     @instruments = current_project.instruments
     @equipment = current_project.equipment
     @handvalves = current_project.handvalves
+    @work_areas = WORK_AREAS
   end
 
   def update
     @information_request = InformationRequest.find(params[:id])
+    @work_areas = WORK_AREAS
     if @information_request.update(information_request_params)
       respond_to do |format|
         format.html {
@@ -64,6 +67,7 @@ class InformationRequestsController < ApplicationController
                                                   :project_id,
                                                   :answered,
                                                   :target_date,
+                                                  :area,
                                                   instrument_ids: [],
                                                   equipment_ids: [],
                                                   handvalve_ids: []
