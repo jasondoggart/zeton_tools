@@ -387,6 +387,10 @@ Project.all.each do |project|
 end
 
 # Add project RFI's
+areas = ["A - Process", "B - BOM", "C - Controls",
+         "D - Drawings", "E - Electrical", "F - Databooks",
+         "G - General", "H - Project Management",
+         "I - Instruments", "L - Piping", "M - Major Equipment", "O - Safety"]
 
 Project.all.each do |project|
   puts "creating rfis for project #{project.id} of #{Project.count}"
@@ -396,12 +400,14 @@ Project.all.each do |project|
     doc_number = "CLIENT-DOC-" + Faker::Number.number(4)
     doc_title = "Super Awesome Client Specfication"
     doc_rev = "1.2"
+    area = areas.sample
     zeton_clarification = Faker::Lorem.paragraph(3)
     project.information_requests.create(client_document_number: doc_number,
                              client_document_title: doc_title,
                              client_document_revision: doc_rev,
                              client_document_section: "1.3.5",
-                             zeton_clarification: zeton_clarification)
+                             zeton_clarification: zeton_clarification,
+                             area: area)
     # add instrument associations
     num_assoc_inst = rand(0..3)
     num_assoc_inst.times do
@@ -441,10 +447,6 @@ end
 
 # Add project Action Items
 
-areas = ["A - Process", "B - BOM", "C - Controls",
-         "D - Drawings", "E - Electrical", "F - Databooks",
-         "G - General", "H - Project Management",
-         "I - Instruments", "L - Piping", "M - Major Equipment", "O - Safety"]
 sent_by_options = ["Email", "Phone", "Internal Meeting"]
 
 Project.all.each do |project|

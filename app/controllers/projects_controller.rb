@@ -163,6 +163,7 @@ class ProjectsController < ApplicationController
   def project_action_items
     @action_items = current_project.action_items
     @action_items = @action_items.with_status(params[:with_status]) if params[:with_status].present?
+    @action_items = @action_items.with_area(params[:with_area]) if params[:with_area].present?
     if params[:sorted_by].present?
       @action_items = @action_items.sorted_by(params[:sorted_by])
     else
@@ -171,7 +172,7 @@ class ProjectsController < ApplicationController
     @sorted_by = params[:sorted_by] if params[:sorted_by].present?
     @action_items = @action_items.paginate(:page => params[:page], :per_page => 15)
     @open_action_items = current_project.information_requests.where(answered: 0)
-
+    @work_areas = @action_items.distinct.pluck(:area).sort
   end
 
   def new

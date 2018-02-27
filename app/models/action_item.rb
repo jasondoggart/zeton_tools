@@ -13,6 +13,10 @@ class ActionItem < ApplicationRecord
     where(status: status)
   }
 
+  scope :with_area, -> (area) {
+    where(area: area)
+  }
+
   scope :sorted_by, -> (sort_option) {
     direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
     case sort_option.to_s
