@@ -97,6 +97,9 @@
           Filters
           <span class="ml-3"><i class="fa fa-caret-down"></i></span>
         </a>
+        <%= link_to 'Download as Excel <i class="fa fa-download"></i>'.html_safe,
+          project_handvalves_excel_path(format: :xlsx),
+          class: 'btn btn-outline-primary' %>
         <div class="collapse" id="collapseExample">
           <div class="card card-body">
             <div class="row">
