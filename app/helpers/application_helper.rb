@@ -70,4 +70,8 @@ module ApplicationHelper
       "text-info"
     end
   end
+
+  def days_from_now(value)
+    ((value - Time.now)/24/3600 + 1).to_i
+  end
 end

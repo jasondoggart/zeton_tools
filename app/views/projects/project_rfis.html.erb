@@ -138,7 +138,7 @@
                       locals: {rfi: rfi} %>
                   </div>
                   <div class="text-muted mb-3">
-                    <%= rfi.created_at.strftime("%b %-d, %Y") %>
+                    Created <%= rfi.created_at.strftime("%b %-d, %Y") %>
                     <% if rfi.rfi_responses.any? %>
                       <span class="text-info">
                         | Updated
@@ -147,6 +147,15 @@
                         ) %>
                         by <%= rfi.rfi_responses.last.organization %>
                       </span>
+                    <% end %>
+                    <% if rfi.target_date.present? %>
+                      <p>
+                      Response required by <%= rfi.target_date.strftime(
+                        "%b %-d, %Y"
+                      ) %> (
+                      <%= pluralize days_from_now(rfi.target_date), 'day' %>
+                      from now)
+                      </p>
                     <% end %>
                   </div>
                 </div>

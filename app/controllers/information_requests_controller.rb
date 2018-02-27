@@ -63,6 +63,7 @@ class InformationRequestsController < ApplicationController
                                                   :zeton_clarification,
                                                   :project_id,
                                                   :answered,
+                                                  :target_date,
                                                   instrument_ids: [],
                                                   equipment_ids: [],
                                                   handvalve_ids: []

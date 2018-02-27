@@ -8,6 +8,15 @@
     <%= @information_request.created_at.strftime("%b %-d, %Y") %> 
     by <%= @information_request.project.user.full_name %>
     </p>
+    <% if @information_request.target_date.present? %>
+      <p>
+      Response required by <%= @information_request.target_date.strftime(
+        "%b %-d, %Y"
+      ) %> (
+      <%= pluralize days_from_now(@information_request.target_date), 'day' %>
+      from now)
+      </p>
+    <% end %>
   </div>
 </div>
 <div class="row pl-5 pr-5">
