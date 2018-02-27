@@ -1,4 +1,4 @@
-class ProjectInstrumentImport
+class ProjectEquipmentImport
   include ActiveModel::Model
   require 'roo'
 
@@ -12,13 +12,12 @@ class ProjectInstrumentImport
     false
   end
 
-  def save
-    if imported_project_instruments.map(&:valid?).all?
-      imported_project_instruments.each(&:save!)
-      true
+  def save 
+    if imported_project_equipment.map(&:valid?).all?
+      imported_project_equipment.each(&:save!)
     else
-      imported_project_instruments.each_with_index do |inst, index|
-        inst.errors.full_messages.each do |msg|
+      imported_project_equipment.each_with_index do |equip, index|
+        equip.errors.full_messages.each do |msg|
           errors.add :base, "Row #{index + 2}: #{msg}"
         end
       end
@@ -26,19 +25,19 @@ class ProjectInstrumentImport
     end
   end
 
-  def imported_project_instruments
-    @imported_project_instruments ||= load_imported_project_instruments
+  def imported_project_equipment
+    @imported_project_equipment ||= load_imported_project_equipment
   end
 
-  def load_imported_project_instruments
+  def load_imported_project_equipment
     spreadsheet = open_spreadsheet
     header = spreadsheet.row(5)
     (6..spreadsheet.last_row).map do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      instrument = Instrument.find_by_id(row["id"]) || Instrument.new
-      instrument.attributes = row.to_hash
-      instrument.project_id = project
-      instrument
+      equipment = Equipment.find_by_id(row["id"]) || Equipment.new
+      equipment.attributes = row.to_hash
+      equipment.project_id = project
+      equipment
     end
   end
 

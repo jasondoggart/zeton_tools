@@ -105,6 +105,9 @@
         <%= link_to 'Download as Excel <i class="fa fa-download"></i>'.html_safe,
           project_equipment_excel_path(format: :xlsx),
           class: 'btn btn-outline-primary' %>
+        <%= link_to 'Upload from Excel <i class="fa fa-upload"></i>'.html_safe,
+          new_project_equipment_import_path,
+          class: 'btn btn-outline-primary' %>
         <div class="collapse" id="collapseExample">
           <div class="card card-body">
             <div class="row">

@@ -1,0 +1,2 @@
+module ProjectEquipmentImportsHelper
+end

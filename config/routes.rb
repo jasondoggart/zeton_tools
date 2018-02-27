@@ -51,4 +51,5 @@ Rails.application.routes.draw do
   resources :team_members
   resources :handvalves
   resources :project_instrument_imports
+  resources :project_equipment_imports
 end
