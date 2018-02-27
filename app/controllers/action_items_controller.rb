@@ -1,4 +1,5 @@
 class ActionItemsController < ApplicationController
+  before_action :set_project, only: [:show, :edit, :update]
 
   def new
     @action_item = ActionItem.new
@@ -77,5 +78,11 @@ class ActionItemsController < ApplicationController
                                         instrument_ids: [],
                                         equipment_ids: [],
                                         handvalve_ids: [])
+  end
+
+  def set_project
+    if !(current_project == ActionItem.find(params[:id]).project)
+      set_current_project(ActionItem.find(params[:id]).project)
+    end
   end
 end

@@ -145,7 +145,7 @@ valve_counting_codes = ["VTUBE", "VSCRD", "VWELD", "VOTHR"]
 
 # Create instruments and equipment for all projects 
 Project.all.each do |project| 
-  num_inst = rand(75..700) 
+  num_inst = rand(75..200) 
   puts "Will generate #{num_inst} instruments for project #{project.project_number}" 
   num_inst.times do 
     skid_number = skids.sample 
@@ -180,7 +180,7 @@ Project.all.each do |project|
   end
   puts "Generated #{project.instruments.count} instruments"
 
-  num_equip = rand(5..150)
+  num_equip = rand(5..50)
   puts "Will generate #{num_equip} 
   pieces of equipment for project #{project.project_number}"
   num_equip.times do
@@ -210,7 +210,7 @@ Project.all.each do |project|
   end
   puts "Generated #{project.equipment.count} pieces of equipment"
 
-  num_valves = rand(100..750)
+  num_valves = rand(100..200)
   puts "Will generate #{num_valves} 
     handvalves for project #{project.project_number}"
   num_valves.times do
@@ -390,7 +390,7 @@ end
 
 Project.all.each do |project|
   puts "creating rfis for project #{project.id} of #{Project.count}"
-  num_rfis = rand(15..200)
+  num_rfis = rand(15..75)
   puts "will create #{num_rfis} for project #{project.id}"
   num_rfis.times do
     doc_number = "CLIENT-DOC-" + Faker::Number.number(4)
@@ -449,7 +449,7 @@ sent_by_options = ["Email", "Phone", "Internal Meeting"]
 
 Project.all.each do |project|
   puts "creating rfis for project #{project.id} of #{Project.count}"
-  num_action_items = rand(50..750)
+  num_action_items = rand(5..75)
   puts "will create #{num_action_items} for project #{project.id}"
   num_action_items.times do
     priority = rand(1..3)

@@ -128,7 +128,7 @@
                         'date-autoclose' => 'true'
                       } %>
                 <% end %>
-                        
+
                 </div>
               </div>
             <% end %>
@@ -138,14 +138,14 @@
                   '<b>Assigned To</b>'.html_safe %>
                 <% if @action_item.assigned_to %>
                   <%= f.collection_select :assigned_to_id,
-                    current_project.users,
+                    current_project.users.uniq,
                     :id,
                     :full_name,
                     {selected: @action_item.assigned_to_id.to_i},
                     {class: "form-control"} %>
                 <% else %>
                   <%= f.collection_select :assigned_to_id,
-                    current_project.users,
+                    current_project.users.uniq,
                     :id,
                     :full_name,
                     {prompt: true},

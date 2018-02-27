@@ -45,13 +45,20 @@
   <div class="col-sm-12">
     <div class="card card-box-shadow mb-3 p-4">
       <div class="card-body">
-        <h5 class="card-title">
-          Open Action Items
+        <h5 class="card-title mb-5">
+          You have
+          <%= pluralize(
+            current_user.assigned_actions.where(status: 0).count,
+            'open action item'
+          ) %>
         </h5>
         <% current_user.all_projects.each do |project| %>
-          <div class="row p-3 mt-0 border-bottom">
+          <div class="row mt-0 border-bottom mb-5">
             <div class="col-sm-12">
-              <h6 class="mb-3">Project <%= project.project_number %></h6>
+              <h6 class="mb-3">
+                Project <%= project.project_number %>
+                (<%= project.action_items.where(assigned_to: current_user, status: 0).count %>)
+              </h6>
               <% project.action_items.where(
                 assigned_to: current_user,
                 status: 0
