@@ -65,6 +65,91 @@
 
 <div class="row pl-5 pr-5">
   <div class="col-sm-12">
+    <div class="card card-box-shadow mb-3">
+      <div class="card-body mt-0">
+        <div class="dropdown mt-3 mb-3">
+          <button class="btn btn-outline-primary dropdown-toggle"
+                  type="button"
+                  id="loop_dropdown_button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false">
+            Sort By
+          </button>
+          <div class="dropdown-menu"
+               style="height: 200px;
+               overflow: scroll;"
+               aria-labelledby="loop_dropdown_button">
+            <%= link_to 'Target Date',
+              request.query_parameters.merge(
+                :sorted_by => 'target_date_' + sort_direction(@sorted_by)
+              ),
+              class: 'dropdown-item' %>
+            <%= link_to 'Status',
+              request.query_parameters.merge(
+                :sorted_by => 'status_' + sort_direction(@sorted_by)
+              ),
+              class: 'dropdown-item' %>
+            <%= link_to 'Date Added',
+              request.query_parameters.merge(
+                :sorted_by => 'date_created_' + sort_direction(@sorted_by)
+              ),
+              class: 'dropdown-item' %>
+          </div>
+        </div>
+        <a class="btn btn-outline-primary"
+           data-toggle="collapse"
+           href="#collapseExample"
+           role="button"
+           aria-expanded="false"
+           aria-controls="collapseExample">
+          Filters<span class="ml-3"><i class="fa fa-caret-down"></i></span>
+        </a>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <div class="row">
+              <div class="col-4">
+                <%= link_to 'Clear all',
+                  project_action_items_path,
+                  class: 'btn btn-outline-primary btn-sm' %>
+              </div>
+              <div class="col-4">
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-outline-primary dropdown-toggle"
+                          type="button"
+                          id="type_code_dropdown_button"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false">
+                    Status
+                    <% if params[:with_status].present? %>
+                      <i class="fa fa-filter"></i>
+                    <% end %>
+                  </button>
+                  <div class="dropdown-menu"
+                       style="height: 200px; overflow: scroll;"
+                       aria-labelledby="type_code_dropdown_button">
+                       <%= link_to "Show All",
+                         project_action_items_path,
+                         class: 'dropdown-item' %>
+                       <%= link_to "Open",
+                         project_action_items_path(:with_status => 0),
+                         class: "dropdown-item" %>
+                       <%= link_to "Closed",
+                         project_action_items_path(:with_status => 1),
+                         class: "dropdown-item" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row pl-5 pr-5">
+  <div class="col-sm-12">
     <div class="card card-box-shadow mb-5">
       <div class="card-body mt-0">
         <% @action_items.each do |action_item| %>

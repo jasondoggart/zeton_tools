@@ -161,8 +161,16 @@ class ProjectsController < ApplicationController
   end
 
   def project_action_items
-    @action_items = current_project.action_items.paginate(:page => params[:page], :per_page => 10)
-    @open_action_items = current_project.action_items.where(status: 0)
+    @action_items = current_project.action_items
+    @action_items = @action_items.with_status(params[:with_status]) if params[:with_status].present?
+    if params[:sorted_by].present?
+      @action_items = @action_items.sorted_by(params[:sorted_by])
+    else
+      @action_items = @action_items.order(status: :asc)
+    end
+    @sorted_by = params[:sorted_by] if params[:sorted_by].present?
+    @action_items = @action_items.paginate(:page => params[:page], :per_page => 15)
+    @open_action_items = current_project.information_requests.where(answered: 0)
 
   end
 

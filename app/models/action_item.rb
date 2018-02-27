@@ -9,6 +9,22 @@ class ActionItem < ApplicationRecord
 
   PRIORITIES = ["1", "2", "3"]
 
+  scope :with_status, -> (status) {
+    where(status: status)
+  }
+
+  scope :sorted_by, -> (sort_option) {
+    direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
+    case sort_option.to_s
+    when /^target_date_/
+      order("action_items.target_date #{direction}")
+    when /^status_/
+      order("action_items.status #{direction}")
+    when /^date_created_/
+      order("action_items.created_at #{direction}")
+    end
+  }
+
   def ai_number
     'ZET-AI-' + id.to_s
   end
