@@ -2,8 +2,12 @@
   <div class="col-sm-12">
     <h3>
       Project Dashboard
-      <%= link_to "(Update Project)", edit_project_path(current_project), id: "update_project_#{current_project.id}" %>
     </h3>
+    <p>
+      <%= link_to "(Update Project)",
+        edit_project_path(current_project),
+        id: "update_project_#{current_project.id}" %>
+    </p>
   </div>
 </div>
 <div class="row pl-5 pr-5 pb-5">
@@ -16,45 +20,77 @@
         <div class="col-sm-12 pt-5 mb-1">
           Purchased
           <span class="float-right">
-            <%= equipment_po_placed_complete %> out of <%= equipment_po_placed_required %> (<%= equipment_po_placed_percent.round(1) %>%)
+            <%= equipment_po_placed_complete %>
+            out of
+            <%= equipment_po_placed_required %>
+            (<%= equipment_po_placed_percent.round(1) %>%)
           </span>
         </div>
         <div class="col-sm-12">
           <div class="progress" style="height: 5px;">
-            <div class="progress-bar" role="progressbar" style="width: <%= equipment_po_placed_percent %>%;" aria-valuenow="<%= equipment_po_placed_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar"
+                 role="progressbar"
+                 style="width: <%= equipment_po_placed_percent %>%;"
+                 aria-valuenow="<%= equipment_po_placed_percent %>"
+                 aria-valuemin="0"
+                 aria-valuemax="100"></div>
           </div>
         </div>
         <div class="col-sm-12 pt-3 mb-1">
           Received
           <span class="float-right">
-            <%= equipment_item_inspected_and_released_complete %> out of <%= equipment_item_inspected_and_released_required %> (<%= equipment_item_inspected_and_released_percent.round(1) %>%)
+            <%= equipment_item_inspected_and_released_complete %>
+            out of
+            <%= equipment_item_inspected_and_released_required %>
+            (<%= equipment_item_inspected_and_released_percent.round(1) %>%)
           </span>
         </div>
         <div class="col-sm-12">
           <div class="progress" style="height: 5px;">
-            <div class="progress-bar" role="progressbar" style="width: <%= equipment_item_inspected_and_released_percent %>%;" aria-valuenow="<%= equipment_item_inspected_and_released_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar"
+                 role="progressbar"
+                 style="width: <%= equipment_item_inspected_and_released_percent %>%;"
+                 aria-valuenow="<%= equipment_item_inspected_and_released_percent %>"
+                 aria-valuemin="0"
+                 aria-valuemax="100"></div>
           </div>
         </div>
         <div class="col-sm-12 pt-3 mb-1">
           Installed
           <span class="float-right">
-            <%= item_installed_by_mech_complete %> out of <%= item_installed_by_mech_required %> (<%= item_installed_by_mech_percent.round(1) %>%)
+            <%= item_installed_by_mech_complete %>
+            out of
+            <%= item_installed_by_mech_required %>
+            (<%= item_installed_by_mech_percent.round(1) %>%)
           </span>
         </div>
         <div class="col-sm-12">
           <div class="progress" style="height: 5px;">
-            <div class="progress-bar" role="progressbar" style="width: <%= item_installed_by_mech_percent %>%;" aria-valuenow="<%= item_installed_by_mech_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar"
+                 role="progressbar"
+                 style="width: <%= item_installed_by_mech_percent %>%;"
+                 aria-valuenow="<%= item_installed_by_mech_percent %>"
+                 aria-valuemin="0"
+                 aria-valuemax="100"></div>
           </div>
         </div>
         <div class="col-sm-12 pt-3 mb-1">
           Grounded
           <span class="float-right">
-            <%= item_grounded_by_elec_complete %> out of <%= item_grounded_by_elec_required %> (<%= item_grounded_by_elec_percent.round(1) %>%)
+            <%= item_grounded_by_elec_complete %>
+            out of
+            <%= item_grounded_by_elec_required %>
+            (<%= item_grounded_by_elec_percent.round(1) %>%)
           </span>
         </div>
         <div class="col-sm-12">
           <div class="progress" style="height: 5px;">
-            <div class="progress-bar" role="progressbar" style="width: <%= item_grounded_by_elec_percent %>%;" aria-valuenow="<%= item_grounded_by_elec_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar"
+                 role="progressbar"
+                 style="width: <%= item_grounded_by_elec_percent %>%;"
+                 aria-valuenow="<%= item_grounded_by_elec_percent %>"
+                 aria-valuemin="0"
+                 aria-valuemax="100"></div>
           </div>
         </div>
         <div class="col-sm-12 pt-5">
@@ -72,45 +108,77 @@
         <div class="col-sm-12 pt-5 mb-1">
           Purchased
           <span class="float-right">
-            <%= po_placed_complete %> out of <%= po_placed_required %> (<%= po_placed_percent.round(1) %>%)
+            <%= po_placed_complete %>
+            out of
+            <%= po_placed_required %>
+            (<%= po_placed_percent.round(1) %>%)
           </span>
         </div>
         <div class="col-sm-12">
           <div class="progress" style="height: 5px;">
-            <div class="progress-bar" role="progressbar" style="width: <%= po_placed_percent %>%;" aria-valuenow="<%= po_placed_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar"
+                 role="progressbar"
+                 style="width: <%= po_placed_percent %>%;"
+                 aria-valuenow="<%= po_placed_percent %>"
+                 aria-valuemin="0"
+                 aria-valuemax="100"></div>
           </div>
         </div>
         <div class="col-sm-12 pt-3 mb-1">
           Received
           <span class="float-right">
-            <%= item_inspected_and_released_complete %> out of <%= item_inspected_and_released_required %> (<%= item_inspected_and_released_percent.round(1) %>%)
+            <%= item_inspected_and_released_complete %>
+            out of
+            <%= item_inspected_and_released_required %>
+            (<%= item_inspected_and_released_percent.round(1) %>%)
           </span>
         </div>
         <div class="col-sm-12">
           <div class="progress" style="height: 5px;">
-            <div class="progress-bar" role="progressbar" style="width: <%= item_inspected_and_released_percent %>%;" aria-valuenow="<%= item_inspected_and_released_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar"
+                 role="progressbar"
+                 style="width: <%= item_inspected_and_released_percent %>%;"
+                 aria-valuenow="<%= item_inspected_and_released_percent %>"
+                 aria-valuemin="0"
+                 aria-valuemax="100"></div>
           </div>
         </div>
         <div class="col-sm-12 pt-3 mb-1">
           Installed
           <span class="float-right">
-            <%= plumbed_by_mechanical_complete %> out of <%= plumbed_by_mechanical_required %> (<%= plumbed_by_mechanical_percent.round(1) %>%)
+            <%= plumbed_by_mechanical_complete %>
+            out of
+            <%= plumbed_by_mechanical_required %>
+            (<%= plumbed_by_mechanical_percent.round(1) %>%)
           </span>
         </div>
         <div class="col-sm-12">
           <div class="progress" style="height: 5px;">
-            <div class="progress-bar" role="progressbar" style="width: <%= plumbed_by_mechanical_percent %>%;" aria-valuenow="<%= plumbed_by_mechanical_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar"
+                 role="progressbar"
+                 style="width: <%= plumbed_by_mechanical_percent %>%;"
+                 aria-valuenow="<%= plumbed_by_mechanical_percent %>"
+                 aria-valuemin="0"
+                 aria-valuemax="100"></div>
           </div>
         </div>
         <div class="col-sm-12 pt-3 mb-1">
           Wired
           <span class="float-right">
-            <%= cable_terminated_at_destination_complete %> out of <%= cable_terminated_at_destination_required %> (<%= cable_terminated_at_destination_percent.round(1) %>%)
+            <%= cable_terminated_at_destination_complete %>
+            out of
+            <%= cable_terminated_at_destination_required %>
+            (<%= cable_terminated_at_destination_percent.round(1) %>%)
           </span>
         </div>
         <div class="col-sm-12">
           <div class="progress" style="height: 5px;">
-            <div class="progress-bar" role="progressbar" style="width: <%= cable_terminated_at_destination_percent %>%;" aria-valuenow="<%= cable_terminated_at_destination_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar"
+                 role="progressbar"
+                 style="width: <%= cable_terminated_at_destination_percent %>%;"
+                 aria-valuenow="<%= cable_terminated_at_destination_percent %>"
+                 aria-valuemin="0"
+                 aria-valuemax="100"></div>
           </div>
         </div>
         <div class="col-sm-12 pt-5">
@@ -128,34 +196,58 @@
         <div class="col-sm-12 pt-5 mb-1">
           Purchased
           <span class="float-right">
-            <%= handvalve_po_placed_complete %> out of <%= handvalve_po_placed_required %> (<%= handvalve_po_placed_percent.round(1) %>%)
+            <%= handvalve_po_placed_complete %>
+            out of
+            <%= handvalve_po_placed_required %>
+            (<%= handvalve_po_placed_percent.round(1) %>%)
           </span>
         </div>
         <div class="col-sm-12">
           <div class="progress" style="height: 5px;">
-            <div class="progress-bar" role="progressbar" style="width: <%= handvalve_po_placed_percent %>%;" aria-valuenow="<%= handvalve_po_placed_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar"
+                 role="progressbar"
+                 style="width: <%= handvalve_po_placed_percent %>%;"
+                 aria-valuenow="<%= handvalve_po_placed_percent %>"
+                 aria-valuemin="0"
+                 aria-valuemax="100"></div>
           </div>
         </div>
         <div class="col-sm-12 pt-3 mb-1">
           Received
           <span class="float-right">
-            <%= handvalve_item_released_complete %> out of <%= handvalve_item_released_required %> (<%= handvalve_item_released_percent.round(1) %>%)
+            <%= handvalve_item_released_complete %>
+            out of
+            <%= handvalve_item_released_required %>
+            (<%= handvalve_item_released_percent.round(1) %>%)
           </span>
         </div>
         <div class="col-sm-12">
           <div class="progress" style="height: 5px;">
-            <div class="progress-bar" role="progressbar" style="width: <%= handvalve_item_released_percent %>%;" aria-valuenow="<%= handvalve_item_released_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar"
+                 role="progressbar"
+                 style="width: <%= handvalve_item_released_percent %>%;"
+                 aria-valuenow="<%= handvalve_item_released_percent %>"
+                 aria-valuemin="0"
+                 aria-valuemax="100"></div>
           </div>
         </div>
         <div class="col-sm-12 pt-3 mb-1">
           Installed
           <span class="float-right">
-            <%= handvalve_item_plumbed_complete %> out of <%= handvalve_item_plumbed_required %> (<%= handvalve_item_plumbed_percent.round(1) %>%)
+            <%= handvalve_item_plumbed_complete %>
+            out of
+            <%= handvalve_item_plumbed_required %>
+            (<%= handvalve_item_plumbed_percent.round(1) %>%)
           </span>
         </div>
         <div class="col-sm-12">
           <div class="progress" style="height: 5px;">
-            <div class="progress-bar" role="progressbar" style="width: <%= handvalve_item_plumbed_percent %>%;" aria-valuenow="<%= handvalve_item_plumbed_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar"
+                 role="progressbar"
+                 style="width: <%= handvalve_item_plumbed_percent %>%;"
+                 aria-valuenow="<%= handvalve_item_plumbed_percent %>"
+                 aria-valuemin="0"
+                 aria-valuemax="100"></div>
           </div>
         </div>
         <div class="col-sm-12 pt-5">
@@ -178,7 +270,10 @@
             <div class="pt-3 mt-0">
               <div class="row pl-3 pr-3">
                 <div class="col-sm-12">
-                  <span class="h6 float-left"><%= link_to rfi.rfi_number, information_request_path(rfi) %></span>
+                  <span class="h6 float-left">
+                    <%= link_to rfi.rfi_number,
+                      information_request_path(rfi) %>
+                  </span>
                   <span class="float-right">
                     <%= rfi.created_at.strftime("%b %-d, %Y") %>
                   </span>
@@ -211,6 +306,54 @@
         </div>
       </div>
     </div>
+    <div class="card card-box-shadow mb-5">
+      <div class="card-body mt-0">
+        <div class="col-sm-12 text-muted">
+          Recent Action Items
+        </div>
+        <% @action_items.each do |item| %>
+          <div class="border-bottom">
+            <div class="pt-3 mt-0">
+              <div class="row pl-3 pr-3">
+                <div class="col-sm-12">
+                  <span class="h6 float-left">
+                    <%= link_to item.ai_number,
+                      action_item_path(item) %>
+                  </span>
+                  <span class="float-right">
+                    <%= item.created_at.strftime("%b %-d, %Y") %>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="pb-3">
+              <div class="row pl-3 pr-3">
+                <div class="col-sm-12">
+                  <%= item.description %>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <% item.instruments.each do |inst| %>
+                  <span class="badge badge-pill badge-primary">
+                    <%= inst.tag %>
+                  </span>
+                <% end %>
+                <% item.equipment.each do |equip| %>
+                  <span class="badge badge-pill badge-primary">
+                    <%= equip.tag %>
+                  </span>
+                <% end %>
+                <% item.handvalves.each do |hv| %>
+                  <span class="badge badge-pill badge-primary">
+                    <%= hv.tag %>
+                  </span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
   <div class="col-sm-4">
     <div class="card card-box-shadow mb-5">
@@ -222,11 +365,21 @@
         <% @team_members.each do |member| %>
           <div class="row border-bottom pt-3 mt-0 pl-3 pr-3">
             <div class="col-sm-9">
-              <h5><%= member.user.present? ? member.user.full_name : "Currently Unassigned" %></h5>
-              <h6><%= member.role %>
+              <h6>
+                <%= member.user.present? ?
+                  member.user.full_name :
+                  "Currently Unassigned" %>
+              </h6>
+              <p>
+                <%= member.role %>
+              </p>
             </div>
             <div class="col-sm-3">
-              <%= link_to "Remove", team_member_path(member), method: :delete, class: 'btn btn-sm btn-outline-danger', id: "remove_team_member_#{member.id}" %>
+              <%= link_to "Remove",
+                team_member_path(member),
+                method: :delete,
+                class: 'btn btn-sm btn-outline-dark',
+                id: "remove_team_member_#{member.id}" %>
             </div>
           </div>
         <% end %>
