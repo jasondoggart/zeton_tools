@@ -140,6 +140,33 @@
                   </div>
                 </div>
               </div>
+              <div class="col-4">
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-outline-primary dropdown-toggle"
+                          type="button"
+                          id="area_dropdown_button"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false">
+                    Work Area
+                    <% if params[:with_area].present? %>
+                      <i class="fa fa-filter"></i>
+                    <% end %>
+                  </button>
+                  <div class="dropdown-menu"
+                       style="height: 200px; overflow: scroll;"
+                       aria-labelledby="area_dropdown_button">
+                    <%= link_to "Show All",
+                      project_rfis_path,
+                      class: 'dropdown-item' %>
+                    <% @work_areas.each do |area| %>
+                      <%= link_to area,
+                        project_rfis_path(:with_area => area),
+                        class: 'dropdown-item' %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

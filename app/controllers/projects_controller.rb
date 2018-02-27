@@ -105,6 +105,7 @@ class ProjectsController < ApplicationController
   def project_rfis
     @rfis = current_project.information_requests
     @rfis = @rfis.with_status(params[:with_status]) if params[:with_status].present?
+    @rfis = @rfis.with_area(params[:with_area]) if params[:with_area].present?
     if params[:sorted_by].present?
       @rfis = @rfis.sorted_by(params[:sorted_by])
     else
@@ -113,6 +114,7 @@ class ProjectsController < ApplicationController
     @sorted_by = params[:sorted_by] if params[:sorted_by].present?
     @rfis = @rfis.paginate(:page => params[:page], :per_page => 15)
     @open_rfis = current_project.information_requests.where(answered: 0)
+    @work_areas = @rfis.distinct.pluck(:area).sort
   end
 
   def project_documents
