@@ -1,4 +1,6 @@
 class HandvalvesController < ApplicationController
+  before_action :require_login
+  before_action :must_select_project
   def new
     @handvalve = Handvalve.new
   end

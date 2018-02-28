@@ -4,7 +4,7 @@ FactoryBot.define do
     phase "MyString"
     timing "MyString"
     file_location "MyString"
-    type ""
+    document_type "MyString"
     revision_name "MyString"
     revision_type "MyString"
     revision_frequency "MyString"

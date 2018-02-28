@@ -61,4 +61,34 @@ describe "Equipment" do
     click_link('back_to_equipment_list')
     expect(current_path).to eq(project_equipment_path)
   end
+
+  it 'redirects new_equipment to sign_in if not signed in' do
+    visit new_equipment_path
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects edit_equipment to sign_in if not signed in' do
+    equip = FactoryBot.create(:equipment)
+    visit edit_equipment_path(equip)
+    expect(current_path).to eq(sign_in_path)
+  end
+end
+
+describe 'current_project' do
+  before do
+    @user = FactoryBot.create(:user)
+    @project = FactoryBot.create(:project, user: @user)
+    sign_in_with(@user.email, @user.password)
+  end
+
+  it 'redirects new_equipment to root if no current_project' do
+    visit new_equipment_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'redirects edit_equipment to root if no current_project' do
+    equip = FactoryBot.create(:equipment)
+    visit edit_equipment_path(equip)
+    expect(current_path).to eq(root_path)
+  end
 end

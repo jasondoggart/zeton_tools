@@ -1,4 +1,6 @@
 class ActionItemsController < ApplicationController
+  before_action :require_login
+  before_action :must_select_project
   before_action :set_project, only: [:show, :edit, :update]
 
   def new

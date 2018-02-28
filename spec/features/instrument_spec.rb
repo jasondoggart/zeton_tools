@@ -84,3 +84,29 @@ describe 'Instruments' do
   end
 
 end
+
+describe 'current_project' do
+  before do
+    @user = FactoryBot.create(:user)
+    @project1 = FactoryBot.create(:project, user: @user)
+    sign_in_with(@user.email, @user.password)
+  end
+
+  it 'redirects to new_instrument to root_path if no current_project' do
+    visit new_instrument_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'redirects to edit_instrument to root_path if no current_project' do
+    inst = FactoryBot.create(:instrument, project: @project1)
+    visit edit_instrument_path(inst)
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'redirects to instrument to root_path if no current_project' do
+    inst = FactoryBot.create(:instrument, project: @project1)
+    visit instrument_path(inst)
+    expect(current_path).to eq(root_path)
+  end
+
+end

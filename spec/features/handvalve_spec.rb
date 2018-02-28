@@ -56,4 +56,34 @@ describe "Handvalve" do
     expect(current_path).to eq(project_handvalves_path)
     expect(@project.handvalves.count).to eq(before_count - 1)
   end
+
+  it 'redirects new_handvalve to sign in if not signed in' do
+    visit new_handvalve_path
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects edit_handvalve to sign in if not signed in' do
+    hv = FactoryBot.create(:handvalve)
+    visit edit_handvalve_path(hv)
+    expect(current_path).to eq(sign_in_path)
+  end
+end
+
+describe 'current_project' do
+  before do
+    @user = FactoryBot.create(:user)
+    @project = FactoryBot.create(:project, user: @user)
+    sign_in_with(@user.email, @user.password)
+  end
+
+  it 'redirects new_handvalve to root_path if no current_project' do
+    visit new_handvalve_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'redirects edit_handvalve to root_path if no current_project' do
+    hv = FactoryBot.create(:handvalve)
+    visit edit_handvalve_path(hv)
+    expect(current_path).to eq(root_path)
+  end
 end

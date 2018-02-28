@@ -42,6 +42,37 @@ describe "Document" do
     click_link("delete_document_#{@project.documents.first.id}")
     expect(current_path).to eq(project_documents_path)
     expect(@project.documents.count).to eq(before_count - 1)
-
   end
+
+  it 'redirects new_document to sign_in when not signed in' do
+    visit new_document_path
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects edit_document to sign_in when not signed in' do
+    doc = FactoryBot.create(:document, project: @project)
+    visit edit_document_path(doc)
+    expect(current_path).to eq(sign_in_path)
+  end
+
+end
+
+describe 'current_project' do
+  before do
+    @user = FactoryBot.create(:user)
+    @project = FactoryBot.create(:project, user: @user)
+    sign_in_with(@user.email, @user.password)
+  end
+
+  it 'redirects new_document to root when no current project' do
+    visit new_document_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'redirects edit_document to root when no current project' do
+    doc = FactoryBot.create(:document, project: @project)
+    visit edit_document_path(doc)
+    expect(current_path).to eq(root_path)
+  end
+
 end

@@ -1,9 +1,6 @@
 class InstrumentsController < ApplicationController
   before_action :require_login
-  def index
-    @instruments = Instrument.all
-  end
-
+  before_action :must_select_project
   def new
     @instrument = Instrument.new
   end

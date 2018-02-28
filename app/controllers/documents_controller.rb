@@ -1,5 +1,6 @@
 class DocumentsController < ApplicationController
   before_action :require_login
+  before_action :must_select_project
 
   def new
     @document = Document.new
