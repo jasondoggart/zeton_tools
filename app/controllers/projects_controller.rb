@@ -4,11 +4,17 @@ class ProjectsController < ApplicationController
   before_action :must_select_project, only: [
                                             :project_instruments,
                                             :project_instruments_metrics,
+                                            :project_instruments_excel,
                                             :project_equipment,
                                             :project_equipment_metrics,
+                                            :project_equipment_excel,
                                             :project_rfis,
+                                            :project_action_items,
                                             :project_documents,
-                                            :project_metrics_summary
+                                            :project_metrics,
+                                            :project_handvalves,
+                                            :project_handvalves_metrics,
+                                            :project_handvalves_excel
                                              ]
 
   def show
@@ -29,14 +35,16 @@ class ProjectsController < ApplicationController
       :with_loop
       ]) if params[:with_loop].present?
     if params[:sorted_by].present?
-      @instruments = @instruments.sorted_by(params[:sorted_by]) if params[:sorted_by].present?
+      @instruments = @instruments.
+        sorted_by(params[:sorted_by]) if params[:sorted_by].present?
     else
       @instruments = @instruments.order(type_code: :asc, loop: :asc)
     end
     @sorted_by = params[:sorted_by] if params[:sorted_by].present?
     @type_codes = @instruments.distinct.pluck(:type_code)
     @loops = @instruments.distinct.pluck(:loop).sort
-    @instruments = @instruments.paginate(:page => params[:page], :per_page => 10)
+    @instruments = @instruments.
+      paginate(:page => params[:page], :per_page => 10)
   end
 
   def project_instruments_excel
@@ -52,22 +60,27 @@ class ProjectsController < ApplicationController
 
   def project_instruments_metrics
     @instruments = current_project.instruments
-    @instruments = @instruments.with_type_code(params[:with_type_code]) if params[:with_type_code].present?
-    @instruments = @instruments.with_loop(params[:with_loop]) if params[:with_loop].present?
+    @instruments = @instruments.
+      with_type_code(params[:with_type_code]) if params[:with_type_code].present?
+    @instruments = @instruments.
+      with_loop(params[:with_loop]) if params[:with_loop].present?
     if params[:sorted_by].present?
-      @instruments = @instruments.sorted_by(params[:sorted_by]) if params[:sorted_by].present?
+      @instruments = @instruments.
+        sorted_by(params[:sorted_by]) if params[:sorted_by].present?
     else
       @instruments = @instruments.order(type_code: :asc, loop: :asc)
     end
     @sorted_by = params[:sorted_by] if params[:sorted_by].present?
     @type_codes = @instruments.distinct.pluck(:type_code)
     @loops = @instruments.distinct.pluck(:loop).sort
-    @instruments = @instruments.paginate(:page => params[:page], :per_page => 10)
+    @instruments = @instruments.
+      paginate(:page => params[:page], :per_page => 10)
   end
 
   def project_equipment
     @equipment = current_project.equipment
-    @equipment = @equipment.with_type(params[:with_type]) if params[:with_type].present?
+    @equipment = @equipment.
+      with_type(params[:with_type]) if params[:with_type].present?
     if params[:sorted_by].present?
       @equipment = @equipment.sorted_by(params[:sorted_by])
     else
@@ -91,7 +104,8 @@ class ProjectsController < ApplicationController
 
   def project_equipment_metrics
     @equipment = current_project.equipment
-    @equipment = @equipment.with_type(params[:with_type]) if params[:with_type].present?
+    @equipment = @equipment.
+      with_type(params[:with_type]) if params[:with_type].present?
     if params[:sorted_by].present?
       @equipment = @equipment.sorted_by(params[:sorted_by])
     else
@@ -104,7 +118,8 @@ class ProjectsController < ApplicationController
 
   def project_rfis
     @rfis = current_project.information_requests
-    @rfis = @rfis.with_status(params[:with_status]) if params[:with_status].present?
+    @rfis = @rfis.
+      with_status(params[:with_status]) if params[:with_status].present?
     @rfis = @rfis.with_area(params[:with_area]) if params[:with_area].present?
     if params[:sorted_by].present?
       @rfis = @rfis.sorted_by(params[:sorted_by])
@@ -123,8 +138,10 @@ class ProjectsController < ApplicationController
 
   def project_handvalves
     @handvalves = current_project.handvalves
-    @handvalves = @handvalves.with_type(params[:with_type]) if params[:with_type].present?
-    @handvalves = @handvalves.with_size(params[:with_size]) if params[:with_size].present?
+    @handvalves = @handvalves.
+      with_type(params[:with_type]) if params[:with_type].present?
+    @handvalves = @handvalves.
+      with_size(params[:with_size]) if params[:with_size].present?
     if params[:sorted_by].present?
       @handvalves = @handvalves.sorted_by(params[:sorted_by])
     else
@@ -149,8 +166,10 @@ class ProjectsController < ApplicationController
 
   def project_handvalves_metrics
     @handvalves = current_project.handvalves
-    @handvalves = @handvalves.with_type(params[:with_type]) if params[:with_type].present?
-    @handvalves = @handvalves.with_size(params[:with_size]) if params[:with_size].present?
+    @handvalves = @handvalves.
+      with_type(params[:with_type]) if params[:with_type].present?
+    @handvalves = @handvalves.
+      with_size(params[:with_size]) if params[:with_size].present?
     if params[:sorted_by].present?
       @handvalves = @handvalves.sorted_by(params[:sorted_by])
     else
@@ -164,16 +183,20 @@ class ProjectsController < ApplicationController
 
   def project_action_items
     @action_items = current_project.action_items
-    @action_items = @action_items.with_status(params[:with_status]) if params[:with_status].present?
-    @action_items = @action_items.with_area(params[:with_area]) if params[:with_area].present?
+    @action_items = @action_items.
+      with_status(params[:with_status]) if params[:with_status].present?
+    @action_items = @action_items.
+      with_area(params[:with_area]) if params[:with_area].present?
     if params[:sorted_by].present?
       @action_items = @action_items.sorted_by(params[:sorted_by])
     else
       @action_items = @action_items.order(status: :asc)
     end
     @sorted_by = params[:sorted_by] if params[:sorted_by].present?
-    @action_items = @action_items.paginate(:page => params[:page], :per_page => 15)
-    @open_action_items = current_project.information_requests.where(answered: 0)
+    @action_items = @action_items.
+      paginate(:page => params[:page], :per_page => 15)
+    @open_action_items = current_project.
+      information_requests.where(answered: 0)
     @work_areas = @action_items.distinct.pluck(:area).sort
   end
 

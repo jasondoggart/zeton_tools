@@ -55,4 +55,174 @@ describe "Project" do
     click_link("project_#{project.id}")
     visit project_metrics_path
   end
+
+  it 'redirects away from project show page if user is not signed in' do
+    project = FactoryBot.create(:project)
+    visit project_path(project)
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects away from project metrics page if user is not signed in' do
+    project = FactoryBot.create(:project)
+    visit project_metrics_path(project)
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects away from project_instruments if user is not signed in' do
+    visit project_instruments_path
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects away from project_instruments_excel if user is not signed in' do
+    visit project_instruments_excel_path
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects away from project_instruments_metrics if user is not signed in' do
+    visit project_instruments_path
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects away from project_equipment if user is not signed in' do
+    visit project_equipment_path
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects away from project_equipment_metrics if user is not signed in' do
+    visit project_equipment_metrics_path
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects away from project_equipment_excel if user is not signed in' do
+    visit project_equipment_excel_path
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects away from project_rfis if user is not signed in' do
+    visit project_rfis_path
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects away from project_documents if user is not signed in' do
+    visit project_documents_path
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects away from project_handvalves if user is not signed in' do
+    visit project_handvalves_path
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects away from project_handvalves_metrics if user is not signed in' do
+    visit project_handvalves_metrics_path
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects away from project_handvalves_excel if user is not signed in' do
+    visit project_handvalves_excel_path
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects away from new_project if user is not signed in' do
+    visit new_project_path
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects away from edit_project if user is not signed in' do
+    project = FactoryBot.create(:project)
+    visit edit_project_path(project)
+    expect(current_path).to eq(sign_in_path)
+  end
+
+end
+
+describe 'Project Session' do
+  before do
+    @user = FactoryBot.create(:user)
+    sign_in_with(@user.email, @user.password)
+    @project1 = FactoryBot.create(:project, user: @user)
+    @project2 = FactoryBot.create(:project, user: @user)
+  end
+
+  it 'redirects project_instruments to root if no current project' do
+    visit project_instruments_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'redirects project_instruments_metrics to root if no current project' do
+    visit project_instruments_metrics_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'redirects project_instruments_excel to root if no current project' do
+    visit project_instruments_excel_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'redirects project_equipment to root if no current project' do
+    visit project_equipment_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'redirects project_equipment_metrics to root if no current project' do
+    visit project_equipment_metrics_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'redirects project_equipment_excel to root if no current project' do
+    visit project_equipment_excel_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'redirects project_rfis to root if no current project' do
+    visit project_rfis_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'redirects project_action_items to root if no current project' do
+    visit project_action_items_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'redirects project_documents to root if no current project' do
+    visit project_documents_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'redirects project_metrics_summary to root if no current project' do
+    visit project_metrics_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'redirects project_handvalves to root if no current project' do
+    visit project_handvalves_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'redirects project_handvalves_metrics to root if no current project' do
+    visit project_handvalves_metrics_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'redirects project_handvalves_excel to root if no current project' do
+    visit project_handvalves_excel_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'updates current project if project_path for different project' do
+    visit root_path
+    click_link("project_#{@project1.id}")
+    expect(page.get_rack_session_key('project_id')).to eq(@project1.id)
+    visit project_path(@project2)
+    expect(page.get_rack_session_key('project_id')).to eq(@project2.id)
+  end
+
+  it 'updates current project if edit_project_path for different project' do
+    visit root_path
+    click_link("project_#{@project1.id}")
+    expect(page.get_rack_session_key('project_id')).to eq(@project1.id)
+    visit edit_project_path(@project2)
+    expect(page.get_rack_session_key('project_id')).to eq(@project2.id)
+  end
+
 end
