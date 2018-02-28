@@ -86,7 +86,7 @@ class ProjectsController < ApplicationController
       @equipment = @equipment.order(tag: :asc)
     end
     @sorted_by = params[:sorted_by] if params[:sorted_by].present?
-    @types = @equipment.distinct.pluck(:equipment_type).sort
+    @types = @equipment.pluck(:equipment_type).uniq.sort
     @equipment = @equipment.paginate(:page => params[:page], :per_page => 10)
   end
 
