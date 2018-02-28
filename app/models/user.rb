@@ -5,10 +5,6 @@ class User < ApplicationRecord
     foreign_key: "user_id"
   has_many :associated_projects, through: :team_memberships,
     source: :project
-  has_many :documents_to_prepare, class_name: "Document",
-    foreign_key: "prepared_by_id"
-  has_many :documents_to_receive, class_name: "Document",
-    foreign_key: "delivered_to_id"
   has_many :action_items, class_name: "ActionItem",
     foreign_key: "creator_id"
   has_many :assigned_actions, class_name: "ActionItem",

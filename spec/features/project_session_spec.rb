@@ -71,10 +71,4 @@ describe 'Project Session' do
     expect(current_path).to eq(root_path)
   end
 
-  it 'redirects to root path if a user tries to access the project_documents_path without current_project being set' do
-    sign_in_with(@user.email, @user.password)
-    visit root_path
-    visit project_documents_path
-    expect(current_path).to eq(root_path)
-  end
 end

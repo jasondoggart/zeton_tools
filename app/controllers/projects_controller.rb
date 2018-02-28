@@ -10,7 +10,6 @@ class ProjectsController < ApplicationController
                                             :project_equipment_excel,
                                             :project_rfis,
                                             :project_action_items,
-                                            :project_documents,
                                             :project_metrics,
                                             :project_handvalves,
                                             :project_handvalves_metrics,
@@ -132,9 +131,6 @@ class ProjectsController < ApplicationController
     @work_areas = @rfis.distinct.pluck(:area).sort
   end
 
-  def project_documents
-    @documents = current_project.documents
-  end
 
   def project_handvalves
     @handvalves = current_project.handvalves

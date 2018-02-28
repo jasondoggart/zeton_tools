@@ -32,8 +32,5 @@ RSpec.describe Project, type: :model do
       expect(@project).to_not be_valid
     end
 
-    it 'has documents created when the new project is created' do
-      expect(@project.documents.count).to be > 0
-    end
   end
 end

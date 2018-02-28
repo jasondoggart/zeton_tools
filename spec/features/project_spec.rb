@@ -103,11 +103,6 @@ describe "Project" do
     expect(current_path).to eq(sign_in_path)
   end
 
-  it 'redirects away from project_documents if user is not signed in' do
-    visit project_documents_path
-    expect(current_path).to eq(sign_in_path)
-  end
-
   it 'redirects away from project_handvalves if user is not signed in' do
     visit project_handvalves_path
     expect(current_path).to eq(sign_in_path)
@@ -181,11 +176,6 @@ describe 'Project Session' do
 
   it 'redirects project_action_items to root if no current project' do
     visit project_action_items_path
-    expect(current_path).to eq(root_path)
-  end
-
-  it 'redirects project_documents to root if no current project' do
-    visit project_documents_path
     expect(current_path).to eq(root_path)
   end
 

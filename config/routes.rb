@@ -22,9 +22,6 @@ Rails.application.routes.draw do
   get 'projects/rfis',
     to: 'projects#project_rfis',
     as: :project_rfis
-  get 'projects/documents',
-    to: 'projects#project_documents',
-    as: :project_documents
   get 'projects/metrics',
     to: 'projects#project_metrics',
     as: :project_metrics
@@ -50,7 +47,6 @@ Rails.application.routes.draw do
   resources :instruments
   resources :equipment
   resources :users, controller: :users, only: [:create, :show]
-  resources :documents
   resources :team_members
   resources :handvalves
   resources :project_instrument_imports
