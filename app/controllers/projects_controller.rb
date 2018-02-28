@@ -71,7 +71,7 @@ class ProjectsController < ApplicationController
     end
     @sorted_by = params[:sorted_by] if params[:sorted_by].present?
     @type_codes = @instruments.pluck(:type_code).uniq
-    @loops = @instruments.pluck(:loop).uniq.sort.
+    @loops = @instruments.pluck(:loop).uniq.sort
     @instruments = @instruments.
       paginate(:page => params[:page], :per_page => 10)
   end
