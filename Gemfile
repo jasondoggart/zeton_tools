@@ -22,7 +22,6 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'faker', '~> 1.8', '>= 1.8.7'
 end
 
 group :production do
@@ -44,3 +43,4 @@ gem 'rubyzip', '>= 1.2.1'
 gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
 gem 'axlsx_rails'
 gem 'roo', '~> 2.7', '>= 2.7.1'
+gem 'faker', '~> 1.8', '>= 1.8.7'
