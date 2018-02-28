@@ -71,4 +71,16 @@ describe 'Instruments' do
     click_link('back_to_instrument_list')
     expect(current_path).to eq(project_instruments_path)
   end
+
+  it 'redirects new_instrument to sign in if not signed in' do
+    visit new_instrument_path
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects edit_instrument to sign in if not signed in' do
+    inst = FactoryBot.create(:instrument)
+    visit edit_instrument_path(inst)
+    expect(current_path).to eq(sign_in_path)
+  end
+
 end
