@@ -135,8 +135,16 @@ describe 'current_project' do
     visit root_path
     click_link("project_#{@project1.id}")
     expect(page.get_rack_session_key('project_id')).to eq(@project1.id)
-    visit action_item_path(ai)
+    visit edit_action_item_path(ai)
     expect(page.get_rack_session_key('project_id')).to eq(@project2.id)
   end
 
+  it 'changes current_project to match action_item project when visiting show_action_item' do
+    ai = FactoryBot.create(:action_item, project: @project2)
+    visit root_path
+    click_link("project_#{@project1.id}")
+    expect(page.get_rack_session_key('project_id')).to eq(@project1.id)
+    visit action_item_path(ai)
+    expect(page.get_rack_session_key('project_id')).to eq(@project2.id)
+  end
 end

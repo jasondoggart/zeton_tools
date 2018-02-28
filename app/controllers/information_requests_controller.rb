@@ -1,5 +1,7 @@
 class InformationRequestsController < ApplicationController
   before_action :require_login
+  before_action :must_select_project
+  before_action :set_project, only: [:show, :edit, :update]
 
   def new
     @information_request = InformationRequest.new
@@ -72,5 +74,10 @@ class InformationRequestsController < ApplicationController
                                                   equipment_ids: [],
                                                   handvalve_ids: []
                                                  )
+    end
+    def set_project
+      if !(current_project == InformationRequest.find(params[:id]).project)
+        set_current_project(InformationRequest.find(params[:id]).project)
+      end
     end
 end

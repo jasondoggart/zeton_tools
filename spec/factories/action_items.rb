@@ -10,5 +10,6 @@ FactoryBot.define do
     project
     association :creator, factory: :user
     association :assigned_to, factory: :user
+    status 0
   end
 end

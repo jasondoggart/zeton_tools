@@ -82,4 +82,47 @@ describe "Information Request" do
     click_on('Add RFI')
     expect(@project.information_requests.last.equipment.last).to eq(Equipment.last)
   end
+
+  it 'redirects new_information_request to sign_in if not signed in' do
+    visit new_information_request_path
+    expect(current_path).to eq(sign_in_path)
+  end
+
+  it 'redirects edit-information_request to sign_in if not signed in' do
+    rfi = FactoryBot.create(:information_request)
+    visit edit_information_request_path(rfi)
+    expect(current_path).to eq(sign_in_path)
+  end
+end
+
+describe 'current_project' do
+  before do
+    @user = FactoryBot.create(:user)
+    @project1 = FactoryBot.create(:project, user: @user)
+    @project2 = FactoryBot.create(:project, user: @user)
+    sign_in_with(@user.email, @user.password)
+  end
+
+  it 'redirects new_information_request to root if no current_project' do
+    visit new_information_request_path
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'changes current_project to match rfi project when at edit rfi path' do
+    rfi = FactoryBot.create(:information_request, project: @project2)
+    visit root_path
+    click_link("project_#{@project1.id}")
+    expect(page.get_rack_session_key('project_id')).to eq(@project1.id)
+    visit edit_information_request_path(rfi)
+    expect(page.get_rack_session_key('project_id')).to eq(@project2.id)
+  end
+
+  it 'changes current_project to match rfi project when at rfi path' do
+    rfi = FactoryBot.create(:information_request, project: @project2)
+    visit root_path
+    click_link("project_#{@project1.id}")
+    expect(page.get_rack_session_key('project_id')).to eq(@project1.id)
+    visit information_request_path(rfi)
+    expect(page.get_rack_session_key('project_id')).to eq(@project2.id)
+  end
 end

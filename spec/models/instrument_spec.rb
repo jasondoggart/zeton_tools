@@ -103,4 +103,45 @@ RSpec.describe Instrument, type: :model do
 
   end
 
+  describe 'scopes' do
+    before do
+      @inst1 = FactoryBot.create(:instrument,
+                                 type_code: "FE",
+                                 loop: "1001",
+                                 scope: "a"
+                                )
+      @inst2 = FactoryBot.create(:instrument,
+                                 type_code: "XV",
+                                 loop: "2001",
+                                 scope: "b"
+                                )
+    end
+
+    it 'has a type_code scope' do
+      expect(Instrument.with_type_code("FE")).to include(@inst1)
+      expect(Instrument.with_type_code("FE")).to_not include(@inst2)
+    end
+
+    it 'has a loop scope' do
+      expect(Instrument.with_loop("1001")).to include(@inst1)
+      expect(Instrument.with_loop("1001")).to_not include(@inst2)
+    end
+
+    it 'can be sorted by type' do
+      expect(Instrument.sorted_by("type_asc").first.id).to eq(@inst1.id)
+      expect(Instrument.sorted_by("type_desc").first.id).to eq(@inst2.id)
+    end
+
+    it 'can be sorted by loop' do
+      expect(Instrument.sorted_by("loop_asc").first.id).to eq(@inst1.id)
+      expect(Instrument.sorted_by("loop_desc").first.id).to eq(@inst2.id)
+    end
+
+    it 'can be sorted by scope' do
+      expect(Instrument.sorted_by("scope_asc").first.id).to eq(@inst1.id)
+      expect(Instrument.sorted_by("scope_desc").first.id).to eq(@inst2.id)
+    end
+
+  end
+
 end

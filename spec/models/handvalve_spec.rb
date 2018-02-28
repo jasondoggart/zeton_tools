@@ -68,4 +68,34 @@ RSpec.describe Handvalve, type: :model do
     end
 
   end
+
+  describe 'scopes' do
+    before do
+      @hv1 = FactoryBot.create(:handvalve,
+                               valve_type: "Ball",
+                               size: "1 in.",
+                               tag: "HV-1001"
+                              )
+      @hv2 = FactoryBot.create(:handvalve,
+                               valve_type: "Needle",
+                               size: "2 in.",
+                               tag: "HV-2001"
+                              )
+    end
+
+    it 'has a type scope' do
+      expect(Handvalve.with_type("Ball")).to include(@hv1)
+      expect(Handvalve.with_type("Ball")).to_not include(@hv2)
+    end
+
+    it 'has  asize scope' do
+      expect(Handvalve.with_size("1 in.")).to include(@hv1)
+      expect(Handvalve.with_size("1 in.")).to_not include(@hv2)
+    end
+
+    it 'can be sorted by tag' do
+      expect(Handvalve.sorted_by("tag_asc").first.id).to eq(@hv1.id)
+      expect(Handvalve.sorted_by("tag_desc").first.id).to eq(@hv2.id)
+    end
+  end
 end

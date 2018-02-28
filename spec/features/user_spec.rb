@@ -21,4 +21,11 @@ describe 'User' do
     visit user_path(user)
   end
 
+  it 'redirects user show to sign_in if not signed in' do
+    user = FactoryBot.create(:user)
+    visit user_path(user)
+    expect(current_path).to eq(sign_in_path)
+
+  end
+
 end

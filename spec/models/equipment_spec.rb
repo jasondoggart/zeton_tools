@@ -101,4 +101,32 @@ RSpec.describe Equipment, type: :model do
     end
 
   end
+
+  describe 'scopes' do
+    before do
+      @equip1 = FactoryBot.create(:equipment,
+                                  equipment_type: "Vessel",
+                                  tag: "V-101"
+                                 )
+      @equip2 = FactoryBot.create(:equipment,
+                                  equipment_type: "Blower",
+                                  tag: "B-101"
+                                 )
+    end
+
+    it 'has a type scope' do
+      expect(Equipment.with_type("Vessel")).to include(@equip1)
+      expect(Equipment.with_type("Vessel")).to_not include(@equip2)
+    end
+
+    it 'can be sorted by type' do
+      expect(Equipment.sorted_by("type_asc").first.id).to eq(@equip2.id)
+      expect(Equipment.sorted_by("type_desc").first.id).to eq(@equip1.id)
+    end
+
+    it 'can be sorted by tag' do
+      expect(Equipment.sorted_by("tag_asc").first.id).to eq(@equip2.id)
+      expect(Equipment.sorted_by("tag_desc").first.id).to eq(@equip1.id)
+    end
+  end
 end

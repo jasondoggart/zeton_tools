@@ -41,4 +41,22 @@ describe 'Team Members' do
     expect(current_path).to eq(project_path(@project))
     expect(@project.team_members.count).to eq(before_count - 1)
   end
+
+  it 'redirects new_team_member to sign_in if not signed in' do
+    visit new_team_member_path
+    expect(current_path).to eq(sign_in_path)
+  end
+end
+
+describe 'current_project' do
+  before do
+    @user = FactoryBot.create(:user)
+    @project1 = FactoryBot.create(:project, user: @user)
+    sign_in_with(@user.email, @user.password)
+  end
+
+  it 'redirects new_team_member to root if no current_project' do
+    visit new_team_member_path
+    expect(current_path).to eq(root_path)
+  end
 end
