@@ -41,9 +41,20 @@ class ActionItemsController < ApplicationController
     @action_item = ActionItem.find(params[:id])
     @work_areas = WORK_AREAS
     @priorities = ActionItem::PRIORITIES
+    change_completion_date = action_item_status_changed?
+    if action_item_closed
+      completion_date = Time.now
+    end
+    if action_item_reopened
+      completion_date = nil
+    end
     if @action_item.update(action_item_params)
       respond_to do |format|
         format.html {
+          if change_completion_date
+            @action_item.completion_date = completion_date
+            @action_item.save!
+          end
           flash[:success] = "Action Item Updated"
           redirect_to project_action_items_path
         }
@@ -54,6 +65,30 @@ class ActionItemsController < ApplicationController
       render :edit
     end
 
+  end
+
+  def action_item_closed
+    if @action_item.status == 0 && params[:action_item][:status] == "1"
+      true
+    else
+      false
+    end
+  end
+
+  def action_item_reopened
+    if @action_item.status == 1 && params[:action_item][:status] == "0"
+      true
+    else
+      false
+    end
+  end
+
+  def action_item_status_changed?
+    if @action_item.status != params[:action_item][:status]
+      true
+    else
+      false
+    end
   end
 
   def destroy

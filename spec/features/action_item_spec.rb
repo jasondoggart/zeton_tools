@@ -115,6 +115,27 @@ describe "Action Item" do
     visit edit_action_item_path(ai)
     expect(current_path).to eq(sign_in_path)
   end
+
+  it 'sets completion date when status is changed to closed' do
+    visit root_path
+    click_link("project_#{@project.id}")
+    action_item = FactoryBot.create(:action_item, project: @project)
+    visit project_action_items_path
+    click_button("status_button_action_item_#{action_item.id}")
+    expect(action_item.reload.completion_date).to_not eq(nil)
+  end
+
+  it 'sets completion_date to nil when action_item reopened' do
+    visit root_path
+    click_link("project_#{@project.id}")
+    action_item = FactoryBot.create(:action_item,
+                                    project: @project,
+                                    status: 1,
+                                    completion_date: Time.now)
+    visit project_action_items_path
+    click_button("status_button_action_item_#{action_item.id}")
+    expect(action_item.reload.completion_date).to eq(nil)
+  end
 end
 
 describe 'current_project' do

@@ -1,4 +1,4 @@
 <%= form_for action_item, remote: true do |f| %>
   <%= f.hidden_field :status, value: rfi_status_update(action_item.status) %>
-  <%= f.button rfi_status_button(action_item.status), class: 'badge badge-pill badge-' + rfi_status_color(action_item.status) %>
+  <%= f.button rfi_status_button(action_item.status), class: 'badge badge-pill badge-' + rfi_status_color(action_item.status), id: "status_button_action_item_#{action_item.id}" %>
 <% end %>
