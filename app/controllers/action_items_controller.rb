@@ -49,12 +49,12 @@ class ActionItemsController < ApplicationController
       completion_date = nil
     end
     if @action_item.update(action_item_params)
+      if change_completion_date
+        @action_item.completion_date = completion_date
+        @action_item.save!
+      end
       respond_to do |format|
         format.html {
-          if change_completion_date
-            @action_item.completion_date = completion_date
-            @action_item.save!
-          end
           flash[:success] = "Action Item Updated"
           redirect_to project_action_items_path
         }
