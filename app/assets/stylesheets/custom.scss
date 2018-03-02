@@ -6,6 +6,11 @@ body {
 .navbar {
   margin-bottom: 20px;
   background-color: #001942;
+  height: 60px;
+}
+
+.main-body {
+  margin-top: 80px;
 }
 
 .main {
@@ -82,3 +87,23 @@ body {
 .card-box-shadow {
   box-shadow: 0 10px 6px -6px #777;
 }
+
+.sidenav {
+  top: 0;
+  bottom:0;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 60px;
+  right: 0;
+  background-color: #001942;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  transition: 0.5s;
+  color: #FFF;
+}
+
+.sidenav-open {
+  width: 250px;
+}
+
