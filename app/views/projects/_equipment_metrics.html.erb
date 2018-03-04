@@ -1,69 +1,25 @@
 <tr>
-  <td class="align-middle text-center"><%= link_to equipment.tag, equipment_path(equipment) %></td>
+  <td class="align-middle text-center">
+    <%=
+      link_to equipment.tag,
+        equipment_path(equipment)
+      %>
+  </td>
   <td class="align-middle text-center">PID Number</td>
-  <td class="align-middle text-center">
-    <div id="datasheet_complete_status_equipment_<%= equipment.id %>">
-      <%= render partial: 'equipment/datasheet_complete_status', locals: {equipment: equipment} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="datasheet_released_status_equipment_<%= equipment.id %>">
-      <%= render partial: 'equipment/datasheet_released_status', locals: {equipment: equipment} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="rfq_sent_status_equipment_<%= equipment.id %>">
-      <%= render partial: 'equipment/rfq_sent_status', locals: {equipment: equipment} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="po_placed_status_equipment_<%= equipment.id %>">
-      <%= render partial: 'equipment/po_placed_status', locals: {equipment: equipment} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="approval_drawing_received_status_equipment_<%= equipment.id %>">
-      <%= render partial: 'equipment/approval_drawing_received_status', locals: {equipment: equipment} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="approval_drawing_marked_up_status_equipment_<%= equipment.id %>">
-      <%= render partial: 'equipment/approval_drawing_marked_up_status', locals: {equipment: equipment} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="approval_drawing_sent_to_client_status_equipment_<%= equipment.id %>">
-      <%= render partial: 'equipment/approval_drawing_sent_to_client_status', locals: {equipment: equipment} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="approval_drawing_released_status_equipment_<%= equipment.id %>">
-      <%= render partial: 'equipment/approval_drawing_released_status', locals: {equipment: equipment} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="item_received_status_equipment_<%= equipment.id %>">
-      <%= render partial: 'equipment/item_received_status', locals: {equipment: equipment} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="item_released_status_equipment_<%= equipment.id %>">
-      <%= render partial: 'equipment/item_released_status', locals: {equipment: equipment} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="installed_by_mech_status_equipment_<%= equipment.id %>">
-      <%= render partial: 'equipment/installed_by_mech_status', locals: {equipment: equipment} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="grounded_by_elec_status_equipment_<%= equipment.id %>">
-      <%= render partial: 'equipment/grounded_by_elec_status', locals: {equipment: equipment} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="inspected_by_eng_status_equipment_<%= equipment.id %>">
-      <%= render partial: 'equipment/inspected_by_eng_status', locals: {equipment: equipment} %>
-    </div>
-  </td>
+  <% equipment.attributes.each do |name, value| %>
+    <% if equipment.metrics_attributes.include?(name) %>
+      <td class="align-middle text-center">
+        <div id="<%= name %>_status_equipment_<%= equipment.id %>">
+          <%=
+            render partial: 'shared/metric_status',
+              locals: {
+              record: equipment,
+              attribute: name,
+              value: value
+            }
+          %>
+        </div>
+      </td>
+    <% end %>
+  <% end %>
 </tr>

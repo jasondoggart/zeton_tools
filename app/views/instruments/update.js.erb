@@ -1,14 +1,14 @@
-$("#datasheet_submitted_status_instrument_<%= @instrument.id %>").html("<%= j render partial: 'datasheet_submitted_status', locals: {instrument: @instrument} %>");
-$("#datasheet_approved_status_instrument_<%= @instrument.id %>").html("<%= j render partial: 'datasheet_approved_status', locals: {instrument: @instrument} %>");
-$("#rfq_sent_status_instrument_<%= @instrument.id %>").html("<%= j render partial: 'rfq_sent_status', locals: {instrument: @instrument} %>");
-$("#po_placed_status_instrument_<%= @instrument.id %>").html("<%= j render partial: 'po_placed_status', locals: {instrument: @instrument} %>");
-$("#item_received_status_instrument_<%= @instrument.id %>").html("<%= j render partial: 'item_received_status', locals: {instrument: @instrument} %>");
-$("#item_released_status_instrument_<%= @instrument.id %>").html("<%= j render partial: 'item_released_status', locals: {instrument: @instrument} %>");
-$("#mounted_status_instrument_<%= @instrument.id %>").html("<%= j render partial: 'mounted_status', locals: {instrument: @instrument} %>");
-$("#plumbed_status_instrument_<%= @instrument.id %>").html("<%= j render partial: 'plumbed_status', locals: {instrument: @instrument} %>");
-$("#cable_pulled_status_instrument_<%= @instrument.id %>").html("<%= j render partial: 'cable_pulled_status', locals: {instrument: @instrument} %>");
-$("#cable_terminated_at_source_status_instrument_<%= @instrument.id %>").html("<%= j render partial: 'cable_terminated_at_source_status', locals: {instrument: @instrument} %>");
-$("#cable_terminated_at_dest_status_instrument_<%= @instrument.id %>").html("<%= j render partial: 'cable_terminated_at_dest_status', locals: {instrument: @instrument} %>");
-$("#continuity_tested_status_instrument_<%= @instrument.id %>").html("<%= j render partial: 'continuity_tested_status', locals: {instrument: @instrument} %>");
-$("#grounded_status_instrument_<%= @instrument.id %>").html("<%= j render partial: 'grounded_status', locals: {instrument: @instrument} %>");
-$("#eng_check_status_instrument_<%= @instrument.id %>").html("<%= j render partial: 'eng_check_status', locals: {instrument: @instrument} %>");
+<% @instrument.attributes.each do |name, value| %>
+  <% if @instrument.metrics_attributes.include?(name) %>
+    $("#<%= name %>_status_instrument_<%= @instrument.id %>").html(
+      "<%=
+        j render partial: 'shared/metric_status',
+          locals: {
+          record: @instrument,
+          attribute: name,
+          value: value
+        }
+      %>");
+  <% end %>
+<% end %>
+

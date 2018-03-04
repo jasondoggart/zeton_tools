@@ -17,110 +17,25 @@
           </h5>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <span class="float-sm-left">Datasheet Complete</span>
-            <span class="float-sm-right">
-              <div id="datasheet_complete_status_equipment_<%= @equipment.id %>">
-                <%= render partial: 'datasheet_complete_status', locals: {equipment: @equipment} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-sm-left">Datasheet Released</span>
-            <span class="float-sm-right">
-              <div id="datasheet_released_status_equipment_<%= @equipment.id %>">
-                <%= render partial: 'datasheet_released_status', locals: {equipment: @equipment} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-sm-left">RFQ Sent</span>
-            <span class="float-sm-right">
-              <div id="rfq_sent_status_equipment_<%= @equipment.id %>">
-                <%= render partial: 'rfq_sent_status', locals: {equipment: @equipment} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-sm-left">PO Placed</span>
-            <span class="float-sm-right">
-              <div id="po_placed_status_equipment_<%= @equipment.id %>">
-                <%= render partial: 'po_placed_status', locals: {equipment: @equipment} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-sm-left">Approval Drawing Received</span>
-            <span class="float-sm-right">
-              <div id="approval_drawing_received_status_equipment_<%= @equipment.id %>">
-                <%= render partial: 'approval_drawing_received_status', locals: {equipment: @equipment} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-sm-left">Approval Drawing Marked Up</span>
-            <span class="float-sm-right">
-              <div id="approval_drawing_marked_up_status_equipment_<%= @equipment.id %>">
-                <%= render partial: 'approval_drawing_marked_up_status', locals: {equipment: @equipment} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-sm-left">Approval Drawing Sent to Client</span>
-            <span class="float-sm-right">
-              <div id="approval_drawing_sent_to_client_status_equipment_<%= @equipment.id %>">
-                <%= render partial: 'approval_drawing_sent_to_client_status', locals: {equipment: @equipment} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-sm-left">Approval Drawing Released</span>
-            <span class="float-sm-right">
-              <div id="approval_drawing_released_status_equipment_<%= @equipment.id %>">
-                <%= render partial: 'approval_drawing_released_status', locals: {equipment: @equipment} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-sm-left">Item Received</span>
-            <span class="float-sm-right">
-              <div id="item_received_status_equipment_<%= @equipment.id %>">
-                <%= render partial: 'item_received_status', locals: {equipment: @equipment} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-sm-left">Item Released</span>
-            <span class="float-sm-right">
-              <div id="item_released_status_equipment_<%= @equipment.id %>">
-                <%= render partial: 'item_released_status', locals: {equipment: @equipment} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-sm-left">Installed by Mechanical</span>
-            <span class="float-sm-right">
-              <div id="installed_by_mech_status_equipment_<%= @equipment.id %>">
-                <%= render partial: 'installed_by_mech_status', locals: {equipment: @equipment} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-sm-left">Grounded by Electrical</span>
-            <span class="float-sm-right">
-              <div id="grounded_by_elec_status_equipment_<%= @equipment.id %>">
-                <%= render partial: 'grounded_by_elec_status', locals: {equipment: @equipment} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-sm-left">Inspected by Engineering</span>
-            <span class="float-sm-right">
-              <div id="inspected_by_eng_status_equipment_<%= @equipment.id %>">
-                <%= render partial: 'inspected_by_eng_status', locals: {equipment: @equipment} %>
-              </div>
-            </span>
-          </li>
+          <% @equipment.attributes.each do |name, value| %>
+            <% if @equipment.metrics_attributes.include?(name) %>
+              <li class="list-group-item">
+                <span class="float-sm-left"><%= name.humanize %></span>
+                <span class="float-sm-right">
+                  <div id="<%= name %>_status_equipment_<%= @equipment.id %>">
+                    <%=
+                      render partial: 'shared/metric_status',
+                        locals: {
+                        record: @equipment,
+                        attribute: name,
+                        value: value
+                      }
+                    %>
+                  </div>
+                </span>
+              </li>
+            <% end %>
+          <% end %>
         </ul>
       </div>
     </div>

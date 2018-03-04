@@ -1,74 +1,26 @@
 <tr>
-  <td class="align-middle text-center"><%= link_to instrument.tag, instrument_path(instrument), id: "show_instrument_#{instrument.id}" %></td>
+  <td class="align-middle text-center">
+    <%=
+      link_to instrument.tag,
+        instrument_path(instrument),
+        id: "show_instrument_#{instrument.id}"
+      %>
+  </td>
   <td class="align-middle text-center">PID number</td>
-  <td class="align-middle text-center">
-    <div id="datasheet_submitted_status_instrument_<%= instrument.id %>">
-      <%= render partial: 'instruments/datasheet_submitted_status', locals: {instrument: instrument} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="datasheet_approved_status_instrument_<%= instrument.id %>">
-      <%= render partial: 'instruments/datasheet_approved_status', locals: {instrument: instrument} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="rfq_sent_status_instrument_<%= instrument.id %>">
-      <%= render partial: 'instruments/rfq_sent_status', locals: {instrument: instrument} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="po_placed_status_instrument_<%= instrument.id %>">
-      <%= render partial: 'instruments/po_placed_status', locals: {instrument: instrument} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="item_received_status_instrument_<%= instrument.id %>">
-      <%= render partial: 'instruments/item_received_status', locals: {instrument: instrument} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="item_released_status_instrument_<%= instrument.id %>">
-      <%= render partial: 'instruments/item_released_status', locals: {instrument: instrument} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id='mounted_status_instrument_<%= instrument.id %>'>
-      <%= render partial: 'instruments/mounted_status', locals: {instrument: instrument} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="plumbed_status_instrument_<%= instrument.id %>">
-      <%= render partial: 'instruments/plumbed_status', locals: {instrument: instrument} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="cable_pulled_status_instrument_<%= instrument.id %>">
-      <%= render partial: 'instruments/cable_pulled_status', locals: {instrument: instrument} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="cable_terminated_at_source_status_instrument_<%= instrument.id %>">
-      <%= render partial: 'instruments/cable_terminated_at_source_status', locals: {instrument: instrument} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="cable_terminated_at_dest_status_instrument_<%= instrument.id %>">
-      <%= render partial: 'instruments/cable_terminated_at_dest_status', locals: {instrument: instrument} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="continuity_tested_status_instrument_<%= instrument.id %>">
-      <%= render partial: 'instruments/continuity_tested_status', locals: {instrument: instrument} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="grounded_status_instrument_<%= instrument.id %>">
-      <%= render partial: 'instruments/grounded_status', locals: {instrument: instrument} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="eng_check_status_instrument_<%= instrument.id %>">
-      <%= render partial: 'instruments/eng_check_status', locals: {instrument: instrument} %>
-    </div>
-  </td>
+  <% instrument.attributes.each do |name, value| %>
+    <% if instrument.metrics_attributes.include?(name) %>
+      <td class="align-middle text-center">
+        <div id="<%= name %>_status_instrument_<%= instrument.id %>">
+          <%=
+            render partial: 'shared/metric_status',
+              locals: {
+              record: instrument,
+              attribute: name,
+              value: value
+            }
+          %>
+        </div>
+      </td>
+    <% end %>
+  <% end %>
 </tr>

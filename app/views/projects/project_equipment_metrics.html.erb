@@ -61,19 +61,13 @@
               <tr class="border-top-0">
                 <th scope="col" class="text-center align-middle border-top-0">Tag</th>
                 <th scope="col" class="text-center align-middle border-top-0">PID</th>
-                <th scope="col" class="text-center align-middle border-top-0">Datasheet Complete</th>
-                <th scope="col" class="text-center align-middle border-top-0">Datasheet Approved</th>
-                <th scope="col" class="text-center align-middle border-top-0">RFQ Sent</th>
-                <th scope="col" class="text-center align-middle border-top-0">PO Placed</th>
-                <th scope="col" class="text-center align-middle border-top-0">Dwg Received</th>
-                <th scope="col" class="text-center align-middle border-top-0">Dwg Reviewed</th>
-                <th scope="col" class="text-center align-middle border-top-0">Client Review</th>
-                <th scope="col" class="text-center align-middle border-top-0">Dwg Approved</th>
-                <th scope="col" class="text-center align-middle border-top-0">Item Received</th>
-                <th scope="col" class="text-center align-middle border-top-0">Item Released</th>
-                <th scope="col" class="text-center align-middle border-top-0">Item Installed</th>
-                <th scope="col" class="text-center align-middle border-top-0">Item Grounded</th>
-                <th scope="col" class="text-center align-middle">Engineering Check</th>
+                <% @equipment.first.attributes.each do |name, value| %>
+                  <% if @equipment.first.metrics_attributes.include?(name) %>
+                    <th scope="col" class="text-center align-middle border-top-0">
+                      <%= name.humanize %>
+                    </th>
+                  <% end %>
+                <% end %>
               </tr>
             </thead>
             <tbody>

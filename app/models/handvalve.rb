@@ -28,4 +28,18 @@ class Handvalve < ApplicationRecord
   scope :with_size, -> (valve_size) {
     where(size: valve_size)
   }
+
+  def metrics_attributes
+    [
+      "valve_description_complete",
+      "valve_description_approved",
+      "po_placed",
+      "item_received",
+      "item_inspected_and_released",
+      "item_mounted",
+      "item_plumbed",
+      "item_checked_by_eng"
+    ]
+
+  end
 end

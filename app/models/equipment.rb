@@ -31,4 +31,22 @@ class Equipment < ApplicationRecord
   scope :with_type, -> (type) {
     where(equipment_type: type)
   }
+
+  def metrics_attributes
+    [
+      "datasheet_complete",
+      "datasheet_released",
+      "rfq_sent",
+      "po_placed",
+      "drawing_for_approval_received",
+      "drawing_for_approval_marked_up",
+      "drawing_for_approval_sent_to_client",
+      "drawing_for_approval_released_for_construction",
+      "item_received_at_zeton",
+      "item_inspected_and_released",
+      "item_installed_by_mech",
+      "item_grounded_by_elec",
+      "item_inspected_by_eng"
+    ]
+  end
 end

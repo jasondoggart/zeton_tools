@@ -1,44 +1,28 @@
 <tr>
-  <td class="align-middle text-center"><%= link_to handvalve.tag, handvalve_path(handvalve), id: "show_handvalve_#{handvalve.id}" %></td>
-  <td class="align-middle text-center">PID number</td>
   <td class="align-middle text-center">
-    <div id="description_complete_status_handvalve_<%= handvalve.id %>">
-      <%= render partial: 'handvalves/description_complete_status', locals: {handvalve: handvalve} %>
-    </div>
+    <%=
+      link_to handvalve.tag,
+        handvalve_path(handvalve),
+        id: "show_handvalve_#{handvalve.id}"
+      %>
   </td>
   <td class="align-middle text-center">
-    <div id="description_approved_status_handvalve_<%= handvalve.id %>">
-      <%= render partial: 'handvalves/description_approved_status', locals: {handvalve: handvalve} %>
-    </div>
+    PID number
   </td>
-  <td class="align-middle text-center">
-    <div id="po_placed_status_handvalve_<%= handvalve.id %>">
-      <%= render partial: 'handvalves/po_placed_status', locals: {handvalve: handvalve} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="item_received_status_handvalve_<%= handvalve.id %>">
-      <%= render partial: 'handvalves/item_received_status', locals: {handvalve: handvalve} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="item_released_status_handvalve_<%= handvalve.id %>">
-      <%= render partial: 'handvalves/item_released_status', locals: {handvalve: handvalve} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="item_mounted_status_handvalve_<%= handvalve.id %>">
-      <%= render partial: 'handvalves/item_mounted_status', locals: {handvalve: handvalve} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="item_plumbed_status_handvalve_<%= handvalve.id %>">
-      <%= render partial: 'handvalves/item_plumbed_status', locals: {handvalve: handvalve} %>
-    </div>
-  </td>
-  <td class="align-middle text-center">
-    <div id="checked_by_eng_status_handvalve_<%= handvalve.id %>">
-      <%= render partial: 'handvalves/checked_by_eng_status', locals: {handvalve: handvalve} %>
-    </div>
-  </td>
+  <% handvalve.attributes.each do |name, value| %>
+    <% if handvalve.metrics_attributes.include?(name) %>
+      <td class="align-middle text-center">
+        <div id="<%= name %>_status_handvalve_<%= handvalve.id %>">
+          <%=
+            render partial: 'shared/metric_status',
+              locals: {
+              record: handvalve,
+              attribute: name,
+              value: value
+            }
+          %>
+        </div>
+      </td>
+    <% end %>
+  <% end %>
 </tr>

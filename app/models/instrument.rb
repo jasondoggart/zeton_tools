@@ -50,4 +50,22 @@ class Instrument < ApplicationRecord
     type_code + "-" + loop
   end
 
+  def metrics_attributes
+    ["datasheet_submitted_for_approval",
+     "datasheet_approved",
+     "rfq_sent",
+     "po_placed",
+     "item_received",
+     "item_inspected_and_released",
+     "mounted_by_mechanical",
+     "plumbed_by_mechanical",
+     "cable_pulled",
+     "cable_terminated_at_source",
+     "cable_terminated_at_destination",
+     "continuity_tested",
+     "grounded_by_electrical",
+     "checked_by_eng"
+    ]
+  end
+
 end

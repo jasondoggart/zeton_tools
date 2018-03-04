@@ -82,20 +82,13 @@
               <tr>
                 <th scope="col" class="border-top-0 align-middle text-center">Tag</th>
                 <th scope="col" class="border-top-0 align-middle text-center">PID</th>
-                <th scope="col" class="border-top-0 align-middle text-center">Datasheet Submitted</th>
-                <th scope="col" class="border-top-0 align-middle text-center">Datasheet Approved</th>
-                <th scope="col" class="border-top-0 align-middle text-center">RFQ Sent</th>
-                <th scope="col" class="border-top-0 align-middle text-center">PO Placed</th>
-                <th scope="col" class="border-top-0 align-middle text-center">Received</th>
-                <th scope="col" class="border-top-0 align-middle text-center">Released</th>
-                <th scope="col" class="border-top-0 align-middle text-center">Mounted</th>
-                <th scope="col" class="border-top-0 align-middle text-center">Plumbed</th>
-                <th scope="col" class="border-top-0 align-middle text-center">Cable Pulled</th>
-                <th scope="col" class="border-top-0 align-middle text-center">Term Source</th>
-                <th scope="col" class="border-top-0 align-middle text-center">Term Dest</th>
-                <th scope="col" class="border-top-0 align-middle text-center">Continuity</th>
-                <th scope="col" class="border-top-0 align-middle text-center">Grounded</th>
-                <th scope="col" class="border-top-0 align-middle text-center">Engineering</th>
+                <% @instruments.first.attributes.each do |name, value| %>
+                  <% if @instruments.first.metrics_attributes.include?(name) %>
+                    <th scope="col" class="border-top-0 align-middle text-center">
+                      <%= name.humanize %>
+                    </th>
+                  <% end %>
+                <% end %>
               </tr>
             </thead>
             <tbody>

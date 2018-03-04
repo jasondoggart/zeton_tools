@@ -1,0 +1,7 @@
+<%= form_for record, remote: true do |f| %>
+  <%= f.hidden_field attribute.to_sym, value: metrics_increment(value) %>
+  <%=
+    f.button icon_select(value).html_safe,
+      class: 'metrics-button'
+    %>
+<% end %>

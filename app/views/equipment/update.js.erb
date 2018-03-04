@@ -1,13 +1,13 @@
-$("#datasheet_complete_status_equipment_<%= @equipment.id %>").html("<%= j render partial: 'datasheet_complete_status', locals: {equipment: @equipment} %>");
-$("#datasheet_released_status_equipment_<%= @equipment.id %>").html("<%= j render partial: 'datasheet_released_status', locals: {equipment: @equipment} %>");
-$("#rfq_sent_status_equipment_<%= @equipment.id %>").html("<%= j render partial: 'rfq_sent_status', locals: {equipment: @equipment} %>");
-$("#po_placed_status_equipment_<%= @equipment.id %>").html("<%= j render partial: 'po_placed_status', locals: {equipment: @equipment} %>");
-$("#approval_drawing_received_status_equipment_<%= @equipment.id %>").html("<%= j render partial: 'approval_drawing_received_status', locals: {equipment: @equipment} %>");
-$("#approval_drawing_marked_up_status_equipment_<%= @equipment.id %>").html("<%= j render partial: 'approval_drawing_marked_up_status', locals: {equipment: @equipment} %>");
-$("#approval_drawing_sent_to_client_status_equipment_<%= @equipment.id %>").html("<%= j render partial: 'approval_drawing_sent_to_client_status', locals: {equipment: @equipment} %>");
-$("#approval_drawing_released_status_equipment_<%= @equipment.id %>").html("<%= j render partial: 'approval_drawing_released_status', locals: {equipment: @equipment} %>");
-$("#item_received_status_equipment_<%= @equipment.id %>").html("<%= j render partial: 'item_received_status', locals: {equipment: @equipment} %>");
-$("#item_released_status_equipment_<%= @equipment.id %>").html("<%= j render partial: 'item_released_status', locals: {equipment: @equipment} %>");
-$("#installed_by_mech_status_equipment_<%= @equipment.id %>").html("<%= j render partial: 'installed_by_mech_status', locals: {equipment: @equipment} %>");
-$("#grounded_by_elec_status_equipment_<%= @equipment.id %>").html("<%= j render partial: 'grounded_by_elec_status', locals: {equipment: @equipment} %>");
-$("#inspected_by_eng_status_equipment_<%= @equipment.id %>").html("<%= j render partial: 'inspected_by_eng_status', locals: {equipment: @equipment} %>");
+<% @equipment.attributes.each do |name, value| %>
+  <% if @equipment.metrics_attributes.include?(name) %>
+    $("#<%= name %>_status_equipment_<%= @equipment.id %>").html(
+      "<%=
+        j render partial: 'shared/metric_status',
+          locals: {
+          record: @equipment,
+          attribute: name,
+          value: value
+        }
+      %>");
+  <% end %>
+<% end %>

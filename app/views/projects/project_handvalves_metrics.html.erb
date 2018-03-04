@@ -75,16 +75,19 @@
           <table class="mt-3 table table-hover table-fixed-tags">
             <thead>
               <tr>
-                <th scope="col" class="pl-0 pr-0 border-top-0 align-middle text-center">Tag</th>
-                <th scope="col" class="pl-0 pr-0 border-top-0 align-middle text-center">PID</th>
-                <th scope="col" class="pl-0 pr-0 border-top-0 align-middle text-center">Description<br /> Complete</th>
-                <th scope="col" class="pl-0 pr-0 border-top-0 align-middle text-center">Description <br />Approved</th>
-                <th scope="col" class="pl-0 pr-0 border-top-0 align-middle text-center">PO Placed</th>
-                <th scope="col" class="pl-0 pr-0 border-top-0 align-middle text-center">Received</th>
-                <th scope="col" class="pl-0 pr-0 border-top-0 align-middle text-center">Released</th>
-                <th scope="col" class="pl-0 pr-0 border-top-0 align-middle text-center">Mounted</th>
-                <th scope="col" class="pl-0 pr-0 border-top-0 align-middle text-center">Plumbed</th>
-                <th scope="col" class="pl-0 pr-0 border-top-0 align-middle text-center">Engineering</th>
+                <th scope="col" class="pl-0 pr-0 border-top-0 align-middle text-center">
+                  Tag
+                </th>
+                <th scope="col" class="pl-0 pr-0 border-top-0 align-middle text-center">
+                  PID
+                </th>
+                <% @handvalves.first.attributes.each do |name, value| %>
+                  <% if @handvalves.first.metrics_attributes.include?(name) %>
+                    <th scope="col" class="pl-0 pr-0 border-top-0 align-middle text-center">
+                      <%= name.humanize.titleize %>
+                    </th>
+                  <% end %>
+                <%end %>
               </tr>
             </thead>
             <tbody>

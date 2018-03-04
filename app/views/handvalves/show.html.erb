@@ -17,72 +17,27 @@
           </h5>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <span class="float-left">
-              Description Complete
-            </span>
-            <span class="float-right">
-              <div id="description_complete_status_handvalve_<%= @handvalve.id %>">
-                <%= render partial: 'description_complete_status', locals: {handvalve: @handvalve} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-left">Description Approved</span>
-            <span class="float-right">
-              <div id="description_approved_status_handvalve_<%= @handvalve.id %>">
-                <%= render partial: 'description_approved_status', locals: {handvalve: @handvalve} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-left">PO Placed</span>
-            <span class="float-right">
-              <div id="po_placed_status_handvalve_<%= @handvalve.id %>">
-                <%= render partial: 'po_placed_status', locals: {handvalve: @handvalve} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-left">Item Received</span>
-            <span class="float-right">
-              <div id="item_received_status_handvalve_<%= @handvalve.id %>">
-                <%= render partial: 'item_received_status', locals: {handvalve: @handvalve} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-left">Item Released</span>
-            <span class="float-right">
-              <div id="item_released_status_handvalve_<%= @handvalve.id %>">
-                <%= render partial: 'item_released_status', locals: {handvalve: @handvalve} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-left">Item Mounted</span>
-            <span class="float-right">
-              <div id="item_mounted_status_handvalve_<%= @handvalve.id %>">
-                <%= render partial: 'item_mounted_status', locals: {handvalve: @handvalve} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-left">Item Plumbed</span>
-            <span class="float-right">
-              <div id="item_plumbed_status_handvalve_<%= @handvalve.id %>">
-                <%= render partial: 'item_plumbed_status', locals: {handvalve: @handvalve} %>
-              </div>
-            </span>
-          </li>
-          <li class="list-group-item">
-            <span class="float-left">Checked By Engineer</span>
-            <span class="float-right">
-              <div id="checked_by_eng_status_handvalve_<%= @handvalve.id %>">
-                <%= render partial: 'checked_by_eng_status', locals: {handvalve: @handvalve} %>
-              </div>
-            </span>
-          </li>
+          <% @handvalve.attributes.each do |name, value| %>
+            <% if @handvalve.metrics_attributes.include?(name) %>
+              <li class="list-group-item">
+                <span class="float-left">
+                  <%= name.humanize %>
+                </span>
+                <span class="float-right">
+                  <div id="<%= name %>_status_handvalve_<%= @handvalve.id %>">
+                    <%=
+                      render partial: 'shared/metric_status',
+                        locals: {
+                        record: @handvalve,
+                        attribute: name,
+                        value: value
+                      }
+                    %>
+                  </div>
+                </span>
+              </li>
+            <% end %>
+          <% end %>
         </ul>
       </div>
     </div>
