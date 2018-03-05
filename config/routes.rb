@@ -52,4 +52,5 @@ Rails.application.routes.draw do
   resources :project_instrument_imports
   resources :project_equipment_imports
   resources :project_handvalve_imports
+  resources :project_extract_imports
 end

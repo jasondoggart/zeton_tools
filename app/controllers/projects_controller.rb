@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
       @instruments = @instruments.order(type_code: :asc, loop: :asc)
     end
     @sorted_by = params[:sorted_by] if params[:sorted_by].present?
-    @type_codes = @instruments.pluck(:type_code).uniq
+    @type_codes = @instruments.where.not(type_code: nil).pluck(:type_code).uniq
     @loops = @instruments.pluck(:loop).uniq.sort
     @instruments = @instruments.
       paginate(:page => params[:page], :per_page => 10)
@@ -144,8 +144,8 @@ class ProjectsController < ApplicationController
       @handvalves = @handvalves.order(tag: :asc)
     end
     @sorted_by = params[:sorted_by] if params[:sorted_by].present?
-    @types = @handvalves.pluck(:valve_type).uniq.sort
-    @sizes = @handvalves.pluck(:size).uniq.sort
+    @types = @handvalves.where.not(valve_type: nil).pluck(:valve_type).uniq.sort
+    @sizes = @handvalves.where.not(size: nil).pluck(:size).uniq.sort
     @handvalves = @handvalves.paginate(:page => params[:page], :per_page => 10)
   end
 

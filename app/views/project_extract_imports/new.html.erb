@@ -1,0 +1,77 @@
+<div class="row pl-5 pr-5 mb-3 mt-5">
+  <div class="col-sm-12">
+    <h3>
+      Import Instruments and Handvalves from Excel
+    </h3>
+  </div>
+</div>
+<div class="row pl-5 pr-5">
+  <div class="col-sm-12">
+    <div class="card card-box-shadow mb-3">
+      <div class="card-body">
+        <h5 class="card-title">
+          Instructions
+        </h5>
+        <div class="row">
+          <div class="col-sm-12">
+            <h6>
+              This tool allows you to upload instruments and handvalves from
+              the P&ID Extract tool.  (Equipment upload is pending)
+            </h6>
+            <p class="card-text">
+            Importing the extract results in the following new instruments and
+            handvalves being added to your project for each row in the 
+            spreadsheet. Notet that this will delete all existing instruments
+            and valves.
+            </p>
+            <p>
+            <h5 class="card-title mt-5">
+              Requirements
+            </h5>
+            <p>The following are required for all instruments</p>
+            <ul>
+              <li>An instrument type (FIT, PIT, LV, etc)</li>
+              <li>A loop number (this can be a temporary number, or "XXXX")</li>
+            </ul>
+            <p>The following are required for all handvalves</p>
+            <ul>
+              <li>A tag number</li>
+            </ul>
+            <h5 class="card-title mt-5">
+              Add File
+            </h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <%= form_for @project_extract_import do |f| %>
+              <% if @project_extract_import.errors.any? %>
+                <div class="alert alert-warning">
+                  <%= pluralize(@project_extract_import.errors.count, 'error') %> stopped the import from proceeding
+                  <ul>
+                    <%= @project_extract_import.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <%= f.file_field :file %>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-sm-12">
+                    <%= f.hidden_field :project, value: current_project.id %>
+                    <%= f.submit "Import XLSX", class: 'btn btn-outline-primary' %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
