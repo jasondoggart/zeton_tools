@@ -15,14 +15,14 @@
 
   <body>
     <%= render 'layouts/navigation' %>
-    <div id="flash">
-      <% flash.each do |key, value| -%>
-        <div class="alert alert-<%= key %>" id="flash_<%= key %>">
-          <%= value %>
-        </div>
-      <% end %>
-    </div>
     <div class="main-body">
+      <div id="flash">
+        <% flash.each do |key, value| -%>
+          <div class="alert alert-<%= key %>" id="flash_<%= key %>">
+            <%= value %>
+          </div>
+        <% end %>
+      </div>
       <%= yield %>
     </div>
     <% if signed_in? %>
