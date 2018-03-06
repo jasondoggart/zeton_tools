@@ -5,281 +5,300 @@
     </h3>
   </div>
 </div>
-<div class="row pl-5 pr-5">
-  <div class="col-sm-3">
-    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-      <div class="col-sm-12 h3 text-info">
-        <i class="fa fa-hashtag"></i>
-      </div>
-      <div class="col-sm-12">
-        <h2>
-          <%= @instruments.count %>
-        </h2>
-      </div>
-      <div class="col-sm-12 text-muted">
-        Total Instruments
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-3">
-    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-      <div class="col-sm-12 h3 text-warning">
-        <i class="fa fa-check"></i>
-      </div>
-      <div class="col-sm-12">
-        <h2>
-          <%= po_placed_percent.to_f.nan? ? "0" : po_placed_percent.round(0) %>%
-        </h2>
-      </div>
-      <div class="col-sm-12 text-muted">
-        Purchased
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-3">
-    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-      <div class="col-sm-12 h3 text-success">
-        <i class="fa fa-wrench"></i>
-      </div>
-      <div class="col-sm-12">
-        <h2>
-          <%= cable_terminated_at_destination_percent.to_f.nan? ?
-            "0" : cable_terminated_at_destination_percent.round(0) %>%
-        </h2>
-      </div>
-      <div class="col-sm-12 text-muted">
-        Installed and Wired
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-3">
-    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-      <div class="col-sm-12 h1 text-info">
-        <%= link_to '<i class="fa fa-plus"></i>'.html_safe,
-          new_instrument_path,
-          id: "new_instrument_link" %>
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="row pl-5 pr-5">
-  <div class="col-sm-12">
-    <div class="card card-box-shadow mb-3">
-      <div class="card-body mt-0">
-        <div class="dropdown mt-3 mb-3">
-          <button class="btn btn-outline-primary dropdown-toggle"
+  <div class="col-sm-2">
+    <h5 class="text-muted">
+      Sort by
+    </h5>
+    <div class="dropdown">
+      <button class="btn btn-outline-primary dropdown-toggle"
+              type="button"
+              id="loop_dropdown_button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false">
+        Select...
+      </button>
+      <div class="dropdown-menu"
+           style="height: 200px;
+           overflow: scroll;"
+           aria-labelledby="loop_dropdown_button">
+        <%=
+          link_to 'Type',
+            request.query_parameters.merge(
+              :sorted_by => 'type_' + sort_direction(@sorted_by)
+          ),
+          class: 'dropdown-item'
+        %>
+        <%=
+          link_to 'Loop',
+            request.query_parameters.merge(
+              :sorted_by => 'loop_' + sort_direction(@sorted_by)
+          ),
+          class: 'dropdown-item'
+        %>
+        <%=
+          link_to 'Scope',
+            project_instruments_path(
+              :sorted_by => 'scope_' + sort_direction(@sorted_by)
+          ),
+          class: 'dropdown-item'
+        %>
+      </div>
+    </div>
+    <h5 class="text-muted mt-3">
+      Filters
+    </h5>
+    <div class="row">
+      <div class="col-12">
+        <%=
+          link_to 'Clear all',
+            project_instruments_path(
+              :sorted_by => 'type_code asc'
+          ),
+          class: 'text-muted'
+        %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="dropdown mt-2">
+          <button class="btn btn-sm btn-outline-primary dropdown-toggle"
                   type="button"
-                  id="loop_dropdown_button"
+                  id="type_code_dropdown_button"
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false">
-            Sort By
+            Type
+            <% if params[:with_type_code].present? %>
+              <i class="fa fa-filter"></i>
+            <% end %>
           </button>
           <div class="dropdown-menu"
                style="height: 200px;
                overflow: scroll;"
-               aria-labelledby="loop_dropdown_button">
-            <%= link_to 'Type',
-              request.query_parameters.merge(
-                :sorted_by => 'type_' + sort_direction(@sorted_by)
-            ),
-            class: 'dropdown-item' %>
-          <%= link_to 'Loop',
-            request.query_parameters.merge(
-              :sorted_by => 'loop_' + sort_direction(@sorted_by)
-          ),
-          class: 'dropdown-item' %>
-        <%= link_to 'Scope',
-          project_instruments_path(
-            :sorted_by => 'scope_' + sort_direction(@sorted_by)
-        ),
-        class: 'dropdown-item' %>
+               aria-labelledby="type_code_dropdown_button">
+            <%=
+              link_to "Show All",
+                project_instruments_path(
+                  :with_type_code => nil
+              ),
+              class: 'dropdown-item'
+            %>
+          <% @type_codes.each do |type| %>
+            <%=
+              link_to type,
+                request.query_parameters.merge(
+                  :with_type_code => type
+              ),
+              class: "dropdown-item"
+            %>
+        <% end %>
           </div>
         </div>
-        <a class="btn btn-outline-primary"
-           data-toggle="collapse"
-           href="#collapseExample"
-           role="button"
-           aria-expanded="false"
-           aria-controls="collapseExample">
-          Filters
-          <span class="ml-3"><i class="fa fa-caret-down"></i></span>
-        </a>
-        <%= link_to 'Download as excel <i class="fa fa-download"></i>'.html_safe,
-          project_instruments_excel_path(format: :xlsx),
-          class: 'btn btn-outline-primary' %>
-        <%= link_to 'Upload from excel <i class="fa fa-upload"></i>'.html_safe,
-          new_project_instrument_import_path,
-          class: 'btn btn-outline-primary' %>
-        <div class="collapse" id="collapseExample">
-          <div class="card card-body">
-            <div class="row">
-              <div class="col-4">
-                <%= link_to 'Clear all',
-                  project_instruments_path(
-                    :sorted_by => 'type_code asc'
-                ),
-                class: 'btn btn-outline-primary btn-sm' %>
-              </div>
-              <div class="col-4">
-                <div class="dropdown">
-                  <button class="btn btn-sm btn-outline-primary dropdown-toggle"
-                          type="button"
-                          id="type_code_dropdown_button"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false">
-                    Type
-                    <% if params[:with_type_code].present? %>
-                      <i class="fa fa-filter"></i>
-                    <% end %>
-                  </button>
-                  <div class="dropdown-menu"
-                       style="height: 200px;
-                       overflow: scroll;"
-                       aria-labelledby="type_code_dropdown_button">
-                       <%= link_to "Show All",
-                         project_instruments_path(
-                           :with_type_code => nil
-                       ),
-                       class: 'dropdown-item' %>
-                    <% @type_codes.each do |type| %>
-                      <%= link_to type,
-                        request.query_parameters.merge(
-                          :with_type_code => type
-                      ),
-                      class: "dropdown-item" %>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="dropdown">
-                  <button class="btn-sm btn btn-outline-primary dropdown-toggle"
-                          type="button"
-                          id="loop_dropdown_button"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false">
-                    Loop
-                    <% if params[:with_loop].present? %>
-                      <i class="fa fa-filter"></i>
-                    <% end %>
-                  </button>
-                  <div class="dropdown-menu"
-                       style="height: 200px;
-                       overflow: scroll;"
-                       aria-labelledby="loop_dropdown_button">
-                    <%= link_to "Show All",
-                      project_instruments_path(
-                        :with_loop => nil
-                    ),
-                    class: 'dropdown-item' %>
-                    <% @loops.each do |loop_num| %>
-                      <%= link_to loop_num,
-                        project_instruments_path(
-                          :with_loop => loop
-                      ),
-                      class: "dropdown-item" %>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-4">
+        <div class="row">
+          <div class="col-12">
+            <div class="dropdown mt-2">
+              <button class="btn-sm btn btn-outline-primary dropdown-toggle"
+                      type="button"
+                      id="loop_dropdown_button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false">
+                Loop
+                <% if params[:with_loop].present? %>
+                  <i class="fa fa-filter"></i>
+                <% end %>
+              </button>
+              <div class="dropdown-menu"
+                   style="height: 200px;
+                   overflow: scroll;"
+                   aria-labelledby="loop_dropdown_button">
+                <%=
+                  link_to "Show All",
+                    project_instruments_path(
+                      :with_loop => nil
+                  ),
+                  class: 'dropdown-item'
+                %>
+              <% @loops.each do |loop_num| %>
+                <%=
+                  link_to loop_num,
+                    project_instruments_path(
+                      :with_loop => loop
+                  ),
+                  class: "dropdown-item"
+                %>
+            <% end %>
               </div>
             </div>
           </div>
+        </div>
+        <h5 class="text-muted mt-3">
+          Actions
+        </h5>
+        <div class-"row">
+          <%=
+            link_to 'Download as excel <i class="fa fa-download"></i>'.html_safe,
+              project_instruments_excel_path(format: :xlsx),
+              class: 'btn btn-outline-primary mt-2'
+            %>
+          <%=
+            link_to 'Upload from excel <i class="fa fa-upload"></i>'.html_safe,
+              new_project_instrument_import_path,
+              class: 'btn btn-outline-primary mt-2'
+            %>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="row pl-5 pr-5">
-  <div class="col-sm-12">
-    <div class="card card-box-shadow mb-5">
-      <div class="card-body mt-0">
-        <% @instruments.each do |inst| %>
-          <div class="border-bottom pb-3">
-            <div class="pt-3 mt-0">
-              <div class="row pl-3 pr-3">
-                <div class="col-sm-12">
-                  <h5 class="mb-0">
-                    <%= link_to inst.tag,
-                      instrument_path(inst),
-                      id: "show_instrument_#{inst.id}" %>
-                  </h5>
-                  <span class="badge badge-pill badge-primary">
-                    710-39-110
-                  </span>
-                  <span class="badge badge-pill badge-info">
-                    <%= inst.scope %>
-                  </span>
+  <div class="col-sm-10">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+          <div class="col-sm-12 h3 text-info">
+            <i class="fa fa-hashtag"></i>
+          </div>
+          <div class="col-sm-12">
+            <h2>
+              <%= @instruments.count %>
+            </h2>
+          </div>
+          <div class="col-sm-12 text-muted">
+            Total Instruments
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+          <div class="col-sm-12 h3 text-warning">
+            <i class="fa fa-check"></i>
+          </div>
+          <div class="col-sm-12">
+            <h2>
+              <%=
+                po_placed_percent.to_f.nan? ?
+                  "0" :
+                  po_placed_percent.round(0)
+              %>%
+            </h2>
+          </div>
+          <div class="col-sm-12 text-muted">
+            Purchased
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+          <div class="col-sm-12 h3 text-success">
+            <i class="fa fa-wrench"></i>
+          </div>
+          <div class="col-sm-12">
+            <h2>
+              <%= cable_terminated_at_destination_percent.to_f.nan? ?
+                "0" : cable_terminated_at_destination_percent.round(0) %>%
+            </h2>
+          </div>
+          <div class="col-sm-12 text-muted">
+            Installed and Wired
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+          <div class="col-sm-12 h1 text-info">
+            <%= link_to '<i class="fa fa-plus"></i>'.html_safe,
+              new_instrument_path,
+              id: "new_instrument_link" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-box-shadow mb-5">
+          <div class="card-body mt-0">
+            <% @instruments.each do |inst| %>
+              <div class="border-bottom pb-3">
+                <div class="pt-3 mt-0">
+                  <div class="row pl-3 pr-3">
+                    <div class="col-sm-12">
+                      <h5 class="mb-0">
+                        <%= link_to inst.tag,
+                          instrument_path(inst),
+                          id: "show_instrument_#{inst.id}" %>
+                      </h5>
+                      <span class="badge badge-pill badge-primary">
+                        710-39-110
+                      </span>
+                      <span class="badge badge-pill badge-info">
+                        <%= inst.scope %>
+                      </span>
+                    </div>
+                  </div>
+                  <dl class="row pl-3 pr-3 pt-3">
+                    <dt class="col-sm-3">
+                    Location
+                    </dt>
+                    <dd class="col-sm-9">
+                    Skid <%= inst.zeton_skid_number %>,
+                    Level <%= inst.zeton_skid_level %>
+                    </dd>
+                    <dt class="col-sm-3">
+                    Manufacturer
+                    </dt>
+                    <dd class="col-sm-9">
+                    <%= inst.manufacturer %>
+                    </dd>
+                    <dt class="col-sm-3">
+                    Model
+                    </dt>
+                    <dd class="col-sm-9">
+                    <%= inst.model %>
+                    </dd>
+                    <dt class="col-sm-3">
+                    Process Connection
+                    </dt>
+                    <dd class="col-sm-9">
+                    <%= inst.process_connection %>
+                    </dd>
+                    <dt class="col-sm-3">
+                    MOC
+                    </dt>
+                    <dd class="col-sm-9">
+                    <%= inst.material_of_construction %>
+                    </dd>
+                    <dt class="col-sm-3">
+                    I/O Type
+                    </dt>
+                    <dd class="col-sm-9">
+                    <%= inst.dcs_io_type %>
+                    </dd>
+                    <dt class="col-sm-3">
+                    Range
+                    </dt>
+                    <dd class="col-sm-9">
+                    <%= inst.range %>
+                    </dd>
+                    <dt class="col-sm-3">
+                    Zeton PO
+                    </dt>
+                    <dd class="col-sm-9">
+                    <%= inst.zeton_po %>
+                    </dd>
+                  </dl>
                 </div>
               </div>
-              <dl class="row pl-3 pr-3 pt-3">
-                <dt class="col-sm-3">
-                  Location
-                </dt>
-                <dd class="col-sm-9">
-                Skid <%= inst.zeton_skid_number %>,
-                Level <%= inst.zeton_skid_level %>
-                </dd>
-                <dt class="col-sm-3">
-                  Manufacturer
-                </dt>
-                <dd class="col-sm-9">
-                <%= inst.manufacturer %>
-                </dd>
-                <dt class="col-sm-3">
-                  Model
-                </dt>
-                <dd class="col-sm-9">
-                <%= inst.model %>
-                </dd>
-                <dt class="col-sm-3">
-                  Process Connection
-                </dt>
-                <dd class="col-sm-9">
-                <%= inst.process_connection %>
-                </dd>
-                <dt class="col-sm-3">
-                  MOC
-                </dt>
-                <dd class="col-sm-9">
-                <%= inst.material_of_construction %>
-                </dd>
-                <dt class="col-sm-3">
-                  I/O Type
-                </dt>
-                <dd class="col-sm-9">
-                <%= inst.dcs_io_type %>
-                </dd>
-                <dt class="col-sm-3">
-                  Range
-                </dt>
-                <dd class="col-sm-9">
-                <%= inst.range %>
-                </dd>
-                <dt class="col-sm-3">
-                  Zeton PO
-                </dt>
-                <dd class="col-sm-9">
-                <%= inst.zeton_po %>
-                </dd>
-              </dl>
-            </div>
+            <% end %>
           </div>
-        <% end %>
-      </div>
-      <div class="row pl-5 pr-5">
-        <%= will_paginate(
-          @instruments,
-          :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer
-        ) %>
+          <div class="row pl-5 pr-5">
+            <%= will_paginate(
+              @instruments,
+              :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer
+            ) %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

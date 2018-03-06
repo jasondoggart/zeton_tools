@@ -6,174 +6,299 @@
   </div>
 </div>
 <div class="row pl-5 pr-5">
-  <div class="col-sm-3">
-    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-      <div class="col-sm-12 h3 text-info">
-        <i class="fa fa-hashtag"></i>
-      </div>
-      <div class="col-sm-12">
-        <h2>
-          <%= @handvalves.count %>
-        </h2>
-      </div>
-      <div class="col-sm-12 text-muted">
-        Total Handvalves
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-3">
-    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-      <div class="col-sm-12 h3 text-warning">
-        <i class="fa fa-check"></i>
-      </div>
-      <div class="col-sm-12">
-        <h2>
-          <%= handvalve_po_placed_percent.to_f.nan? ?
-            "0" : handvalve_po_placed_percent.round(0) %>%
-        </h2>
-      </div>
-      <div class="col-sm-12 text-muted">
-        Purchased
+  <div class="col-sm-2">
+    <h5 class="text-muted">
+      Sort by
+    </h5>
+    <div class="dropdown">
+      <button class="btn-sm btn btn-outline-primary dropdown-toggle"
+              type="button"
+              id="loop_dropdown_button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false">
+        Select...
+      </button>
+      <div class="dropdown-menu"
+           style="height: 200px;
+           overflow: scroll;"
+           aria-labelledby="loop_dropdown_button">
+        <%=
+          link_to 'Tag',
+            request.query_parameters.merge(
+              :sorted_by => 'tag_' + sort_direction(@sorted_by)
+            ),
+            class: 'dropdown-item'
+        %>
       </div>
     </div>
-  </div>
-  <div class="col-sm-3">
-    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-      <div class="col-sm-12 h3 text-success">
-        <i class="fa fa-wrench"></i>
-      </div>
-      <div class="col-sm-12">
-        <h2>
-          <%= handvalve_item_plumbed_percent.to_f.nan? ?
-            "0" : handvalve_item_plumbed_percent.round(0) %>%
-        </h2>
-      </div>
-      <div class="col-sm-12 text-muted">
-        Installed
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-3">
-    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-      <div class="col-sm-12 h1 text-info">
-        <%= link_to '<i class="fa fa-plus"></i>'.html_safe,
-          new_handvalve_path,
-          id: "new_handvalve_link" %>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row pl-5 pr-5">
-  <div class="col-sm-12">
-    <div class="card card-box-shadow mb-3">
-      <div class="card-body mt-0">
-        <div class="dropdown mt-3 mb-3">
-          <button class="btn btn-outline-primary dropdown-toggle"
+    <h5 class="text-muted mt-3">
+      Filters
+    </h5>
+    <%=
+      link_to 'Clear all',
+        project_handvalves_path(
+          :sorted_by => 'tag asc'
+      ),
+      class: 'text-muted'
+    %>
+    <div class="row">
+      <div class="col-12">
+        <div class="dropdown mt-2">
+          <button class="btn btn-sm btn-outline-primary dropdown-toggle"
                   type="button"
-                  id="loop_dropdown_button"
+                  id="type_code_dropdown_button"
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false">
-            Sort By
+            Type
+            <% if params[:with_type].present? %>
+              <i class="fa fa-filter"></i>
+            <% end %>
           </button>
           <div class="dropdown-menu"
                style="height: 200px;
                overflow: scroll;"
-               aria-labelledby="loop_dropdown_button">
-            <%= link_to 'Tag',
-              request.query_parameters.merge(
-                :sorted_by => 'tag_' + sort_direction(@sorted_by)
+               aria-labelledby="type_code_dropdown_button">
+            <%= link_to "Show All",
+              project_handvalves_path(
+                :with_type => nil
             ),
             class: 'dropdown-item' %>
+          <% @types.each do |type| %>
+            <%= link_to type,
+              request.query_parameters.merge(
+                :with_type => type
+            ),
+            class: "dropdown-item" %>
+        <% end %>
           </div>
         </div>
-        <a class="btn btn-outline-primary"
-           data-toggle="collapse"
-           href="#collapseExample"
-           role="button"
-           aria-expanded="false"
-           aria-controls="collapseExample">
-          Filters
-          <span class="ml-3"><i class="fa fa-caret-down"></i></span>
-        </a>
+        <div class="row">
+          <div class="col-12">
+            <div class="dropdown mt-2">
+              <button class="btn-sm btn btn-outline-primary dropdown-toggle"
+                      type="button"
+                      id="loop_dropdown_button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false">
+                Size
+                <% if params[:with_size].present? %>
+                  <i class="fa fa-filter"></i>
+                <% end %>
+              </button>
+              <div class="dropdown-menu"
+                   style="height: 200px;
+                   overflow: scroll;"
+                   aria-labelledby="loop_dropdown_button">
+                <%= link_to "Show All",
+                  project_handvalves_path(
+                    :with_size => nil
+                ),
+                class: 'dropdown-item' %>
+              <% @sizes.each do |size| %>
+                <%= link_to size,
+                  project_handvalves_path(
+                    :with_size => size
+                ),
+                class: "dropdown-item" %>
+            <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h5 class="text-muted mt-3">
+      Actions
+    </h5>
+    <div class="row">
+      <div class="col-12">
         <%= link_to 'Download as Excel <i class="fa fa-download"></i>'.html_safe,
           project_handvalves_excel_path(format: :xlsx),
-          class: 'btn btn-outline-primary' %>
+          class: 'btn-sm btn btn-outline-primary' %>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-12">
         <%= link_to 'Upload from Excel <i class="fa fa-upload"></i>'.html_safe,
           new_project_handvalve_import_path,
-          class: 'btn btn-outline-primary' %>
-        <div class="collapse" id="collapseExample">
-          <div class="card card-body">
-            <div class="row">
-              <div class="col-4">
-                <%= link_to 'Clear all',
-                  project_handvalves_path(
-                    :sorted_by => 'tag asc'
+          class: 'btn-sm btn btn-outline-primary' %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-10">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+          <div class="col-sm-12 h3 text-info">
+            <i class="fa fa-hashtag"></i>
+          </div>
+          <div class="col-sm-12">
+            <h2>
+              <%= @handvalves.count %>
+            </h2>
+          </div>
+          <div class="col-sm-12 text-muted">
+            Total Handvalves
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+          <div class="col-sm-12 h3 text-warning">
+            <i class="fa fa-check"></i>
+          </div>
+          <div class="col-sm-12">
+            <h2>
+              <%= handvalve_po_placed_percent.to_f.nan? ?
+                "0" : handvalve_po_placed_percent.round(0) %>%
+            </h2>
+          </div>
+          <div class="col-sm-12 text-muted">
+            Purchased
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+          <div class="col-sm-12 h3 text-success">
+            <i class="fa fa-wrench"></i>
+          </div>
+          <div class="col-sm-12">
+            <h2>
+              <%= handvalve_item_plumbed_percent.to_f.nan? ?
+                "0" : handvalve_item_plumbed_percent.round(0) %>%
+            </h2>
+          </div>
+          <div class="col-sm-12 text-muted">
+            Installed
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+          <div class="col-sm-12 h1 text-info">
+            <%= link_to '<i class="fa fa-plus"></i>'.html_safe,
+              new_handvalve_path,
+              id: "new_handvalve_link" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-box-shadow mb-3">
+          <div class="card-body mt-0">
+            <div class="dropdown mt-3 mb-3">
+              <button class="btn btn-outline-primary dropdown-toggle"
+                      type="button"
+                      id="loop_dropdown_button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false">
+                Sort By
+              </button>
+              <div class="dropdown-menu"
+                   style="height: 200px;
+                   overflow: scroll;"
+                   aria-labelledby="loop_dropdown_button">
+                <%= link_to 'Tag',
+                  request.query_parameters.merge(
+                    :sorted_by => 'tag_' + sort_direction(@sorted_by)
                 ),
-                class: 'btn btn-outline-primary btn-sm' %>
+                class: 'dropdown-item' %>
               </div>
-              <div class="col-4">
-                <div class="dropdown">
-                  <button class="btn btn-sm btn-outline-primary dropdown-toggle"
-                          type="button"
-                          id="type_code_dropdown_button"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false">
-                    Type
-                    <% if params[:with_type].present? %>
-                      <i class="fa fa-filter"></i>
-                    <% end %>
-                  </button>
-                  <div class="dropdown-menu"
-                       style="height: 200px;
-                       overflow: scroll;"
-                       aria-labelledby="type_code_dropdown_button">
-                    <%= link_to "Show All",
+            </div>
+            <a class="btn btn-outline-primary"
+               data-toggle="collapse"
+               href="#collapseExample"
+               role="button"
+               aria-expanded="false"
+               aria-controls="collapseExample">
+              Filters
+              <span class="ml-3"><i class="fa fa-caret-down"></i></span>
+            </a>
+            <%= link_to 'Download as Excel <i class="fa fa-download"></i>'.html_safe,
+              project_handvalves_excel_path(format: :xlsx),
+              class: 'btn btn-outline-primary' %>
+            <%= link_to 'Upload from Excel <i class="fa fa-upload"></i>'.html_safe,
+              new_project_handvalve_import_path,
+              class: 'btn btn-outline-primary' %>
+            <div class="collapse" id="collapseExample">
+              <div class="card card-body">
+                <div class="row">
+                  <div class="col-4">
+                    <%= link_to 'Clear all',
                       project_handvalves_path(
-                        :with_type => nil
+                        :sorted_by => 'tag asc'
                     ),
-                    class: 'dropdown-item' %>
-                    <% @types.each do |type| %>
-                      <%= link_to type,
-                        request.query_parameters.merge(
-                          :with_type => type
-                      ),
-                      class: "dropdown-item" %>
-                    <% end %>
+                    class: 'btn btn-outline-primary btn-sm' %>
                   </div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="dropdown">
-                  <button class="btn-sm btn btn-outline-primary dropdown-toggle"
-                          type="button"
-                          id="loop_dropdown_button"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false">
-                    Size
-                    <% if params[:with_size].present? %>
-                      <i class="fa fa-filter"></i>
+                  <div class="col-4">
+                    <div class="dropdown">
+                      <button class="btn btn-sm btn-outline-primary dropdown-toggle"
+                              type="button"
+                              id="type_code_dropdown_button"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false">
+                        Type
+                        <% if params[:with_type].present? %>
+                          <i class="fa fa-filter"></i>
+                        <% end %>
+                      </button>
+                      <div class="dropdown-menu"
+                           style="height: 200px;
+                           overflow: scroll;"
+                           aria-labelledby="type_code_dropdown_button">
+                        <%= link_to "Show All",
+                          project_handvalves_path(
+                            :with_type => nil
+                        ),
+                        class: 'dropdown-item' %>
+                      <% @types.each do |type| %>
+                        <%= link_to type,
+                          request.query_parameters.merge(
+                            :with_type => type
+                        ),
+                        class: "dropdown-item" %>
                     <% end %>
-                  </button>
-                  <div class="dropdown-menu"
-                       style="height: 200px;
-                       overflow: scroll;"
-                       aria-labelledby="loop_dropdown_button">
-                    <%= link_to "Show All",
-                      project_handvalves_path(
-                        :with_size => nil
-                    ),
-                    class: 'dropdown-item' %>
-                    <% @sizes.each do |size| %>
-                      <%= link_to size,
-                        project_handvalves_path(
-                          :with_size => size
-                      ),
-                      class: "dropdown-item" %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="dropdown">
+                      <button class="btn-sm btn btn-outline-primary dropdown-toggle"
+                              type="button"
+                              id="loop_dropdown_button"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false">
+                        Size
+                        <% if params[:with_size].present? %>
+                          <i class="fa fa-filter"></i>
+                        <% end %>
+                      </button>
+                      <div class="dropdown-menu"
+                           style="height: 200px;
+                           overflow: scroll;"
+                           aria-labelledby="loop_dropdown_button">
+                        <%= link_to "Show All",
+                          project_handvalves_path(
+                            :with_size => nil
+                        ),
+                        class: 'dropdown-item' %>
+                      <% @sizes.each do |size| %>
+                        <%= link_to size,
+                          project_handvalves_path(
+                            :with_size => size
+                        ),
+                        class: "dropdown-item" %>
                     <% end %>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -182,103 +307,101 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-
-<div class="row pl-5 pr-5">
-  <div class="col-sm-12">
-    <div class="card card-box-shadow mb-5">
-      <div class="card-body mt-0">
-        <% @handvalves.each do |valve| %>
-          <div class="border-bottom pb-3">
-            <div class="pt-3 mt-0">
-              <div class="row pl-3 pr-3">
-                <div class="col-sm-12">
-                  <h5 class="mb-0">
-                    <%= link_to valve.tag,
-                      handvalve_path(valve),
-                      id: "show_handvalve_#{valve.id}" %>
-                  </h5>
-                  <span class="badge badge-pill badge-primary">
-                    710-39-110
-                  </span>
-                  <span class="badge badge-pill badge-info">
-                    <%= valve.scope %>
-                  </span>
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-box-shadow mb-5">
+          <div class="card-body mt-0">
+            <% @handvalves.each do |valve| %>
+              <div class="border-bottom pb-3">
+                <div class="pt-3 mt-0">
+                  <div class="row pl-3 pr-3">
+                    <div class="col-sm-12">
+                      <h5 class="mb-0">
+                        <%= link_to valve.tag,
+                          handvalve_path(valve),
+                          id: "show_handvalve_#{valve.id}" %>
+                      </h5>
+                      <span class="badge badge-pill badge-primary">
+                        710-39-110
+                      </span>
+                      <span class="badge badge-pill badge-info">
+                        <%= valve.scope %>
+                      </span>
+                    </div>
+                  </div>
+                  <dl class="row pl-3 pr-3 pt-3">
+                    <dt class="col-sm-3">
+                    Location
+                    </dt>
+                    <dd class="col-sm-9">
+                    Skid <%= valve.zeton_skid_number %>,
+                    Level <%= valve.zeton_skid_level %>
+                    </dd>
+                    <dt class="col-sm-3">
+                    Pipe Specificaiton
+                    </dt>
+                    <dd class="col-sm-9">
+                    <%= valve.valve_code %>
+                    </dd>
+                    <dt class="col-sm-3">
+                    Type
+                    </dt>
+                    <dd class="col-sm-9">
+                    <%= valve.valve_type %>
+                    </dd>
+                    <dt class="col-sm-3">
+                    Size
+                    </dt>
+                    <dd class="col-sm-9">
+                    <%= valve.size %>
+                    </dd>
+                    <dt class="col-sm-3">
+                    Line/Equipment Number</dt>
+                    <dd class="col-sm-9">
+                    <%= valve.line_number %>
+                    </dd>
+                    <dt class="col-sm-3">
+                    Manufacturer
+                    </dt>
+                    <dd class="col-sm-9">
+                    <%= valve.manufacturer %>
+                    </dd>
+                    <dt class="col-sm-3">
+                    Model
+                    </dt>
+                    <dd class="col-sm-9">
+                    <%= valve.model %>
+                    </dd>
+                    <dt class="col-sm-3">
+                    Process Connection
+                    </dt>
+                    <dd class="col-sm-9">
+                    <%= valve.process_connection %>
+                    </dd>
+                    <dt class="col-sm-3">
+                    MOC
+                    </dt>
+                    <dd class="col-sm-9">
+                    <%= valve.material_of_construction %>
+                    </dd>
+                    <dt class="col-sm-3">
+                    Zeton PO
+                    </dt>
+                    <dd class="col-sm-9">
+                    <%= valve.zeton_po %>
+                    </dd>
+                  </dl>
                 </div>
               </div>
-              <dl class="row pl-3 pr-3 pt-3">
-                <dt class="col-sm-3">
-                  Location
-                </dt>
-                <dd class="col-sm-9">
-                Skid <%= valve.zeton_skid_number %>,
-                Level <%= valve.zeton_skid_level %>
-                </dd>
-                <dt class="col-sm-3">
-                  Pipe Specificaiton
-                </dt>
-                <dd class="col-sm-9">
-                  <%= valve.valve_code %>
-                </dd>
-                <dt class="col-sm-3">
-                  Type
-                </dt>
-                <dd class="col-sm-9">
-                  <%= valve.valve_type %>
-                </dd>
-                <dt class="col-sm-3">
-                  Size
-                </dt>
-                <dd class="col-sm-9">
-                  <%= valve.size %>
-                </dd>
-                <dt class="col-sm-3">
-                  Line/Equipment Number</dt>
-                <dd class="col-sm-9">
-                  <%= valve.line_number %>
-                </dd>
-                <dt class="col-sm-3">
-                  Manufacturer
-                </dt>
-                <dd class="col-sm-9">
-                  <%= valve.manufacturer %>
-                </dd>
-                <dt class="col-sm-3">
-                  Model
-                </dt>
-                <dd class="col-sm-9">
-                  <%= valve.model %>
-                </dd>
-                <dt class="col-sm-3">
-                  Process Connection
-                </dt>
-                <dd class="col-sm-9">
-                  <%= valve.process_connection %>
-                </dd>
-                <dt class="col-sm-3">
-                  MOC
-                </dt>
-                <dd class="col-sm-9">
-                  <%= valve.material_of_construction %>
-                </dd>
-                <dt class="col-sm-3">
-                  Zeton PO
-                </dt>
-                <dd class="col-sm-9">
-                  <%= valve.zeton_po %>
-                </dd>
-              </dl>
-            </div>
+            <% end %>
           </div>
-        <% end %>
-      </div>
-      <div class="row pl-5 pr-5">
-        <%= will_paginate(
-          @handvalves,
-          :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer
-        ) %>
+          <div class="row pl-5 pr-5">
+            <%= will_paginate(
+              @handvalves,
+              :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer
+            ) %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
