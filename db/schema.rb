@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180228184754) do
+ActiveRecord::Schema.define(version: 20180306013928) do
 
   create_table "action_items", force: :cascade do |t|
     t.integer "priority"
@@ -42,6 +42,18 @@ ActiveRecord::Schema.define(version: 20180228184754) do
   create_table "action_items_instruments", id: false, force: :cascade do |t|
     t.integer "action_item_id", null: false
     t.integer "instrument_id", null: false
+  end
+
+  create_table "client_team_members", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "organization"
+    t.integer "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "role"
+    t.index ["project_id"], name: "index_client_team_members_on_project_id"
   end
 
   create_table "equipment", force: :cascade do |t|

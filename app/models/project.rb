@@ -8,6 +8,7 @@ class Project < ApplicationRecord
   has_many :documents
   has_many :handvalves
   has_many :action_items
+  has_many :client_team_members
   belongs_to :user
   after_create :initialize_team_members
 

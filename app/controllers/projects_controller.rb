@@ -20,6 +20,7 @@ class ProjectsController < ApplicationController
     @rfis = current_project.information_requests.take(3)
     @action_items = current_project.action_items.take(3)
     @team_members = current_project.team_members
+    @client_team_members = current_project.client_team_members
   end
 
   def project_metrics

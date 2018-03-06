@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   resources :users, controller: :users, only: [:create, :show]
   resources :team_members
   resources :handvalves
+  resources :client_team_members
   resources :project_instrument_imports
   resources :project_equipment_imports
   resources :project_handvalve_imports
