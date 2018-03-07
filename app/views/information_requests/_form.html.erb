@@ -16,28 +16,27 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
-                <%= f.label :client_document_number, '<b>Document Number</b>'.html_safe %>
-                <%= f.text_field :client_document_number, class: 'form-control' %>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <%= f.label :client_document_title, '<b>Title</b>'.html_safe %>
-                <%= f.text_field :client_document_title, class: 'form-control' %>
-              </div>
-            </div>
-          </div>
-          <div class="row mt-1">
-            <div class="col-sm-6">
-              <div class="form-group">
-                <%= f.label :client_document_revision, '<b>Revision Number</b>'.html_safe %>
-                <%= f.text_field :client_document_revision, class: 'form-control' %>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <%= f.label :client_document_section, '<b>Section</b>'.html_safe %>
-                <%= f.text_field :client_document_section, class: 'form-control' %>
+                <%= f.label :client_document_id, 'Select Client Document' %>
+                <% if @information_request.client_document %>
+                  <%= f.collection_select :client_document_id,
+                    @client_documents,
+                    :id,
+                    :document_name,
+                    {
+                      selected: @information_request.client_document_id.to_i,
+                      include_blank: 'Select a document'
+                    },
+                    {class: 'form-control'} %>
+                <% else %>
+                  <%= f.collection_select :client_document_id,
+                    @client_documents,
+                    :id,
+                    :document_name,
+                    {
+                      include_blank: 'Select a document'
+                    },
+                    {class: 'form-control'} %>
+                <% end %>
               </div>
             </div>
           </div>

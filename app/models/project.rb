@@ -9,6 +9,7 @@ class Project < ApplicationRecord
   has_many :handvalves
   has_many :action_items
   has_many :client_team_members
+  has_many :client_documents
   belongs_to :user
   after_create :initialize_team_members
 

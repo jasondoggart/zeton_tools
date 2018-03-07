@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180306015918) do
+ActiveRecord::Schema.define(version: 20180307131234) do
 
   create_table "action_items", force: :cascade do |t|
     t.integer "priority"
@@ -42,6 +42,17 @@ ActiveRecord::Schema.define(version: 20180306015918) do
   create_table "action_items_instruments", id: false, force: :cascade do |t|
     t.integer "action_item_id", null: false
     t.integer "instrument_id", null: false
+  end
+
+  create_table "client_documents", force: :cascade do |t|
+    t.string "document_name"
+    t.string "document_number"
+    t.string "document_revision"
+    t.integer "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "document_section"
+    t.index ["project_id"], name: "index_client_documents_on_project_id"
   end
 
   create_table "client_team_members", force: :cascade do |t|
@@ -128,10 +139,6 @@ ActiveRecord::Schema.define(version: 20180306015918) do
   end
 
   create_table "information_requests", force: :cascade do |t|
-    t.string "client_document_number"
-    t.string "client_document_title"
-    t.string "client_document_revision"
-    t.string "client_document_section"
     t.string "zeton_clarification"
     t.integer "answered", default: 0
     t.datetime "created_at", null: false
@@ -142,6 +149,8 @@ ActiveRecord::Schema.define(version: 20180306015918) do
     t.datetime "target_date"
     t.string "area"
     t.integer "client_team_member_id"
+    t.integer "client_document_id"
+    t.index ["client_document_id"], name: "index_information_requests_on_client_document_id"
     t.index ["client_team_member_id"], name: "index_information_requests_on_client_team_member_id"
     t.index ["equipment_id"], name: "index_information_requests_on_equipment_id"
     t.index ["instrument_id"], name: "index_information_requests_on_instrument_id"

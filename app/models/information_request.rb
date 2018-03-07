@@ -5,6 +5,7 @@ class InformationRequest < ApplicationRecord
   has_and_belongs_to_many :handvalves
   has_many :rfi_responses
   belongs_to :client_team_member, optional: true
+  belongs_to :client_document, optional: true
   validates_presence_of :zeton_clarification
 
   scope :with_status, -> (status) {
