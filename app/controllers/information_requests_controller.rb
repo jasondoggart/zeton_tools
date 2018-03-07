@@ -9,6 +9,7 @@ class InformationRequestsController < ApplicationController
     @equipment = current_project.equipment
     @handvalves = current_project.handvalves
     @work_areas = WORK_AREAS
+    @client_team_members = current_project.client_team_members.all
   end
 
   def create
@@ -28,6 +29,7 @@ class InformationRequestsController < ApplicationController
     @equipment = current_project.equipment
     @handvalves = current_project.handvalves
     @work_areas = WORK_AREAS
+    @client_team_members = current_project.client_team_members.all
   end
 
   def update
@@ -70,6 +72,7 @@ class InformationRequestsController < ApplicationController
                                                   :answered,
                                                   :target_date,
                                                   :area,
+                                                  :client_team_member_id,
                                                   instrument_ids: [],
                                                   equipment_ids: [],
                                                   handvalve_ids: []

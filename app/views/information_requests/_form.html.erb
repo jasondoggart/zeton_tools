@@ -119,11 +119,34 @@
                 @work_areas,
                 {},
                 {class: 'form-control'} %>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <%= f.label :client_team_member_id, 'Select Client Team Member' %>
+                <% if @information_request.client_team_member %>
+                  <%= f.collection_select :client_team_member_id,
+                    @client_team_members,
+                    :id,
+                    :full_name,
+                    {selected: @information_request.client_team_member_id.to_i},
+                    {class: 'form-control'} %>
+                <% else %>
+                  <%= f.collection_select :client_team_member_id,
+                    @client_team_members,
+                    :id,
+                    :full_name,
+                    {promt: true},
+                    {class: 'form-control'} %>
+                <% end %>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-sm-3">
-          <%= f.submit @information_request.new_record? ? 'Add RFI' : 'Update RFI', class: 'btn btn-outline-primary' %>
-        or <%= link_to 'Cancel', :back %>
+        <div class="row">
+          <div class="col-sm-3">
+            <%= f.submit @information_request.new_record? ? 'Add RFI' : 'Update RFI', class: 'btn btn-outline-primary' %>
+            or <%= link_to 'Cancel', :back %>
+          </div>
         </div>
       </div>
     </div>

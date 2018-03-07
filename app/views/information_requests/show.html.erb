@@ -89,6 +89,27 @@
           </div>
         </div>
         <h5 class="card-title mt-4 pt-4">
+          Sent to
+        </h5>
+        <% if @information_request.client_team_member.present? %>
+          <dl class="row mt-0">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">
+            <%= @information_request.client_team_member.full_name %>
+            </dd>
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">
+            <%= @information_request.client_team_member.email %>
+            </dd>
+            <dt class="col-sm-3">Date sent</dt>
+            <dd class="col-sm-9">
+            Will update with this info
+            </dd>
+          </dl>
+        <% else %>
+          No client team member added
+        <% end %>
+        <h5 class="card-title mt-4 pt-4">
           RFI Responses
         </h5>
         <div class="row">

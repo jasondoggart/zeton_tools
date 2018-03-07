@@ -30,7 +30,8 @@ class ClientTeamMembersController < ApplicationController
       :last_name,
       :email,
       :organization,
-      :role
+      :role,
+      :client_team_member_id
     )
   end
 end
