@@ -3,10 +3,13 @@
     <h3>
       Equipment
     </h3>
+    <button onclick="toggleFilters()" class="btn btn-sm btn-primary">
+      Filters
+    </button>
   </div>
 </div>
 <div class="row pl-5 pr-5">
-  <div class="col-sm-2">
+  <div id="filters" class="col-sm-2 filters-close">
     <h5 class="text-muted">
       Sort by
     </h5>
@@ -100,7 +103,7 @@
         </div>
       </div>
   </div>
-  <div class="col-sm-10">
+  <div class="col-sm">
     <div class="row">
       <div class="col-sm-3">
         <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
