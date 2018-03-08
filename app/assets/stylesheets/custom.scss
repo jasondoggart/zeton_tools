@@ -12,7 +12,13 @@ body {
 }
 
 .main-body {
-  margin-top: 80px;
+  top: 0;
+  bottom: 0;
+  left: 250px;
+  right: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: fixed;
 }
 
 .main {
@@ -24,24 +30,6 @@ body {
   margin-right: 5%;
 }
 
-.sign-in {
-  background-color: white;
-  padding: 30px;
-  width: 50%;
-  border-radius: 5px;
-  height: 400px;
-  margin-top: 50px;
-  margin-left: 25%;
-}
-
-.sign-in-title {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.sign-in-button {
-  margin-top: 25px;
-}
 
 .other-links {
   margin-top: 25px;
@@ -109,3 +97,64 @@ body {
   width: 250px;
 }
 
+.sidebar {
+  top: 0;
+  bottom: 0;
+  width: 250px;
+  position: fixed;
+  background-color: #FFF;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  z-index: 1;
+}
+
+.sidebar-user-info {
+  margin-top: 25px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+.sidebar-project {
+  margin-top: 25px;
+  padding-left: 10px;
+}
+
+.sidebar-project-title {
+  text-decoration: none;
+  color: #000;
+}
+
+.sidebar-link {
+  text-decoration: none;
+  color: #000;
+  opacity: 0.6;
+}
+
+.sidebar-link:hover {
+  text-decoration: none;
+  color: #000;
+  opacity: 1;
+  margin-top: 0;
+}
+
+.sidebar-logo {
+  margin-top: 10px;
+  padding-left: 10px;
+  font-weight: lighter;
+}
+
+.sidebar-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: white;
+}
+
+#flash {
+  position: fixed;
+  top: 25px;
+  left: 50%;
+  right: 20px;
+  height: 50px;
+}

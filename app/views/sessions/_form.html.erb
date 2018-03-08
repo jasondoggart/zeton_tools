@@ -1,29 +1,43 @@
-<div class="sign-in">
-  <h3 class="sign-in-title">Please Sign In</h3>
-  <%= form_for :session, url: session_path do |form| %>
-    <div class="form-group row">
-      <%= form.label :email, class: 'col-sm-2 col-form-label' %>
-      <div class="col-sm-10">
-        <%= form.text_field :email, type: 'email', class: 'form-control' %>
+<div class="row pl-5 pr-5 mb-3 mt-5">
+  <div class="col-sm-8 offset-sm-2">
+    <h3>
+      Please Sign In
+    </h3>
+  </div>
+</div>
+<div class="row pl-5 pr-5 pb-5">
+  <div class="col-sm-8 offset-sm-2">
+    <div class="card card-box-shadow">
+      <div class="card-body">
+        <%= form_for :session, url: session_path do |form| %>
+          <div class="form-group row">
+            <%= form.label :email, class: 'col-sm-2 col-form-label' %>
+            <div class="col-sm-10">
+              <%= form.text_field :email, type: 'email', class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <%= form.label :password, class: 'col-sm-2 col-form-label' %>
+            <div class='col-sm-10'>
+              <%= form.password_field :password, class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="submit-field col-sm-3">
+              <%= form.submit 'Sign in', id: 'sign_in', class: 'btn btn-outline-primary btn-block sign-in-button' %>
+            </div>
+          </div>
+
+          <div class="other-links">
+            <% if Clearance.configuration.allow_sign_up? %>
+              <%= link_to t(".sign_up"), sign_up_path %>
+            <% end %>
+            <%= link_to t(".forgot_password"), new_password_path %>
+          </div>
+        <% end %>
       </div>
     </div>
-
-    <div class="form-group row">
-      <%= form.label :password, class: 'col-sm-2 col-form-label' %>
-      <div class='col-sm-10'>
-        <%= form.password_field :password, class: 'form-control' %>
-      </div>
-    </div>
-
-    <div class="submit-field">
-      <%= form.submit 'Sign in', id: 'sign_in', class: 'btn btn-outline-primary btn-block sign-in-button' %>
-    </div>
-
-    <div class="other-links">
-      <% if Clearance.configuration.allow_sign_up? %>
-        <%= link_to t(".sign_up"), sign_up_path %>
-      <% end %>
-      <%= link_to t(".forgot_password"), new_password_path %>
-    </div>
-  <% end %>
+  </div>
 </div>
