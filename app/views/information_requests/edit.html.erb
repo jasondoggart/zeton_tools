@@ -1,5 +1,8 @@
-<div class="main">
-  <h3><%= @information_request.rfi_number %></h3>
-  <h5><%= link_to "Project #{@information_request.project.project_number}", project_path(@information_request.project) %></h5>
-  <%= render 'form' %>
+<div class="row pl-5 pr-5 mb-3 mt-5">
+  <div class="col-sm-12">
+    <h1 class="display-4">
+      Updating <%= @information_request.rfi_number %>
+    </h1>
+  </div>
 </div>
+<%= render 'form' %>

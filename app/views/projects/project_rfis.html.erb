@@ -3,256 +3,265 @@
     <h3>
       Requests for Information
     </h3>
-  </div>
-</div>
-<div class="row pl-5 pr-5">
-  <div class="col-sm-3">
-    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-      <div class="col-sm-12 h3 text-info">
-        <i class="fa fa-hashtag text-centered"></i>
-      </div>
-      <div class="col-sm-12">
-        <h2>
-          <%= @rfis.count %>
-        </h2>
-      </div>
-      <div class="col-sm-12 text-muted">
-        RFI Count
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-3">
-    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-      <div class="col-sm-12 h3 text-warning">
-        <i class="fa fa-exclamation text-centered"></i>
-      </div>
-      <div class="col-sm-12">
-        <h2>
-          <%= @open_rfis.count %>
-        </h2>
-      </div>
-      <div class="col-sm-12 text-muted">
-        Open RFIs
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-3">
-    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-      <div class="col-sm-12 h3 text-success">
-        <i class="fa fa-calendar-plus-o text-centered"></i>
-      </div>
-      <div class="col-sm-12">
-        <h2>
-          <%= @open_rfis.count %>
-        </h2>
-      </div>
-      <div class="col-sm-12 text-muted">
-        New RFIs This Week
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-3">
-    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-      <div class="col-sm-12 h1 text-primary">
-        <%= link_to '<i class="fa fa-plus text-centered"></i>'.html_safe,
-          new_information_request_path,
-          id: 'new_rfi' %>
-      </div>
-    </div>
+    <button onclick="toggleFilters()" class="btn btn-sm btn-primary">
+      Filters
+    </button>
   </div>
 </div>
 
 <div class="row pl-5 pr-5">
-  <div class="col-sm-12">
-    <div class="card card-box-shadow mb-3">
-      <div class="card-body mt-0">
-        <div class="dropdown mt-3 mb-3">
-          <button class="btn btn-outline-primary dropdown-toggle"
+  <div id="filters" class="col-sm-2 filters-close">
+    <h5 class="text-muted">
+      Sort by
+    </h5>
+    <div class="dropdown">
+      <button class="btn btn-sm btn-outline-primary dropdown-toggle"
+              type="button"
+              id="loop_dropdown_button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false">
+        Select...
+      </button>
+      <div class="dropdown-menu"
+           style="height: 200px;
+           overflow: scroll;"
+           aria-labelledby="loop_dropdown_button">
+        <%=
+          link_to 'Target Date',
+            request.query_parameters.merge(
+              :sorted_by => 'target_date_' + sort_direction(@sorted_by)
+            ),
+            class: 'dropdown-item'
+        %>
+        <%=
+          link_to 'Status',
+            request.query_parameters.merge(
+              :sorted_by => 'answered_' + sort_direction(@sorted_by)
+            ),
+            class: 'dropdown-item'
+        %>
+        <%=
+          link_to 'Date Added',
+            request.query_parameters.merge(
+              :sorted_by => 'date_created_' + sort_direction(@sorted_by)
+          ),
+          class: 'dropdown-item'
+        %>
+      </div>
+    </div>
+    <h5 class="text-muted mt-3">
+      Filters
+    </h5>
+    <div class="row">
+      <div class="col-12">
+        <%=
+          link_to 'Clear all',
+            project_rfis_path,
+            class: 'btn btn-outline-primary btn-sm'
+        %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="dropdown mt-2">
+          <button class="btn btn-sm btn-outline-primary dropdown-toggle"
                   type="button"
-                  id="loop_dropdown_button"
+                  id="type_code_dropdown_button"
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false">
-            Sort By
+            Status
+            <% if params[:with_status].present? %>
+              <i class="fa fa-filter"></i>
+            <% end %>
           </button>
           <div class="dropdown-menu"
-               style="height: 200px;
-               overflow: scroll;"
-               aria-labelledby="loop_dropdown_button">
-            <%= link_to 'Target Date',
-              request.query_parameters.merge(
-                :sorted_by => 'target_date_' + sort_direction(@sorted_by)
-              ),
+               style="height: 200px; overflow: scroll;"
+               aria-labelledby="type_code_dropdown_button">
+            <%= link_to "Show All",
+              project_rfis_path,
               class: 'dropdown-item' %>
-            <%= link_to 'Status',
-              request.query_parameters.merge(
-                :sorted_by => 'answered_' + sort_direction(@sorted_by)
-              ),
-              class: 'dropdown-item' %>
-            <%= link_to 'Date Added',
-              request.query_parameters.merge(
-                :sorted_by => 'date_created_' + sort_direction(@sorted_by)
-              ),
-              class: 'dropdown-item' %>
-          </div>
-        </div>
-        <a class="btn btn-outline-primary"
-           data-toggle="collapse"
-           href="#collapseExample"
-           role="button"
-           aria-expanded="false"
-           aria-controls="collapseExample">
-          Filters<span class="ml-3"><i class="fa fa-caret-down"></i></span>
-        </a>
-        <div class="collapse" id="collapseExample">
-          <div class="card card-body">
-            <div class="row">
-              <div class="col-4">
-                <%= link_to 'Clear all',
-                  project_rfis_path,
-                  class: 'btn btn-outline-primary btn-sm' %>
-              </div>
-              <div class="col-4">
-                <div class="dropdown">
-                  <button class="btn btn-sm btn-outline-primary dropdown-toggle"
-                          type="button"
-                          id="type_code_dropdown_button"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false">
-                    Status
-                    <% if params[:with_status].present? %>
-                      <i class="fa fa-filter"></i>
-                    <% end %>
-                  </button>
-                  <div class="dropdown-menu"
-                       style="height: 200px; overflow: scroll;"
-                       aria-labelledby="type_code_dropdown_button">
-                       <%= link_to "Show All",
-                         project_rfis_path,
-                         class: 'dropdown-item' %>
-                       <%= link_to "Open",
+            <%= link_to "Open",
                          project_rfis_path(:with_status => 0),
                          class: "dropdown-item" %>
                        <%= link_to "Closed",
                          project_rfis_path(:with_status => 1),
                          class: "dropdown-item" %>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="dropdown">
-                  <button class="btn btn-sm btn-outline-primary dropdown-toggle"
-                          type="button"
-                          id="area_dropdown_button"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false">
-                    Work Area
-                    <% if params[:with_area].present? %>
-                      <i class="fa fa-filter"></i>
-                    <% end %>
-                  </button>
-                  <div class="dropdown-menu"
-                       style="height: 200px; overflow: scroll;"
-                       aria-labelledby="area_dropdown_button">
-                    <%= link_to "Show All",
-                      project_rfis_path,
-                      class: 'dropdown-item' %>
-                    <% @work_areas.each do |area| %>
-                      <%= link_to area,
-                        project_rfis_path(:with_area => area),
-                        class: 'dropdown-item' %>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="dropdown mt-2">
+          <button class="btn btn-sm btn-outline-primary dropdown-toggle"
+                  type="button"
+                  id="area_dropdown_button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false">
+            Work Area
+            <% if params[:with_area].present? %>
+              <i class="fa fa-filter"></i>
+            <% end %>
+          </button>
+          <div class="dropdown-menu"
+               style="height: 200px; overflow: scroll;"
+               aria-labelledby="area_dropdown_button">
+            <%= link_to "Show All",
+              project_rfis_path,
+              class: 'dropdown-item' %>
+            <% @work_areas.each do |area| %>
+              <%= link_to area,
+                project_rfis_path(:with_area => area),
+                class: 'dropdown-item' %>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+
+  <div class="col-sm">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+          <div class="col-sm-12 h3 text-info">
+            <i class="fa fa-hashtag text-centered"></i>
+          </div>
+          <div class="col-sm-12">
+            <h2>
+              <%= @rfis.count %>
+            </h2>
+          </div>
+          <div class="col-sm-12 text-muted">
+            RFI Count
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+          <div class="col-sm-12 h3 text-warning">
+            <i class="fa fa-exclamation text-centered"></i>
+          </div>
+          <div class="col-sm-12">
+            <h2>
+              <%= @open_rfis.count %>
+            </h2>
+          </div>
+          <div class="col-sm-12 text-muted">
+            Open RFIs
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+          <div class="col-sm-12 h3 text-success">
+            <i class="fa fa-calendar-plus-o text-centered"></i>
+          </div>
+          <div class="col-sm-12">
+            <h2>
+              <%= @open_rfis.count %>
+            </h2>
+          </div>
+          <div class="col-sm-12 text-muted">
+            New RFIs This Week
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+          <div class="col-sm-12 h1 text-primary">
+            <%= link_to '<i class="fa fa-plus text-centered"></i>'.html_safe,
+              new_information_request_path,
+              id: 'new_rfi' %>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
-<div class="row pl-5 pr-5">
-  <div class="col-sm-12">
-    <div class="card card-box-shadow mb-5">
-      <div class="card-body mt-0">
-        <% @rfis.each do |rfi| %>
-          <div class="border-bottom">
-            <div class="pt-3 mt-0">
-              <div class="row pl-3 pr-3">
-                <div class="col-sm-12">
-                  <h5 class="mb-0">
-                    <%= link_to rfi.rfi_number,
-                      information_request_path(rfi),
-                      id: "show_rfi_#{rfi.id}" %>
-                  </h5>
-                  <div id="rfi_status_form_rfi_<%= rfi.id %>">
-                    <%= render partial: 'information_requests/rfi_status_form',
-                      locals: {rfi: rfi} %>
-                  </div>
-                  <div class="text-muted mb-3">
-                    Created <%= rfi.created_at.strftime("%b %-d, %Y") %>
-                    <% if rfi.rfi_responses.any? %>
-                      <span class="text-info">
-                        | Updated
-                        <%= rfi.rfi_responses.last.created_at.strftime(
-                          "%b %-d, %Y"
-                        ) %>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-box-shadow mb-5">
+          <div class="card-body mt-0">
+            <% @rfis.each do |rfi| %>
+              <div class="border-bottom">
+                <div class="pt-3 mt-0">
+                  <div class="row pl-3 pr-3">
+                    <div class="col-sm-12">
+                      <h5 class="mb-0">
+                        <%= link_to rfi.rfi_number,
+                          information_request_path(rfi),
+                          id: "show_rfi_#{rfi.id}" %>
+                      </h5>
+                      <div id="rfi_status_form_rfi_<%= rfi.id %>">
+                        <%= render partial: 'information_requests/rfi_status_form',
+                          locals: {rfi: rfi} %>
+                      </div>
+                      <div class="text-muted mb-3">
+                        Created <%= rfi.created_at.strftime("%b %-d, %Y") %>
+                      <% if rfi.rfi_responses.any? %>
+                        <span class="text-info">
+                          | Updated
+                          <%= rfi.rfi_responses.last.created_at.strftime(
+                            "%b %-d, %Y"
+                          ) %>
                         by <%= rfi.rfi_responses.last.organization %>
+                        </span>
+                      <% end %>
+                      <% if rfi.target_date.present? %>
+                        <p>
+                        Response required by <%= rfi.target_date.strftime(
+                          "%b %-d, %Y"
+                        ) %> (
+                        <%= pluralize days_from_now(rfi.target_date), 'day' %>
+                        from now)
+                        </p>
+                      <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pb-3">
+                  <div class="row pl-3 pr-3">
+                    <div class="col-sm-12 pb-2">
+                      <%= rfi.zeton_clarification %>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <% rfi.instruments.each do |inst| %>
+                      <%= link_to inst.tag,
+                        instrument_path(inst),
+                        class: 'badge badge-pill badge-primary' %>
+                    <% end %>
+                    <% rfi.equipment.each do |equip| %>
+                      <span >
+                        <%= link_to equip.tag,
+                          equipment_path(equip),
+                          class: 'badge badge-pill badge-primary' %>
                       </span>
                     <% end %>
-                    <% if rfi.target_date.present? %>
-                      <p>
-                      Response required by <%= rfi.target_date.strftime(
-                        "%b %-d, %Y"
-                      ) %> (
-                      <%= pluralize days_from_now(rfi.target_date), 'day' %>
-                      from now)
-                      </p>
+                    <% rfi.handvalves.each do |valve| %>
+                      <span >
+                        <%= link_to valve.tag,
+                          handvalve_path(valve),
+                          class: 'badge badge-pill badge-primary' %>
+                      </span>
                     <% end %>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="pb-3">
-              <div class="row pl-3 pr-3">
-                <div class="col-sm-12 pb-2">
-                  <%= rfi.zeton_clarification %>
-                </div>
-              </div>
-              <div class="col-sm-12">
-                <% rfi.instruments.each do |inst| %>
-                  <%= link_to inst.tag,
-                    instrument_path(inst),
-                    class: 'badge badge-pill badge-primary' %>
-                <% end %>
-                <% rfi.equipment.each do |equip| %>
-                  <span >
-                    <%= link_to equip.tag,
-                      equipment_path(equip),
-                      class: 'badge badge-pill badge-primary' %>
-                  </span>
-                <% end %>
-                <% rfi.handvalves.each do |valve| %>
-                  <span >
-                    <%= link_to valve.tag,
-                      handvalve_path(valve),
-                      class: 'badge badge-pill badge-primary' %>
-                  </span>
-                <% end %>
-              </div>
+            <% end %>
+            <div class="pt-3">
+              <%= will_paginate(
+                @rfis,
+                :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer
+              ) %>
             </div>
           </div>
-        <% end %>
-        <div class="pt-3">
-          <%= will_paginate(
-            @rfis,
-            :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer
-          ) %>
         </div>
       </div>
     </div>

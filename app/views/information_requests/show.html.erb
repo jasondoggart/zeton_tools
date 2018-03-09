@@ -17,13 +17,22 @@
       from now)
       </p>
     <% end %>
+    <%= link_to 'Edit RFI',
+      edit_information_request_path(@information_request),
+      class: 'btn btn-sm btn-outline-primary mr-2 ml-2',
+      id: "edit_rfi_#{@information_request.id}" %>
+    <%= link_to 'Delete',
+      information_request_path(@information_request),
+      method: :delete,
+      class: 'btn btn-sm btn-outline-danger mr-2 ml-2',
+      id: "delete_rfi_#{@information_request.id}" %>
   </div>
 </div>
 <div class="row pl-5 pr-5">
   <div class="col-sm-12">
-    <h1 class="section-title mb-3">
+    <h3 class="section-title mb-3">
       Client Document
-    </h1>
+    </h3>
     <div class="card card-box-shadow mb-3 p-4">
       <div class="card-body">
         <% if @information_request.client_document.present? %>
@@ -58,18 +67,18 @@
         <% end %>
       </div>
     </div>
-    <h1 class="section-title mt-5">
+    <h3 class="section-title mt-3">
       Associations
-    </h1>
+    </h3>
     <div class="card card-box-shadow mb-3 p-4">
       <div class="card-body">
         <div class="row">
           <div class="col-sm-4">
             <div class="row">
               <div class="col-sm-12">
-                <h3 class="section-sub-title">
+                <h5 class="section-sub-title">
                   Instruments
-                </h3>
+                </h5>
               </div>
             </div>
             <div class="row">
@@ -85,9 +94,9 @@
           <div class="col-sm-4">
             <div class="row">
               <div class="col-sm-12">
-                <h3 class="section-sub-title">
+                <h5 class="section-sub-title">
                   Equipment
-                </h3>
+                </h5>
               </div>
             </div>
             <div class="row">
@@ -103,9 +112,9 @@
           <div class="col-sm-4">
             <div class="row">
               <div class="col-sm-12">
-                <h3 class="section-sub-title">
+                <h5 class="section-sub-title">
                   Handvalves
-                </h3>
+                </h4>
               </div>
             </div>
             <div class="row">
@@ -122,9 +131,9 @@
       </div>
     </div>
 
-    <h1 class="section-title mt-5">
+    <h3 class="section-title mt-3">
       Zeton Clarification
-    </h1>
+    </h3>
     <div class="card card-box-shadow mb-3 p-4">
       <div class="card-body">
         <dl class="row mt-0">
@@ -139,9 +148,9 @@
         </dl>
       </div>
     </div>
-    <h1 class="section-title mt-5">
+    <h3 class="section-title mt-3">
       Client
-    </h1>
+    </h3>
     <div class="card card-box-shadow mb-3 p-4">
       <div class="card-body">
         <% if @information_request.client_team_member.present? %>
@@ -164,9 +173,9 @@
         <% end %>
       </div>
     </div>
-    <h1 class="section-title mt-5">
+    <h3 class="section-title mt-3">
       RFI Responses
-    </h1>
+    </h3>
     <div class="card card-box-shadow mb-3 p-4">
       <div class="card-body">
         <div class="row">
@@ -224,15 +233,6 @@
         new_rfi_response_path(:rfi => @information_request),
         id: 'new_rfi_response',
         class: 'btn btn-outline-primary btn-sm mr-2' %>
-      <%= link_to 'Edit RFI',
-        edit_information_request_path(@information_request),
-        class: 'btn btn-sm btn-outline-primary mr-2 ml-2',
-        id: "edit_rfi_#{@information_request.id}" %>
-      <%= link_to 'Delete',
-        information_request_path(@information_request),
-        method: :delete,
-        class: 'btn btn-sm btn-outline-danger mr-2 ml-2',
-        id: "delete_rfi_#{@information_request.id}" %>
         </div>
       </div>
     </div>

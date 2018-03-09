@@ -1,6 +1,13 @@
 <%= form_for @information_request do |f| %>
   <% if @information_request.errors.any? %>
-    <h2><%= pluralize(@information_request.errors.count, "error") %> prohibited this RFI from being created</h2>
+    <h2>
+      <%=
+        pluralize(
+          @information_request.errors.count, "error"
+        )
+      %>
+      prohibited this RFI from being created
+    </h2>
     <ul>
       <% @information_request.errors.full_messages.each do |msg|%>
         <li><%= msg %></li>
@@ -8,139 +15,179 @@
     </ul>
   <% end %>
 
-  <div class="row pl-5 pr-5">
-    <div class="col-sm-12">
-      <div class="card card-box-shadow mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Client Document</h5>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group">
-                <%= f.label :client_document_id, 'Select Client Document' %>
-                <% if @information_request.client_document %>
-                  <%= f.collection_select :client_document_id,
-                    @client_documents,
-                    :id,
-                    :document_name,
-                    {
-                      selected: @information_request.client_document_id.to_i,
-                      include_blank: 'Select a document'
-                    },
-                    {class: 'form-control'} %>
-                <% else %>
-                  <%= f.collection_select :client_document_id,
-                    @client_documents,
-                    :id,
-                    :document_name,
-                    {
-                      include_blank: 'Select a document'
-                    },
-                    {class: 'form-control'} %>
-                <% end %>
-              </div>
+<div class="row pl-5 pr-5">
+  <div class="col-sm-12">
+    <h3 class="section-title mb-3">
+      Client Document
+    </h3>
+    <div class="card card-box-shadow mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <% if @information_request.client_document %>
+                <%= f.collection_select :client_document_id,
+                  @client_documents,
+                  :id,
+                  :document_name,
+                  {
+                    selected: @information_request.client_document_id.to_i,
+                    include_blank: 'Select a document'
+                  },
+                  {class: 'form-control'} %>
+              <% else %>
+                <%= f.collection_select :client_document_id,
+                  @client_documents,
+                  :id,
+                  :document_name,
+                  {
+                    include_blank: 'Select a document'
+                  },
+                  {class: 'form-control'} %>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+    <h3 class="section-title mt-3">
+      Associations
+    </h3>
   
-  <div class="row pl-5 pr-5">
-    <div class="col-sm-12">
-      <div class="card card-box-shadow mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Add Associations</h5>
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="form-group">
-                <%= hidden_field_tag "information_request[instrument_ids][]", nil %>
-                <%= f.label :instrument_ids, '<b>Associated Instruments</b>'.html_safe %>
-                <%= f.select :instrument_ids, @instruments.map{ |i| [i.tag, i.id]}, {}, multiple: true, class: "form-control" %>
-              </div>
+    <div class="card card-box-shadow mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <%=
+                hidden_field_tag "information_request[instrument_ids][]",
+                  nil
+              %>
+              <%=
+                f.label :instrument_ids,
+                  '<b>Instruments</b>'.html_safe,
+                  class: 'h5 section-sub-title'
+              %>
+              <%=
+                f.select :instrument_ids,
+                  @instruments.map{ |i| [i.tag, i.id]},
+                  {},
+                  multiple: true,
+                  class: "form-control"
+              %>
             </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <%= hidden_field_tag "information_request[equipment_ids][]", nil %>
-                <%= f.label :equipment_ids, '<b>Associated Equipment</b>'.html_safe %>
-                <%= f.select :equipment_ids, @equipment.map{ |i| [i.tag, i.id]}, {}, multiple: true, class: "form-control" %>
-              </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <%=
+                hidden_field_tag "information_request[equipment_ids][]",
+                  nil
+              %>
+              <%=
+                f.label :equipment_ids,
+                  '<b>Equipment</b>'.html_safe,
+                  class: 'h5 section-sub-title'
+              %>
+              <%= f.select :equipment_ids,
+                @equipment.map{ |i| [i.tag, i.id]},
+                {},
+                multiple: true,
+                class: "form-control"
+              %>
             </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <%= hidden_field_tag "information_request[handvalves_ids][]", nil %>
-                <%= f.label :handvalve_ids, '<b>Associated Handvalves</b>'.html_safe %>
-                <%= f.select :handvalve_ids, @handvalves.map{ |i| [i.tag, i.id]}, {}, multiple: true, class: "form-control" %>
-              </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <%=
+                hidden_field_tag "information_request[handvalves_ids][]",
+                  nil
+              %>
+              <h5 class="section-sub-title">
+                <%=
+                  f.label :handvalve_ids,
+                    '<b>Handvalves</b>'.html_safe
+                %>
+              </h5>
+              <%=
+                f.select :handvalve_ids,
+                  @handvalves.map{ |i| [i.tag, i.id]},
+                  {},
+                  multiple: true,
+                  class: "form-control"
+              %>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+    <h3 class="section-title mt-3">
+      Zeton Clarification
+    </h3>
 
 
-  <div class="row pl-5 pr-5 mb-5">
-    <div class="col-sm-12">
-      <div class="card card-box-shadow mb-3 pb-3">
-        <div class="card-body">
-          <h5 class="card-title"><%= f.label :zeton_clarification, 'Zeton Clarification' %></h5>
-          <div class="form-group">
-            <%= f.text_area :zeton_clarification, class: 'form-control', rows: "3" %>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group">
-                <%= f.label :target_date, 'Response Required by' %>
-                <% if @information_request.present? %>
-                  <%= f.text_field :target_date,
-                    class: 'form-control',
-                    data: {
-                      provide: 'datepicker',
-                      'date-format' => 'yyyy-mm-dd',
-                      'date-autoclose' => 'true'
-                    } %>
-                <% else %>
-                  <%= f.text_field :target_date,
-                    class: 'form-control',
-                    data: {
-                      provide: 'datepicker',
-                      'date-format' => 'yyy-mm-dd',
-                      'date-autoclose' => 'true'
-                    },
-                    value: @information_request.target_date.strftime("%b %-d, %Y") %>
-                <% end %>
-              </div>
+    <div class="card card-box-shadow mb-3 pb-3">
+      <div class="card-body">
+        <%= f.label :zeton_clarification, 'Zeton Clarification' %>
+        <div class="form-group">
+          <%= f.text_area :zeton_clarification, class: 'form-control', rows: "3" %>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <%= f.label :target_date, 'Response Required by' %>
+              <% if @information_request.present? %>
+                <%= f.text_field :target_date,
+                  class: 'form-control',
+                  data: {
+                    provide: 'datepicker',
+                    'date-format' => 'yyyy-mm-dd',
+                    'date-autoclose' => 'true'
+                  } %>
+              <% else %>
+                <%= f.text_field :target_date,
+                  class: 'form-control',
+                  data: {
+                    provide: 'datepicker',
+                    'date-format' => 'yyy-mm-dd',
+                    'date-autoclose' => 'true'
+                  },
+                  value: @information_request.target_date.strftime("%b %-d, %Y") %>
+              <% end %>
             </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <%= f.label :area, 'Work Area' %>
-                <%= f.select :area, 
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <%= f.label :area, 'Work Area' %>
+              <%= f.select :area, 
                 @work_areas,
-                {},
+                {include_blank: 'Select work area'},
                 {class: 'form-control'} %>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <%= f.label :client_team_member_id, 'Select Client Team Member' %>
-                <% if @information_request.client_team_member %>
-                  <%= f.collection_select :client_team_member_id,
-                    @client_team_members,
-                    :id,
-                    :full_name,
-                    {selected: @information_request.client_team_member_id.to_i},
-                    {class: 'form-control'} %>
-                <% else %>
-                  <%= f.collection_select :client_team_member_id,
-                    @client_team_members,
-                    :id,
-                    :full_name,
-                    {promt: true},
-                    {class: 'form-control'} %>
-                <% end %>
-              </div>
             </div>
           </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <%= f.label :client_team_member_id, 'Send RFI to...' %>
+              <% if @information_request.client_team_member %>
+                <%= f.collection_select :client_team_member_id,
+                  @client_team_members,
+                  :id,
+                  :full_name,
+                  {
+                    selected: @information_request.client_team_member_id.to_i,
+                    include_blank: 'Select client team member'
+                  },
+                  {class: 'form-control'} %>
+              <% else %>
+                <%= f.collection_select :client_team_member_id,
+                  @client_team_members,
+                  :id,
+                  :full_name,
+                  {include_blank: 'Select client team member'},
+                  {class: 'form-control'} %>
+              <% end %>
+            </div>
+          </div>
+        </div>
         <div class="row">
           <div class="col-sm-3">
             <%= f.submit @information_request.new_record? ? 'Add RFI' : 'Update RFI', class: 'btn btn-outline-primary' %>
@@ -149,7 +196,6 @@
         </div>
       </div>
     </div>
-  </div>
 <% end %>
 
 <script>
