@@ -165,7 +165,15 @@
             </dd>
             <dt class="col-sm-3">Date sent</dt>
             <dd class="col-sm-9">
-            Will update with this info
+            <% if @information_request.date_sent.present? %>
+              <%= @information_request.date_sent.strftime("%b %-d, %Y") %>
+            <% else %>
+              Not yet sent.
+              <%=
+                link_to 'Click to send now',
+                  send_rfi_path(:rfi => @information_request)
+              %>
+            <% end %>
             </dd>
           </dl>
         <% else %>

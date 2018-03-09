@@ -51,6 +51,12 @@ class InformationRequestsController < ApplicationController
     end
   end
 
+  def send_rfi
+    @information_request = InformationRequest.find(params[:rfi])
+    RfiMailer.send_rfi(@information_request).deliver_now
+    redirect_to @information_request
+  end
+
   def destroy
     @information_request = InformationRequest.find(params[:id])
     @information_request.delete

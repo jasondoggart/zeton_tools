@@ -38,6 +38,9 @@ Rails.application.routes.draw do
     to: 'projects#project_action_items',
     as: :project_action_items
   post 'select_project', to: 'project_sessions#create'
+  get 'information_requests/send_rfi',
+    to: 'information_requests#send_rfi',
+    as: 'send_rfi'
 
   root to: 'pages#home'
   resources :action_items

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180307131234) do
+ActiveRecord::Schema.define(version: 20180309210334) do
 
   create_table "action_items", force: :cascade do |t|
     t.integer "priority"
@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(version: 20180307131234) do
     t.string "area"
     t.integer "client_team_member_id"
     t.integer "client_document_id"
+    t.datetime "date_sent"
     t.index ["client_document_id"], name: "index_information_requests_on_client_document_id"
     t.index ["client_team_member_id"], name: "index_information_requests_on_client_team_member_id"
     t.index ["equipment_id"], name: "index_information_requests_on_equipment_id"

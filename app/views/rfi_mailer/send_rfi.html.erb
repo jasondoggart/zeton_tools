@@ -1,0 +1,52 @@
+<p>
+  Dear <%= @rfi.client_team_member.first_name %>,
+</p>
+<p>
+  A new RFI has been created for Project <%= @rfi.project.project_number %>.
+    Please review the information below, and respond by
+    <b><%= @rfi.target_date.strftime("%b %-d, %Y") %></b>.
+</p>
+<br />
+<br />
+***
+<% if @rfi.client_document.present? %>
+  <p>
+    The following information request is in regards to your document:
+  </p>
+  <p>
+    <% if @rfi.client_document.document_name.present? %>
+      <b>Title:</b> <%= @rfi.client_document.document_name %><br />
+    <% end %>
+    <% if @rfi.client_document.document_number.present? %>
+      <b>Number:</b><%= @rfi.client_document.document_number %><br />
+    <% end %>
+    <% if @rfi.client_document.document_revision.present? %>
+      <b>Revision:</b><%= @rfi.client_document.document_revision %><br />
+    <% end %>
+  </p>
+<% end %>
+<br />
+<br />
+***
+
+<p>
+  The request for information follows:
+</p>
+<p>
+  <%= @rfi.zeton_clarification %>
+</p>
+<br />
+<br />
+***
+
+<p>
+<b>Please respond by <%= @rfi.target_date.strftime("%b %-d, %Y") %>.</b>
+</p>
+<br />
+<br />
+***
+
+<p>
+  Best regards,<br />
+  <%= @rfi.project.user.first_name %>
+</p>
