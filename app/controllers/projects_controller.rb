@@ -161,6 +161,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def project_client_documents
+    @client_documents = current_project.client_documents.all
+  end
+
   def project_handvalves_metrics
     @handvalves = current_project.handvalves
     @handvalves = @handvalves.

@@ -56,6 +56,17 @@ describe "Project" do
     visit project_metrics_path
   end
 
+  it 'has a project client documents page' do
+    user = FactoryBot.create(:user)
+    project = FactoryBot.create(:project, user: user)
+    client_document = FactoryBot.create(:client_document, project: project)
+    sign_in_with user.email, user.password
+    visit root_path
+    click_link("project_#{project.id}")
+    visit project_client_documents_path
+    expect(page).to have_content(client_document.document_name)
+  end
+
   it 'redirects away from project show page if user is not signed in' do
     project = FactoryBot.create(:project)
     visit project_path(project)
@@ -214,5 +225,6 @@ describe 'Project Session' do
     visit edit_project_path(@project2)
     expect(page.get_rack_session_key('project_id')).to eq(@project2.id)
   end
+
 
 end

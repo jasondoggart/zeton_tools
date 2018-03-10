@@ -37,6 +37,9 @@ Rails.application.routes.draw do
   get 'projects/action_items',
     to: 'projects#project_action_items',
     as: :project_action_items
+  get 'projects/client_documents',
+    to: 'projects#project_client_documents',
+    as: :project_client_documents
   post 'select_project', to: 'project_sessions#create'
   get 'information_requests/send_rfi',
     to: 'information_requests#send_rfi',

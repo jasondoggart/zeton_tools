@@ -1,0 +1,61 @@
+<div class="row pl-5 pr-5 mb-3 mt-5">
+  <div class="col-sm-12">
+    <h3>
+      Client Documents
+    </h3>
+    <button onclick="toggleFilters()" class="btn btn-sm btn-primary">
+      Filters
+    </button>
+  </div>
+</div>
+
+<div class="row pl-5 pr-5">
+  <div id="filters" class="col-sm-2 filters-close">
+    <h5 class="text-muted">
+      Sort by
+    </h5>
+    <h5 class="text-muted">
+      Filters
+    </h5>
+    <h5 class="text-muted">
+      Actions
+    </h5>
+  </div>
+  <div class="col-sm">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-box-shadow mb-5">
+          <div class="card-body mt-0">
+            <% @client_documents.each do |doc| %>
+              <div class="border-bottom pb-3 pt-3 mt-0">
+                <div class="row pl-3 pr-3">
+                  <div class="col-sm-12">
+                    <h5 class-"mb-0">
+                      <%= link_to doc.document_name,
+                        '#',
+                        id: "show_client_document_#{doc.id}" %>
+                    </h5>
+                    <% if doc.document_number %>
+                      <p class="text-muted">
+                      <%= doc.document_number %>
+                      </p>
+                    <% end %>
+                    <% if doc.document_revision %>
+                      <p class="text-muted">
+                      Revision <%= doc.document_revision %>
+                      </p>
+                    <% end %>
+                    <p>
+                    <%= pluralize(doc.information_requests.count, 'Information Request') %> submitted for this document
+                    </p>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
