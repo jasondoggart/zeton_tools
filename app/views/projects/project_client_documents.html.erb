@@ -23,6 +23,20 @@
   </div>
   <div class="col-sm">
     <div class="row">
+      <div class="col-sm-3">
+        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+          <div class="col-sm-12 h3 text-info">
+            <%=
+              link_to '<i class="fa fa-plus"></i>'.html_safe,
+              new_client_document_path,
+              id: "new_client_document_link"
+            %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="col-12">
         <div class="card card-box-shadow mb-5">
           <div class="card-body mt-0">
@@ -32,7 +46,7 @@
                   <div class="col-sm-12">
                     <h5 class-"mb-0">
                       <%= link_to doc.document_name,
-                        '#',
+                        client_document_path(doc),
                         id: "show_client_document_#{doc.id}" %>
                     </h5>
                     <% if doc.document_number %>

@@ -1,0 +1,65 @@
+<div class="row pl-5 pr-5 mb-3 mt-5">
+  <div class="col-sm-12">
+    <h1 class="display-4">
+      <%= @client_document.document_name %>
+    </h1>
+    <%=
+      link_to 'Edit Details',
+      edit_client_document_path(@client_document),
+      class: 'btn btn-outline-primary',
+      id: "edit_client_document_#{@client_document.id}"
+    %>
+    <%=
+      link_to 'Delete Document',
+      client_document_path(@client_document),
+      method: :delete,
+      class: 'btn btn-outline-danger',
+      id: "delete_client_document_#{@client_document.id}"
+    %>
+  </div>
+</div>
+<div class="row pl-5 pr-5 mb-3 mt-5">
+  <div class="col-sm-12">
+    <h3 class="section-title mb-3">
+      Document Info
+    </h3>
+    <div class="card card-box-shadow mb-3 p-4">
+      <div class="card-body">
+        <% if @client_document.document_number || @client_document.document_revision %>
+          <% if @client_document.document_number %>
+            <p>
+            Document Number: <%= @client_document.document_number %>
+            </p>
+          <% end %>
+          <% if @client_document.document_revision %>
+            <p>
+            Document Revision: <%= @client_document.document_revision %>
+            </p>
+          <% end %>
+        <% else %>
+            No document number or revision added
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row pl-5 pr-5 mb-3 mt-5">
+  <div class="col-sm-12">
+    <h3 class="section-title mb-3">
+      Associated RFIs
+    </h3>
+    <div class="card card-box-shadow mb-3 p-4">
+      <div class="card-body">
+        <% if @client_document.information_requests.any? %>
+          <% @client_document.information_requests.each do |rfi| %>
+            <%= render partial: 'projects/rfi', locals: {rfi: rfi} %>
+          <% end %>
+        <% else %>
+          No RFI's added
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+

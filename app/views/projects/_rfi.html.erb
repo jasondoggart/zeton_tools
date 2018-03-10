@@ -1,0 +1,66 @@
+<div class="border-bottom">
+  <div class="pt-3 mt-0">
+    <div class="row pl-3 pr-3">
+      <div class="col-sm-12">
+        <h5 class="mb-0">
+          <%= link_to rfi.rfi_number,
+            information_request_path(rfi),
+            id: "show_rfi_#{rfi.id}" %>
+        </h5>
+        <div id="rfi_status_form_rfi_<%= rfi.id %>">
+          <%= render partial: 'information_requests/rfi_status_form',
+            locals: {rfi: rfi} %>
+        </div>
+        <div class="text-muted mb-3">
+          Created <%= rfi.created_at.strftime("%b %-d, %Y") %>
+        <% if rfi.rfi_responses.any? %>
+          <span class="text-info">
+            | Updated
+            <%= rfi.rfi_responses.last.created_at.strftime(
+              "%b %-d, %Y"
+            ) %>
+          by <%= rfi.rfi_responses.last.organization %>
+          </span>
+        <% end %>
+        <% if rfi.target_date.present? %>
+          <p>
+          Response required by <%= rfi.target_date.strftime(
+            "%b %-d, %Y"
+          ) %> (
+          <%= pluralize days_from_now(rfi.target_date), 'day' %>
+          from now)
+          </p>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pb-3">
+    <div class="row pl-3 pr-3">
+      <div class="col-sm-12 pb-2">
+        <%= rfi.zeton_clarification %>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <% rfi.instruments.each do |inst| %>
+        <%= link_to inst.tag,
+          instrument_path(inst),
+          class: 'badge badge-pill badge-primary' %>
+      <% end %>
+      <% rfi.equipment.each do |equip| %>
+        <span >
+          <%= link_to equip.tag,
+            equipment_path(equip),
+            class: 'badge badge-pill badge-primary' %>
+        </span>
+      <% end %>
+      <% rfi.handvalves.each do |valve| %>
+        <span >
+          <%= link_to valve.tag,
+            handvalve_path(valve),
+            class: 'badge badge-pill badge-primary' %>
+        </span>
+      <% end %>
+    </div>
+  </div>
+</div>

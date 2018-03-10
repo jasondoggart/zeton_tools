@@ -1,0 +1,67 @@
+<%= form_for @client_document do |f| %>
+  <% if @client_document.errors.any? %>
+    <h2>
+      <%=
+        pluralize(
+          @client_document.errors.count, "error"
+          )
+      %>
+      prohibited this document from being added
+    </h2>
+    <ul>
+      <% @client_document.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="row pl-5 pr-5">
+    <div class="col-sm-12">
+      <div class="card card-box-shadow ">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <%= f.label :document_name, "Document name" %>
+                <%=
+                  f.text_field :document_name,
+                    class: 'form-control'
+                  %>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <%= f.label :document_number, "Document number" %>
+                <%=
+                  f.text_field :document_number,
+                    class: 'form-control'
+                  %>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <%= f.label :document_revision, "Document revision" %>
+                <%=
+                  f.text_field :document_revision,
+                    class: 'form-control'
+                  %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <%=
+                f.submit @client_document.new_record? ?
+                'Add document' :
+                'Update document',
+                class: 'btn btn-outline-primary'
+              %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
