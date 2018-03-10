@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180309210334) do
+ActiveRecord::Schema.define(version: 20180310201359) do
 
   create_table "action_items", force: :cascade do |t|
     t.integer "priority"
@@ -94,6 +94,19 @@ ActiveRecord::Schema.define(version: 20180309210334) do
     t.integer "item_grounded_by_elec", default: 0
     t.integer "item_inspected_by_eng", default: 0
     t.integer "project_id"
+    t.datetime "datasheet_complete_completed_at"
+    t.datetime "datasheet_released_completed_at"
+    t.datetime "rfq_sent_completed_at"
+    t.datetime "po_placed_completed_at"
+    t.datetime "drawing_for_approval_received_completed_at"
+    t.datetime "drawing_for_approval_marked_up_completed_at"
+    t.datetime "drawing_for_approval_sent_to_client_completed_at"
+    t.datetime "drawing_for_approval_released_for_construction_completed_at"
+    t.datetime "item_received_at_zeton_completed_at"
+    t.datetime "item_inspected_and_released_completed_at"
+    t.datetime "item_installed_by_mech_completed_at"
+    t.datetime "item_grounded_by_elec_completed_at"
+    t.datetime "item_inspected_by_eng_completed_at"
     t.index ["project_id"], name: "index_equipment_on_project_id"
   end
 
@@ -130,6 +143,14 @@ ActiveRecord::Schema.define(version: 20180309210334) do
     t.integer "item_mounted", default: 0
     t.integer "item_plumbed", default: 0
     t.integer "item_checked_by_eng", default: 0
+    t.datetime "valve_description_complete_completed_at"
+    t.datetime "valve_description_approved_completed_at"
+    t.datetime "po_placed_completed_at"
+    t.datetime "item_received_completed_at"
+    t.datetime "item_inspected_and_released_completed_at"
+    t.datetime "item_mounted_completed_at"
+    t.datetime "item_plumbed_completed_at"
+    t.datetime "item_checked_by_eng_completed_at"
     t.index ["project_id"], name: "index_handvalves_on_project_id"
   end
 
@@ -199,6 +220,20 @@ ActiveRecord::Schema.define(version: 20180309210334) do
     t.integer "grounded_by_electrical", default: 0
     t.integer "checked_by_eng", default: 0
     t.integer "project_id"
+    t.datetime "datasheet_submitted_for_approval_completed_at"
+    t.datetime "datasheet_approved_completed_at"
+    t.datetime "rfq_sent_completed_at"
+    t.datetime "po_placed_completed_at"
+    t.datetime "item_received_completed_at"
+    t.datetime "item_inspected_and_released_completed_at"
+    t.datetime "mounted_by_mechanical_completed_at"
+    t.datetime "plumbed_by_mechanical_completed_at"
+    t.datetime "cable_pulled_completed_at"
+    t.datetime "cable_terminated_at_source_completed_at"
+    t.datetime "cable_terminated_at_destination_completed_at"
+    t.datetime "continuity_tested_completed_at"
+    t.datetime "grounded_by_electrical_completed_at"
+    t.datetime "checked_by_eng_completed_at"
     t.index ["project_id"], name: "index_instruments_on_project_id"
   end
 

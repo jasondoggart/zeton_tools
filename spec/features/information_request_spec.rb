@@ -65,7 +65,7 @@ describe "Information Request" do
     visit project_rfis_path
     click_link('new_rfi')
     fill_in('Zeton Clarification', with: "Clar")
-    select(@project.instruments.last.tag, from: 'Associated Instruments')
+    select(@project.instruments.last.tag, from: 'Instruments')
     click_on('Add RFI')
     expect(@project.information_requests.last.instruments.last).to eq(Instrument.last)
   end
@@ -78,7 +78,7 @@ describe "Information Request" do
     visit project_rfis_path
     click_link('new_rfi')
     fill_in('Zeton Clarification', with: "Clar")
-    select(@project.equipment.last.tag, from: 'Associated Equipment')
+    select(@project.equipment.last.tag, from: 'Equipment')
     click_on('Add RFI')
     expect(@project.information_requests.last.equipment.last).to eq(Equipment.last)
   end

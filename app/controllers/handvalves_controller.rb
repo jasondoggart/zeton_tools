@@ -45,7 +45,6 @@ class HandvalvesController < ApplicationController
     @handvalve.delete
     flash[:info] = "Handvalve deleted"
     redirect_to project_handvalves_path
-
   end
 
   private 
@@ -74,6 +73,14 @@ class HandvalvesController < ApplicationController
                                      :item_inspected_and_released,
                                      :item_mounted,
                                      :item_plumbed,
-                                     :item_checked_by_eng)
+                                     :item_checked_by_eng,
+                                     :valve_description_complete_completed_at,
+                                     :valve_description_approved_completed_at,
+                                     :po_placed_completed_at,
+                                     :item_received_completed_at,
+                                     :item_inspected_and_released_completed_at,
+                                     :item_mounted_completed_at,
+                                     :item_plumbed_completed_at,
+                                     :item_checked_by_eng_completed_at)
   end
 end

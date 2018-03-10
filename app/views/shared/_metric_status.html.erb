@@ -1,5 +1,12 @@
 <%= form_for record, remote: true do |f| %>
   <%= f.hidden_field attribute.to_sym, value: metrics_increment(value) %>
+  <% if metrics_increment(value) == 1 %>
+    <%= f.hidden_field (attribute + "_completed_at").to_sym,
+      value: Time.now %>
+  <% else %>
+    <%= f.hidden_field (attribute + "_completed_at").to_sym,
+      value: nil %>
+  <% end %>
   <%=
     f.button icon_select(value).html_safe,
       class: 'metrics-button'
