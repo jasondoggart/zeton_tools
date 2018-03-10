@@ -6,7 +6,18 @@
     <p class="lead text-muted">
     Created 
     <%= @information_request.created_at.strftime("%b %-d, %Y") %> 
-    by <%= @information_request.project.user.full_name %>
+    by <%= @information_request.project.user.full_name %>.
+    <% if @information_request.date_sent %>
+      Sent to <%= @information_request.client_team_member.full_name %>
+      on <%= @information_request.date_sent %>.
+    <% elsif @information_request.client_team_member %>
+      Not sent yet sent to client.
+      <%= link_to 'Send now?',
+      send_rfi_path(:rfi => @information_request),
+      class: 'text-danger' %>
+    <% else %>
+        Not sent to client yet. Add client team member below to send RFI.
+    <% end %>
     </p>
     <% if @information_request.target_date.present? %>
       <p>

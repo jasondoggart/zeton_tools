@@ -1,7 +1,9 @@
 Dear <%= @rfi.client_team_member.first_name %>,
 
-A new RFI has been created for Project <%= @rfi.project.project_number %>. Please review the information below, and respond by <%= @rfi.target_date.strftime("%b %-d, %Y") %>.
-
+A new RFI has been created for Project <%= @rfi.project.project_number %>.
+<% if @rfi.target_date %>
+Please review the information below, and respond by <%= @rfi.target_date.strftime("%b %-d, %Y") %>.
+<% end %>
 ***
 
 <% if @rfi.client_document.present? %>
@@ -24,10 +26,11 @@ The requested information follows:
 <%= @rfi.zeton_clarification %>
 
 ***
-
+<% if @rfi.target_date %>
 Please respond by <%= @rfi.target_date.strftime("%b %-d, %Y") %>.
 
 ***
+<% end %>
 
 Best regards,
 <%= @rfi.project.user.first_name %>

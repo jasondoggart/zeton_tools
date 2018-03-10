@@ -54,6 +54,8 @@ class InformationRequestsController < ApplicationController
   def send_rfi
     @information_request = InformationRequest.find(params[:rfi])
     RfiMailer.send_rfi(@information_request).deliver_now
+    @information_request.date_sent = Time.now
+    @information_request.save
     redirect_to @information_request
   end
 

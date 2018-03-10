@@ -3,8 +3,10 @@
 </p>
 <p>
   A new RFI has been created for Project <%= @rfi.project.project_number %>.
+  <% if @rfi.target_date %>
     Please review the information below, and respond by
     <b><%= @rfi.target_date.strftime("%b %-d, %Y") %></b>.
+  <% end %>
 </p>
 <br />
 <br />
@@ -38,13 +40,14 @@
 <br />
 <br />
 ***
-
-<p>
-<b>Please respond by <%= @rfi.target_date.strftime("%b %-d, %Y") %>.</b>
-</p>
-<br />
-<br />
-***
+<% if @rfi.target_date %>
+  <p>
+  <b>Please respond by <%= @rfi.target_date.strftime("%b %-d, %Y") %>.</b>
+  </p>
+  <br />
+  <br />
+  ***
+<% end %>
 
 <p>
   Best regards,<br />
