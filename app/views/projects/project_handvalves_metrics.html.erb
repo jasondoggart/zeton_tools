@@ -82,7 +82,7 @@
                   PID
                 </th>
                 <% @handvalves.first.attributes.each do |name, value| %>
-                  <% if @handvalves.first.metrics_attributes.include?(name) %>
+                  <% if Handvalve.metrics_attributes.include?(name) %>
                     <th scope="col" class="pl-0 pr-0 border-top-0 align-middle text-center">
                       <%= name.humanize.titleize %>
                     </th>

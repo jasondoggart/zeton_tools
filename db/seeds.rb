@@ -22,47 +22,48 @@ User.create(first_name: "Oliver",
             email: "oorrell@zeton.com",
             password: "password")
 puts "Created Oliver Orrell"
-User.create(first_name: "Ian",
-            last_name: "Jessop",
-            email: "ijessop@zeton.com",
-            password: "password")
-puts "Created Ian Jessop"
 User.create(first_name: "Danielle",
             last_name: "DeSousa",
             email: "ddesousa@zeton.com",
             password: "password")
 puts "Created Danielle De Sousa"
-User.create(first_name: "Pallavi",
-            last_name: "Dziewa",
-            email: "pdziewa@zeton.com",
-            password: "password")
-puts "Created Pallavi Dziewa"
-User.create(first_name: "Nigel",
-            last_name: "Semegen",
-            email: "nsemegen@zeton.com",
-            password: "password")
-puts "Created Nigel Semegen"
-User.create(first_name: "Paul",
-            last_name: "Martin",
-            email: "pmartin@zeton.com",
-            password: "password")
-puts "Created Paul Martin"
-User.create(first_name: "Mike",
-            last_name: "Trainor",
-            email: "mtrainor@zeton.com",
-            password: "password")
-puts "Created Mike Trainor"
 
-# Create project for each project manager
-User.all.each do |user| 
-  project_number = Faker::Number.number(3) + "-" + Faker::Number.number(2)
-  project_name = Faker::Science.element + " From Biomass"
-  client = Faker::Science.scientist
-  user.projects.create(project_number: project_number,
-                       project_name: project_name,
-                       client: client)
-  puts "Created project number #{Project.last.project_number}"
-end
+# Create projects
+
+Project.create(
+  project_number: "123-45",
+  project_name: "Almost Complete Example",
+  client: "A Great Client",
+  project_start_date: "March 6, 2017".to_date,
+  project_end_date: "April 27, 2018".to_date,
+  user: User.find_by(email: "jdoggart@zeton.com")
+)
+
+puts "Created project number #{Project.last.project_number}"
+
+Project.create(
+  project_number: "234-56",
+  project_name: "Halfway Done Example",
+  client: "A Superb Client",
+  project_start_date: "September 18, 2017".to_date,
+  project_end_date: "October 23, 2018".to_date,
+  user: User.find_by(email: "oorrell@zeton.com")
+)
+
+puts "Created project number #{Project.last.project_number}"
+
+Project.create(
+  project_number: "345-67",
+  project_name: "Just Beginning Example",
+  client: "A Fantastic Client",
+  project_start_date: "February 5, 2018".to_date,
+  project_end_date: "December 17, 2018".to_date,
+  user: User.find_by(email: "jonesi@zeton.com")
+)
+
+puts "Created project number #{Project.last.project_number}"
+
+
 
 # Create other project roles
 User.create(first_name: "Matt",
@@ -97,7 +98,6 @@ User.create(first_name: "Leisl",
 puts "Created Leisl Dukhedin-Lalla"
 
 # Create all team members
-n = User.count
 Project.all.each do |project|
   project.team_members.create(role: "Frame Fabrication Supervisor",
                               user: User.find_by(email: "mtwynstra@zeton.com"))
@@ -112,10 +112,9 @@ Project.all.each do |project|
   project.team_members.create(role: "Plant Manager",
                               user: User.find_by(email: "jgrieve@zeton.com"))
   project.team_members.create(role: "Project Engineer",
-                              user: User.find(n))
+                              user: User.find_by(email: "jdoggart@zeton.com"))
   project.team_members.create(role: "Project Engineer",
                               user: User.find_by(email: "jdoggart@zeton.com"))
-  n = n - 1
   puts "Added #{project.team_members.count} team members to project #{project.project_number}"
 end
 
@@ -145,7 +144,7 @@ valve_counting_codes = ["VTUBE", "VSCRD", "VWELD", "VOTHR"]
 
 # Create instruments and equipment for all projects 
 Project.all.each do |project| 
-  num_inst = rand(75..200) 
+  num_inst = rand(10..20) 
   puts "Will generate #{num_inst} instruments for project #{project.project_number}" 
   num_inst.times do 
     skid_number = skids.sample 
@@ -180,7 +179,7 @@ Project.all.each do |project|
   end
   puts "Generated #{project.instruments.count} instruments"
 
-  num_equip = rand(5..50)
+  num_equip = rand(3..7)
   puts "Will generate #{num_equip} 
   pieces of equipment for project #{project.project_number}"
   num_equip.times do
@@ -210,7 +209,7 @@ Project.all.each do |project|
   end
   puts "Generated #{project.equipment.count} pieces of equipment"
 
-  num_valves = rand(100..200)
+  num_valves = rand(10..20)
   puts "Will generate #{num_valves} 
     handvalves for project #{project.project_number}"
   num_valves.times do
@@ -253,138 +252,254 @@ Project.all.each do |project|
 
 end
 
-
-# Fill in metrics for all instruments
-odds = [1,1,1,1,1,1,1,1,1,0]
-
+# Fill in project metrics
+work_days = [1,2,3,4,5]
 Project.all.each do |project|
-  puts "Updating Instrument Metrics for project #{project.id} of #{Project.count}"
-  project.instruments.each do |inst|
-    inst.datasheet_submitted_for_approval = odds.sample
-    if inst.datasheet_submitted_for_approval == 1
-      inst.datasheet_approved = odds.sample
-      if inst.datasheet_approved == 1
+  puts "Updating metrics for project #{project.project_number}"
+  working_days = (project.project_start_date.to_datetime..project.project_end_date.to_datetime).to_a.
+    select { |k| work_days.include?(k.wday) }
+  odds = [1]
+  (working_days.length).times do
+    odds.push(0)
+  end
+  odds = odds.sort
+  complete_working_days = (project.project_start_date.to_datetime..Time.now).to_a.
+    select { |k| work_days.include?(k.wday) }
+
+
+  #counter
+  d = 0
+  complete_working_days.each do |day|
+    odds[d] = 1
+    d += 1
+    puts "Completing Metrics for day #{d} of #{working_days.length} days"
+    puts "Updating Instrument Metrics for project #{project.id} of #{Project.count}"
+    project.instruments.each do |inst|
+      if inst.datasheet_submitted_for_approval == 0
+        inst.datasheet_submitted_for_approval = odds.sample
+        if inst.datasheet_submitted_for_approval == 1
+          inst.datasheet_submitted_for_approval_completed_at = day
+        end
+      end
+      if inst.datasheet_submitted_for_approval == 1 and inst.datasheet_approved == 0
+        inst.datasheet_approved = odds.sample
+        if inst.datasheet_approved == 1
+          inst.datasheet_approved_completed_at = day
+        end
+      end
+      if inst.datasheet_approved == 1 and inst.rfq_sent == 0
         inst.rfq_sent = odds.sample
         if inst.rfq_sent == 1
-          inst.po_placed = odds.sample
-          if inst.po_placed == 1
-            inst.zeton_po = "18." + Faker::Number.number(5)
-            inst.item_received = odds.sample
-            if inst.item_received == 1
-              inst.item_inspected_and_released = odds.sample
-              if inst.item_inspected_and_released == 1
-                inst.mounted_by_mechanical = odds.sample
-                if inst.mounted_by_mechanical == 1
-                  inst.plumbed_by_mechanical = odds.sample
-                  if inst.plumbed_by_mechanical == 1
-                    inst.cable_pulled = odds.sample
-                    if inst.cable_pulled == 1
-                      inst.cable_terminated_at_source = odds.sample
-                      if inst.cable_terminated_at_source == 1
-                        inst.cable_terminated_at_destination = odds.sample
-                        if inst.cable_terminated_at_destination == 1
-                          inst.continuity_tested = odds.sample
-                          if inst.continuity_tested == 1
-                            inst.grounded_by_electrical = odds.sample
-                            if inst.grounded_by_electrical == 1
-                              inst.checked_by_eng = odds.sample
-                            end
-                          end
-                        end
-                      end
-                    end
-                  end
-                end
-              end
-            end
-          end
+          inst.rfq_sent_completed_at = day
         end
       end
+      if inst.rfq_sent == 1 and inst.po_placed == 0
+        inst.po_placed = odds.sample
+        if inst.po_placed == 1
+          inst.po_placed_completed_at = day
+          inst.zeton_po = "18." + Faker::Number.number(5)
+        end
+      end
+      if inst.po_placed == 1 and inst.item_received == 0
+        inst.item_received = odds.sample
+        if inst.item_received == 1
+          inst.item_received_completed_at = day
+        end
+      end
+      if inst.item_received == 1 and inst.item_inspected_and_released == 0
+        inst.item_inspected_and_released = odds.sample
+        if inst.item_inspected_and_released == 1
+          inst.item_inspected_and_released_completed_at = day
+        end
+      end
+      if inst.item_inspected_and_released == 1 and inst.mounted_by_mechanical == 0
+        inst.mounted_by_mechanical = odds.sample
+        if inst.mounted_by_mechanical == 1
+          inst.mounted_by_mechanical_completed_at = day
+        end
+      end
+      if inst.mounted_by_mechanical == 1 and inst.plumbed_by_mechanical == 0
+        inst.plumbed_by_mechanical = odds.sample
+        if inst.plumbed_by_mechanical == 1
+          inst.plumbed_by_mechanical_completed_at = day
+        end
+      end
+      if inst.plumbed_by_mechanical == 1 and inst.cable_pulled == 0
+        inst.cable_pulled = odds.sample
+        if inst.cable_pulled == 1
+          inst.cable_pulled_completed_at = day
+        end
+      end
+      if inst.cable_pulled == 1 and inst.cable_terminated_at_source == 0
+        inst.cable_terminated_at_source = odds.sample
+        if inst.cable_terminated_at_source == 1
+          inst.cable_terminated_at_source_completed_at = day
+        end
+      end
+      if inst.cable_terminated_at_source == 1 and inst.cable_terminated_at_destination == 0
+        inst.cable_terminated_at_destination = odds.sample
+        if inst.cable_terminated_at_destination == 1
+          inst.cable_terminated_at_destination_completed_at = day
+        end
+      end
+      if inst.cable_terminated_at_destination == 1 and inst.continuity_tested == 0
+        inst.continuity_tested = odds.sample
+        if inst.continuity_tested == 1
+          inst.continuity_tested_completed_at = day
+        end
+      end
+      if inst.continuity_tested == 1 and inst.grounded_by_electrical == 0
+        inst.grounded_by_electrical = odds.sample
+        if inst.grounded_by_electrical == 1
+          inst.grounded_by_electrical_completed_at = day
+        end
+      end
+      if inst.grounded_by_electrical == 1 and inst.checked_by_eng == 0
+        inst.checked_by_eng = odds.sample
+        if inst.checked_by_eng == 1
+          inst.checked_by_eng_completed_at = day
+        end
+      end
+      inst.save
     end
-    inst.save
-  end
-  puts "Completed instrument metrics"
-end
-
-# Fill in metrics for all equipment
-
-Project.all.each do |project|
-  puts "Filling in metrics for project #{project.id} of #{Project.count}"
-  project.equipment.each do |equip|
-    equip.datasheet_complete = odds.sample
-    if equip.datasheet_complete == 1
-      equip.datasheet_released = odds.sample
-      if equip.datasheet_released == 1
+    project.equipment.each do |equip|
+      if equip.datasheet_complete == 0
+        equip.datasheet_complete = odds.sample
+        if equip.datasheet_complete == 1
+          equip.datasheet_complete_completed_at = day
+        end
+      end
+      if equip.datasheet_complete == 1 and equip.datasheet_released == 0
+        equip.datasheet_released = odds.sample
+        if equip.datasheet_released == 1
+          equip.datasheet_released_completed_at = day
+        end
+      end
+      if equip.datasheet_released == 1 and equip.rfq_sent == 0
         equip.rfq_sent = odds.sample
         if equip.rfq_sent == 1
-          equip.po_placed = odds.sample
-          if equip.po_placed == 1
-            equip.zeton_po = "18." + Faker::Number.number(5)
-            equip.drawing_for_approval_received = odds.sample
-            if equip.drawing_for_approval_received == 1
-              equip.drawing_for_approval_marked_up = odds.sample
-              if equip.drawing_for_approval_marked_up == 1
-                equip.drawing_for_approval_sent_to_client = odds.sample
-                if equip.drawing_for_approval_sent_to_client == 1
-                  equip.drawing_for_approval_released_for_construction = odds.sample
-                  if equip.drawing_for_approval_released_for_construction == 1
-                    equip.item_received_at_zeton = odds.sample
-                    if equip.item_received_at_zeton == 1
-                      equip.item_inspected_and_released = odds.sample
-                      if equip.item_inspected_and_released == 1
-                        equip.item_installed_by_mech = odds.sample
-                        if equip.item_installed_by_mech == 1
-                          equip.item_grounded_by_elec = odds.sample
-                          if equip.item_grounded_by_elec == 1
-                            equip.item_inspected_by_eng = odds.sample
-                          end
-                        end
-                      end
-                    end
-                  end
-                end
-              end
-            end
-          end
+          equip.rfq_sent_completed_at = day
         end
       end
+      if equip.rfq_sent == 1 and equip.po_placed == 0
+        equip.po_placed = odds.sample
+        if equip.po_placed == 1
+          equip.zeton_po = "18." + Faker::Number.number(5)
+          equip.po_placed_completed_at = day
+        end
+      end
+      if equip.po_placed == 1 and equip.drawing_for_approval_received == 0
+        equip.drawing_for_approval_received = odds.sample
+        if equip.drawing_for_approval_received == 1
+          equip.drawing_for_approval_received_completed_at = day
+        end
+      end
+      if equip.drawing_for_approval_received == 1 and equip.drawing_for_approval_marked_up == 0
+        equip.drawing_for_approval_marked_up = odds.sample
+        if equip.drawing_for_approval_marked_up == 1
+          equip.drawing_for_approval_marked_up_completed_at = day
+        end
+      end
+      if equip.drawing_for_approval_marked_up == 1 and equip.drawing_for_approval_sent_to_client == 0
+        equip.drawing_for_approval_sent_to_client = odds.sample
+        if equip.drawing_for_approval_sent_to_client == 1
+          equip.drawing_for_approval_sent_to_client_completed_at = day
+        end
+      end
+      if equip.drawing_for_approval_sent_to_client == 1 and equip.drawing_for_approval_released_for_construction == 0
+        equip.drawing_for_approval_released_for_construction = odds.sample
+        if equip.drawing_for_approval_released_for_construction == 1
+          equip.drawing_for_approval_released_for_construction_completed_at = day
+        end
+      end
+      if equip.drawing_for_approval_released_for_construction == 1 and equip.item_received_at_zeton == 0
+        equip.item_received_at_zeton = odds.sample
+        if equip.item_received_at_zeton == 1
+          equip.item_received_at_zeton_completed_at = day
+        end
+      end
+      if equip.item_received_at_zeton == 1 and equip.item_inspected_and_released == 0
+        equip.item_inspected_and_released = odds.sample
+        if equip.item_inspected_and_released == 1
+          equip.item_inspected_and_released_completed_at = day
+        end
+      end
+      if equip.item_inspected_and_released == 1 and equip.item_installed_by_mech == 0
+        equip.item_installed_by_mech = odds.sample
+        if equip.item_installed_by_mech == 1
+          equip.item_installed_by_mech_completed_at = day
+        end
+      end
+      if equip.item_installed_by_mech == 1 and equip.item_grounded_by_elec == 0
+        equip.item_grounded_by_elec = odds.sample
+        if equip.item_grounded_by_elec == 1
+          equip.item_grounded_by_elec_completed_at = day
+        end
+      end
+      if equip.item_grounded_by_elec ==1 and equip.item_inspected_by_eng == 0
+        equip.item_inspected_by_eng = odds.sample
+        if equip.item_inspected_by_eng == 1
+          equip.item_inspected_by_eng_completed_at = day
+        end
+      end
+      equip.save
     end
-    equip.save
-  end
-    puts "Completed Equipment Metrics"
-end
-
-# Fill in metrics for all handvalves
-
-Project.all.each do |project|
-  puts "Filling in metrics for project #{project.id} of #{Project.count}"
-  project.handvalves.each do |valve|
-    valve.valve_description_complete = odds.sample
-    if valve.valve_description_complete == 1
-      valve.valve_description_approved = odds.sample
-      if valve.valve_description_approved == 1
+    project.handvalves.each do |valve|
+      if valve.valve_description_complete == 0
+        valve.valve_description_complete = odds.sample
+        if valve.valve_description_complete == 1
+          valve.valve_description_complete_completed_at = day
+        end
+      end
+      if valve.valve_description_complete == 1 and valve.valve_description_approved == 0
+        valve.valve_description_approved = odds.sample
+        if valve.valve_description_approved == 1
+          valve.valve_description_approved_completed_at = day
+        end
+      end
+      if valve.valve_description_approved == 1 and valve.po_placed == 0
         valve.po_placed = odds.sample
         if valve.po_placed == 1
-          valve.item_received = odds.sample
-          if valve.item_received == 1
-            valve.item_inspected_and_released = odds.sample
-            if valve.item_inspected_and_released == 1
-              valve.item_mounted = odds.sample
-              if valve.item_mounted == 1
-                valve.item_plumbed = odds.sample
-                if valve.item_plumbed == 1
-                  valve.item_checked_by_eng = odds.sample
-                end
-              end
-            end
-          end
+          valve.po_placed_completed_at = day
+          valve.zeton_po = "18." + Faker::Number.number(5)
         end
       end
+      if valve.po_placed == 1 and valve.item_received == 0
+        valve.item_received = odds.sample
+        if valve.item_received == 1
+          valve.item_received_completed_at = day
+        end
+      end
+      if valve.item_received == 1 and valve.item_inspected_and_released = 0
+        valve.item_inspected_and_released = odds.sample
+        if valve.item_inspected_and_released == 1
+          valve.item_inspected_and_released_completed_at = day
+        end
+      end
+      if valve.item_inspected_and_released == 1 and valve.item_mounted == 0
+        valve.item_mounted = odds.sample
+        if valve.item_mounted == 1
+          valve.item_mounted_completed_at = day
+        end
+      end
+      if valve.item_mounted == 1 and valve.item_plumbed == 0
+        valve.item_plumbed = odds.sample
+        if valve.item_plumbed == 1
+          valve.item_plumbed_completed_at = day
+        end
+      end
+      if valve.item_plumbed == 1 and valve.item_checked_by_eng == 0
+        valve.item_checked_by_eng = odds.sample
+        if valve.item_checked_by_eng == 1
+          valve.item_checked_by_eng_completed_at = day
+        end
+      end
+      valve.save
     end
-    valve.save
   end
-  puts "Completed Handvalve Metrics"
+
 end
+
 
 # Add project RFI's
 areas = ["A - Process", "B - BOM", "C - Controls",
@@ -397,17 +512,12 @@ Project.all.each do |project|
   num_rfis = rand(15..75)
   puts "will create #{num_rfis} for project #{project.id}"
   num_rfis.times do
-    doc_number = "CLIENT-DOC-" + Faker::Number.number(4)
-    doc_title = "Super Awesome Client Specfication"
-    doc_rev = "1.2"
     area = areas.sample
     zeton_clarification = Faker::Lorem.paragraph(3)
-    project.information_requests.create(client_document_number: doc_number,
-                             client_document_title: doc_title,
-                             client_document_revision: doc_rev,
-                             client_document_section: "1.3.5",
+    project.information_requests.create(
                              zeton_clarification: zeton_clarification,
-                             area: area)
+                             area: area
+    )
     # add instrument associations
     num_assoc_inst = rand(0..3)
     num_assoc_inst.times do

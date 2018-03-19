@@ -18,7 +18,7 @@
         </div>
         <ul class="list-group list-group-flush">
           <% @instrument.attributes.each do |name, value| %>
-            <% if @instrument.metrics_attributes.include?(name) %>
+            <% if Instrument.metrics_attributes.include?(name) %>
               <li class="list-group-item">
                 <span class="float-sm-left"><%= name.humanize %></span>
                 <span class="align-middle float-sm-right">

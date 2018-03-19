@@ -46,11 +46,7 @@ class Instrument < ApplicationRecord
     where(loop: loop_selected)
   }
 
-  def tag
-    type_code + "-" + loop
-  end
-
-  def metrics_attributes
+  def self.metrics_attributes
     ["datasheet_submitted_for_approval",
      "datasheet_approved",
      "rfq_sent",
@@ -67,5 +63,10 @@ class Instrument < ApplicationRecord
      "checked_by_eng"
     ]
   end
+
+  def tag
+    type_code + "-" + loop
+  end
+
 
 end

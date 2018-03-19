@@ -7,7 +7,7 @@
   </td>
   <td class="align-middle text-center">PID Number</td>
   <% equipment.attributes.each do |name, value| %>
-    <% if equipment.metrics_attributes.include?(name) %>
+    <% if Equipment.metrics_attributes.include?(name) %>
       <td class="align-middle text-center">
         <div id="<%= name %>_status_equipment_<%= equipment.id %>">
           <%=

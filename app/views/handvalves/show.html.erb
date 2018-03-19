@@ -18,7 +18,7 @@
         </div>
         <ul class="list-group list-group-flush">
           <% @handvalve.attributes.each do |name, value| %>
-            <% if @handvalve.metrics_attributes.include?(name) %>
+            <% if Handvalve.metrics_attributes.include?(name) %>
               <li class="list-group-item">
                 <span class="float-left">
                   <%= name.humanize %>

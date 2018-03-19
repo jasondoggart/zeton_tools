@@ -32,7 +32,7 @@ class Equipment < ApplicationRecord
     where(equipment_type: type)
   }
 
-  def metrics_attributes
+  def self.metrics_attributes
     [
       "datasheet_complete",
       "datasheet_released",

@@ -83,7 +83,7 @@
                 <th scope="col" class="border-top-0 align-middle text-center">Tag</th>
                 <th scope="col" class="border-top-0 align-middle text-center">PID</th>
                 <% @instruments.first.attributes.each do |name, value| %>
-                  <% if @instruments.first.metrics_attributes.include?(name) %>
+                  <% if Instrument.metrics_attributes.include?(name) %>
                     <th scope="col" class="border-top-0 align-middle text-center">
                       <%= name.humanize %>
                     </th>

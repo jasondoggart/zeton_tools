@@ -29,7 +29,7 @@ class Handvalve < ApplicationRecord
     where(size: valve_size)
   }
 
-  def metrics_attributes
+  def self.metrics_attributes
     [
       "valve_description_complete",
       "valve_description_approved",
