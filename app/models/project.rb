@@ -24,21 +24,79 @@ class Project < ApplicationRecord
   end
 
 
-  def instrument_metrics_report
+  def create_blank_metrics_hash_for(record)
     reporting_days = self.reporting_days_array
     empty_array = []
     reporting_days.length.times do
       empty_array.push(0)
     end
     report = Hash.new
-    Instrument.metrics_attributes.each do |attr|
+    record.metrics_attributes.each do |attr|
       report[attr.to_sym] = empty_array.dup
     end
+    report
+  end
+
+  def instrument_metrics_report
+    reporting_days = self.reporting_days_array
+    report = create_blank_metrics_hash_for Instrument
     report.each do |key, array|
       counter = 0
       completed = self.instruments.where(key => 1)
       completed.each do |item|
-        empty_array.each do |i|
+        reporting_days.each do |i|
+          if counter == 0
+            if (self.project_start_date.to_datetime...reporting_days[0].to_datetime).
+                include?(item["#{key.to_s}_completed_at"])
+              report[key][counter] += 1
+            end
+          else
+            if (reporting_days[counter-1].to_datetime...reporting_days[counter].to_datetime).include?(item["#{key.to_s}_completed_at"])
+              report[key][counter] += 1
+            end
+          end
+          counter += 1
+        end
+        counter = 0
+      end
+    end
+    report
+  end
+
+  def handvalve_metrics_report
+    reporting_days = self.reporting_days_array
+    report = create_blank_metrics_hash_for Handvalve
+    report.each do |key, array|
+      counter = 0
+      completed = self.handvalves.where(key => 1)
+      completed.each do |item|
+        reporting_days.each do |i|
+          if counter == 0
+            if (self.project_start_date.to_datetime...reporting_days[0].to_datetime).
+                include?(item["#{key.to_s}_completed_at"])
+              report[key][counter] += 1
+            end
+          else
+            if (reporting_days[counter-1].to_datetime...reporting_days[counter].to_datetime).include?(item["#{key.to_s}_completed_at"])
+              report[key][counter] += 1
+            end
+          end
+          counter += 1
+        end
+        counter = 0
+      end
+    end
+    report
+  end
+
+  def equipment_metrics_report
+    reporting_days = self.reporting_days_array
+    report = create_blank_metrics_hash_for Equipment
+    report.each do |key, array|
+      counter = 0
+      completed = self.equipment.where(key => 1)
+      completed.each do |item|
+        reporting_days.each do |i|
           if counter == 0
             if (self.project_start_date.to_datetime...reporting_days[0].to_datetime).
                 include?(item["#{key.to_s}_completed_at"])
