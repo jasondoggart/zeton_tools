@@ -21,6 +21,13 @@ class ProjectsController < ApplicationController
     @action_items = current_project.action_items.take(3)
     @team_members = current_project.team_members
     @client_team_members = current_project.client_team_members
+    @reporting_days_array = current_project.reporting_days_array.to_json.html_safe
+    @inst_metrics = currment_project.cumulative_metrics_report_for(Instrument)
+    @inst_datasheet_submitted_for_approval = current_project.cumulative_metrics_report_for(Instrument)[:datasheet_submitted_for_approval].to_json.html_safe
+    @inst_datasheet_approved = current_project.cumulative_metrics_report_for(Instrument)[:datasheet_approved].to_json.html_safe
+    @inst_rfq_sent = current_project.cumulative_metrics_report_for(Instrument)[:rfq_sent].to_json.html_safe
+    @inst_po_placed = current_project.cumulative_metrics_report_for(Instrument)[:po_placed].to_json.html_safe
+
   end
 
   def project_metrics

@@ -1,4 +1,4 @@
-<div class="row pl-5 pr-5 mb-3 mt-5">
+<div class="row pl-5 pr-5 mt-5">
   <div class="col-sm-12">
     <h3>
       Project Dashboard
@@ -9,6 +9,7 @@
         id: "update_project_#{current_project.id}" %>
     </p>
   </div>
+  <canvas id="myChart" width="200" height="100"></canvas>
 </div>
 <div class="row pl-5 pr-5 pb-5">
   <div class="col-sm-4">
@@ -416,3 +417,52 @@
     </div>
   </div>
 </div>
+<script>
+  var ctx = document.getElementById("myChart");
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: <%= @reporting_days_array %>,
+      datasets: [
+        {
+          label: 'Datasheet submitted for approval',
+          data: <%= @inst_datasheet_submitted_for_approval %>,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)'
+          ]
+        },
+        {
+          label: 'Datasheet approved',
+          data: <%= @inst_datasheet_approved %>,
+          backgroundColor: [
+            'rgba(54, 162, 235, 0.2)'
+          ]
+        },
+        {
+          label: 'RFQ Sent',
+          data: <%= @inst_rfq_sent %>,
+          backgroundColor: [
+            'rgba(255, 206, 86, 0.2)'
+          ]
+        },
+        {
+          label: 'PO Placed',
+          data: <%= @inst_po_placed %>,
+          backgroundColor: [
+            'rgba(75, 192, 192, 0.2)'
+          ]
+        },
+      ]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
+</script>
+

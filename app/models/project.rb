@@ -20,7 +20,12 @@ class Project < ApplicationRecord
   end
 
   def reporting_days_array
-    (self.project_start_date.to_datetime..self.project_end_date.to_datetime).to_a.select { |k| k.wday == 4 }
+    days = (self.project_start_date.to_datetime..self.project_end_date.to_datetime).to_a.select { |k| k.wday == 4 }
+    days_formatted = []
+    days.each_with_index do |day, i|
+      days_formatted[i] = day.strftime("%b %-d, %Y")
+    end
+    days_formatted
   end
 
 
@@ -37,12 +42,12 @@ class Project < ApplicationRecord
     report
   end
 
-  def instrument_metrics_report
+  def metrics_report_for(record)
     reporting_days = self.reporting_days_array
-    report = create_blank_metrics_hash_for Instrument
+    report = create_blank_metrics_hash_for record
     report.each do |key, array|
       counter = 0
-      completed = self.instruments.where(key => 1)
+      completed = record.where(:project => self, key => 1)
       completed.each do |item|
         reporting_days.each do |i|
           if counter == 0
@@ -63,56 +68,17 @@ class Project < ApplicationRecord
     report
   end
 
-  def handvalve_metrics_report
-    reporting_days = self.reporting_days_array
-    report = create_blank_metrics_hash_for Handvalve
-    report.each do |key, array|
-      counter = 0
-      completed = self.handvalves.where(key => 1)
-      completed.each do |item|
-        reporting_days.each do |i|
-          if counter == 0
-            if (self.project_start_date.to_datetime...reporting_days[0].to_datetime).
-                include?(item["#{key.to_s}_completed_at"])
-              report[key][counter] += 1
-            end
-          else
-            if (reporting_days[counter-1].to_datetime...reporting_days[counter].to_datetime).include?(item["#{key.to_s}_completed_at"])
-              report[key][counter] += 1
-            end
-          end
-          counter += 1
+  def cumulative_metrics_report_for(record)
+    metrics = metrics_report_for record
+    cumulative_metrics = create_blank_metrics_hash_for record
+    cumulative_metrics.each do |key, array|
+      array.each_with_index do |value, i|
+        (0..i).each do |j|
+          array[i] += metrics[key][j]
         end
-        counter = 0
       end
     end
-    report
   end
 
-  def equipment_metrics_report
-    reporting_days = self.reporting_days_array
-    report = create_blank_metrics_hash_for Equipment
-    report.each do |key, array|
-      counter = 0
-      completed = self.equipment.where(key => 1)
-      completed.each do |item|
-        reporting_days.each do |i|
-          if counter == 0
-            if (self.project_start_date.to_datetime...reporting_days[0].to_datetime).
-                include?(item["#{key.to_s}_completed_at"])
-              report[key][counter] += 1
-            end
-          else
-            if (reporting_days[counter-1].to_datetime...reporting_days[counter].to_datetime).include?(item["#{key.to_s}_completed_at"])
-              report[key][counter] += 1
-            end
-          end
-          counter += 1
-        end
-        counter = 0
-      end
-    end
-    report
-  end
 
 end

@@ -43,7 +43,6 @@ RSpec.describe Project, type: :model do
 
     it 'can generate an array of metrics reporting days' do
       expect(@project.reporting_days_array.length).to eq(6)
-      expect(@project.reporting_days_array.sample.wday).to eq(4)
     end
 
     it 'calculates the number of metrics items added per reporting period' do
@@ -221,45 +220,83 @@ RSpec.describe Project, type: :model do
         to_date
       hv10.save
 
-      expect(@project.instrument_metrics_report[:datasheet_submitted_for_approval][0]).
+      expect(@project.metrics_report_for(Instrument)[:datasheet_submitted_for_approval][0]).
         to eq(0)
-      expect(@project.instrument_metrics_report[:datasheet_submitted_for_approval][1]).
+      expect(@project.metrics_report_for(Instrument)[:datasheet_submitted_for_approval][1]).
         to eq(2)
-      expect(@project.instrument_metrics_report[:datasheet_submitted_for_approval][2]).
+      expect(@project.metrics_report_for(Instrument)[:datasheet_submitted_for_approval][2]).
         to eq(4)
-      expect(@project.instrument_metrics_report[:datasheet_submitted_for_approval][3]).
+      expect(@project.metrics_report_for(Instrument)[:datasheet_submitted_for_approval][3]).
         to eq(2)
-      expect(@project.instrument_metrics_report[:datasheet_submitted_for_approval][4]).
+      expect(@project.metrics_report_for(Instrument)[:datasheet_submitted_for_approval][4]).
         to eq(1)
-      expect(@project.instrument_metrics_report[:datasheet_submitted_for_approval][5]).
+      expect(@project.metrics_report_for(Instrument)[:datasheet_submitted_for_approval][5]).
         to eq(1)
 
-      expect(@project.equipment_metrics_report[:datasheet_complete][0]).
+      expect(@project.cumulative_metrics_report_for(Instrument)[:datasheet_submitted_for_approval][0]).
         to eq(0)
-      expect(@project.equipment_metrics_report[:datasheet_complete][1]).
+      expect(@project.cumulative_metrics_report_for(Instrument)[:datasheet_submitted_for_approval][1]).
         to eq(2)
-      expect(@project.equipment_metrics_report[:datasheet_complete][2]).
+      expect(@project.cumulative_metrics_report_for(Instrument)[:datasheet_submitted_for_approval][2]).
+        to eq(6)
+      expect(@project.cumulative_metrics_report_for(Instrument)[:datasheet_submitted_for_approval][3]).
+        to eq(8)
+      expect(@project.cumulative_metrics_report_for(Instrument)[:datasheet_submitted_for_approval][4]).
+        to eq(9)
+      expect(@project.cumulative_metrics_report_for(Instrument)[:datasheet_submitted_for_approval][5]).
+        to eq(10)
+
+      expect(@project.metrics_report_for(Equipment)[:datasheet_complete][0]).
+        to eq(0)
+      expect(@project.metrics_report_for(Equipment)[:datasheet_complete][1]).
+        to eq(2)
+      expect(@project.metrics_report_for(Equipment)[:datasheet_complete][2]).
         to eq(4)
-      expect(@project.equipment_metrics_report[:datasheet_complete][3]).
+      expect(@project.metrics_report_for(Equipment)[:datasheet_complete][3]).
         to eq(2)
-      expect(@project.equipment_metrics_report[:datasheet_complete][4]).
+      expect(@project.metrics_report_for(Equipment)[:datasheet_complete][4]).
         to eq(1)
-      expect(@project.equipment_metrics_report[:datasheet_complete][5]).
+      expect(@project.metrics_report_for(Equipment)[:datasheet_complete][5]).
         to eq(1)
 
-      expect(@project.handvalve_metrics_report[:valve_description_complete][0]).
+      expect(@project.cumulative_metrics_report_for(Equipment)[:datasheet_complete][0]).
         to eq(0)
-      expect(@project.handvalve_metrics_report[:valve_description_complete][1]).
+      expect(@project.cumulative_metrics_report_for(Equipment)[:datasheet_complete][1]).
         to eq(2)
-      expect(@project.handvalve_metrics_report[:valve_description_complete][2]).
+      expect(@project.cumulative_metrics_report_for(Equipment)[:datasheet_complete][2]).
+        to eq(6)
+      expect(@project.cumulative_metrics_report_for(Equipment)[:datasheet_complete][3]).
+        to eq(8)
+      expect(@project.cumulative_metrics_report_for(Equipment)[:datasheet_complete][4]).
+        to eq(9)
+      expect(@project.cumulative_metrics_report_for(Equipment)[:datasheet_complete][5]).
+        to eq(10)
+
+      expect(@project.metrics_report_for(Handvalve)[:valve_description_complete][0]).
+        to eq(0)
+      expect(@project.metrics_report_for(Handvalve)[:valve_description_complete][1]).
+        to eq(2)
+      expect(@project.metrics_report_for(Handvalve)[:valve_description_complete][2]).
         to eq(4)
-      expect(@project.handvalve_metrics_report[:valve_description_complete][3]).
+      expect(@project.metrics_report_for(Handvalve)[:valve_description_complete][3]).
         to eq(2)
-      expect(@project.handvalve_metrics_report[:valve_description_complete][4]).
+      expect(@project.metrics_report_for(Handvalve)[:valve_description_complete][4]).
         to eq(1)
-      expect(@project.handvalve_metrics_report[:valve_description_complete][5]).
+      expect(@project.metrics_report_for(Handvalve)[:valve_description_complete][5]).
         to eq(1)
 
+      expect(@project.cumulative_metrics_report_for(Handvalve)[:valve_description_complete][0]).
+        to eq(0)
+      expect(@project.cumulative_metrics_report_for(Handvalve)[:valve_description_complete][1]).
+        to eq(2)
+      expect(@project.cumulative_metrics_report_for(Handvalve)[:valve_description_complete][2]).
+        to eq(6)
+      expect(@project.cumulative_metrics_report_for(Handvalve)[:valve_description_complete][3]).
+        to eq(8)
+      expect(@project.cumulative_metrics_report_for(Handvalve)[:valve_description_complete][4]).
+        to eq(9)
+      expect(@project.cumulative_metrics_report_for(Handvalve)[:valve_description_complete][5]).
+        to eq(10)
 
     end
   end
