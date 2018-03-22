@@ -5,7 +5,9 @@
         Project Dashboard
       </h3>
     </div>
-    <canvas id="instrumentsChart" height="75"></canvas>
+    <% if current_project.ready_to_report_metrics %>
+      <canvas id="instrumentsChart" height="75"></canvas>
+    <% end %>
   </div>
 </div>
 <div class="row pl-5 pr-5 pb-5 neg-mar">
@@ -416,55 +418,57 @@
 </div>
 
 <script>
-  Chart.defaults.global.defaultFontColor = '#ccd6e5';
-  
-  var colors = [
-    'rgba(230, 25, 75, 0.7)',
-    'rgba(60, 180, 75, 0.7)',
-    'rgba(255, 225, 25, 0.7)',
-    'rgba(0, 130, 200, 0.7)',
-    'rgba(245, 130, 48, 0.7)',
-    'rgba(145, 30, 180, 0.7)',
-    'rgba(70, 240, 240, 0.7)',
-    'rgba(240, 50, 230, 0.7)',
-    'rgba(210, 245, 60, 0.7)',
-    'rgba(250, 190, 190, 0.7)',
-    'rgba (0, 128, 128, 0.7)',
-    'rgba(230, 190, 255, 0.7)',
-    'rgba(170, 110, 40, 0.7)',
-    'rgba(255, 250, 200, 0.7)'
-  ]
-  var ctx = document.getElementById("instrumentsChart");
-  var instrumentsChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: <%= @reporting_days_array %>,
-      datasets: [
-        <% @inst_metrics.each_with_index do |(key, value), i| %>
-          {
-            label: "<%= key.to_s.humanize %>",
-            data: <%= value.to_json.html_safe %>,
-            borderColor: [
-              colors[<%= i %>]
-            ],
-            fill: false
-          },
-        <% end %>
+  <% if current_project.ready_to_report_metrics %>
+      Chart.defaults.global.defaultFontColor = '#ccd6e5';
+
+      var colors = [
+        'rgba(230, 25, 75, 0.7)',
+        'rgba(60, 180, 75, 0.7)',
+        'rgba(255, 225, 25, 0.7)',
+        'rgba(0, 130, 200, 0.7)',
+        'rgba(245, 130, 48, 0.7)',
+        'rgba(145, 30, 180, 0.7)',
+        'rgba(70, 240, 240, 0.7)',
+        'rgba(240, 50, 230, 0.7)',
+        'rgba(210, 245, 60, 0.7)',
+        'rgba(250, 190, 190, 0.7)',
+        'rgba (0, 128, 128, 0.7)',
+        'rgba(230, 190, 255, 0.7)',
+        'rgba(170, 110, 40, 0.7)',
+        'rgba(255, 250, 200, 0.7)'
       ]
-    },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero:true
+      var ctx = document.getElementById("instrumentsChart");
+      var instrumentsChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: <%= @reporting_days_array %>,
+          datasets: [
+            <% @inst_metrics.each_with_index do |(key, value), i| %>
+              {
+                label: "<%= key.to_s.humanize %>",
+                data: <%= value.to_json.html_safe %>,
+                borderColor: [
+                  colors[<%= i %>]
+                ],
+                fill: false
+              },
+          <% end %>
+          ]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero:true
+              }
+            }]
+          },
+          legend: {
+            position: 'bottom'
           }
-        }]
-      },
-      legend: {
-        position: 'right'
-      }
-    }
-  });
+        }
+      });
+  <% end %>
 
 </script>
 

@@ -68,7 +68,8 @@
               <%=
                 link_to 'Update Project',
                   edit_project_path(current_project),
-                  class: 'sidebar-link'
+                  class: 'sidebar-link',
+                  id: "update_project_#{current_project.id}"
               %>
               <br />
               <%=

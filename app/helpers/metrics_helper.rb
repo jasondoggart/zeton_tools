@@ -4,13 +4,16 @@ module MetricsHelper
   def total_instrument_count
     current_project.instruments.count
   end
-
-  def instruments_in_zeton_scope
-    current_project.instruments.where(scope: "Zeton").count
+  def total_count_for(project, record)
+    record.where(project: project).count
   end
 
-  def instruments_in_zeton_scope_percent
-    instruments_in_zeton_scope.to_f/total_instrument_count.to_f * 100
+  def in_zeton_scope_for(project, record)
+    record.where(scope: "Zeton", project: project).count
+  end
+
+  def metrics_percent_for(item, total)
+    item.to_f/total.to_f * 100
   end
 
   def datasheet_submitted_for_approval_required
