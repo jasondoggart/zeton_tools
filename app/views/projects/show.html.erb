@@ -1,17 +1,14 @@
-<div class="row pl-5 pr-5 mt-5">
-  <div class="col-sm-12">
-    <h3>
-      Project Dashboard
-    </h3>
-    <p>
-      <%= link_to "(Update Project)",
-        edit_project_path(current_project),
-        id: "update_project_#{current_project.id}" %>
-    </p>
+<div class="chart">
+  <div class="row pl-5 pr-5">
+    <div class="col-sm-12">
+      <h3 class="mb-5">
+        Project Dashboard
+      </h3>
+    </div>
+    <canvas id="instrumentsChart" height="75"></canvas>
   </div>
-  <canvas id="myChart" width="200" height="100"></canvas>
 </div>
-<div class="row pl-5 pr-5 pb-5">
+<div class="row pl-5 pr-5 pb-5 neg-mar">
   <div class="col-sm-4">
     <div class="card card-box-shadow">
       <div class="card-body">
@@ -417,41 +414,42 @@
     </div>
   </div>
 </div>
+
 <script>
-  var ctx = document.getElementById("myChart");
-  var myChart = new Chart(ctx, {
+  Chart.defaults.global.defaultFontColor = '#ccd6e5';
+  
+  var colors = [
+    'rgba(230, 25, 75, 0.7)',
+    'rgba(60, 180, 75, 0.7)',
+    'rgba(255, 225, 25, 0.7)',
+    'rgba(0, 130, 200, 0.7)',
+    'rgba(245, 130, 48, 0.7)',
+    'rgba(145, 30, 180, 0.7)',
+    'rgba(70, 240, 240, 0.7)',
+    'rgba(240, 50, 230, 0.7)',
+    'rgba(210, 245, 60, 0.7)',
+    'rgba(250, 190, 190, 0.7)',
+    'rgba (0, 128, 128, 0.7)',
+    'rgba(230, 190, 255, 0.7)',
+    'rgba(170, 110, 40, 0.7)',
+    'rgba(255, 250, 200, 0.7)'
+  ]
+  var ctx = document.getElementById("instrumentsChart");
+  var instrumentsChart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: <%= @reporting_days_array %>,
       datasets: [
-        {
-          label: 'Datasheet submitted for approval',
-          data: <%= @inst_datasheet_submitted_for_approval %>,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)'
-          ]
-        },
-        {
-          label: 'Datasheet approved',
-          data: <%= @inst_datasheet_approved %>,
-          backgroundColor: [
-            'rgba(54, 162, 235, 0.2)'
-          ]
-        },
-        {
-          label: 'RFQ Sent',
-          data: <%= @inst_rfq_sent %>,
-          backgroundColor: [
-            'rgba(255, 206, 86, 0.2)'
-          ]
-        },
-        {
-          label: 'PO Placed',
-          data: <%= @inst_po_placed %>,
-          backgroundColor: [
-            'rgba(75, 192, 192, 0.2)'
-          ]
-        },
+        <% @inst_metrics.each_with_index do |(key, value), i| %>
+          {
+            label: "<%= key.to_s.humanize %>",
+            data: <%= value.to_json.html_safe %>,
+            borderColor: [
+              colors[<%= i %>]
+            ],
+            fill: false
+          },
+        <% end %>
       ]
     },
     options: {
@@ -461,8 +459,12 @@
             beginAtZero:true
           }
         }]
+      },
+      legend: {
+        position: 'right'
       }
     }
   });
+
 </script>
 
