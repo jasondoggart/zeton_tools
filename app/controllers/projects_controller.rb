@@ -22,7 +22,27 @@ class ProjectsController < ApplicationController
     @team_members = current_project.team_members
     @client_team_members = current_project.client_team_members
     @reporting_days_array = current_project.reporting_days_array.to_json.html_safe
-    @inst_metrics = current_project.cumulative_metrics_report_for(Instrument)
+    @inst_cumulative_metrics = current_project.cumulative_metrics_report_for(Instrument)
+    @inst_metrics_summary = current_project.metrics_summary_for Instrument
+    @hv_metrics_summary = current_project.metrics_summary_for Handvalve
+    @equip_metrics_summary = current_project.metrics_summary_for Equipment
+    @equip_quick_metrics = {
+      :po_placed => "Purchased",
+      :item_inspected_and_released => "Received",
+      :item_installed_by_mech => "Installed",
+      :item_grounded_by_elec => "Grounded"
+    }
+    @inst_quick_metrics = {
+      :po_placed => "Purchased",
+      :item_inspected_and_released => "Received",
+      :plumbed_by_mechanical => "Installed",
+      :cable_terminated_at_destination => "Wired"
+    }
+    @hv_quick_metrics = {
+      :po_placed => "Purchased",
+      :item_inspected_and_released => "Received",
+      :item_plumbed => "Installed"
+    }
 
   end
 

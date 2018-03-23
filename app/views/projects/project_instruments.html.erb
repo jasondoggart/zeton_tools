@@ -158,67 +158,6 @@
   </div>
   <div class="col-sm">
     <div class="row">
-      <div class="col-sm-3">
-        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-          <div class="col-sm-12 h3 text-info">
-            <i class="fa fa-hashtag"></i>
-          </div>
-          <div class="col-sm-12">
-            <h2>
-              <%= @instruments.count %>
-            </h2>
-          </div>
-          <div class="col-sm-12 text-muted">
-            Total Instruments
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-          <div class="col-sm-12 h3 text-warning">
-            <i class="fa fa-check"></i>
-          </div>
-          <div class="col-sm-12">
-            <h2>
-              <%=
-                po_placed_percent.to_f.nan? ?
-                  "0" :
-                  po_placed_percent.round(0)
-              %>%
-            </h2>
-          </div>
-          <div class="col-sm-12 text-muted">
-            Purchased
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-          <div class="col-sm-12 h3 text-success">
-            <i class="fa fa-wrench"></i>
-          </div>
-          <div class="col-sm-12">
-            <h2>
-              <%= cable_terminated_at_destination_percent.to_f.nan? ?
-                "0" : cable_terminated_at_destination_percent.round(0) %>%
-            </h2>
-          </div>
-          <div class="col-sm-12 text-muted">
-            Installed and Wired
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-          <div class="col-sm-12 h1 text-info">
-            <%= link_to '<i class="fa fa-plus"></i>'.html_safe,
-              new_instrument_path,
-              id: "new_instrument_link" %>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
       <div class="col-12">
         <div class="card card-box-shadow mb-5">
           <div class="card-body mt-0">
