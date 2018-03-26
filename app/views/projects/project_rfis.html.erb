@@ -9,69 +9,13 @@
           link_to 'Add new',
             new_information_request_path,
             id: 'new_rfi_link'
-        %>
+          %>
       </h5>
       <i class="filter-button fa fa-filter" onClick="toggleFilters()"></i>
     </div>
   </div>
 </div>
 
-<div class="row px-5 neg-mar">
-  <div class="col-sm-3">
-    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-      <div class="col-sm-12 h3 text-info">
-        <i class="fa fa-hashtag text-centered"></i>
-      </div>
-      <div class="col-sm-12">
-        <h2>
-          <%= @rfis.count %>
-        </h2>
-      </div>
-      <div class="col-sm-12 text-muted">
-        RFI Count
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-3">
-    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-      <div class="col-sm-12 h3 text-warning">
-        <i class="fa fa-exclamation text-centered"></i>
-      </div>
-      <div class="col-sm-12">
-        <h2>
-          <%= @open_rfis.count %>
-        </h2>
-      </div>
-      <div class="col-sm-12 text-muted">
-        Open RFIs
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-3">
-    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-      <div class="col-sm-12 h3 text-success">
-        <i class="fa fa-calendar-plus-o text-centered"></i>
-      </div>
-      <div class="col-sm-12">
-        <h2>
-          <%= @open_rfis.count %>
-        </h2>
-      </div>
-      <div class="col-sm-12 text-muted">
-        New RFIs This Week
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-3">
-    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-      <div class="col-sm-12 h1 text-primary">
-        <%= link_to '<i class="fa fa-plus text-centered"></i>'.html_safe,
-          new_information_request_path,
-          id: 'new_rfi' %>
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="row pl-5 pr-5">
   <div id="filters" class="col-sm-2 filters-close filters">
@@ -95,23 +39,23 @@
           link_to 'Target Date',
             request.query_parameters.merge(
               :sorted_by => 'target_date_' + sort_direction(@sorted_by)
-            ),
-            class: 'dropdown-item'
-        %>
-        <%=
-          link_to 'Status',
-            request.query_parameters.merge(
-              :sorted_by => 'answered_' + sort_direction(@sorted_by)
-            ),
-            class: 'dropdown-item'
-        %>
-        <%=
-          link_to 'Date Added',
-            request.query_parameters.merge(
-              :sorted_by => 'date_created_' + sort_direction(@sorted_by)
           ),
           class: 'dropdown-item'
         %>
+      <%=
+        link_to 'Status',
+          request.query_parameters.merge(
+            :sorted_by => 'answered_' + sort_direction(@sorted_by)
+        ),
+        class: 'dropdown-item'
+      %>
+    <%=
+      link_to 'Date Added',
+        request.query_parameters.merge(
+          :sorted_by => 'date_created_' + sort_direction(@sorted_by)
+      ),
+      class: 'dropdown-item'
+    %>
       </div>
     </div>
     <h5 class="text-muted mt-3">
@@ -123,7 +67,7 @@
           link_to 'Clear all',
             project_rfis_path,
             class: 'btn btn-outline-primary btn-sm'
-        %>
+          %>
       </div>
     </div>
     <div class="row">
@@ -147,9 +91,9 @@
               project_rfis_path,
               class: 'dropdown-item' %>
             <%= link_to "Open",
-                         project_rfis_path(:with_status => 0),
-                         class: "dropdown-item" %>
-                       <%= link_to "Closed",
+              project_rfis_path(:with_status => 0),
+              class: "dropdown-item" %>
+            <%= link_to "Closed",
                          project_rfis_path(:with_status => 1),
                          class: "dropdown-item" %>
           </div>
@@ -191,21 +135,15 @@
 
 
 
-    <div class="row">
-      <div class="col-12">
-        <div class="card card-box-shadow mb-5">
-          <div class="card-body mt-0">
-            <% @rfis.each do |rfi| %>
-              <%= render partial: 'rfi', locals: {rfi: rfi} %>
-            <% end %>
-            <div class="pt-3">
-              <%= will_paginate(
-                @rfis,
-                :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer
-              ) %>
-            </div>
-          </div>
-        </div>
+    <div class="row neg-mar">
+      <% @rfis.each do |rfi| %>
+        <%= render partial: 'rfi', locals: {rfi: rfi} %>
+      <% end %>
+      <div class="pt-3">
+        <%= will_paginate(
+          @rfis,
+          :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer
+        ) %>
       </div>
     </div>
   </div>

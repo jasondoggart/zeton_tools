@@ -15,11 +15,16 @@ class InformationRequestsController < ApplicationController
 
   def create
     @information_request = current_project.information_requests.build(information_request_params)
+    @instruments = current_project.instruments
+    @equipment = current_project.equipment
+    @handvalves = current_project.handvalves
+    @work_areas = WORK_AREAS
+    @client_team_members = current_project.client_team_members.all
+    @client_documents = current_project.client_documents
     if @information_request.save
       flash[:success] = "RFI created"
       redirect_to project_rfis_path
     else
-      flash[:danger] = "RFI could not be created"
       render :new
     end
   end
@@ -51,7 +56,6 @@ class InformationRequestsController < ApplicationController
         format.js
       end
     else
-      flash[:danger] = "RFI could not be updated"
       render :edit
     end
   end

@@ -15,11 +15,15 @@ class ActionItemsController < ApplicationController
   def create
     @action_item = current_project.action_items.build(action_item_params)
     @action_item.creator = current_user
+    @instruments = current_project.instruments
+    @equipment = current_project.equipment
+    @handvalves = current_project.handvalves
+    @work_areas = WORK_AREAS
+    @priorities = ActionItem::PRIORITIES
     if @action_item.save
       flash[:success] = 'Action Item Created'
       redirect_to project_action_items_path
     else
-      flash[:warning] = 'Action Item could not be created'
       render :new
     end
   end
@@ -61,7 +65,6 @@ class ActionItemsController < ApplicationController
         format.js
       end
     else
-      flash[:danger] = "Action Item could not be updated"
       render :edit
     end
 

@@ -1,0 +1,77 @@
+<div class="col-sm-12">
+  <div class="card mb-3">
+    <div class="card-body mt-0">
+      <div class="row">
+        <div class="col-sm-2">
+          <h5 class="mb-0">
+            <%= link_to action_item.ai_number,
+              action_item_path(action_item),
+              id: "show_action_item_#{action_item.id}" %>
+          </h5>
+        </div>
+        <div class="col-sm-9">
+          <h5 class="mb-0">
+            <%= action_item.title %>
+          </h5>
+        </div>
+        <div class="col-sm-1">
+          <div id="action_item_status_form_action_item_<%= action_item.id %>">
+            <%= render partial: 'action_items/action_item_status_form',
+              locals: {action_item: action_item} %>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-12">
+          <% action_item.instruments.each do |inst| %>
+            <%= link_to inst.tag,
+              instrument_path(inst),
+              class: 'badge badge-pill badge-primary' %>
+          <% end %>
+          <% action_item.equipment.each do |equip| %>
+            <span >
+              <%= link_to equip.tag,
+                equipment_path(equip),
+                class: 'badge badge-pill badge-primary' %>
+            </span>
+          <% end %>
+          <% action_item.handvalves.each do |valve| %>
+            <span >
+              <%= link_to valve.tag,
+                handvalve_path(valve),
+                class: 'badge badge-pill badge-primary' %>
+            </span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-sm-4">
+          <i class="fa fa-calendar pr-3"></i>
+          <% if action_item.target_date.present? %>
+            <%= action_item.target_date.strftime("%b %-d, %Y") %>
+          <% else %>
+            No date entered
+          <% end %>
+        </div>
+        <div class="col-sm-4">
+          <i class="fa fa-user pr-3"></i>
+          <% if action_item.assigned_to.present? %>
+            <%= action_item.assigned_to.full_name %>
+          <% else %>
+            No one assigned
+          <% end %>
+        </div>
+        <div class="col-sm-4">
+          <i class="fa fa-bullseye pr-3"></i>
+          <% if action_item.area.present? %>
+            <%= action_item.area %>
+          <% else %>
+            No area assigned
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
