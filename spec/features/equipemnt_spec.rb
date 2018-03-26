@@ -52,14 +52,12 @@ describe "Equipment" do
     expect(Equipment.count).to eq(before_count - 1)
   end
 
-  it 'has a show page that redirects back to the project equipment list' do
+  it 'has a show page' do
     sign_in_with(@user.email, @user.password)
     visit root_path
     click_link("project_#{@project.id}")
     equipment = Equipment.create(tag: "V-101", description: "A Vessel", equipment_type: "Vessel", project: @project)
     visit equipment_path(equipment)
-    click_link('back_to_equipment_list')
-    expect(current_path).to eq(project_equipment_path)
   end
 
   it 'redirects new_equipment to sign_in if not signed in' do

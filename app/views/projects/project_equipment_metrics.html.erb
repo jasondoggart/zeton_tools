@@ -1,44 +1,111 @@
-<div class="row pl-5 pr-5 mb-3 mt-5">
-  <div class="col-sm-12">
-    <h3>
-      Equipment Metrics
-    </h3>
+<div class="dark-header">
+  <div class="row pl-5 pr-5">
+    <div class="col-sm-12">
+      <h1>
+        Equipment Metrics
+      </h1>
+      <i class="filter-button fa fa-filter" onClick="toggleFilters()"></i>
+    </div>
   </div>
 </div>
-<div class="row pl-5 pr-5">
+
+<div class="row pl-5 pr-5 filters-close"
+     id="filters"
+     style="margin-top: -75px; margin-bottom: 75px;">
   <div class="col-sm-12">
     <div class="card card-box-shadow mb-3">
       <div class="card-body mt-0">
         <div class="dropdown mt-3 mb-3">
-          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="loop_dropdown_button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button class="btn btn-outline-primary dropdown-toggle btn-sm"
+                  type="button"
+                  id="loop_dropdown_button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false">
             Sort By
           </button>
-          <div class="dropdown-menu" style="height: 200px; overflow: scroll;" aria-labelledby="loop_dropdown_button">
-            <%= link_to 'Type', request.query_parameters.merge(:sorted_by => 'type_' + sort_direction(@sorted_by)), class: 'dropdown-item' %>
-            <%= link_to 'Tag', request.query_parameters.merge(:sorted_by => 'tag_' + sort_direction(@sorted_by)), class: 'dropdown-item' %>
+          <div class="dropdown-menu"
+               style="height: 200px; overflow: scroll;"
+               aria-labelledby="loop_dropdown_button">
+            <%=
+              link_to 'Type',
+                request.query_parameters.merge(
+                  :sorted_by => 'type_' + sort_direction(@sorted_by)
+              ),
+              class: 'dropdown-item'
+            %>
+            <%= link_to 'Tag',
+              request.query_parameters.merge(
+                :sorted_by => 'tag_' + sort_direction(@sorted_by)
+              ),
+              class: 'dropdown-item'
+            %>
           </div>
         </div>
-        <a class="btn btn-outline-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-          Filters<span class="ml-3"><i class="fa fa-caret-down"></i></span>
+        <a class="btn btn-outline-primary btn-sm"
+           data-toggle="collapse"
+           href="#collapseExample"
+           role="button"
+           aria-expanded="false"
+           aria-controls="collapseExample">
+          Filters
+          <span class="ml-3">
+            <i class="fa fa-caret-down"></i>
+          </span>
         </a>
+        <%=
+          link_to 'Download as excel <i class="fa fa-download"></i>'.html_safe,
+            project_equipment_excel_path(format: :xlsx),
+            class: 'btn btn-sm btn-outline-primary'
+          %>
+        <%=
+          link_to 'Upload from excel <i class="fa fa-upload"></i>'.html_safe,
+            new_project_equipment_import_path,
+            class: 'btn btn-sm btn-outline-primary'
+          %>
         <div class="collapse" id="collapseExample">
           <div class="card card-body">
             <div class="row">
               <div class="col-4">
-                <%= link_to 'Clear all', project_equipment_metrics_path(:sorted_by => 'type asc'), class: 'btn btn-outline-primary btn-sm' %>
+                <%=
+                  link_to 'Clear all',
+                    project_equipment_metrics_path(
+                      :sorted_by => 'type asc'
+                  ),
+                  class: 'btn btn-outline-primary btn-sm'
+                %>
               </div>
               <div class="col-4">
                 <div class="dropdown">
-                  <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="type_code_dropdown_button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button class="btn btn-sm btn-outline-primary dropdown-toggle"
+                          type="button"
+                          id="type_code_dropdown_button"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false">
                     Type
                     <% if params[:with_type].present? %>
                       <i class="fa fa-filter"></i>
                     <% end %>
                   </button>
-                  <div class="dropdown-menu" style="height: 200px; overflow: scroll;" aria-labelledby="type_code_dropdown_button">
-                    <%= link_to "Show All", project_equipment_metrics_path(:with_type => nil), class: 'dropdown-item' %>
-                    <% @types.each do |type| %>
-                      <%= link_to type, request.query_parameters.merge(:with_type => type), class: "dropdown-item" %>
+                  <div class="dropdown-menu"
+                       style="height: 200px; overflow: scroll;"
+                       aria-labelledby="type_code_dropdown_button">
+                    <%=
+                      link_to "Show All",
+                      project_equipment_metrics_path(
+                        :with_type => nil
+                      ),
+                      class: 'dropdown-item'
+                    %>
+                    <%@types.each do |type| %>
+                      <%=
+                        link_to type,
+                          request.query_parameters.merge(
+                            :with_type => type
+                        ),
+                        class: "dropdown-item"
+                      %>
                     <% end %>
                   </div>
                 </div>
@@ -51,7 +118,7 @@
   </div>
 </div>
 
-<div class="row pl-5 pr-5">
+<div class="row pl-5 pr-5 neg-mar">
   <div class="col-sm-12">
     <div class="card card-box-shadow mb-3">
       <div class="card-body mt-0">

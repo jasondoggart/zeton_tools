@@ -1,8 +1,14 @@
-<div class="row pl-5 pr-5 mb-3 mt-5">
-  <div class="col-sm-12">
-    <h1 class="display-4">
-      Updating <%= @information_request.rfi_number %>
-    </h1>
+<div class="dark-header">
+  <div class="row pl-5 pr-5">
+    <div class="col-sm-12">
+      <h1>
+        Updating <%= @information_request.rfi_number %>
+      </h1>
+      <%=
+        link_to 'Back',
+        :back
+      %>
+    </div>
   </div>
 </div>
 <%= render 'form' %>

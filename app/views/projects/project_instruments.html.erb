@@ -1,16 +1,23 @@
-<div class="row pl-5 pr-5 mb-3 mt-5">
-  <div class="col-sm-12">
-    <h3>
-      Instruments
-    </h3>
-    <button onclick="toggleFilters()" class="btn btn-sm btn-primary">
-      Filters
-    </button>
+<div class="dark-header">
+  <div class="row pl-5 pr-5">
+    <div class="col-sm-12">
+      <h1>
+        Instruments
+      </h1>
+      <h5>
+        <%=
+          link_to 'Add new',
+            new_instrument_path,
+            id: 'new_instrument_link'
+        %>
+      </h5>
+      <i class="filter-button fa fa-filter" onClick="toggleFilters()"></i>
+    </div>
   </div>
 </div>
 
-<div class="row pl-5 pr-5">
-  <div id="filters" class="col-sm-2 filters-close">
+<div class="row pl-5 pr-5 neg-mar">
+  <div id="filters" class="mr-3 col-sm-2 filters-close filters">
     <h5 class="text-muted">
       Sort by
     </h5>
@@ -34,20 +41,20 @@
           ),
           class: 'dropdown-item'
         %>
-        <%=
-          link_to 'Loop',
-            request.query_parameters.merge(
-              :sorted_by => 'loop_' + sort_direction(@sorted_by)
-          ),
-          class: 'dropdown-item'
-        %>
-        <%=
-          link_to 'Scope',
-            project_instruments_path(
-              :sorted_by => 'scope_' + sort_direction(@sorted_by)
-          ),
-          class: 'dropdown-item'
-        %>
+      <%=
+        link_to 'Loop',
+          request.query_parameters.merge(
+            :sorted_by => 'loop_' + sort_direction(@sorted_by)
+        ),
+        class: 'dropdown-item'
+      %>
+    <%=
+      link_to 'Scope',
+        project_instruments_path(
+          :sorted_by => 'scope_' + sort_direction(@sorted_by)
+      ),
+      class: 'dropdown-item'
+    %>
       </div>
     </div>
     <h5 class="text-muted mt-3">

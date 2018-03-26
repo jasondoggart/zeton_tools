@@ -1,51 +1,115 @@
-<div class="row pl-5 pr-5 mb-3 mt-5">
-  <div class="col-sm-12">
-    <h1 class="display-4">
-      <%= @information_request.rfi_number %>
-    </h1>
-    <p class="lead text-muted">
-    Created 
-    <%= @information_request.created_at.strftime("%b %-d, %Y") %> 
-    by <%= @information_request.project.user.full_name %>.
-    <% if @information_request.date_sent %>
-      Sent to <%= @information_request.client_team_member.full_name %>
-      on <%= @information_request.date_sent %>.
-    <% elsif @information_request.client_team_member %>
-      Not sent yet sent to client.
-      <%= link_to 'Send now?',
-      send_rfi_path(:rfi => @information_request),
-      class: 'text-danger' %>
-    <% else %>
-        Not sent to client yet. Add client team member below to send RFI.
-    <% end %>
-    </p>
-    <% if @information_request.target_date.present? %>
-      <p>
-      Response required by <%= @information_request.target_date.strftime(
-        "%b %-d, %Y"
-      ) %> (
-      <%= pluralize days_from_now(@information_request.target_date), 'day' %>
-      from now)
-      </p>
-    <% end %>
-    <%= link_to 'Edit RFI',
-      edit_information_request_path(@information_request),
-      class: 'btn btn-sm btn-outline-primary mr-2 ml-2',
-      id: "edit_rfi_#{@information_request.id}" %>
-    <%= link_to 'Delete',
-      information_request_path(@information_request),
-      method: :delete,
-      class: 'btn btn-sm btn-outline-danger mr-2 ml-2',
-      id: "delete_rfi_#{@information_request.id}" %>
+<div class="dark-header">
+  <div class="row pl-5 pr-5">
+    <div class="col-sm-12">
+      <h1>
+        <%= @information_request.rfi_number %>
+      </h1>
+      <small>
+        Created 
+        <%= @information_request.created_at.strftime("%b %-d, %Y") %> 
+        by <%= @information_request.project.user.full_name %>.
+        <br />
+        <% if @information_request.target_date.present? %>
+          Response required by <%= @information_request.target_date.strftime(
+            "%b %-d, %Y"
+          ) %> (
+          <%= pluralize days_from_now(@information_request.target_date), 'day' %>
+          from now)
+        <% end %>
+        <br />
+        <%=
+          link_to 'Back',
+          :back
+        %>
+        <br />
+        <%=
+          link_to 'Edit RFI',
+          edit_information_request_path(@information_request),
+          id: "edit_rfi_#{@information_request.id}"
+        %>
+        <br />
+        <%=
+          link_to 'Delete RFI',
+          information_request_path(@information_request),
+          method: :delete,
+          id: "delete_rfi_#{@information_request.id}",
+          data: {
+            confirm:
+            "Are you sure you want to delete #{@information_request.rfi_number}"
+          }
+        %>
+      </small>
+    </div>
   </div>
 </div>
-<div class="row pl-5 pr-5">
+<div class="row px-5 neg-mar">
   <div class="col-sm-12">
-    <h3 class="section-title mb-3">
-      Client Document
-    </h3>
     <div class="card card-box-shadow mb-3 p-4">
       <div class="card-body">
+        <% if @information_request.date_sent %>
+          <p class="text-success">
+            Sent to <%= @information_request.client_team_member.full_name %>
+            on <%= @information_request.date_sent %>.
+          </p>
+        <% elsif @information_request.client_team_member %>
+          <p class="text-warning">
+            Not sent yet sent to client.
+            <%=
+              link_to 'Send now?',
+              send_rfi_path(:rfi => @information_request),
+              class: 'text-danger'
+            %>
+          </p>
+        <% else %>
+          <p class="text-warning">
+            Not sent to client yet. Add client team member below to send RFI.
+          </p>
+        <% end %>
+        <h3 class="section-title mt-5">
+          Zeton Clarification
+        </h3>
+        <dl class="row mt-0">
+          <dt class="col-sm-2">Work Area</dt>
+          <dd class="col-sm-10">
+          <%= @information_request.area %>
+          </dd>
+          <dt class="col-sm-2">Clarification</dt>
+          <dd class="col-sm-10">
+            <%= @information_request.zeton_clarification %>
+          </dd>
+        </dl>
+        <h3 class="section-title mt-5">
+          Client
+        </h3>
+        <% if @information_request.client_team_member.present? %>
+          <dl class="row mt-0">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">
+            <%= @information_request.client_team_member.full_name %>
+            </dd>
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">
+            <%= @information_request.client_team_member.email %>
+            </dd>
+            <dt class="col-sm-3">Date sent</dt>
+            <dd class="col-sm-9">
+            <% if @information_request.date_sent.present? %>
+              <%= @information_request.date_sent.strftime("%b %-d, %Y") %>
+            <% else %>
+              Not yet sent.
+              <%=
+                link_to 'Click to send now',
+                  send_rfi_path(:rfi => @information_request)
+                %>
+            <% end %>
+            </dd>
+          </dl>
+        <% else %>
+          No client team member added
+        <% end %>
+        <h3 class="section-title mt-5">
+          Associated Client Document
+        </h3>
         <% if @information_request.client_document.present? %>
           <div class="row">
             <div class="col-sm-6">
@@ -74,15 +138,11 @@
             </div>
           </div>
         <% else %>
-            No document added
+          No document added
         <% end %>
-      </div>
-    </div>
-    <h3 class="section-title mt-3">
-      Associations
-    </h3>
-    <div class="card card-box-shadow mb-3 p-4">
-      <div class="card-body">
+        <h3 class="section-title mt-5">
+          Associated Items
+        </h3>
         <div class="row">
           <div class="col-sm-4">
             <div class="row">
@@ -125,7 +185,7 @@
               <div class="col-sm-12">
                 <h5 class="section-sub-title">
                   Handvalves
-                </h4>
+                  </h4>
               </div>
             </div>
             <div class="row">
@@ -139,64 +199,9 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <h3 class="section-title mt-3">
-      Zeton Clarification
-    </h3>
-    <div class="card card-box-shadow mb-3 p-4">
-      <div class="card-body">
-        <dl class="row mt-0">
-          <dt class="col-sm-2">Work Area</dt>
-          <dd class="col-sm-10">
-          <%= @information_request.area %>
-          </dd>
-          <dt class="col-sm-2">Clarification</dt>
-          <dd class="col-sm-10">
-            <%= @information_request.zeton_clarification %>
-          </dd>
-        </dl>
-      </div>
-    </div>
-    <h3 class="section-title mt-3">
-      Client
-    </h3>
-    <div class="card card-box-shadow mb-3 p-4">
-      <div class="card-body">
-        <% if @information_request.client_team_member.present? %>
-          <dl class="row mt-0">
-            <dt class="col-sm-3">Name</dt>
-            <dd class="col-sm-9">
-            <%= @information_request.client_team_member.full_name %>
-            </dd>
-            <dt class="col-sm-3">Email</dt>
-            <dd class="col-sm-9">
-            <%= @information_request.client_team_member.email %>
-            </dd>
-            <dt class="col-sm-3">Date sent</dt>
-            <dd class="col-sm-9">
-            <% if @information_request.date_sent.present? %>
-              <%= @information_request.date_sent.strftime("%b %-d, %Y") %>
-            <% else %>
-              Not yet sent.
-              <%=
-                link_to 'Click to send now',
-                  send_rfi_path(:rfi => @information_request)
-              %>
-            <% end %>
-            </dd>
-          </dl>
-        <% else %>
-          No client team member added
-        <% end %>
-      </div>
-    </div>
-    <h3 class="section-title mt-3">
-      RFI Responses
-    </h3>
-    <div class="card card-box-shadow mb-3 p-4">
-      <div class="card-body">
+        <h3 class="section-title mt-5">
+          RFI Responses
+        </h3>
         <div class="row">
           <div class="col-sm-12">
             <% if @information_request.rfi_responses.any? %>
@@ -245,15 +250,18 @@
             <% end %>
           </div>
         </div>
-      </div>
-      <div class="row p-3">
-        <div class="col-sm-12">
-          <%= link_to 'Add new response',
-        new_rfi_response_path(:rfi => @information_request),
-        id: 'new_rfi_response',
-        class: 'btn btn-outline-primary btn-sm mr-2' %>
+        <div class="row p-3">
+          <div class="col-sm-12">
+            <%= link_to 'Add new response',
+              new_rfi_response_path(:rfi => @information_request),
+              id: 'new_rfi_response',
+              class: 'btn btn-outline-primary btn-sm mr-2' %>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
   </div>
 </div>

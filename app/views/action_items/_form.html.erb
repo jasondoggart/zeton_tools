@@ -10,17 +10,27 @@
     </ul>
   <% end %>
 
-  <div class="row pl-5 pr-5">
+  <div class="row pl-5 pr-5 neg-mar">
     <div class="col-sm-12">
       <div class="card card-box-shadow mb-3">
         <div class="card-body">
           <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-12">
               <div class="form-group">
                 <%= f.label :title, '<b>Title</b>'.html_safe %>
                 <%= f.text_field :title, class: 'form-control' %>
               </div>
             </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="from-group">
+                <%= f.label :description, 'Action Item' %>
+                <%= f.text_area :description, class: 'form-control', rows: 5 %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
             <% if !@action_item.new_record? %>
               <div class="col-sm-4">
                 <div class="form-group">
@@ -154,16 +164,8 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="row pl-5 pr-5">
-    <div class="col-sm-12">
-      <div class="card card-box-shadow mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Add Association</h5>
+          <h5 class="card-title mt-5">Association Items</h5>
           <div class="row">
             <div class="col-sm-4">
               <div class="form-group">
@@ -190,9 +192,9 @@
                     @equipment.map{ |i| [i.tag, i.id]}, {},
                     multiple: true,
                     class: 'form-control' %>
-                  <% else %>
-                    No Equipment Added yet
-                  <% end %>
+                <% else %>
+                  No Equipment Added yet
+                <% end %>
               </div>
             </div>
             <div class="col-sm-4">
@@ -205,38 +207,22 @@
                     @handvalves.map{ |i| [i.tag, i.id]}, {},
                     multiple: true,
                     class: 'form-control' %>
-                  <% else %>
-                    No Handvalves Added Yet
-                  <% end %>
+                <% else %>
+                  No Handvalves Added Yet
+                <% end %>
               </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-sm-3">
+              <%= f.submit @action_item.new_record? ?
+                'Add Action Item' :
+                'Update Action Item',
+                class: 'btn btn-outline-primary' %>
+              <%= link_to "Cancel", :back, class: 'text-muted ml-3' %>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row pl-5 pr-5">
-    <div class="col-sm-12">
-      <div class="card card-box-shadow mb-3 pb-3">
-        <div class="card-body">
-          <h5 class="card-title">
-            <%= f.label :description, '<b>Action Item</b>'.html_safe %>
-          </h5>
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="from-group">
-                <%= f.text_area :description, class: 'form-control', rows: 5 %>
-              </div>
-            </div>
-          </div>
-      </div>
-      <div class="col-sm-3">
-        <%= f.submit @action_item.new_record? ?
-          'Add Action Item' :
-          'Update Action Item',
-          class: 'btn btn-outline-primary' %>
-        <%= link_to "Cancel", :back, class: 'text-muted ml-3' %>
       </div>
     </div>
   </div>

@@ -1,134 +1,153 @@
-<div class="main">
-  <h6 class="mt-3 mb-4 text-muted">
-    <%= @handvalve.tag %><br />
-    <small>
-      <%= link_to 'Edit Handvalve', edit_handvalve_path(@handvalve), id: "edit_handvalve_#{@handvalve.id}" %><br />
-      <%= link_to 'Delete Handvalve', handvalve_path(@handvalve), method: :delete, id: "delete_handvalve_#{@handvalve.id}" %><br />
-      <%= link_to 'Back to Handvalve List', project_handvalves_path, id: 'back_to_handvalve_list' %>
-    </small>
-  </h6>
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">
-            Metrics<br />
-            <small class="text-muted">Click below to update</small>
-          </h5>
-        </div>
-        <ul class="list-group list-group-flush">
-          <% @handvalve.attributes.each do |name, value| %>
-            <% if Handvalve.metrics_attributes.include?(name) %>
-              <li class="list-group-item">
-                <span class="float-left">
-                  <%= name.humanize %>
-                </span>
-                <span class="float-right">
-                  <div id="<%= name %>_status_handvalve_<%= @handvalve.id %>">
-                    <%=
-                      render partial: 'shared/metric_status',
-                        locals: {
-                        record: @handvalve,
-                        attribute: name,
-                        value: value
-                      }
-                    %>
-                  </div>
-                </span>
-              </li>
-            <% end %>
+<div class="dark-header">
+  <div class="row pl-5 pr-5">
+    <div class="col-sm-12">
+      <h1>
+        <%= @handvalve.tag %>
+      </h1>
+      <small>
+        <%=
+          link_to 'Back',
+          :back
+        %>
+        <br />
+        <%=
+          link_to 'Edit Handvalve',
+          edit_handvalve_path(@handvalve),
+          id: "edit_handvalve_#{@handvalve.id}"
+        %>
+        <br />
+        <%=
+          link_to 'Delete Handvalve',
+          handvalve_path(@handvalve),
+          method: :delete,
+          id: "delete_handvalve_#{@handvalve.id}"
+        %>
+        <br />
+      </small>
+    </div>
+  </div>
+</div>
+<div class="row px-5 neg-mar">
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          Metrics<br />
+          <small class="text-muted">Click below to update</small>
+        </h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <% @handvalve.attributes.each do |name, value| %>
+          <% if Handvalve.metrics_attributes.include?(name) %>
+            <li class="list-group-item">
+              <span class="float-left">
+                <%= name.humanize %>
+              </span>
+              <span class="float-right">
+                <div id="<%= name %>_status_handvalve_<%= @handvalve.id %>">
+                  <%=
+                    render partial: 'shared/metric_status',
+                      locals: {
+                      record: @handvalve,
+                      attribute: name,
+                      value: value
+                    }
+                  %>
+                </div>
+              </span>
+            </li>
           <% end %>
-        </ul>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="col-sm-8">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Handvalve Data</h5>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <ul class="list-group ml-3 border-0">
+            <li class="list-group-item border-0">
+              <b>Tag:</b> <%= @handvalve.tag %>
+            </li>
+            <li class="list-group-item border-0">
+              <b>Valve Code:</b> <%= @handvalve.valve_code %>
+            </li>
+            <li class="list-group-item border-0">
+              <b>Valve Type:</b> <%= @handvalve.valve_type %>
+            </li>
+            <li class="list-group-item border-0">
+              <b>Size:</b> <%= @handvalve.size %>
+            </li>
+            <li class="list-group-item border-0">
+              <b>Line/Equipment Number:</b> <%= @handvalve.line_number %>
+            </li>
+            <li class="list-group-item border-0">
+              <b>Skid:</b> <%= @handvalve.zeton_skid_number %>
+            </li>
+            <li class="list-group-item border-0">
+              <b>Level:</b> <%= @handvalve.zeton_skid_level %>
+            </li>
+            <li class="list-group-item border-0">
+              <b>Scope:</b> <%= @handvalve.scope %>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-6">
+          <ul class="list-group ml-3 border-0">
+            <li class="list-group-item border-0">
+              <b>Supplier:</b> <%= @handvalve.supplier %>
+            </li>
+            <li class="list-group-item border-0">
+              <b>Manufacturer:</b> <%= @handvalve.manufacturer %>
+            </li>
+            <li class="list-group-item border-0">
+              <b>Model:</b> <%= @handvalve.model %>
+            </li>
+            <li class="list-group-item border-0">
+              <b>Process Connection:</b> <%= @handvalve.process_connection %>
+            </li>
+            <li class="list-group-item border-0">
+              <b>Material of Construction:</b> <%= @handvalve.material_of_construction %>
+            </li>
+            <li class="list-group-item border-0">
+              <b>Valve Type:</b> <%= @handvalve.valve_counting_code %>
+            </li>
+            <li class="list-group-item border-0">
+              <b>Installation Location:</b> <%= @handvalve.valve_location %>
+            </li>
+            <li class="list-group-item border-0">
+              <b>Zeton PO:</b> <%= @handvalve.zeton_po %>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-    <div class="col-sm-8">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Handvalve Data</h5>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <ul class="list-group ml-3 border-0">
-              <li class="list-group-item border-0">
-                <b>Tag:</b> <%= @handvalve.tag %>
-              </li>
-              <li class="list-group-item border-0">
-                <b>Valve Code:</b> <%= @handvalve.valve_code %>
-              </li>
-              <li class="list-group-item border-0">
-                <b>Valve Type:</b> <%= @handvalve.valve_type %>
-              </li>
-              <li class="list-group-item border-0">
-                <b>Size:</b> <%= @handvalve.size %>
-              </li>
-              <li class="list-group-item border-0">
-                <b>Line/Equipment Number:</b> <%= @handvalve.line_number %>
-              </li>
-              <li class="list-group-item border-0">
-                <b>Skid:</b> <%= @handvalve.zeton_skid_number %>
-              </li>
-              <li class="list-group-item border-0">
-                <b>Level:</b> <%= @handvalve.zeton_skid_level %>
-              </li>
-              <li class="list-group-item border-0">
-                <b>Scope:</b> <%= @handvalve.scope %>
-              </li>
-            </ul>
-          </div>
-          <div class="col-sm-6">
-            <ul class="list-group ml-3 border-0">
-              <li class="list-group-item border-0">
-                <b>Supplier:</b> <%= @handvalve.supplier %>
-              </li>
-              <li class="list-group-item border-0">
-                <b>Manufacturer:</b> <%= @handvalve.manufacturer %>
-              </li>
-              <li class="list-group-item border-0">
-                <b>Model:</b> <%= @handvalve.model %>
-              </li>
-              <li class="list-group-item border-0">
-                <b>Process Connection:</b> <%= @handvalve.process_connection %>
-              </li>
-              <li class="list-group-item border-0">
-                <b>Material of Construction:</b> <%= @handvalve.material_of_construction %>
-              </li>
-              <li class="list-group-item border-0">
-                <b>Valve Type:</b> <%= @handvalve.valve_counting_code %>
-              </li>
-              <li class="list-group-item border-0">
-                <b>Installation Location:</b> <%= @handvalve.valve_location %>
-              </li>
-              <li class="list-group-item border-0">
-                <b>Zeton PO:</b> <%= @handvalve.zeton_po %>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="card mt-5">
-        <div class="card-body">
-          <h5 class="card-title">
-            Related RFI's
-          </h5>
-          <% if @handvalve.information_requests.any? %>
-            <table>
-              <thead>
-                <th class="p-3">Number</th>
-                <th class="p-3">Zeton Clarification</th>
-              </thead>
-              <tbody>
-                <% @handvalve.information_requests.each do |rfi| %>
-                  <tr class="mb-3">
-                    <td class="p-3"><%= link_to rfi.rfi_number, information_request_path(rfi) %></td>
-                    <td class="p-3"><%= rfi.zeton_clarification %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          <% else %>
-            No related RFIs
-          <% end %>
-        </div>
+    <div class="card mt-5">
+      <div class="card-body">
+        <h5 class="card-title">
+          Related RFI's
+        </h5>
+        <% if @handvalve.information_requests.any? %>
+          <table>
+            <thead>
+              <th class="p-3">Number</th>
+              <th class="p-3">Zeton Clarification</th>
+            </thead>
+            <tbody>
+              <% @handvalve.information_requests.each do |rfi| %>
+                <tr class="mb-3">
+                  <td class="p-3"><%= link_to rfi.rfi_number, information_request_path(rfi) %></td>
+                  <td class="p-3"><%= rfi.zeton_clarification %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          No related RFIs
+        <% end %>
       </div>
     </div>
   </div>

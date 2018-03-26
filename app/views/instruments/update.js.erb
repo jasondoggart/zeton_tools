@@ -1,5 +1,5 @@
 <% @instrument.attributes.each do |name, value| %>
-  <% if @instrument.metrics_attributes.include?(name) %>
+  <% if Instrument.metrics_attributes.include?(name) %>
     $("#<%= name %>_status_instrument_<%= @instrument.id %>").html(
       "<%=
         j render partial: 'shared/metric_status',

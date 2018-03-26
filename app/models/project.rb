@@ -92,6 +92,24 @@ class Project < ApplicationRecord
     end
   end
 
+  def normalized_metrics_for(record)
+    if ready_to_report_metrics
+      normalized_metrics = cumulative_metrics_report_for record
+      required_hash = Hash.new
+      records = record.where(:project => self)
+      record.metrics_attributes.each do |attr|
+        required_hash[attr.to_sym] = records.where.not(attr.to_sym => 2).count
+      end
+      normalized_metrics.each do |key, array|
+        array.each_with_index do |value, i|
+          required_hash[key] != 0 ? array[i] = (array[i].to_f/required_hash[key].to_f * 100).round(1) : 100
+        end
+      end
+      normalized_metrics
+    end
+
+  end
+
   def metrics_summary_for(record)
     report = Hash.new
     records = record.where(:project => self)

@@ -30,21 +30,34 @@ describe "Information Request" do
     click_link("edit_rfi_#{rfi.id}")
     fill_in('Zeton Clarification', with: "new")
     click_on('Update RFI')
-    expect(current_path).to eq(project_rfis_path)
+    expect(current_path).to eq(information_request_path(rfi))
     expect(rfi.reload.zeton_clarification).to eq("new")
   end
 
-  it 'can be deleted' do
+  it 'redirects back to edit if update is invalid' do
     sign_in_with(@user.email, @user.password)
     visit root_path
     click_link("project_#{@project.id}")
     rfi = InformationRequest.create(zeton_clarification: "asdf", project: @project)
-    before_count = InformationRequest.count
     visit project_rfis_path
     click_link("show_rfi_#{rfi.id}")
-    click_link("delete_rfi_#{rfi.id}")
-    expect(current_path).to eq(project_rfis_path)
-    expect(InformationRequest.count).to eq(before_count - 1)
+    click_link("edit_rfi_#{rfi.id}")
+    fill_in('Zeton Clarification', with: "")
+    click_on('Update RFI')
+    expect(page).to have_content("Updating #{rfi.rfi_number}")
+  end
+
+  it 'can be deleted', js: true do
+    sign_in_with(@user.email, @user.password)
+    visit root_path
+    click_link("project_#{@project.id}")
+    rfi = InformationRequest.create(zeton_clarification: "asdf", project: @project)
+    visit project_rfis_path
+    click_link("show_rfi_#{rfi.id}")
+    page.accept_confirm do
+      click_link("delete_rfi_#{rfi.id}")
+    end
+    expect(current_path).to eq(information_request_path(rfi))
   end
 
   it 'can be viewed in its show page' do

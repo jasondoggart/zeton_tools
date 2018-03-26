@@ -1,15 +1,22 @@
-<div class="row pl-5 pr-5 mb-3 mt-5">
-  <div class="col-sm-12">
-    <h3>
-      Handvalves
-    </h3>
-    <button onclick="toggleFilters()" class="btn btn-sm btn-primary">
-      Filters
-    </button>
+<div class="dark-header">
+  <div class="row pl-5 pr-5">
+    <div class="col-sm-12">
+      <h1>
+        Handvalves
+      </h1>
+      <h5>
+        <%=
+          link_to 'Add new',
+            new_handvalve_path,
+            id: 'new_handvalve_link'
+        %>
+      </h5>
+      <i class="filter-button fa fa-filter" onClick="toggleFilters()"></i>
+    </div>
   </div>
 </div>
-<div class="row pl-5 pr-5">
-  <div id="filters" class="col-sm-2 filters-close">
+<div class="row pl-5 pr-5 neg-mar">
+  <div id="filters" class="col-sm-2 filters-close filters mr-3">
     <h5 class="text-muted">
       Sort by
     </h5>

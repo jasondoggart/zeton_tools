@@ -1,16 +1,80 @@
-<div class="row pl-5 pr-5 mb-3 mt-5">
-  <div class="col-sm-12">
-    <h3>
-      Requests for Information
-    </h3>
-    <button onclick="toggleFilters()" class="btn btn-sm btn-primary">
-      Filters
-    </button>
+<div class="dark-header">
+  <div class="row pl-5 pr-5">
+    <div class="col-sm-12">
+      <h1>
+        Requests for Information
+      </h1>
+      <h5>
+        <%=
+          link_to 'Add new',
+            new_information_request_path,
+            id: 'new_rfi_link'
+        %>
+      </h5>
+      <i class="filter-button fa fa-filter" onClick="toggleFilters()"></i>
+    </div>
+  </div>
+</div>
+
+<div class="row px-5 neg-mar">
+  <div class="col-sm-3">
+    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+      <div class="col-sm-12 h3 text-info">
+        <i class="fa fa-hashtag text-centered"></i>
+      </div>
+      <div class="col-sm-12">
+        <h2>
+          <%= @rfis.count %>
+        </h2>
+      </div>
+      <div class="col-sm-12 text-muted">
+        RFI Count
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+      <div class="col-sm-12 h3 text-warning">
+        <i class="fa fa-exclamation text-centered"></i>
+      </div>
+      <div class="col-sm-12">
+        <h2>
+          <%= @open_rfis.count %>
+        </h2>
+      </div>
+      <div class="col-sm-12 text-muted">
+        Open RFIs
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+      <div class="col-sm-12 h3 text-success">
+        <i class="fa fa-calendar-plus-o text-centered"></i>
+      </div>
+      <div class="col-sm-12">
+        <h2>
+          <%= @open_rfis.count %>
+        </h2>
+      </div>
+      <div class="col-sm-12 text-muted">
+        New RFIs This Week
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
+      <div class="col-sm-12 h1 text-primary">
+        <%= link_to '<i class="fa fa-plus text-centered"></i>'.html_safe,
+          new_information_request_path,
+          id: 'new_rfi' %>
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="row pl-5 pr-5">
-  <div id="filters" class="col-sm-2 filters-close">
+  <div id="filters" class="col-sm-2 filters-close filters">
     <h5 class="text-muted">
       Sort by
     </h5>
@@ -124,62 +188,6 @@
   </div>
 
   <div class="col-sm">
-    <div class="row">
-      <div class="col-sm-3">
-        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-          <div class="col-sm-12 h3 text-info">
-            <i class="fa fa-hashtag text-centered"></i>
-          </div>
-          <div class="col-sm-12">
-            <h2>
-              <%= @rfis.count %>
-            </h2>
-          </div>
-          <div class="col-sm-12 text-muted">
-            RFI Count
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-          <div class="col-sm-12 h3 text-warning">
-            <i class="fa fa-exclamation text-centered"></i>
-          </div>
-          <div class="col-sm-12">
-            <h2>
-              <%= @open_rfis.count %>
-            </h2>
-          </div>
-          <div class="col-sm-12 text-muted">
-            Open RFIs
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-          <div class="col-sm-12 h3 text-success">
-            <i class="fa fa-calendar-plus-o text-centered"></i>
-          </div>
-          <div class="col-sm-12">
-            <h2>
-              <%= @open_rfis.count %>
-            </h2>
-          </div>
-          <div class="col-sm-12 text-muted">
-            New RFIs This Week
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-          <div class="col-sm-12 h1 text-primary">
-            <%= link_to '<i class="fa fa-plus text-centered"></i>'.html_safe,
-              new_information_request_path,
-              id: 'new_rfi' %>
-          </div>
-        </div>
-      </div>
-    </div>
 
 
 

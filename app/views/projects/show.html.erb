@@ -1,4 +1,4 @@
-<div class="chart">
+<div class="dark-header">
   <div class="row pl-5 pr-5">
     <div class="col-sm-12">
       <h3 class="mb-5">
@@ -6,7 +6,7 @@
       </h3>
     </div>
     <% if current_project.ready_to_report_metrics %>
-      <canvas id="instrumentsChart" height="75"></canvas>
+      <canvas id="instrumentsChart" height="100%"></canvas>
     <% end %>
   </div>
 </div>
@@ -300,7 +300,7 @@
         data: {
           labels: <%= @reporting_days_array %>,
           datasets: [
-            <% @inst_cumulative_metrics.each_with_index do |(key, value), i| %>
+            <% @inst_normalized_metrics.each_with_index do |(key, value), i| %>
               {
                 label: "<%= key.to_s.humanize %>",
                 data: <%= value.to_json.html_safe %>,
@@ -317,11 +317,32 @@
             yAxes: [{
               ticks: {
                 beginAtZero:true
+              },
+              gridLines : {
+                color: 'rgba(255, 255, 255, 0.6)',
+                drawBorder: false,
+                tickMarkLength: 10
+              },
+              ticks: {
+                stepSize: 25,
+                callback: function(value, index, values) {
+                  return value + "%  "
+                },
+                min: 0,
+                max: 100
+              }
+            }],
+            xAxes: [{
+              ticks: {
+                display: false
               }
             }]
           },
           legend: {
-            position: 'bottom'
+            position: 'bottom',
+            labels: {
+              padding: 20
+            }
           }
         }
       });

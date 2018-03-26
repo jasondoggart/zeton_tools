@@ -1,56 +1,57 @@
-<div class="row pl-5 pr-5 mb-3 mt-5">
-  <div class="col-sm-12">
-    <h3>
-      Project Metrics
-    </h3>
+<div class="dark-header">
+  <div class="row pl-5 pr-5">
+    <div class="col-sm-12">
+      <h1>
+        Project Metrics
+      </h1>
+    </div>
   </div>
 </div>
 
-<% [Instrument, Equipment, Handvalve].each do |record| %>
-  <div class="row pl-5 pr-5">
-    <div class="col-sm-12">
-      <div class="card card-box-shadow mb-5 pt-3 pb-3">
-        <div class="card-body">
-          <h4 class="card-title mb-4">
-            <%= link_to record.to_s.pluralize(2), project_instruments_metrics_path %>
-          </h4>
-          <div class="row">
-            <%
-                current_project.metrics_summary_for(record)
-              .each do |key, hash|
-            %>
-          <div class="col-sm-6 mb-4">
+<div class="row neg-mar">
+  <% [Instrument, Equipment, Handvalve].each do |record| %>
+    <div class="row pl-5 pr-5">
+      <div class="col-sm-12">
+        <div class="card card-box-shadow mb-5 pt-3 pb-3">
+          <div class="card-body">
+            <h4 class="card-title mb-4">
+              <%= link_to record.to_s.pluralize(2), project_instruments_metrics_path %>
+            </h4>
             <div class="row">
-              <div class="col-sm-12">
-                <b><%= key.to_s.humanize %></b>
-                <span class="float-right">
-                  <%= hash[:complete] %>
-                  out of
-                  <%= hash[:required] %> (<%= hash[:percent] %>%)
-                </span>
+              <%
+                  current_project.metrics_summary_for(record)
+                .each do |key, hash|
+              %>
+            <div class="col-sm-6 mb-4">
+              <div class="row">
+                <div class="col-sm-12">
+                  <b><%= key.to_s.humanize %></b>
+                  <span class="float-right">
+                    <%= hash[:complete] %>
+                    out of
+                    <%= hash[:required] %> (<%= hash[:percent] %>%)
+                  </span>
+                </div>
               </div>
-            </div>
-            <div class="row mt-1">
-              <div class="col-sm-12">
-                <div class="progress" style="height: 4px;">
-                  <div class="progress-bar"
-                       role="progressbar"
-                       style="width: <%= hash[:percent] %>%;"
-                       aria-valuenow="<%= hash[:percent] %>"
-                       aria-valuemin="0"
-                       aria-valuemax="100">
+              <div class="row mt-1">
+                <div class="col-sm-12">
+                  <div class="progress" style="height: 4px;">
+                    <div class="progress-bar"
+                         role="progressbar"
+                         style="width: <%= hash[:percent] %>%;"
+                         aria-valuenow="<%= hash[:percent] %>"
+                         aria-valuemin="0"
+                         aria-valuemax="100">
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
-
-
-
+  <% end %>
+ </div>

@@ -1,11 +1,16 @@
-<div class="row pl-5 pr-5 mb-3 mt-5">
-  <div class="col-sm-12">
-    <h3 class="mb-0 pb-0">
-    <%= @action_item.ai_number %><br />
-    </h3>
-    <p class='text-muted mt-0 pt-0'>
-      Update action item
-    <p>
+<div class="dark-header">
+  <div class="row pl-5 pr-5">
+    <div class="col-sm-12">
+      <h1>
+        Updating <%= @action_item.ai_number %>
+      </h1>
+      <h5>
+        <%=
+          link_to 'Back',
+          :back
+        %>
+      </h5>
+    </div>
   </div>
 </div>
 <%= render 'form' %>

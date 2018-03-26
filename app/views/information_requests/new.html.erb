@@ -1,8 +1,14 @@
-<div class="row pl-5 pr-5 mb-3 mt-5">
-  <div class="col-sm-12">
-    <h1 class="display-4">
-      Create New RFI
-    </h1>
+<div class="dark-header">
+  <div class="row pl-5 pr-5">
+    <div class="col-sm-12">
+      <h1>
+        Create New RFI
+      </h1>
+      <%=
+        link_to 'Back',
+        :back
+      %>
+    </div>
   </div>
 </div>
 <%= render 'form' %>

@@ -36,12 +36,17 @@ class InformationRequestsController < ApplicationController
 
   def update
     @information_request = InformationRequest.find(params[:id])
+    @instruments = current_project.instruments
+    @equipment = current_project.equipment
+    @handvalves = current_project.handvalves
     @work_areas = WORK_AREAS
+    @client_team_members = current_project.client_team_members.all
+    @client_documents = current_project.client_documents
     if @information_request.update(information_request_params)
       respond_to do |format|
         format.html {
           flash[:success] = "RFI successfully updated"
-          redirect_to project_rfis_path
+          redirect_to information_request_path(@information_request)
         }
         format.js
       end

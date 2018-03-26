@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
     @team_members = current_project.team_members
     @client_team_members = current_project.client_team_members
     @reporting_days_array = current_project.reporting_days_array.to_json.html_safe
-    @inst_cumulative_metrics = current_project.cumulative_metrics_report_for(Instrument)
+    @inst_normalized_metrics = current_project.normalized_metrics_for(Instrument)
     @inst_metrics_summary = current_project.metrics_summary_for Instrument
     @hv_metrics_summary = current_project.metrics_summary_for Handvalve
     @equip_metrics_summary = current_project.metrics_summary_for Equipment
