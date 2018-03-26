@@ -1,12 +1,19 @@
 <% if signed_in? %>
-  <div class="main">
-    <h3>Welcome, <%= current_user.first_name %></h3>
-    <h5 class="mt-3 mb-3">Select a project</h5>
-    <div class="row mb-5 mt-5">
-      <% current_user.all_projects.each do |project| %>
-        <%= render partial: 'user_projects', locals: {project: project} %>
-      <% end %>
+  <div class="dark-header">
+    <div class="row pl-5 pr-5">
+      <div class="col-sm-12">
+        <h1>
+          Select a project
+        </h1>
+      </div>
     </div>
+  </div>
+  <div class="row px-5 neg-mar">
+    <% current_user.all_projects.each do |project| %>
+      <%= render partial: 'user_projects', locals: {project: project} %>
+    <% end %>
+  </div>
+  <div class="row px-5">
     <%= link_to 'New Project', new_project_path, class: 'btn btn-outline-primary', id: 'create_project' %>
   </div>
 
