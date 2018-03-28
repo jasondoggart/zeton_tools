@@ -1,0 +1,146 @@
+<div class="sidebar border-right">
+  <div class='p-3'>
+    <div class="sidebar-header">
+      <div class="p-3">
+        <h4 class="sidebar-logo">
+          Zeton Project Tools
+        </h4>
+      </div>
+    </div>
+  </div>
+  <% if signed_in? %>
+    <div class="p-3">
+      <div class="sidebar-user-info border-bottom">
+        <h5 class="mt-0 pt-0">
+          <%= current_user.full_name %>
+        </h5>
+        <p>
+        <%=
+          link_to 'Action Items',
+            current_user,
+            class: 'sidebar-link'
+          %>
+        <br />
+        <%=
+          link_to 'Sign out',
+            sign_out_path,
+            method: :delete,
+            class: 'sidebar-link'
+          %>
+        <br />
+        </p>
+      </div>
+      <% if current_project %>
+        <div class="sidebar-project">
+          <h5>
+            Project <%= current_project.project_number %>
+          </h5>
+          <p>
+          <%=
+            link_to 'Project Overview',
+              project_path(current_project),
+              class: 'sidebar-link'
+            %>
+          <br />
+          <%=
+            link_to 'Update Project',
+              edit_project_path(current_project),
+              class: 'sidebar-link',
+              id: "update_project_#{current_project.id}"
+            %>
+          <br />
+          <%=
+            link_to 'Change Project',
+              root_path,
+              class: 'sidebar-link'
+            %>
+          </p>
+          <h6>
+            Bill of Materials
+          </h6>
+          <p>
+          <%=
+            link_to 'Import From Extract',
+              new_project_extract_import_path,
+              class: 'sidebar-link'
+              %><br />
+              <%=
+                link_to 'Instruments',
+                  project_instruments_path,
+                  class: 'sidebar-link'
+                  %><br />
+                  <%=
+                    link_to 'Equipment',
+                      project_equipment_path,
+                      class: 'sidebar-link'
+                      %><br />
+                      <%=
+                        link_to 'Handvalves',
+                          project_handvalves_path,
+                          class: 'sidebar-link'
+                          %><br />
+          </p>
+          <h6>
+            Project Metrics
+          </h6>
+          <p>
+          <%=
+            link_to 'Metrics Summary',
+              project_metrics_path,
+              class: 'sidebar-link'
+            %>
+          <br />
+          <%=
+            link_to 'Instruments Metrics',
+              project_instruments_metrics_path,
+              class: 'sidebar-link'
+            %>
+          <br />
+          <%=
+            link_to 'Equipment Metrics',
+              project_equipment_metrics_path,
+              class: 'sidebar-link'
+            %>
+          <br />
+          <%=
+            link_to 'Handvalves Metrics',
+              project_handvalves_metrics_path,
+              class: 'sidebar-link'
+            %>
+          </p>
+          <h6>
+            Project Tools
+          </h6>
+          <p>
+          <%=
+            link_to 'RFI Log',
+              project_rfis_path,
+              class: 'sidebar-link'
+            %>
+          <br />
+          <%=
+            link_to 'Action Items List',
+              project_action_items_path,
+              class: 'sidebar-link'
+            %>
+          </p>
+          <h6>
+            Client
+          </h6>
+          <p>
+          <%=
+            link_to 'Client Team',
+              '#',
+              class: 'sidebar-link'
+            %>
+          <br />
+          <%=
+            link_to 'Client Documents',
+              project_client_documents_path,
+              class: 'sidebar-link'
+            %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
