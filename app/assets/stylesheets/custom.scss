@@ -200,3 +200,30 @@ body {
 .filter-button:hover {
   opacity: 1;
 }
+
+.sub-nav {
+  padding-bottom: 10px;
+  width: auto;
+  border-bottom: 1px solid white;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.sub-nav-item {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.sub-nav a > .sub-nav-dropdown {
+  text-decoration: none;
+  color: black;
+}
+
+.sub-nav-link {
+  color: white;
+  text-decoration: none;
+  padding-right: 25px;
+}
+

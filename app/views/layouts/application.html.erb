@@ -173,10 +173,13 @@
       <%= yield %>
     </div>
     <script>
-      function toggleFilters() {
-        var filters = document.getElementById("filters");
-        filters.classList.toggle("filters-close");
-      }
+      $('#filter-toggle-link').click(function() {
+        if ($('#filters').hasClass('filters-close')) {
+          $('#filters').removeClass('filters-close');
+        } else {
+          $('#filters').addClass('filters-close');
+        }
+      });
     </script>
   </body>
 </html>

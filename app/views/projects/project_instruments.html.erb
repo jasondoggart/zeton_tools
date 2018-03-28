@@ -4,59 +4,62 @@
       <h1>
         Instruments
       </h1>
-      <h5>
+    </div>
+  </div>
+  <div class="row px-5 mt-3">
+    <div class="col-sm" style="width: auto;">
+      <div class="sub-nav" style="width: auto;">
         <%=
-          link_to 'Add new',
-            new_instrument_path,
-            id: 'new_instrument_link'
+          link_to 'New',
+          new_instrument_path,
+          class: 'sub-nav-link',
+          id: 'new-instrument_link'
         %>
-      </h5>
-      <i class="filter-button fa fa-filter" onClick="toggleFilters()"></i>
+        <a class='pointer' id="filter-toggle-link" style="padding-right: 25px;">Filter</a>
+        <a class='pointer'
+           id="sort_by_dropdown"
+           role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true"
+           aria-expanded="false">
+          Sort by
+          <i class="fa fa-angle-down"></i>
+        </a>
+        <div class="dropdown-menu sub-nav-dropdown"
+             style="height: 200px;
+             overflow: scroll;"
+             aria-labelledby="sort_by_dropdown">
+          <%=
+            link_to 'Type',
+              request.query_parameters.merge(
+                :sorted_by => 'type_' + sort_direction(@sorted_by)
+            ),
+            class: 'dropdown-item sub-nav-dropdown'
+          %>
+        <%=
+          link_to 'Loop',
+            request.query_parameters.merge(
+              :sorted_by => 'loop_' + sort_direction(@sorted_by)
+          ),
+          class: 'dropdown-item'
+        %>
+      <%=
+        link_to 'Scope',
+          project_instruments_path(
+            :sorted_by => 'scope_' + sort_direction(@sorted_by)
+        ),
+        class: 'dropdown-item'
+      %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
     </div>
   </div>
 </div>
 
 <div class="row pl-5 pr-5 neg-mar">
   <div id="filters" class="mr-3 col-sm-2 filters-close filters">
-    <h5 class="text-muted">
-      Sort by
-    </h5>
-    <div class="dropdown">
-      <button class="btn btn-sm btn-outline-primary dropdown-toggle"
-              type="button"
-              id="loop_dropdown_button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false">
-        Select...
-      </button>
-      <div class="dropdown-menu"
-           style="height: 200px;
-           overflow: scroll;"
-           aria-labelledby="loop_dropdown_button">
-        <%=
-          link_to 'Type',
-            request.query_parameters.merge(
-              :sorted_by => 'type_' + sort_direction(@sorted_by)
-          ),
-          class: 'dropdown-item'
-        %>
-      <%=
-        link_to 'Loop',
-          request.query_parameters.merge(
-            :sorted_by => 'loop_' + sort_direction(@sorted_by)
-        ),
-        class: 'dropdown-item'
-      %>
-    <%=
-      link_to 'Scope',
-        project_instruments_path(
-          :sorted_by => 'scope_' + sort_direction(@sorted_by)
-      ),
-      class: 'dropdown-item'
-    %>
-      </div>
-    </div>
     <h5 class="text-muted mt-3">
       Filters
     </h5>
@@ -164,91 +167,84 @@
     </div>
   </div>
   <div class="col-sm">
-    <div class="row">
-      <div class="col-12">
-        <div class="card card-box-shadow mb-5">
-          <div class="card-body mt-0">
-            <% @instruments.each do |inst| %>
-              <div class="border-bottom pb-3">
-                <div class="pt-3 mt-0">
-                  <div class="row pl-3 pr-3">
-                    <div class="col-sm-12">
-                      <h5 class="mb-0">
-                        <%= link_to inst.tag,
-                          instrument_path(inst),
-                          id: "show_instrument_#{inst.id}" %>
-                      </h5>
-                      <span class="badge badge-pill badge-primary">
-                        710-39-110
-                      </span>
-                      <span class="badge badge-pill badge-info">
-                        <%= inst.scope %>
-                      </span>
-                    </div>
-                  </div>
-                  <dl class="row pl-3 pr-3 pt-3">
-                    <dt class="col-sm-3">
-                    Location
-                    </dt>
-                    <dd class="col-sm-9">
-                    Skid <%= inst.zeton_skid_number %>,
-                    Level <%= inst.zeton_skid_level %>
-                    </dd>
-                    <dt class="col-sm-3">
+    <% @instruments.each do |inst| %>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card mb-3">
+            <div class="card-body mt-0">
+              <div class="row">
+                <div class="col-sm-4">
+                  <h5 class="mb-0">
+                    <%=
+                      link_to inst.tag,
+                        instrument_path(inst),
+                        id: "show_instrument_#{inst.id}"
+                      %>
+                  </h5>
+                </div>
+                <div class="col-sm-8">
+                  <h5 class="mb-0">
+                    Will put in instrument description
+                  </h5>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-sm-12">
+                  <dl class="row">
+                    <dt class="col-sm-4">
                     Manufacturer
                     </dt>
-                    <dd class="col-sm-9">
+                    <dd class="col-sm-8">
                     <%= inst.manufacturer %>
                     </dd>
-                    <dt class="col-sm-3">
+                    <dt class="col-sm-4">
                     Model
                     </dt>
-                    <dd class="col-sm-9">
+                    <dd class="col-sm-8">
                     <%= inst.model %>
                     </dd>
-                    <dt class="col-sm-3">
-                    Process Connection
+                    <dt class="col-sm-4">
+                    Connection
                     </dt>
-                    <dd class="col-sm-9">
-                    <%= inst.process_connection %>
-                    </dd>
-                    <dt class="col-sm-3">
-                    MOC
-                    </dt>
-                    <dd class="col-sm-9">
+                    <dd class="col-sm-8">
                     <%= inst.material_of_construction %>
-                    </dd>
-                    <dt class="col-sm-3">
-                    I/O Type
-                    </dt>
-                    <dd class="col-sm-9">
-                    <%= inst.dcs_io_type %>
-                    </dd>
-                    <dt class="col-sm-3">
-                    Range
-                    </dt>
-                    <dd class="col-sm-9">
-                    <%= inst.range %>
-                    </dd>
-                    <dt class="col-sm-3">
-                    Zeton PO
-                    </dt>
-                    <dd class="col-sm-9">
-                    <%= inst.zeton_po %>
                     </dd>
                   </dl>
                 </div>
               </div>
-            <% end %>
-          </div>
-          <div class="row pl-5 pr-5">
-            <%= will_paginate(
-              @instruments,
-              :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer
-            ) %>
+            </div>
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-sm-4">
+                  <i class="fa fa-map-marker pr-3"></i>
+                  <% if inst.zeton_skid_number %>
+                    Skid <%= inst.zeton_skid_number %>
+                    <% if inst.zeton_skid_level %>
+                      , Level <%= inst.zeton_skid_level %>
+                    <% end %>
+                  <% end %>
+                </div>
+                <div class="col-sm-4">
+                  <i class="fa fa-file-alt pr-3"></i>
+                  710-39
+                </div>
+                <div class="col-sm-4">
+                  <i class="fa fa-wrench pr-3"></i>
+                  <% if inst.mech_elec %>
+                    <%= inst.mech_elec %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>
+</div>
+<div class="row pl-5 pr-5">
+  <%= will_paginate(
+    @instruments,
+    :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer
+  ) %>
 </div>
