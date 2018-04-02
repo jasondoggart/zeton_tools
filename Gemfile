@@ -47,5 +47,4 @@ gem 'axlsx_rails'
 gem 'roo', '~> 2.7', '>= 2.7.1'
 gem 'faker', '~> 1.8', '>= 1.8.7'
 gem 'roo-xls', '~> 1.2'
-gem 'webpacker', '~> 3.4'
 
