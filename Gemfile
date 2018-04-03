@@ -31,13 +31,9 @@ group :production do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'clearance', '~> 1.16', '>= 1.16.1'
-gem 'popper_js', '~> 1.12.9'
-gem 'font-awesome-rails'
 gem 'will_paginate', '~> 3.1', '>= 3.1.6'
-gem 'bootstrap-will_paginate', '~> 1.0'
 gem 'chart-js-rails', '~> 0.1.4'
 gem 'select2-rails', '~> 4.0', '>= 4.0.3'
 gem 'bootstrap-datepicker-rails', '~> 1.7', '>= 1.7.1.1'

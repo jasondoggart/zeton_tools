@@ -31,4 +31,8 @@ class InformationRequest < ApplicationRecord
   def rfi_number
     'ZET-RFI-' + id.to_s
   end
+
+  def number_of_associations
+    (self.instruments.count + self.equipment.count + self.handvalves.count).to_i
+  end
 end

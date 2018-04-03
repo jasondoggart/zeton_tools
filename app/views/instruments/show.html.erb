@@ -1,160 +1,595 @@
-<div class="dark-header">
-  <div class="row pl-5 pr-5">
-    <div class="col-sm-12">
-      <h1>
-        <%= @instrument.tag %><br />
-      </h1>
-      <small>
-        <%=
-          link_to 'Back',
-          :back
-        %>
-        <br />
-        <%=
-          link_to 'Edit Instrument',
-          edit_instrument_path(@instrument),
-          id: "edit_instrument_#{@instrument.id}"
-        %>
-        <br />
-        <%= link_to 'Delete Instrument',
-          instrument_path(@instrument),
-          method: :delete,
-          id: "delete_instrument_#{@instrument.id}",
-          data: { confirm: "Are you sure you want to delete #{@instrument.tag}?" }
-        %>
-        <br />
-      </small>
-    </div>
+<div class="section-heading">
+  <%= @instrument.tag %>
+</div>
+<div class="item-sub-heading">
+  <div class="item-sub-heading-icon">
+    <i class="fas fa-list-ul"></i>
+  </div>
+  <div class="item-sub-heading-text">
+    Properties
   </div>
 </div>
-<div class="row pl-5 pr-5 neg-mar">
-  <div class="col-sm-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">
-          Metrics<br />
-          <small class="text-muted">Click below to update</small>
-        </h5>
+<div class="item-properties">
+  <div class="instrument-header">
+    <div class="instrument-header-icon">
+      <i class="fas fa-bullseye"></i>
+    </div>
+    <div class="instrument-header-text">
+      Type
+    </div>
+  </div>
+  <div class="instrument-specific">
+    <%= @instrument.type_code %>
+  </div>
+  <div class="instrument-header">
+    <div class="instrument-header-icon">
+      <i class="fas fa-hashtag"></i>
+    </div>
+    <div class="instrument-header-text">
+      Loop
+    </div>
+  </div>
+  <div class="instrument-specific">
+    <%= @instrument.loop %>
+  </div>
+  <div class="instrument-header">
+    <div class="instrument-header-icon">
+      <i class="fas fa-dollar-sign"></i>
+    </div>
+    <div class="instrument-header-text">
+      Vendor
+    </div>
+  </div>
+  <div class="instrument-specific">
+    <%= @instrument.supplier %>
+  </div>
+  <div class="instrument-header">
+    <div class="instrument-header-icon">
+      <i class="far fa-building"></i>
+    </div>
+    <div class="instrument-header-text">
+      Manufacturer
+    </div>
+  </div>
+  <div class="instrument-specific">
+    <%= @instrument.manufacturer %>
+  </div>
+  <div class="instrument-header">
+    <div class="instrument-header-icon">
+      <i class="fas fa-hashtag"></i>
+    </div>
+    <div class="instrument-header-text">
+      Model Number
+    </div>
+  </div>
+  <div class="instrument-specific">
+    <%= @instrument.model %>
+  </div>
+  <div class="instrument-header">
+    <div class="instrument-header-icon">
+      <i class="fas fa-wrench"></i>
+    </div>
+    <div class="instrument-header-text">
+      Process Connection
+    </div>
+  </div>
+  <div class="instrument-specific">
+    <%= @instrument.process_connection %>
+  </div>
+  <div class="instrument-header">
+    <div class="instrument-header-icon">
+      <i class="fas fa-certificate"></i>
+    </div>
+    <div class="instrument-header-text">
+      Material of Construction
+    </div>
+  </div>
+  <div class="instrument-specific">
+    <%= @instrument.material_of_construction %>
+  </div>
+  <div class="instrument-header">
+    <div class="instrument-header-icon">
+      <i class="fas fa-sliders-h"></i>
+    </div>
+    <div class="instrument-header-text">
+      Range
+    </div>
+  </div>
+  <div class="instrument-specific">
+    <%= @instrument.range %>
+  </div>
+  <div class="instrument-header">
+    <div class="instrument-header-icon">
+      <i class="fas fa-code"></i>
+    </div>
+    <div class="instrument-header-text">
+      DCS I/O Type
+    </div>
+  </div>
+  <div class="instrument-specific">
+    <%= @instrument.dcs_io_type %>
+  </div>
+  <div class="instrument-header">
+    <div class="instrument-header-icon">
+      <i class="fas fa-shopping-cart"></i>
+    </div>
+    <div class="instrument-header-text">
+      PO Number
+    </div>
+  </div>
+  <div class="instrument-specific">
+    <%= @instrument.zeton_po %>
+  </div>
+  <div class="instrument-header">
+    <div class="instrument-header-icon">
+      <i class="far fa-hand-point-right"></i>
+    </div>
+    <div class="instrument-header-text">
+      Item Scope
+    </div>
+  </div>
+  <div class="instrument-specific">
+    <%= @instrument.scope %>
+  </div>
+  <div class="instrument-header">
+    <div class="instrument-header-icon">
+      <i class="fas fa-list-ul"></i>
+    </div>
+    <div class="instrument-header-text">
+      Installation Scope
+    </div>
+  </div>
+  <div class="instrument-specific">
+    <%= @instrument.mech_elec %>
+  </div>
+  <div class="instrument-header">
+    <div class="instrument-header-icon">
+      <i class="fas fa-bullseye"></i>
+    </div>
+    <div class="instrument-header-text">
+      Skid Location
+    </div>
+  </div>
+  <div class="instrument-specific">
+    Skid <%= @instrument.zeton_skid_number %>,
+    Level <%= @instrument.zeton_skid_level %>
+  </div>
+  <div class="instrument-header">
+    <div class="instrument-header-icon">
+      <i class="fas fa-map-pin"></i>
+    </div>
+    <div class="instrument-header-text">
+      Installation Location
+    </div>
+  </div>
+  <div class="instrument-specific">
+    Update model to include
+  </div>
+  <div class="instrument-header">
+    <div class="instrument-header-icon">
+      <i class="fas fa-signal"></i>
+    </div>
+    <div class="instrument-header-text">
+      Statistics Count
+    </div>
+  </div>
+  <div class="instrument-specific">
+    <%= @instrument.item_type %>
+  </div>
+</div>
+<div class="item-sub-heading">
+  <div class="item-sub-heading-icon">
+    <i class="fas fa-chart-line"></i>
+  </div>
+  <div class="item-sub-heading-text">
+    Metrics
+  </div>
+</div>
+<div class="metrics">
+  <div class="metrics-report">
+    <% @instrument.attributes.each do |name, value| %>
+      <% if Instrument.metrics_attributes.include?(name) %>
+        <div class="metrics-description">
+          <%= name.humanize %>
+        </div>
+        <div id="<%= name %>_status_instrument_<%= @instrument.id %>">
+          <%=
+            render partial: 'shared/metrics_icon',
+            locals: {
+              instrument: @instrument,
+              value: value,
+              name: name
+            }
+          %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="item-sub-heading">
+  <div class="item-sub-heading-icon">
+    <i class="far fa-envelope"></i>
+  </div>
+  <div class="item-sub-heading-text">
+    Requests for Information
+  </div>
+</div>
+<div class="rfi-list">
+  <div class="wide-table">
+    <div class="rfi-table-heading-row">
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-hashtag"></i>
+        </div>
+        <div class="table-heading-text">
+          Number
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#numberSort')">
+          <i class="fas fa-sort"></i>
+        </div>
       </div>
-      <ul class="list-group list-group-flush">
-        <% @instrument.attributes.each do |name, value| %>
-          <% if Instrument.metrics_attributes.include?(name) %>
-            <li class="list-group-item">
-              <span class="float-sm-left"><%= name.humanize %></span>
-              <span class="align-middle float-sm-right">
-                <div id="<%= name %>_status_instrument_<%= @instrument.id %>">
-                  <%=
-                    render partial: 'shared/metric_status',
-                      locals: {
-                      record: @instrument,
-                      attribute: name,
-                      value: value
-                    }
-                  %>
-                </div>
-              </span>
-            </li>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-clipboard-check"></i>
+        </div>
+        <div class="table-heading-text">
+          Status
+        </div>
+        <div class="table-heading-sort" onclick="showPopup('#statusSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+        <div class="sort-pop-up hide" id="statusSort">
+          <div class="sort-ascending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-up"></i>
+            </div>
+            <div class="sort-text">
+              Ascending
+            </div>
+          </div>
+          <div class="sort-descending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-down"></i>
+            </div>
+            <div class="sort-text">
+              Descending
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="far fa-file"></i>
+        </div>
+        <div class="table-heading-text">
+          Client Document
+        </div>
+        <div class="table-heading-sort" onclick="showPopup('#documentSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+        <div class="sort-pop-up hide" id="documentSort">
+          <div class="sort-ascending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-up"></i>
+            </div>
+            <div class="sort-text">
+              Ascending
+            </div>
+          </div>
+          <div class="sort-descending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-down"></i>
+            </div>
+            <div class="sort-text">
+              Descending
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="far fa-user"></i>
+        </div>
+        <div class="table-heading-text">
+          Send to
+        </div>
+        <div class="table-heading-sort" onclick="showPopup('#sendToSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+        <div class="sort-pop-up hide" id="sendToSort">
+          <div class="sort-ascending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-up"></i>
+            </div>
+            <div class="sort-text">
+              Ascending
+            </div>
+          </div>
+          <div class="sort-descending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-down"></i>
+            </div>
+            <div class="sort-text">
+              Descending
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="far fa-dot-circle"></i>
+        </div>
+        <div class="table-heading-text">
+          Work Area
+        </div>
+        <div class="table-heading-sort" onclick="showPopup('#areaSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+        <div class="sort-pop-up hide" id="areaSort">
+          <div class="sort-ascending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-up"></i>
+            </div>
+            <div class="sort-text">
+              Ascending
+            </div>
+          </div>
+          <div class="sort-descending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-down"></i>
+            </div>
+            <div class="sort-text">
+              Descending
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-tags"></i>
+        </div>
+        <div class="table-heading-text">
+          Associated Items
+        </div>
+        <div class="table-heading-sort" onclick="showPopup('#itemsSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+        <div class="sort-pop-up hide" id="itemsSort">
+          <div class="sort-ascending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-up"></i>
+            </div>
+            <div class="sort-text">
+              Ascending
+            </div>
+          </div>
+          <div class="sort-descending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-down"></i>
+            </div>
+            <div class="sort-text">
+              Descending
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-align-left"></i>
+        </div>
+        <div class="table-heading-text">
+          RFI
+        </div>
+        <div class="table-heading-sort" onclick="showPopup('#rfiSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+        <div class="sort-pop-up hide" id="rfiSort">
+          <div class="sort-ascending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-up"></i>
+            </div>
+            <div class="sort-text">
+              Ascending
+            </div>
+          </div>
+          <div class="sort-descending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-down"></i>
+            </div>
+            <div class="sort-text">
+              Descending
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="far fa-calendar-alt"></i>
+        </div>
+        <div class="table-heading-text">
+          Latest Response
+        </div>
+        <div class="table-heading-sort" onclick="showPopup('#responseSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+        <div class="sort-pop-up hide" id="responseSort">
+          <div class="sort-ascending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-up"></i>
+            </div>
+            <div class="sort-text">
+              Ascending
+            </div>
+          </div>
+          <div class="sort-descending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-down"></i>
+            </div>
+            <div class="sort-text">
+              Descending
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% @instrument.information_requests.each do |rfi| %>
+      <div class="rfi-table-data-row">
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <%= rfi.rfi_number %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <div class="rfi-status-badge-<%= rfi_status_button(rfi.answered).downcase %>">
+              <%= rfi_status_button(rfi.answered) %>
+            </div>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <% if rfi.client_document %>
+            <div class="table-data-text table-link" onclick="showDocumentData(event, '#client_document_<%=rfi.client_document.id%>')">
+              <%= rfi.client_document.document_number %>
+            </div>
+          <% else %>
+            <div class="table-data-text">
+              None
+            </div>
           <% end %>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-  <div class="col-sm-8">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Instrument Data</h5>
-      </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <ul class="list-group ml-3 border-0">
-            <li class="list-group-item border-0">
-              <b>Type:</b> <%= @instrument.type_code %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Skid Number:</b> <%= @instrument.zeton_skid_number %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Scope:</b> <%= @instrument.scope %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Supplier:</b> <%= @instrument.supplier %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Model Number:</b> <%= @instrument.model %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Material of Construction:</b> <%= @instrument.model %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Installation Location:</b> <%= @instrument.location %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>DCS I/O Type:</b> <%= @instrument.dcs_io_type %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Tracking Number:</b> <%= @instrument.tracking_number %>
-            </li>
-          </ul>
         </div>
-        <div class="col-sm-6">
-          <ul class="list-group mr-3">
-            <li class="list-group-item border-0">
-              <b>Loop:</b> <%= @instrument.loop %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Skid Level:</b> <%= @instrument.zeton_skid_level %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>M, M/E, E:</b> <%= @instrument.mech_elec %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Manufacturer:</b> <%= @instrument.manufacturer %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Process Connection:</b> <%= @instrument.process_connection %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Item Type:</b> <%= @instrument.item_type %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Instrument Range:</b> <%= @instrument.range %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Zeton PO Number:</b> <%= @instrument.zeton_po %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Receiving Info:</b> <%= @instrument.receiving_info %>
-            </li>
-          </ul>
+        <div class="table-data-cell">
+          <% if rfi.client_team_member %>
+            <div class="table-data-text table-link" onclick="showDocumentData(event, '#client_team_member_<%= rfi.client_team_member.id %>')">
+              <%= rfi.client_team_member.full_name %>
+            </div>
+          <% else %>
+            <div class="table-data-text table-link">
+              None
+            </div>
+          <% end %>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <%= rfi.area %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <div class="rfi-table-assoc-item">
+              <%= rfi.number_of_associations %> Items
+            </div>
+            <div class="rfi-table-assoc-item">
+            </div>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text table-link" onclick="showDocumentData(event, '#clarification_<%= rfi.id %>')">
+            <%= truncate(rfi.zeton_clarification, length: 38) %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <% if rfi.rfi_responses.any? %>
+              <%= rfi.rfi_responses.last.created_at.strftime("%b %-d, %Y") %>
+            <% else %>
+              No responses
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="card mt-5">
-      <div class="card-body">
-        <h5 class="card-title">
-          Related RFI's
-        </h5>
-        <% if @instrument.information_requests.any? %>
-          <table>
-            <thead>
-              <th>Number</th>
-              <th>Zeton Clarification</th>
-              <th>Responses</th>
-            </thead>
-            <tbody>
-              <% @instrument.information_requests.each do |rfi| %>
-                <tr class="mb-3">
-                  <td><%= link_to rfi.rfi_number, information_request_path(rfi) %></td>
-                  <td><%= rfi.zeton_clarification %></td>
-                  <td><%= link_to rfi.rfi_responses.count, information_request_path(rfi) %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        <% else %>
-          No related RFIs
-        <% end %>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>
+
+<!-- create divs for all client documents -->
+<% @instrument.information_requests.each do |rfi| %>
+  <% if rfi.client_document %>
+    <div class="client-document hide" id="client_document_<%= rfi.client_document.id %>">
+      <div class='cd-close' onclick="showPopup('#client_document_<%= rfi.client_document.id %>')">
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="client-document-table">
+        <div class="cd-heading">
+          Title
+        </div>
+        <div class="cd-specific">
+          <%= rfi.client_document.document_name %>
+        </div>
+        <div class="cd-heading">
+          Document Number
+        </div>
+        <div class="cd-specific">
+          <%= rfi.client_document.document_number %>
+        </div>
+        <div class="cd-heading">
+          Revision
+        </div>
+        <div class="cd-specific">
+          <%= rfi.client_document.document_revision %>
+        </div>
+        <div class="cd-heading">
+          Date Recevied
+        </div>
+        <div class="cd-specific">
+          <%= rfi.client_document.created_at.strftime("%b %-d, %Y") %>
+        </div>
+        <div class="cd-download">
+          <i class="fa fa-download"></i>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<!-- create divs for all client team members -->
+<% @instrument.information_requests.each do |rfi| %>
+  <% if rfi.client_team_member %>
+    <div class="client-pop-up hide" id="client_team_member_<%= rfi.client_team_member.id %>">
+      <div class='cd-close' onclick="showPopup('#client_team_member_<%= rfi.client_team_member.id %>')">
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="client-grid">
+        <div class="client-heading">
+          Name
+        </div>
+        <div class="client-specific">
+          <%= rfi.client_team_member.full_name %>
+        </div>
+        <div class="client-heading">
+          Organization
+        </div>
+        <div class="client-specific">
+          <%= rfi.client_team_member.organization %>
+        </div>
+        <div class="client-heading">
+          Email
+        </div>
+        <div class="client-specific">
+          <%= rfi.client_team_member.email %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<!-- create divs for all clarfications -->
+<% @instrument.information_requests.each do |rfi| %>
+  <div class="rfi-clarification-pop-up hide" id="clarification_<%= rfi.id %>">
+    <div class='clarification-close' onclick="showPopup('#clarification_<%= rfi.id %>')">
+      <i class="fas fa-times"></i>
+    </div>
+    <div class="clarification-grid">
+      <div class="clarification-heading">
+        Zeton Clarification
+      </div>
+      <div class="clarification-specific">
+        <%= rfi.zeton_clarification %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+
+
+

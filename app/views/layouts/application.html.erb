@@ -11,6 +11,7 @@
       'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application' %>
     <%= stylesheet_pack_tag 'application' %>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
 
     <%= favicon_link_tag %>
   </head>
@@ -24,11 +25,11 @@
       <% end %>
     </div>
 
-    <%= render 'layouts/sidebar' %>
-
-
-    <div class="main-body">
-      <%= yield %>
+    <div class="container">
+      <%= render 'layouts/sidebar' %>
+      <div class="main">
+        <%= yield %>
+      </div>
     </div>
     <script>
       $('#filter-toggle-link').click(function() {
@@ -38,6 +39,45 @@
           $('#filters').addClass('filters-close');
         }
       });
+
+      function toggleDropdown(list, arrow, height) {
+        const ddList = document.querySelector(list);
+        const listItems = ddList.querySelectorAll('.list-item');
+        const newArrow = document.querySelector(arrow);
+        dropdownStatus(listItems, height, newArrow)
+      }
+
+      function dropdownStatus(listItems, height, newArrow) {
+        listItems.forEach((e) => {
+          if (e.classList.contains('hide')) {
+            e.classList.remove('hide');
+            document.documentElement.style.setProperty(height, '27px');
+            newArrow.innerHTML = '<i class="fa fa-caret-down"></i>';
+          } else {
+            e.classList.add('hide');
+            document.documentElement.style.setProperty(height, '0px');
+            newArrow.innerHTML = '<i class="fa fa-caret-right"></i>';
+          }
+        });
+      }
+
+      function showPopup(e) {
+        const popup = document.querySelector(e);
+        popup.classList.contains('hide') ? popup.classList.remove('hide') : popup.classList.add('hide');
+
+      }
+
+      function showDocumentData(e, divid) {
+        const left = e.clientX + 'px';
+        const top = e.clientY + 'px';
+
+        const div = document.querySelector(divid);
+
+        div.style.left = left;
+        div.style.top = top;
+
+        showPopup(divid);
+      }
     </script>
   </body>
 </html>

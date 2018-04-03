@@ -3,13 +3,13 @@ module ApplicationHelper
   def icon_select(value)
     case value
     when nil
-      content_tag(:i, nil, class: 'fa fa-times text-warning fa-1x')
+      content_tag(:i, nil, class: 'far fa-times-circle')
     when 0
-      content_tag(:i, nil, class: 'fa fa-times text-warning fa-1x')
+      content_tag(:i, nil, class: 'far fa-times-circle')
     when 1
-      content_tag(:i, nil, class: 'fa fa-check text-success fa-1x')
+      content_tag(:i, nil, class: 'far fa-check-circle')
     when 2
-      content_tag(:i, nil, class: 'fa fa-circle text-info fa-1x')
+      content_tag(:i, nil, class: 'far fa-circle')
     end
   end
 
@@ -36,6 +36,19 @@ module ApplicationHelper
       1
     else
       0
+    end
+  end
+
+  def metrics_background_color(value)
+    case value
+    when nil
+      "incomplete"
+    when 0
+      "incomplete"
+    when 1
+      "complete"
+    when 2
+      "not-required"
     end
   end
 

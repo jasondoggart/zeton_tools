@@ -1,247 +1,512 @@
-<div class="dark-header">
-  <div class="row pl-5 pr-5">
-    <div class="col-sm-12">
-      <h1>
-        Instruments
-      </h1>
+<div class="section-heading">
+  Instruments
+</div>
+<div class="section-sub-heading">
+  Click on an instrument tag to view and update
+</div>
+<div class="table-function-row">
+  <div class="table-function-item" onclick="showPopup('#filter-pop-up')">
+    <i class="fa fa-filter"></i>
+    Filter
+  </div>
+  <div class="table-function-item" onclick="showPopup('#filter-pop-up')">
+    <i class="fa fa-filter"></i>
+    Download as Excel
+  </div>
+  <div class="table-function-item" onclick="showPopup('#filter-pop-up')">
+    <i class="fa fa-filter"></i>
+    Upload from Excel
+  </div>
+</div>
+<div class="filter-pop-up hide" id="filter-pop-up">
+  <div class="filter-row">
+    <div class="filter-select">
+      Select...
+    </div>
+    <div class="filter-params">
+      param
     </div>
   </div>
-  <div class="row px-5 mt-3">
-    <div class="col-sm" style="width: auto;">
-      <div class="sub-nav" style="width: auto;">
-        <%=
-          link_to 'New',
-          new_instrument_path,
-          class: 'sub-nav-link',
-          id: 'new-instrument_link'
-        %>
-        <a class='pointer' id="filter-toggle-link" style="padding-right: 25px;">Filter</a>
-        <a class='pointer'
-           id="sort_by_dropdown"
-           role="button"
-           data-toggle="dropdown"
-           aria-haspopup="true"
-           aria-expanded="false">
-          Sort by
-          <i class="fa fa-angle-down"></i>
-        </a>
-        <div class="dropdown-menu sub-nav-dropdown"
-             style="height: 200px;
-             overflow: scroll;"
-             aria-labelledby="sort_by_dropdown">
-          <%=
-            link_to 'Type',
-              request.query_parameters.merge(
-                :sorted_by => 'type_' + sort_direction(@sorted_by)
-            ),
-            class: 'dropdown-item sub-nav-dropdown'
-          %>
-        <%=
-          link_to 'Loop',
-            request.query_parameters.merge(
-              :sorted_by => 'loop_' + sort_direction(@sorted_by)
-          ),
-          class: 'dropdown-item'
-        %>
-      <%=
-        link_to 'Scope',
-          project_instruments_path(
-            :sorted_by => 'scope_' + sort_direction(@sorted_by)
-        ),
-        class: 'dropdown-item'
-      %>
+  <div class="add-new-filter">
+    <div class="new-filter-icon">
+      <i class="fas fa-plus"></i>
+    </div>
+    <div class="new-filter-text">
+      Add new filter
+    </div>
+  </div>
+</div>
+<div class="wide-table">
+  <div class="table-heading-row">
+    <div class="table-heading-cell">
+      <div class="table-heading-icon">
+        <i class="fas fa-tag"></i>
+      </div>
+      <div class="table-heading-text">
+        Tag
+      </div>
+      <div class="table-heading-sort" onclick="showPopup('#tagSort')">
+        <i class="fas fa-sort"></i>
+      </div>
+      <div class="sort-pop-up hide" id="tagSort">
+        <div class="sort-ascending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-up"></i>
+          </div>
+          <div class="sort-text">
+            Ascending
+          </div>
+        </div>
+        <div class="sort-descending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-down"></i>
+          </div>
+          <div class="sort-text">
+            Descending
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-sm">
+    <div class="table-heading-cell">
+      <div class="table-heading-icon">
+        <i class="far fa-building"></i>
+      </div>
+      <div class="table-heading-text">
+        Manufacturer
+      </div>
+      <div class="table-heading-sort" onclick="showPopup('#manufacturerSort')">
+        <i class="fas fa-sort"></i>
+      </div>
+      <div class="sort-pop-up hide" id="manufacturerSort">
+        <div class="sort-ascending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-up"></i>
+          </div>
+          <div class="sort-text">
+            Ascending
+          </div>
+        </div>
+        <div class="sort-descending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-down"></i>
+          </div>
+          <div class="sort-text">
+            Descending
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="table-heading-cell">
+      <div class="table-heading-icon">
+        <i class="fas fa-hashtag"></i>
+      </div>
+      <div class="table-heading-text">
+        Model Number
+      </div>
+      <div class="table-heading-sort" onclick="showPopup('#modelSort')">
+        <i class="fas fa-sort"></i>
+      </div>
+      <div class="sort-pop-up hide" id="modelSort">
+        <div class="sort-ascending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-up"></i>
+          </div>
+          <div class="sort-text">
+            Ascending
+          </div>
+        </div>
+        <div class="sort-descending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-down"></i>
+          </div>
+          <div class="sort-text">
+            Descending
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-heading-cell">
+      <div class="table-heading-icon">
+        <i class="fas fa-wrench"></i>
+      </div>
+      <div class="table-heading-text">
+        Process Connection
+      </div>
+      <div class="table-heading-sort" onclick="showPopup('#processSort')">
+        <i class="fas fa-sort"></i>
+      </div>
+      <div class="sort-pop-up hide" id="processSort">
+        <div class="sort-ascending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-up"></i>
+          </div>
+          <div class="sort-text">
+            Ascending
+          </div>
+        </div>
+        <div class="sort-descending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-down"></i>
+          </div>
+          <div class="sort-text">
+            Descending
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-heading-cell">
+      <div class="table-heading-icon">
+        <i class="fas fa-certificate"></i>
+      </div>
+      <div class="table-heading-text">
+        Material of Construction
+      </div>
+      <div class="table-heading-sort" onclick="showPopup('#mocSort')">
+        <i class="fas fa-sort"></i>
+      </div>
+      <div class="sort-pop-up hide" id="mocSort">
+        <div class="sort-ascending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-up"></i>
+          </div>
+          <div class="sort-text">
+            Ascending
+          </div>
+        </div>
+        <div class="sort-descending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-down"></i>
+          </div>
+          <div class="sort-text">
+            Descending
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-heading-cell">
+      <div class="table-heading-icon">
+        <i class="fas fa-sliders-h"></i>
+      </div>
+      <div class="table-heading-text">
+        Range
+      </div>
+      <div class="table-heading-sort" onclick="showPopup('#rangeSort')">
+        <i class="fas fa-sort"></i>
+      </div>
+      <div class="sort-pop-up hide" id="rangeSort">
+        <div class="sort-ascending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-up"></i>
+          </div>
+          <div class="sort-text">
+            Ascending
+          </div>
+        </div>
+        <div class="sort-descending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-down"></i>
+          </div>
+          <div class="sort-text">
+            Descending
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-heading-cell">
+      <div class="table-heading-icon">
+        <i class="fas fa-code"></i>
+      </div>
+      <div class="table-heading-text">
+        DCS I/O Type
+      </div>
+      <div class="table-heading-sort" onclick="showPopup('#dcsSort')">
+        <i class="fas fa-sort"></i>
+      </div>
+      <div class="sort-pop-up hide" id="dcsSort">
+        <div class="sort-ascending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-up"></i>
+          </div>
+          <div class="sort-text">
+            Ascending
+          </div>
+        </div>
+        <div class="sort-descending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-down"></i>
+          </div>
+          <div class="sort-text">
+            Descending
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-heading-cell">
+      <div class="table-heading-icon">
+        <i class="fas fa-shopping-cart"></i>
+      </div>
+      <div class="table-heading-text">
+        PO Number
+      </div>
+      <div class="table-heading-sort" onclick="showPopup('#poSort')">
+        <i class="fas fa-sort"></i>
+      </div>
+      <div class="sort-pop-up hide" id="poSort">
+        <div class="sort-ascending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-up"></i>
+          </div>
+          <div class="sort-text">
+            Ascending
+          </div>
+        </div>
+        <div class="sort-descending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-down"></i>
+          </div>
+          <div class="sort-text">
+            Descending
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-heading-cell">
+      <div class="table-heading-icon">
+        <i class="far fa-hand-point-right"></i>
+      </div>
+      <div class="table-heading-text">
+        Item Scope
+      </div>
+      <div class="table-heading-sort" onclick="showPopup('#itemSort')">
+        <i class="fas fa-sort"></i>
+      </div>
+      <div class="sort-pop-up hide" id="itemSort">
+        <div class="sort-ascending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-up"></i>
+          </div>
+          <div class="sort-text">
+            Ascending
+          </div>
+        </div>
+        <div class="sort-descending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-down"></i>
+          </div>
+          <div class="sort-text">
+            Descending
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-heading-cell">
+      <div class="table-heading-icon">
+        <i class="fas fa-th-list"></i>
+      </div>
+      <div class="table-heading-text">
+        Installation Scope
+      </div>
+      <div class="table-heading-sort" onclick="showPopup('#installationSort')">
+        <i class="fas fa-sort"></i>
+      </div>
+      <div class="sort-pop-up hide" id="installationSort">
+        <div class="sort-ascending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-up"></i>
+          </div>
+          <div class="sort-text">
+            Ascending
+          </div>
+        </div>
+        <div class="sort-descending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-down"></i>
+          </div>
+          <div class="sort-text">
+            Descending
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-heading-cell">
+      <div class="table-heading-icon">
+        <i class="fas fa-bullseye"></i>
+      </div>
+      <div class="table-heading-text">
+        Skid Location
+      </div>
+      <div class="table-heading-sort" onclick="showPopup('#skidSort')">
+        <i class="fas fa-sort"></i>
+      </div>
+      <div class="sort-pop-up hide" id="skidSort">
+        <div class="sort-ascending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-up"></i>
+          </div>
+          <div class="sort-text">
+            Ascending
+          </div>
+        </div>
+        <div class="sort-descending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-down"></i>
+          </div>
+          <div class="sort-text">
+            Descending
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-heading-cell">
+      <div class="table-heading-icon">
+        <i class="fas fa-map-pin"></i>
+      </div>
+      <div class="table-heading-text">
+        Installed On
+      </div>
+      <div class="table-heading-sort" onclick="showPopup('#installedOnSort')">
+        <i class="fas fa-sort"></i>
+      </div>
+      <div class="sort-pop-up hide" id="installedOnSort">
+        <div class="sort-ascending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-up"></i>
+          </div>
+          <div class="sort-text">
+            Ascending
+          </div>
+        </div>
+        <div class="sort-descending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-down"></i>
+          </div>
+          <div class="sort-text">
+            Descending
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-heading-cell last-cell">
+      <div class="table-heading-icon">
+        <i class="fas fa-signal"></i>
+      </div>
+      <div class="table-heading-text">
+        Statistics Count
+      </div>
+      <div class="table-heading-sort" onclick="showPopup('#statisticsSort')">
+        <i class="fas fa-sort"></i>
+      </div>
+      <div class="sort-pop-up hide" id="statisticsSort">
+        <div class="sort-ascending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-up"></i>
+          </div>
+          <div class="sort-text">
+            Ascending
+          </div>
+        </div>
+        <div class="sort-descending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-down"></i>
+          </div>
+          <div class="sort-text">
+            Descending
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% @instruments.each do |instrument| %>
+    <div class="table-data-row">
+      <div class="table-data-cell">
+        <div class="table-data-text">
+          <%=
+            link_to instrument.tag,
+            instrument_path(instrument),
+            class: 'table-link'
+          %>
+        </div>
+      </div>
+      <div class="table-data-cell">
+        <div class="table-data-text">
+          <%= truncate(instrument.manufacturer, length: 25) %>
+        </div>
+      </div>
+      <div class="table-data-cell">
+        <div class="table-data-text">
+          <%= instrument.model %>
+        </div>
+      </div>
+      <div class="table-data-cell">
+        <div class="table-data-text">
+          <%= instrument.process_connection %>
+        </div>
+      </div>
+      <div class="table-data-cell">
+        <div class="table-data-text">
+          <%= instrument.material_of_construction %>
+        </div>
+      </div>
+      <div class="table-data-cell">
+        <div class="table-data-text">
+          <%= instrument.range %>
+        </div>
+      </div>
+      <div class="table-data-cell">
+        <div class="table-data-text">
+          <%= instrument.dcs_io_type %>
+        </div>
+      </div>
+      <div class="table-data-cell">
+        <div class="table-data-text">
+          <%= instrument.zeton_po %>
+        </div>
+      </div>
+      <div class="table-data-cell">
+        <div class="table-data-text">
+          <%= instrument.scope %>
+        </div>
+      </div>
+      <div class="table-data-cell">
+        <div class="table-data-text">
+          <%= instrument.mech_elec %>
+        </div>
+      </div>
+      <div class="table-data-cell">
+        <div class="table-data-text">
+          Skid <%= instrument.zeton_skid_number %>,
+          Level <%= instrument.zeton_skid_level %>
+        </div>
+      </div>
+      <div class="table-data-cell">
+        <div class="table-data-text">
+          Update model
+        </div>
+      </div>
+      <div class="table-data-cell">
+        <div class="table-data-text">
+          <%= instrument.item_type %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="table-last-row">
+    <div class="table-last-icon">
+      <i class="fas fa-plus"></i>
+    </div>
+    <%=
+      link_to 'Add an instrument',
+      new_instrument_path,
+      class: "table-last-text"
+    %>
   </div>
 </div>
 
-<div class="row pl-5 pr-5 neg-mar">
-  <div id="filters" class="mr-3 col-sm-2 filters-close filters">
-    <h5 class="text-muted mt-3">
-      Filters
-    </h5>
-    <div class="row">
-      <div class="col-12">
-        <%=
-          link_to 'Clear all',
-            project_instruments_path(
-              :sorted_by => 'type_code asc'
-          ),
-          class: 'text-muted'
-        %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div class="dropdown mt-2">
-          <button class="btn btn-sm btn-outline-primary dropdown-toggle"
-                  type="button"
-                  id="type_code_dropdown_button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false">
-            Type
-            <% if params[:with_type_code].present? %>
-              <i class="fa fa-filter"></i>
-            <% end %>
-          </button>
-          <div class="dropdown-menu"
-               style="height: 200px;
-               overflow: scroll;"
-               aria-labelledby="type_code_dropdown_button">
-            <%=
-              link_to "Show All",
-                project_instruments_path(
-                  :with_type_code => nil
-              ),
-              class: 'dropdown-item'
-            %>
-          <% @type_codes.each do |type| %>
-            <%=
-              link_to type,
-                request.query_parameters.merge(
-                  :with_type_code => type
-              ),
-              class: "dropdown-item"
-            %>
-        <% end %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="dropdown mt-2">
-              <button class="btn-sm btn btn-outline-primary dropdown-toggle"
-                      type="button"
-                      id="loop_dropdown_button"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false">
-                Loop
-                <% if params[:with_loop].present? %>
-                  <i class="fa fa-filter"></i>
-                <% end %>
-              </button>
-              <div class="dropdown-menu"
-                   style="height: 200px;
-                   overflow: scroll;"
-                   aria-labelledby="loop_dropdown_button">
-                <%=
-                  link_to "Show All",
-                    project_instruments_path(
-                      :with_loop => nil
-                  ),
-                  class: 'dropdown-item'
-                %>
-              <% @loops.each do |loop_num| %>
-                <%=
-                  link_to loop_num,
-                    project_instruments_path(
-                      :with_loop => loop
-                  ),
-                  class: "dropdown-item"
-                %>
-            <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <h5 class="text-muted mt-3">
-          Actions
-        </h5>
-        <div class-"row">
-          <%=
-            link_to 'Download as excel <i class="fa fa-download"></i>'.html_safe,
-              project_instruments_excel_path(format: :xlsx),
-              class: 'btn btn-sm btn-outline-primary mt-2'
-            %>
-          <%=
-            link_to 'Upload from excel <i class="fa fa-upload"></i>'.html_safe,
-              new_project_instrument_import_path,
-              class: 'btn btn-sm btn-outline-primary mt-2'
-            %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm">
-    <% @instruments.each do |inst| %>
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="card mb-3">
-            <div class="card-body mt-0">
-              <div class="row">
-                <div class="col-sm-4">
-                  <h5 class="mb-0">
-                    <%=
-                      link_to inst.tag,
-                        instrument_path(inst),
-                        id: "show_instrument_#{inst.id}"
-                      %>
-                  </h5>
-                </div>
-                <div class="col-sm-8">
-                  <h5 class="mb-0">
-                    Will put in instrument description
-                  </h5>
-                </div>
-              </div>
-              <div class="row mt-3">
-                <div class="col-sm-12">
-                  <dl class="row">
-                    <dt class="col-sm-4">
-                    Manufacturer
-                    </dt>
-                    <dd class="col-sm-8">
-                    <%= inst.manufacturer %>
-                    </dd>
-                    <dt class="col-sm-4">
-                    Model
-                    </dt>
-                    <dd class="col-sm-8">
-                    <%= inst.model %>
-                    </dd>
-                    <dt class="col-sm-4">
-                    Connection
-                    </dt>
-                    <dd class="col-sm-8">
-                    <%= inst.material_of_construction %>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-            </div>
-            <div class="card-footer">
-              <div class="row">
-                <div class="col-sm-4">
-                  <i class="fa fa-map-marker pr-3"></i>
-                  <% if inst.zeton_skid_number %>
-                    Skid <%= inst.zeton_skid_number %>
-                    <% if inst.zeton_skid_level %>
-                      , Level <%= inst.zeton_skid_level %>
-                    <% end %>
-                  <% end %>
-                </div>
-                <div class="col-sm-4">
-                  <i class="fa fa-file-alt pr-3"></i>
-                  710-39
-                </div>
-                <div class="col-sm-4">
-                  <i class="fa fa-wrench pr-3"></i>
-                  <% if inst.mech_elec %>
-                    <%= inst.mech_elec %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
+
+
+
+
+
 <div class="row pl-5 pr-5">
   <%= will_paginate(
     @instruments,

@@ -1,0 +1,10 @@
+<div class="metrics-icon-<%= metrics_background_color(value) %>">
+  <%=
+    render partial: 'shared/metric_status',
+    locals: {
+      record: @instrument,
+      value: value,
+      attribute: name
+    }
+  %>
+</div>
