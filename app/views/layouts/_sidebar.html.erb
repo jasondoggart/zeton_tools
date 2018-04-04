@@ -34,219 +34,221 @@
       %>
     </div>
   </div>
-  <div class="sidebar-3">
-    <div class="sidebar-title">
-      Project <%= current_project.project_number %>
+  <% if current_project %>
+    <div class="sidebar-3">
+      <div class="sidebar-title">
+        Project <%= current_project.project_number %>
+      </div>
+      <div class="s3-item">
+        <div class="s3-arrow" id="bom-arrow">
+          <i class="fa fa-caret-right"></i>
+        </div>
+        <div class="s3-icon">
+          <i class="far fa-file-alt"></i>
+        </div>
+        <div class="s3-link" onclick="toggleDropdown('#bom-link', '#bom-arrow', '--bom-dropdown-item-height')">
+          Bill of Materials
+        </div>
+      </div>
+      <div class="bom-dropdown-list" id="bom-link">
+        <div class="list-item hide">
+          <div class="list-icon">
+            <i class="fas fa-circle"></i>
+          </div>
+          <%=
+            link_to 'Import From P&ID Extract',
+              new_project_extract_import_path,
+              class: 'list-link'
+            %>
+        </div>
+        <div class="list-item hide">
+          <div class="list-icon">
+            <i class="fas fa-circle"></i>
+          </div>
+          <%=
+            link_to 'Instruments',
+              project_instruments_path,
+              class: 'list-link'
+            %>
+        </div>
+        <div class="list-item hide">
+          <div class="list-icon">
+            <i class="fas fa-circle"></i>
+          </div>
+          <%=
+            link_to 'Equipment',
+              project_equipment_path,
+              class: 'list-link'
+            %>
+        </div>
+        <div class="list-item hide">
+          <div class="list-icon">
+            <i class="fas fa-circle"></i>
+          </div>
+          <%=
+            link_to 'Handvalves',
+              project_handvalves_path,
+              class: 'list-link'
+            %>
+        </div>
+      </div>
+      <div class="s3-item">
+        <div class="s3-arrow" id="pm-arrow">
+          <i class="fa fa-caret-right"></i>
+        </div>
+        <div class="s3-icon">
+          <i class="far fa-clipboard"></i>
+        </div>
+        <div class="s3-link" onclick="toggleDropdown('#pm-link', '#pm-arrow', '--pm-dropdown-item-height')">
+          Project Management
+        </div>
+      </div>
+      <div class="pm-dropdown-list" id="pm-link">
+        <div class="list-item hide">
+          <div class="list-icon">
+            <i class="fas fa-circle"></i>
+          </div>
+          <%=
+            link_to 'Requests for Information',
+              project_rfis_path,
+              class: 'list-link'
+            %>
+        </div>
+        <div class="list-item hide">
+          <div class="list-icon">
+            <i class="fas fa-circle"></i>
+          </div>
+          <div class="list-link">
+            Transmittals
+          </div>
+        </div>
+        <div class="list-item hide">
+          <div class="list-icon">
+            <i class="fas fa-circle"></i>
+          </div>
+          <%=
+            link_to 'Action Items',
+              project_action_items_path,
+              class: 'list-link'
+            %>
+        </div>
+      </div>
+      <div class="s3-item">
+        <div class="s3-arrow" id="metrics-arrow">
+          <i class="fa fa-caret-right"></i>
+        </div>
+        <div class="s3-icon">
+          <i class="fa fa-chart-line"></i>
+        </div>
+        <div class="s3-link" onclick="toggleDropdown('#metrics-link', '#metrics-arrow', '--metrics-dropdown-item-height')">
+          Metrics
+        </div>
+      </div>
+      <div class="metrics-dropdown-list" id="metrics-link">
+        <div class="list-item hide">
+          <div class="list-icon">
+            <i class="fas fa-circle"></i>
+          </div>
+          <%=
+            link_to 'Metrics Summary',
+              project_metrics_path,
+              class: 'list-link'
+            %>
+        </div>
+        <div class="list-item hide">
+          <div class="list-icon">
+            <i class="fas fa-circle"></i>
+          </div>
+          <%=
+            link_to 'Instruments',
+              project_instruments_metrics_path,
+              class: 'list-link'
+            %>
+        </div>
+        <div class="list-item hide">
+          <div class="list-icon">
+            <i class="fas fa-circle"></i>
+          </div>
+          <%=
+            link_to 'Equipment',
+              project_equipment_metrics_path,
+              class: 'list-link'
+            %>
+        </div>
+        <div class="list-item hide">
+          <div class="list-icon">
+            <i class="fas fa-circle"></i>
+          </div>
+          <%=
+            link_to 'Handvalves',
+              project_handvalves_metrics_path,
+              class: 'list-link'
+            %>
+        </div>
+      </div>
+      <div class="s3-item">
+        <div class="s3-arrow" id="client-arrow">
+          <i class="fa fa-caret-right"></i>
+        </div>
+        <div class="s3-icon">
+          <i class="fa fa-list-ul"></i>
+        </div>
+        <div class="s3-link" onclick="toggleDropdown('#client-link', '#client-arrow', '--client-dropdown-item-height')">
+          Client Information
+        </div>
+      </div>
+      <div class="client-dropdown-list" id="client-link">
+        <div class="list-item hide">
+          <div class="list-icon">
+            <i class="fas fa-circle"></i>
+          </div>
+          <%=
+            link_to 'Documents',
+              project_client_documents_path,
+              class: 'list-link'
+            %>
+        </div>
+        <div class="list-item hide">
+          <div class="list-icon">
+            <i class="fas fa-circle"></i>
+          </div>
+          <div class="list-link">
+            Team
+          </div>
+        </div>
+      </div>
+      <div class="s3-item">
+        <div class="s3-arrow">
+        </div>
+        <div class="s3-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <div class="s3-link">
+          Project Team
+        </div>
+      </div>
+      <div class="s3-item">
+        <div class="s3-arrow">
+        </div>
+        <div class="s3-icon">
+          <i class="fas fa-cog"></i>
+        </div>
+        <div class="s3-link">
+          Project Settings
+        </div>
+      </div>
+      <div class="s3-item">
+        <div class="s3-arrow">
+        </div>
+        <div class="s3-icon">
+          <i class="fas fa-exchange-alt"></i>
+        </div>
+        <div class="s3-link">
+          Change Project
+        </div>
+      </div>
     </div>
-    <div class="s3-item">
-      <div class="s3-arrow" id="bom-arrow">
-        <i class="fa fa-caret-right"></i>
-      </div>
-      <div class="s3-icon">
-        <i class="far fa-file-alt"></i>
-      </div>
-      <div class="s3-link" onclick="toggleDropdown('#bom-link', '#bom-arrow', '--bom-dropdown-item-height')">
-        Bill of Materials
-      </div>
-    </div>
-    <div class="bom-dropdown-list" id="bom-link">
-      <div class="list-item hide">
-        <div class="list-icon">
-          <i class="fas fa-circle"></i>
-        </div>
-        <%=
-          link_to 'Import From P&ID Extract',
-          new_project_extract_import_path,
-          class: 'list-link'
-        %>
-      </div>
-      <div class="list-item hide">
-        <div class="list-icon">
-          <i class="fas fa-circle"></i>
-        </div>
-        <%=
-          link_to 'Instruments',
-          project_instruments_path,
-          class: 'list-link'
-        %>
-      </div>
-      <div class="list-item hide">
-        <div class="list-icon">
-          <i class="fas fa-circle"></i>
-        </div>
-        <%=
-          link_to 'Equipment',
-          project_equipment_path,
-          class: 'list-link'
-        %>
-      </div>
-      <div class="list-item hide">
-        <div class="list-icon">
-          <i class="fas fa-circle"></i>
-        </div>
-        <%=
-          link_to 'Handvalves',
-          project_handvalves_path,
-          class: 'list-link'
-        %>
-      </div>
-    </div>
-    <div class="s3-item">
-      <div class="s3-arrow" id="pm-arrow">
-        <i class="fa fa-caret-right"></i>
-      </div>
-      <div class="s3-icon">
-        <i class="far fa-clipboard"></i>
-      </div>
-      <div class="s3-link" onclick="toggleDropdown('#pm-link', '#pm-arrow', '--pm-dropdown-item-height')">
-        Project Management
-      </div>
-    </div>
-    <div class="pm-dropdown-list" id="pm-link">
-      <div class="list-item hide">
-        <div class="list-icon">
-          <i class="fas fa-circle"></i>
-        </div>
-        <%=
-          link_to 'Requests for Information',
-          project_rfis_path,
-          class: 'list-link'
-        %>
-      </div>
-      <div class="list-item hide">
-        <div class="list-icon">
-          <i class="fas fa-circle"></i>
-        </div>
-        <div class="list-link">
-          Transmittals
-        </div>
-      </div>
-      <div class="list-item hide">
-        <div class="list-icon">
-          <i class="fas fa-circle"></i>
-        </div>
-        <%=
-          link_to 'Action Items',
-          project_action_items_path,
-          class: 'list-link'
-        %>
-      </div>
-    </div>
-    <div class="s3-item">
-      <div class="s3-arrow" id="metrics-arrow">
-        <i class="fa fa-caret-right"></i>
-      </div>
-      <div class="s3-icon">
-        <i class="fa fa-chart-line"></i>
-      </div>
-      <div class="s3-link" onclick="toggleDropdown('#metrics-link', '#metrics-arrow', '--metrics-dropdown-item-height')">
-        Metrics
-      </div>
-    </div>
-    <div class="metrics-dropdown-list" id="metrics-link">
-      <div class="list-item hide">
-        <div class="list-icon">
-          <i class="fas fa-circle"></i>
-        </div>
-        <%=
-          link_to 'Metrics Summary',
-          project_metrics_path,
-          class: 'list-link'
-        %>
-      </div>
-      <div class="list-item hide">
-        <div class="list-icon">
-          <i class="fas fa-circle"></i>
-        </div>
-        <%=
-          link_to 'Instruments',
-          project_instruments_metrics_path,
-          class: 'list-link'
-        %>
-      </div>
-      <div class="list-item hide">
-        <div class="list-icon">
-          <i class="fas fa-circle"></i>
-        </div>
-        <%=
-          link_to 'Equipment',
-          project_equipment_metrics_path,
-          class: 'list-link'
-        %>
-      </div>
-      <div class="list-item hide">
-        <div class="list-icon">
-          <i class="fas fa-circle"></i>
-        </div>
-        <%=
-          link_to 'Handvalves',
-          project_handvalves_metrics_path,
-          class: 'list-link'
-        %>
-      </div>
-    </div>
-    <div class="s3-item">
-      <div class="s3-arrow" id="client-arrow">
-        <i class="fa fa-caret-right"></i>
-      </div>
-      <div class="s3-icon">
-        <i class="fa fa-list-ul"></i>
-      </div>
-      <div class="s3-link" onclick="toggleDropdown('#client-link', '#client-arrow', '--client-dropdown-item-height')">
-        Client Information
-      </div>
-    </div>
-    <div class="client-dropdown-list" id="client-link">
-      <div class="list-item hide">
-        <div class="list-icon">
-          <i class="fas fa-circle"></i>
-        </div>
-        <%=
-          link_to 'Documents',
-          project_client_documents_path,
-          class: 'list-link'
-        %>
-      </div>
-      <div class="list-item hide">
-        <div class="list-icon">
-          <i class="fas fa-circle"></i>
-        </div>
-        <div class="list-link">
-          Team
-        </div>
-      </div>
-    </div>
-    <div class="s3-item">
-      <div class="s3-arrow">
-      </div>
-      <div class="s3-icon">
-        <i class="fas fa-users"></i>
-      </div>
-      <div class="s3-link">
-        Project Team
-      </div>
-    </div>
-    <div class="s3-item">
-      <div class="s3-arrow">
-      </div>
-      <div class="s3-icon">
-        <i class="fas fa-cog"></i>
-      </div>
-      <div class="s3-link">
-        Project Settings
-      </div>
-    </div>
-    <div class="s3-item">
-      <div class="s3-arrow">
-      </div>
-      <div class="s3-icon">
-        <i class="fas fa-exchange-alt"></i>
-      </div>
-      <div class="s3-link">
-        Change Project
-      </div>
-    </div>
-  </div>
+  <% end %>
   <div class="sidebar-2">
     <div class="sidebar-title">
       Tools

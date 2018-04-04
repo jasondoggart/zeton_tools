@@ -518,14 +518,14 @@
   background: white;
   border-radius: 3px;
   width: 150px;
-  position: relative;
-  top:  0px;
+  position: fixed;
   z-index: 1;
   height: auto;
   box-shadow: rgba(84, 70, 35, 0.3) 0px 6px 20px, rgba(84, 70, 35, 0.14) 0px 1px 3px, rgba(0, 0, 0, 0.08) 0px 0px 1px;
   color: #424241;
   font-size: 14px;
   line-height: 21px;
+  margin-top: 10px;
 }
 
 .sort-ascending {
@@ -582,6 +582,17 @@
   padding: 20px;
 }
 
+.rfi-response-pop-up {
+  background: white;
+  box-shadow: rgba(84, 70, 35, 0.3) 0px 6px 20px, rgba(84, 70, 35, 0.14) 0px 1px 3px, rgba(0, 0, 0, 0.08) 0px 0px 1px;
+  width: 400px;
+  height: auto;
+  color: #424241;
+  z-index: 200000;
+  position: fixed;
+  padding: 20px;
+  margin-left: -250px;
+}
 
 .client-document-table {
   display: grid;
@@ -667,6 +678,7 @@
 }
 
 .clarification-heading {
+  margin-bottom: 10px;
   color: #999999;
 }
 
@@ -688,7 +700,8 @@
   margin-right: 65px;
   display: grid;
   grid-template-columns: 200px auto;
-  grid-auto-rows: 35px;
+  grid-auto-rows: auto;
+  align-items: center;
   padding-top: 15px;
   font-size: 14px;
   line-height: 16.8px;
@@ -700,6 +713,8 @@
   display: grid;
   grid-template-columns: 25px 1fr;
   color: #a5a5a5;
+  transition: color 0.5s ease;
+  align-items: center;
 }
 
 .instrument-specific {
@@ -769,7 +784,7 @@
   border-radius: 5px;
 }
 
-.rfi-list {
+.wide-section {
   width: calc(100vw - 315px);
   overflow-x: auto;
   margin-bottom: 100px;
@@ -793,4 +808,59 @@
   align-items: center;
   justify-content: center;
   border-radius: 1px;
+}
+
+.form-input {
+  border: 0;
+  border-bottom: 1px solid rgb(242, 242, 242);
+  transition: border 0.5s ease;
+  font-family: inherit;
+  font-size: 14px;
+  color: #424241;
+  width: 300px;
+  padding-bottom: 8px;
+  margin-top: 16px;
+}
+
+.form-input:focus {
+  border-bottom: 1px solid #424241;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.instrument-header-text {
+  margin-bottom: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+.form-submit-button {
+  background: white;
+  border: 1px solid rgb(221, 225, 227);
+  border-radius: 5px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+  margin-top: 10px;
+  width: 150px;
+  cursor: pointer;
+}
+
+.form-submit-button:hover {
+  background: #EAE9E8;
+}
+
+.errors-dialogue {
+  background: #fff0c9;
+  box-shadow: rgba(84, 70, 35, 0.3) 0px 6px 20px, rgba(84, 70, 35, 0.14) 0px 1px 3px, rgba(0, 0, 0, 0.08) 0px 0px 1px;
+  margin-left: 65px;
+  margin-right: 65px;
+  padding: 15px;
 }
