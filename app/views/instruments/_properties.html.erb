@@ -1,0 +1,478 @@
+<div class="instrument-header" id="type-header">
+  <div class="instrument-header-icon">
+    <i class="fas fa-bullseye"></i>
+  </div>
+  <div class="instrument-header-text">
+    Type
+  </div>
+</div>
+<div id="type-code">
+  <div id="type-code-show">
+    <%=
+      render partial: 'shared/item_value',
+        locals: {
+        item: "#type-code",
+        value: @instrument.type_code,
+        header: "#type-header"
+      }
+    %>
+  </div>
+  <div id="type-code-form" class="hide">
+    <%=
+      render partial: 'shared/inline_item_edit',
+      locals: {
+        record: @instrument,
+        attribute: 'type_code',
+        item: "#type-code",
+        header: "#type-header"
+      }
+    %>
+  </div>
+</div>
+<div class="instrument-header" id="loop-header">
+  <div class="instrument-header-icon">
+    <i class="fas fa-hashtag"></i>
+  </div>
+  <div class="instrument-header-text">
+    Loop
+  </div>
+</div>
+<div id="loop">
+  <div id="loop-show">
+    <%=
+      render partial: 'shared/item_value',
+        locals: {
+        value: @instrument.loop,
+        item: "#loop",
+        header: "#loop-header",
+      }
+    %>
+  </div>
+  <div id="loop-form" class="hide">
+    <%=
+      render partial: 'shared/inline_item_edit',
+      locals: {
+        record: @instrument,
+        attribute: 'loop',
+        item: "#loop",
+        header: "#loop-header"
+      }
+    %>
+  </div>
+</div>
+<div class="instrument-header" id="vendor-header">
+  <div class="instrument-header-icon">
+    <i class="fas fa-dollar-sign"></i>
+  </div>
+  <div class="instrument-header-text">
+    Vendor
+  </div>
+</div>
+<div id="vendor">
+  <div id="vendor-show">
+    <%=
+      render partial: 'shared/item_value',
+        locals: {
+        value: @instrument.supplier,
+        item: "#vendor",
+        header: "#vendor-header",
+
+      }
+    %>
+  </div>
+  <div id="vendor-form" class="hide">
+    <%=
+      render partial: 'shared/inline_item_edit',
+      locals: {
+        record: @instrument,
+        attribute: 'supplier',
+        item: "#vendor",
+        header: "#vendor-header"
+      }
+    %>
+  </div>
+</div>
+<div class="instrument-header" id="manufacturer-header">
+  <div class="instrument-header-icon">
+    <i class="far fa-building"></i>
+  </div>
+  <div class="instrument-header-text">
+    Manufacturer
+  </div>
+</div>
+<div id="manufacturer">
+  <div id="manufacturer-show">
+    <%=
+      render partial: 'shared/item_value',
+        locals: {
+        value: @instrument.manufacturer,
+        item: "#manufacturer",
+        header: "#manufacturer-header",
+
+      }
+    %>
+  </div>
+  <div id="manufacturer-form" class="hide">
+    <%=
+      render partial: 'shared/inline_item_edit',
+      locals: {
+        record: @instrument,
+        attribute: 'manufacturer',
+        item: "#manufacturer",
+        header: "#manufacturer-header"
+      }
+    %>
+  </div>
+</div>
+<div class="instrument-header" id="model-header">
+  <div class="instrument-header-icon">
+    <i class="fas fa-hashtag"></i>
+  </div>
+  <div class="instrument-header-text">
+    Model Number
+  </div>
+</div>
+<div id="model">
+  <div id="model-show">
+    <%=
+      render partial: 'shared/item_value',
+        locals: {
+        value: @instrument.model,
+        item: "#model",
+        header: "#model-header",
+      }
+    %>
+  </div>
+  <div id="model-form" class="hide">
+    <%=
+      render partial: 'shared/inline_item_edit',
+      locals: {
+        record: @instrument,
+        attribute: 'model',
+        item: "#model",
+        header: "#model-header"
+      }
+    %>
+  </div>
+</div>
+<div class="instrument-header" id="connection-header">
+  <div class="instrument-header-icon">
+    <i class="fas fa-wrench"></i>
+  </div>
+  <div class="instrument-header-text">
+    Process Connection
+  </div>
+</div>
+<div id="connection">
+  <div id="connection-show">
+    <%=
+      render partial: 'shared/item_value',
+        locals: {
+        value: @instrument.process_connection,
+        item: "#connection",
+        header: "#connection-header",
+      }
+    %>
+  </div>
+  <div id="connection-form" class="hide">
+    <%=
+      render partial: 'shared/inline_item_edit',
+      locals: {
+        record: @instrument,
+        attribute: 'process_connection',
+        item: "#connection",
+        header: "#connection-header"
+      }
+    %>
+  </div>
+</div>
+<div class="instrument-header"id="moc-header">
+  <div class="instrument-header-icon">
+    <i class="fas fa-certificate"></i>
+  </div>
+  <div class="instrument-header-text">
+    Material of Construction
+  </div>
+</div>
+<div id="moc">
+  <div id="moc-show">
+    <%=
+      render partial: 'shared/item_value',
+        locals: {
+        value: @instrument.material_of_construction,
+        item: "#moc",
+        header: "#moc-header",
+      }
+    %>
+  </div>
+  <div id="moc-form" class="hide">
+    <%=
+      render partial: 'shared/inline_item_edit',
+      locals: {
+        record: @instrument,
+        attribute: 'material_of_construction',
+        item: "#moc",
+        header: "#moc-header"
+      }
+    %>
+  </div>
+</div>
+<div class="instrument-header" id="range-header">
+  <div class="instrument-header-icon">
+    <i class="fas fa-sliders-h"></i>
+  </div>
+  <div class="instrument-header-text">
+    Range
+  </div>
+</div>
+<div id="range">
+  <div id="range-show">
+    <%=
+      render partial: 'shared/item_value',
+        locals: {
+        value: @instrument.range,
+        item: "#range",
+        header: "#range-header",
+      }
+    %>
+  </div>
+  <div id="range-form" class="hide">
+    <%=
+      render partial: 'shared/inline_item_edit',
+      locals: {
+        record: @instrument,
+        attribute: 'range',
+        item: "#range",
+        header: "#range-header"
+      }
+    %>
+  </div>
+</div>
+<div class="instrument-header" id="dcs-header">
+  <div class="instrument-header-icon">
+    <i class="fas fa-code"></i>
+  </div>
+  <div class="instrument-header-text">
+    DCS I/O Type
+  </div>
+</div>
+<div id="dcs">
+  <div id="dcs-show">
+    <%=
+      render partial: 'shared/item_value',
+        locals: {
+        value: @instrument.dcs_io_type,
+        item: "#dcs",
+        header: "#dcs-header",
+      }
+    %>
+  </div>
+  <div id="dcs-form" class="hide">
+    <%=
+      render partial: 'shared/inline_item_edit',
+      locals: {
+        record: @instrument,
+        attribute: 'dcs_io_type',
+        item: "#dcs",
+        header: "#dcs-header"
+      }
+    %>
+  </div>
+</div>
+<div class="instrument-header" id="po-number-header">
+  <div class="instrument-header-icon">
+    <i class="fas fa-shopping-cart"></i>
+  </div>
+  <div class="instrument-header-text">
+    PO Number
+  </div>
+</div>
+<div id="po-number">
+  <div id="po-number-show">
+    <%=
+      render partial: 'shared/item_value',
+        locals: {
+        value: @instrument.zeton_po,
+        item: "#po-number",
+        header: "#po-number-header",
+      }
+    %>
+  </div>
+  <div id="po-number-form" class="hide">
+    <%=
+      render partial: 'shared/inline_item_edit',
+      locals: {
+        record: @instrument,
+        attribute: 'zeton_po',
+        item: "#po-number",
+        header: "#po-number-header"
+      }
+    %>
+  </div>
+</div>
+<div class="instrument-header" id="scope-header">
+  <div class="instrument-header-icon">
+    <i class="far fa-hand-point-right"></i>
+  </div>
+  <div class="instrument-header-text">
+    Item Scope
+  </div>
+</div>
+<div id="scope">
+  <div id="scope-show">
+    <%=
+      render partial: 'shared/item_value',
+        locals: {
+        value: @instrument.scope,
+        item: "#scope",
+        header: "#scope-header",
+      }
+    %>
+  </div>
+  <div id="scope-form" class="hide">
+    <%=
+      render partial: 'shared/inline_item_edit',
+      locals: {
+        record: @instrument,
+        attribute: 'scope',
+        item: "#scope",
+        header: "#scope-header"
+      }
+    %>
+  </div>
+</div>
+<div class="instrument-header" id="mech-elec-header">
+  <div class="instrument-header-icon">
+    <i class="fas fa-list-ul"></i>
+  </div>
+  <div class="instrument-header-text">
+    Installation Scope
+  </div>
+</div>
+<div id="mech-elec">
+  <div id="mech-elec-show">
+    <%=
+      render partial: 'shared/item_value',
+        locals: {
+        value: @instrument.mech_elec,
+        item: "#mech-elec",
+        header: "#mech-elec-header",
+      }
+    %>
+  </div>
+  <div id="mech-elec-form" class="hide">
+    <%=
+      render partial: 'shared/inline_item_edit',
+      locals: {
+        record: @instrument,
+        attribute: 'mech_elec',
+        item: "#mech-elec",
+        header: "#mech-elec-header"
+      }
+    %>
+  </div>
+</div>
+<div class="instrument-header" id="skid-number-header">
+  <div class="instrument-header-icon">
+    <i class="fas fa-bullseye"></i>
+  </div>
+  <div class="instrument-header-text">
+    Skid Number
+  </div>
+</div>
+<div id="skid-number">
+  <div id="skid-number-show">
+    <%=
+      render partial: 'shared/item_value',
+        locals: {
+        value: @instrument.zeton_skid_number,
+        item: "#skid-number",
+        header: "#skid-number-header",
+      }
+    %>
+  </div>
+  <div id="skid-number-form" class="hide">
+    <%=
+      render partial: 'shared/inline_item_edit',
+      locals: {
+        record: @instrument,
+        attribute: 'zeton_skid_number',
+        item: "#skid-number",
+        header: "#skid-number-header"
+      }
+    %>
+  </div>
+</div>
+<div class="instrument-header" id="skid-level-header">
+  <div class="instrument-header-icon">
+    <i class="fas fa-bullseye"></i>
+  </div>
+  <div class="instrument-header-text">
+    Skid Level
+  </div>
+</div>
+<div id="skid-level">
+  <div id="skid-level-show">
+    <%=
+      render partial: 'shared/item_value',
+        locals: {
+        value: @instrument.zeton_skid_level,
+        item: "#skid-level",
+        header: "#skid-level-header",
+      }
+    %>
+  </div>
+  <div id="skid-level-form" class="hide">
+    <%=
+      render partial: 'shared/inline_item_edit',
+      locals: {
+        record: @instrument,
+        attribute: 'zeton_skid_level',
+        item: "#skid-level",
+        header: "#skid-level-header"
+      }
+    %>
+  </div>
+</div>
+<div class="instrument-header">
+  <div class="instrument-header-icon">
+    <i class="fas fa-map-pin"></i>
+  </div>
+  <div class="instrument-header-text">
+    Installation Location
+  </div>
+</div>
+<div class="instrument-specific">
+  Update model to include
+</div>
+<div class="instrument-header" id="statistics-header">
+  <div class="instrument-header-icon">
+    <i class="fas fa-signal"></i>
+  </div>
+  <div class="instrument-header-text">
+    Statistics Count
+  </div>
+</div>
+<div id="statistics">
+  <div id="statistics-show">
+    <%=
+      render partial: 'shared/item_value',
+        locals: {
+        value: @instrument.item_type,
+        item: "#statistics",
+        header: "#statistics-header",
+      }
+    %>
+  </div>
+  <div id="statistics-form" class="hide">
+    <%=
+      render partial: 'shared/inline_item_edit',
+      locals: {
+        record: @instrument,
+        attribute: 'item_type',
+        item: "#statistics",
+        header: "#statistics-header"
+      }
+    %>
+  </div>
+</div>

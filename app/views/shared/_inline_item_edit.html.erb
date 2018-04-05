@@ -1,0 +1,13 @@
+<%= form_for record, remote: true do |f| %>
+  <div class="inline-form">
+    <div class="inline-form-field">
+      <%=
+        f.text_field attribute.to_sym,
+          class: "form-input"
+      %>
+    </div>
+    <div class="inline-submit">
+      <%= f.submit 'Update', class: 'form-submit-button' %>
+    </div>
+  </div>
+<% end %>

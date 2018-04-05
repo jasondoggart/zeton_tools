@@ -1,18 +1,4 @@
-<div class="dark-header">
-  <div class="row pl-5 pr-5">
-    <div class="col-sm-12">
-      <h1>
-        Editing <%= @instrument.tag %><br />
-      </h1>
-      <h5>
-        <%=
-          link_to 'Back',
-          :back
-        %>
-      </h5>
-    </div>
-  </div>
+<div class="section-heading">
+  Editing <%= @instrument.tag %>
 </div>
-<div class="neg-mar">
-  <%= render 'form' %>
-</div>
+<%= render 'form' %>

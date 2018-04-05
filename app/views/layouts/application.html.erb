@@ -89,6 +89,21 @@
 
         div.style.color = '#a5a5a5';
       }
+
+      function showInput(divid, label) {
+        const div = document.querySelector(divid);
+        const show = div.querySelector(`${divid}-show`);
+        const formDiv = div.querySelector(`${divid}-form`);
+        const form = formDiv.querySelector('form');
+        const input = form.querySelector('input');
+        input.focus();
+        show.classList.add('hide');
+        formDiv.classList.remove('hide');
+        darkLabel(label);
+
+
+      }
+
     </script>
   </body>
 </html>
