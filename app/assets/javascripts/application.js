@@ -16,4 +16,5 @@
 //= require Chart.min
 //= require select2
 //= require bootstrap-datepicker
+//= require custom.js
 //= require_tree .
