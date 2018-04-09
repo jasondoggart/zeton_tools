@@ -1,72 +1,155 @@
 <%= form_for @equipment do |f| %>
   <% if @equipment.errors.any? %>
-    <h2><%= pluralize(@equipment.errors.count, "error") %> prohibited the equipment from being added</h2>
-    <ul>
-      <%= @equipment.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
+    <div class="errors-dialogue">
+      This couldn't be completed because there are <%= pluralize(@equipment.errors.count, "error") %>.  Please correct these errors below, then resubmit your form.
+      <ul>
+        <% @equipment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 
-  <div class="form-group row">
-    <%= f.label :tag, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= f.text_field :tag, class: 'form-control' %>
+  <div class="item-properties">
+    <div class="item-header" id="tag">
+      <div class="item-header-icon">
+        <i class="fas fa-tag"></i>
+      </div>
+      <%=
+        f.label :tag,
+        'Tag',
+        class: 'item-header-text'
+      %>
     </div>
-  </div>
-  <div class="form-group row">
-    <%= f.label :description, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= f.text_field :description, class: 'form-control' %>
+    <%=
+      f.text_field :tag,
+      class: 'form-input',
+      placeholder: 'Enter tag number',
+      onfocus: "darkLabel('#tag')",
+      onblur: "lightLabel('#tag')"
+    %>
+    <div class="item-header" id="description">
+      <div class="item-header-icon">
+        <i class="fas fa-align-justify"></i>
+      </div>
+      <%=
+        f.label :description,
+        'Description',
+        class: 'item-header-text'
+      %>
     </div>
-  </div>
-  <div class="form-group row">
-    <%= f.label :equipment_type, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= f.text_field :equipment_type, class: 'form-control' %>
+    <%=
+      f.text_field :description,
+      class: 'form-input',
+      placeholder: 'Enter equipment description',
+      onfocus: "darkLabel('#description')",
+      onblur: "lightLabel('#description')"
+    %>
+    <div class="item-header" id="type">
+      <div class="item-header-icon">
+        <i class="fas fa-dot-circle"></i>
+      </div>
+      <%=
+        f.label :equipment_type,
+        'Equipment Type',
+        class: 'item-header-text'
+      %>
     </div>
-  </div>
-  <div class="form-group row">
-    <%= f.label :scope, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= f.text_field :scope, class: 'form-control' %>
+    <%=
+      f.text_field :equipment_type,
+      class: 'form-input',
+      placeholder: 'Enter equipment type (Vessel, Pump, etc)',
+      onfocus: "darkLabel('#type')",
+      onblur: "lightLabel('#type')"
+    %>
+    <div class="item-header" id="scope">
+      <div class="item-header-icon">
+        <i class="far fa-hand-point-right"></i>
+      </div>
+      <%=
+        f.label :scope,
+        'Scope',
+        class: 'item-header-text'
+      %>
     </div>
-  </div>
-  <div class="form-group row">
-    <%= f.label :supplier, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= f.text_field :supplier, class: 'form-control' %>
+    <%=
+      f.text_field :scope,
+      class: 'form-input',
+      placeholder: 'Enter scope',
+      onfocus: "darkLabel('#scope')",
+      onblur: "lightLabel('#scope')"
+    %>
+    <div class="item-header" id="supplier">
+      <div class="item-header-icon">
+        <i class="fas fa-dollar-sign"></i>
+      </div>
+      <%=
+        f.label :supplier,
+        'Supplier',
+        class: 'item-header-text'
+      %>
     </div>
-  </div>
-  <div class="form-group row">
-    <%= f.label :manufacturer, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= f.text_field :manufacturer, class: 'form-control' %>
+    <%=
+      f.text_field :supplier,
+      class: 'form-input',
+      placeholder: 'Enter supplier',
+      onfocus: "darkLabel('#supplier')",
+      onblur: "lightLabel('#supplier')"
+    %>
+    <div class="item-header" id="manufacturer">
+      <div class="item-header-icon">
+        <i class="far fa-building"></i>
+      </div>
+      <%=
+        f.label :manufacturer,
+        'Manufacturer',
+        class: 'item-header-text'
+      %>
     </div>
-  </div>
-  <div class="form-group row">
-    <%= f.label :model_number, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= f.text_field :model_number, class: 'form-control' %>
+    <%=
+      f.text_field :manufacturer,
+      class: 'form-input',
+      placeholder: 'Enter manufacturer',
+      onfocus: "darkLabel('#manufacturer')",
+      onblur: "lightLabel('#manufacturer')"
+    %>
+    <div class="item-header" id="model">
+      <div class="item-header-icon">
+        <i class="fas fa-hashtag"></i>
+      </div>
+      <%=
+        f.label :model_number,
+        'Model Number',
+        class: 'item-header-text'
+      %>
     </div>
-  </div>
-  <div class="form-group row">
-    <%= f.label :zeton_po, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= f.text_field :zeton_po, class: 'form-control' %>
+    <%=
+      f.text_field :model_number,
+      class: 'form-input',
+      placeholder: 'Enter model number',
+      onfocus: "darkLabel('#model')",
+      onblur: "lightLabel('#model')"
+    %>
+    <div class="item-header" id="zeton_po">
+      <div class="item-header-icon">
+        <i class="fas fa-shopping-cart"></i>
+      </div>
+      <%=
+        f.label :zeton_po,
+        'PO Number',
+        class: 'item-header-text'
+      %>
     </div>
+    <%=
+      f.text_field :zeton_po,
+      class: 'form-input',
+      placeholder: 'Enter PO number',
+      onfocus: "darkLabel('#zeton_po')",
+      onblur: "lightLabel('#zeton_po')"
+    %>
+  <%=
+    f.submit @equipment.new_record? ? 'Add Equipment' : 'Update Equipment',
+      class: 'form-submit-button'
+    %>
   </div>
-  <div class="form-group row">
-    <%= f.label :tracking_number, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= f.text_field :tracking_number, class: 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group row">
-    <%= f.label :receiving_info, class: 'col-sm-2 col-form-label' %>
-    <div class="col-sm-10">
-      <%= f.text_field :receiving_info, class: 'form-control' %>
-    </div>
-  </div>
-  <%= f.submit @equipment.new_record? ? 'Add Equipment' : 'Update Equipment', class: 'btn btn-outline-primary' %>
 <% end %>

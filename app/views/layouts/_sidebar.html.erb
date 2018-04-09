@@ -244,9 +244,23 @@
         <div class="s3-icon">
           <i class="fas fa-exchange-alt"></i>
         </div>
-        <div class="s3-link">
-          Change Project
+        <%=
+          link_to 'Change Project',
+          root_path,
+          class: 's3-link'
+        %>
+      </div>
+      <div class="s3-item">
+        <div class="s3-arrow">
         </div>
+        <div class="s3-icon">
+          <i class="fas fa-tachometer-alt"></i>
+        </div>
+        <%=
+          link_to 'Project Summary',
+          project_path(current_project),
+          class: 's3-link'
+        %>
       </div>
     </div>
   <% end %>

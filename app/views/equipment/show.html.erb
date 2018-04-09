@@ -1,150 +1,515 @@
-<div class="dark-header">
-  <div class="row pl-5 pr-5">
-    <div class="col-sm-12">
-      <h1>
-        <%= @equipment.tag %>
-      </h1>
-      <small>
-        <%=
-          link_to 'Back',
-          :back
-        %>
-        <br />
-        <%=
-          link_to 'Edit Equipment',
-          edit_equipment_path(@equipment),
-          id: "edit_equipment_#{@equipment.id}"
-        %>
-        <br />
-        <%=
-          link_to 'Delete Equipment',
-          equipment_path(@equipment),
-          method: :delete,
-          id: "delete_equipment_#{@equipment.id}",
-          data: { confirm: "Are you sure you want to delete #{@equipment.tag}" }
-        %>
-        <br />
-      </small>
-    </div>
+<div class="section-heading">
+  <%= @equipment.tag %>
+</div>
+<div class="item-sub-heading">
+  <div class="item-sub-heading-icon">
+    <i class="fas fa-list-ul"></i>
+  </div>
+  <div class="item-sub-heading-text">
+    Properties
   </div>
 </div>
-  <div class="row px-5 neg-mar">
-    <div class="col-sm-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">
-            Metrics<br />
-            <small class="text-muted">Click below to update</small>
-          </h5>
+<div class="section-sub-heading">
+  Click below to edit, or
+  <%=
+    link_to 'edit all fields',
+      edit_equipment_path(@equipment),
+      class: 'table-link'
+  %>
+</div>
+<div class="item-properties" id="equipment-properties">
+  <%= render 'properties' %>
+</div>
+<div class="item-sub-heading">
+  <div class="item-sub-heading-icon">
+    <i class="fas fa-chart-line"></i>
+  </div>
+  <div class="item-sub-heading-text">
+    Metrics
+  </div>
+</div>
+<div class="metrics">
+  <div class="metrics-report">
+    <% @equipment.attributes.each do |name, value| %>
+      <% if Equipment.metrics_attributes.include?(name) %>
+        <div class="metrics-description">
+          <%= name.humanize %>
         </div>
-        <ul class="list-group list-group-flush">
-          <% @equipment.attributes.each do |name, value| %>
-            <% if Equipment.metrics_attributes.include?(name) %>
-              <li class="list-group-item">
-                <span class="float-sm-left"><%= name.humanize %></span>
-                <span class="float-sm-right">
-                  <div id="<%= name %>_status_equipment_<%= @equipment.id %>">
-                    <%=
-                      render partial: 'shared/metric_status',
-                        locals: {
-                        record: @equipment,
-                        attribute: name,
-                        value: value
-                      }
-                    %>
-                  </div>
-                </span>
-              </li>
-            <% end %>
-          <% end %>
-        </ul>
+        <div id="<%= name %>_status_equipment_<%= @equipment.id %>">
+          <%=
+            render partial: 'shared/metrics_icon',
+            locals: {
+              record: @equipment,
+              value: value,
+              name: name
+            }
+          %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="item-sub-heading">
+  <div class="item-sub-heading-icon">
+    <i class="far fa-envelope"></i>
+  </div>
+  <div class="item-sub-heading-text">
+    Requests for Information
+  </div>
+</div>
+<div class="wide-section">
+  <div class="wide-table">
+    <div class="rfi-table-heading-row">
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-hashtag"></i>
+        </div>
+        <div class="table-heading-text">
+          Number
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#numberSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-clipboard-check"></i>
+        </div>
+        <div class="table-heading-text">
+          Status
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#statusSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="far fa-file"></i>
+        </div>
+        <div class="table-heading-text">
+          Client Document
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#documentSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="far fa-user"></i>
+        </div>
+        <div class="table-heading-text">
+          Send to
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#sendToSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="far fa-dot-circle"></i>
+        </div>
+        <div class="table-heading-text">
+          Work Area
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#areaSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-tags"></i>
+        </div>
+        <div class="table-heading-text">
+          Associated Items
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#itemsSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-align-left"></i>
+        </div>
+        <div class="table-heading-text">
+          RFI
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#rfiSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="far fa-calendar-alt"></i>
+        </div>
+        <div class="table-heading-text">
+          Latest Response
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#responseSort')">
+          <i class="fas fa-sort"></i>
+        </div>
       </div>
     </div>
-    <div class="col-sm-8">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Equipment Data</h5>
+    <% @equipment.information_requests.each do |rfi| %>
+      <div class="rfi-table-data-row">
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <%=
+              link_to rfi.rfi_number,
+              information_request_path(rfi),
+              class: 'table-link'
+            %>
+          </div>
         </div>
-        <ul class="list group ml-3 border-0">
-          <li class="list-group-item border-0">
-            <div class="form-row">
-              <div class="col-sm-6">
-                <b>Tag:</b> <%= @equipment.tag %>
-              </div>
-              <div class="col-sm-6">
-                <b>Description:</b> <%= @equipment.description %>
-              </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <div class="rfi-status-badge-<%= rfi_status_button(rfi.answered).downcase %>">
+              <%= rfi_status_button(rfi.answered) %>
             </div>
-          </li>
-          <li class="list-group-item border-0">
-            <div class="form-row">
-              <div class="col-sm-6">
-                <b>Type:</b> <%= @equipment.equipment_type %>
-              </div>
-              <div class="col-sm-6">
-                <b>Scope:</b> <%= @equipment.scope %>
-              </div>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <% if rfi.client_document %>
+            <div class="table-data-text table-link" onclick="showDocumentData(event, '#client_document_<%=rfi.client_document.id%>')">
+              <%= rfi.client_document.document_number %>
             </div>
-          </li>
-          <li class="list-group-item border-0">
-            <div class="form-row">
-              <div class="col-sm-6">
-                <b>Supplier:</b> <%= @equipment.supplier %>
-              </div>
-              <div class="col-sm-6">
-                <b>Manufacturer:</b> <%= @equipment.manufacturer %>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item border-0">
-            <div class="form-row">
-              <div class="col-sm-6">
-                <b>Model Number:</b> <%= @equipment.model_number %>
-              </div>
-              <div class="col-sm-6">
-                <b>Zeton PO:</b> <%= @equipment.zeton_po %>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item border-0">
-            <div class="form-row">
-              <div class="col-sm-6">
-                <b>Tracking Number:</b> <%= @equipment.tracking_number %>
-              </div>
-              <div class="col-sm-6">
-                <b>Receiving Info:</b> <%= @equipment.receiving_info %>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="card mt-5">
-        <div class="card-body">
-          <h5 class="card-title">Related RFIs (<%= @equipment.information_requests.count %>)</h5>
-          <% if @equipment.information_requests.any? %>
-            <table>
-              <thead>
-                <tr>
-                  <th class="p-3">Number</th>
-                  <th class="p-3">Zeton Clarification</th>
-                  <th class="p-3">Responses</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @equipment.information_requests.each do |rfi| %>
-                  <tr>
-                    <td class="p-3"><%= link_to rfi.rfi_number, information_request_path(rfi) %></td>
-                    <td class="p-3"><%= rfi.zeton_clarification %></td>
-                    <td class="p-3"><%= link_to rfi.rfi_responses.count, information_request_path(rfi) %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
           <% else %>
-            No related RFIs
+            <div class="table-data-text">
+              None
+            </div>
+          <% end %>
+        </div>
+        <div class="table-data-cell">
+          <% if rfi.client_team_member %>
+            <div class="table-data-text table-link" onclick="showDocumentData(event, '#client_team_member_<%= rfi.client_team_member.id %>')">
+              <%= rfi.client_team_member.full_name %>
+            </div>
+          <% else %>
+            <div class="table-data-text table-link">
+              None
+            </div>
+          <% end %>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <%= rfi.area %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <div class="rfi-table-assoc-item">
+              <%= rfi.number_of_associations %> Items
+            </div>
+            <div class="rfi-table-assoc-item">
+            </div>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text table-link" onclick="showDocumentData(event, '#clarification_<%= rfi.id %>')">
+            <%= truncate(rfi.zeton_clarification, length: 38) %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <% if rfi.rfi_responses.any? %>
+            <div class="table-data-text table-link" onclick="showDocumentData(event, '#rfi_response_<%= rfi.rfi_responses.last.id %>')">
+              <%= rfi.rfi_responses.last.created_at.strftime("%b %-d, %Y") %>
+            </div>
+          <% else %>
+            <div class="table-data-text table_link">
+              No responses
+            </div>
           <% end %>
         </div>
       </div>
+    <% end %>
+    <div class="table-last-row">
+      <div class="table-last-icon">
+        <i class="fas fa-plus"></i>
+      </div>
+      <%=
+        link_to 'Add an RFI',
+          new_information_request_path,
+          class: "table-last-text"
+        %>
     </div>
   </div>
 </div>
+<!-- create divs for all client documents -->
+<% @equipment.information_requests.each do |rfi| %>
+  <% if rfi.client_document %>
+    <div class="client-document hide" id="client_document_<%= rfi.client_document.id %>">
+      <div class='cd-close' onclick="showPopup('#client_document_<%= rfi.client_document.id %>')">
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="client-document-table">
+        <div class="cd-heading">
+          Title
+        </div>
+        <div class="cd-specific">
+          <%= rfi.client_document.document_name %>
+        </div>
+        <div class="cd-heading">
+          Document Number
+        </div>
+        <div class="cd-specific">
+          <%= rfi.client_document.document_number %>
+        </div>
+        <div class="cd-heading">
+          Revision
+        </div>
+        <div class="cd-specific">
+          <%= rfi.client_document.document_revision %>
+        </div>
+        <div class="cd-heading">
+          Date Recevied
+        </div>
+        <div class="cd-specific">
+          <%= rfi.client_document.created_at.strftime("%b %-d, %Y") %>
+        </div>
+        <div class="cd-download">
+          <i class="fa fa-download"></i>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<!-- create divs for all client team members -->
+<% @equipment.information_requests.each do |rfi| %>
+  <% if rfi.client_team_member %>
+    <div class="client-pop-up hide" id="client_team_member_<%= rfi.client_team_member.id %>">
+      <div class='cd-close' onclick="showPopup('#client_team_member_<%= rfi.client_team_member.id %>')">
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="client-grid">
+        <div class="client-heading">
+          Name
+        </div>
+        <div class="client-specific">
+          <%= rfi.client_team_member.full_name %>
+        </div>
+        <div class="client-heading">
+          Organization
+        </div>
+        <div class="client-specific">
+          <%= rfi.client_team_member.organization %>
+        </div>
+        <div class="client-heading">
+          Email
+        </div>
+        <div class="client-specific">
+          <%= rfi.client_team_member.email %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<!-- create divs for last response -->
+<% @equipment.information_requests.each do |rfi| %>
+  <% if rfi.rfi_responses.any? %>
+    <div class="rfi-response-pop-up hide" id="rfi_response_<%= rfi.rfi_responses.last.id %>">
+      <div class="clarification-close" onclick="showPopup('#rfi_response_<%= rfi.rfi_responses.last.id %>')">
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="clarification-grid">
+        <div class="clarification-heading">
+          Date received
+        </div>
+        <div class="clarification-specific">
+          <%= rfi.rfi_responses.last.created_at.strftime("%b %-d, %Y") %>
+        </div>
+        <div class="clarification-heading">
+          Organization
+        </div>
+        <div class="clarification-specific">
+          <%= rfi.rfi_responses.last.organization %>
+        </div>
+        <div class="clarification-heading">
+          Received from
+        </div>
+        <div class="clarification-specific">
+          <%= rfi.rfi_responses.last.responder %>
+        </div>
+        <div class="clarification-heading">
+          Response
+        </div>
+        <div class="clarification-specific">
+          <%= rfi.rfi_responses.last.response %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<!-- create divs for all clarfications -->
+<% @equipment.information_requests.each do |rfi| %>
+  <div class="rfi-clarification-pop-up hide" id="clarification_<%= rfi.id %>">
+    <div class='clarification-close' onclick="showPopup('#clarification_<%= rfi.id %>')">
+      <i class="fas fa-times"></i>
+    </div>
+    <div class="clarification-grid">
+      <div class="clarification-heading">
+        Zeton Clarification
+      </div>
+      <div class="clarification-specific">
+        <%= rfi.zeton_clarification %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<!-- create divs for sorting table headings -->
+<div class="sort-pop-up hide" id="numberSort">
+  <div class="sort-ascending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-up"></i>
+    </div>
+    <div class="sort-text">
+      Ascending
+    </div>
+  </div>
+  <div class="sort-descending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-down"></i>
+    </div>
+    <div class="sort-text">
+      Descending
+    </div>
+  </div>
+</div>
+
+<div class="sort-pop-up hide" id="statusSort">
+  <div class="sort-ascending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-up"></i>
+    </div>
+    <div class="sort-text">
+      Ascending
+    </div>
+  </div>
+  <div class="sort-descending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-down"></i>
+    </div>
+    <div class="sort-text">
+      Descending
+    </div>
+  </div>
+</div>
+
+<div class="sort-pop-up hide" id="documentSort">
+  <div class="sort-ascending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-up"></i>
+    </div>
+    <div class="sort-text">
+      Ascending
+    </div>
+  </div>
+  <div class="sort-descending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-down"></i>
+    </div>
+    <div class="sort-text">
+      Descending
+    </div>
+  </div>
+</div>
+
+<div class="sort-pop-up hide" id="sendToSort">
+  <div class="sort-ascending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-up"></i>
+    </div>
+    <div class="sort-text">
+      Ascending
+    </div>
+  </div>
+  <div class="sort-descending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-down"></i>
+    </div>
+    <div class="sort-text">
+      Descending
+    </div>
+  </div>
+</div>
+
+<div class="sort-pop-up hide" id="areaSort">
+  <div class="sort-ascending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-up"></i>
+    </div>
+    <div class="sort-text">
+      Ascending
+    </div>
+  </div>
+  <div class="sort-descending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-down"></i>
+    </div>
+    <div class="sort-text">
+      Descending
+    </div>
+  </div>
+</div>
+
+<div class="sort-pop-up hide" id="itemsSort">
+  <div class="sort-ascending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-up"></i>
+    </div>
+    <div class="sort-text">
+      Ascending
+    </div>
+  </div>
+  <div class="sort-descending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-down"></i>
+    </div>
+    <div class="sort-text">
+      Descending
+    </div>
+  </div>
+</div>
+
+<div class="sort-pop-up hide" id="rfiSort">
+  <div class="sort-ascending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-up"></i>
+    </div>
+    <div class="sort-text">
+      Ascending
+    </div>
+  </div>
+  <div class="sort-descending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-down"></i>
+    </div>
+    <div class="sort-text">
+      Descending
+    </div>
+  </div>
+</div>
+
+<div class="sort-pop-up hide" id="responseSort">
+  <div class="sort-ascending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-up"></i>
+    </div>
+    <div class="sort-text">
+      Ascending
+    </div>
+  </div>
+  <div class="sort-descending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-down"></i>
+    </div>
+    <div class="sort-text">
+      Descending
+    </div>
+  </div>
+</div>
+
+
+

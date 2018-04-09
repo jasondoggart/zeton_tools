@@ -1,154 +1,517 @@
-<div class="dark-header">
-  <div class="row pl-5 pr-5">
-    <div class="col-sm-12">
-      <h1>
-        <%= @handvalve.tag %>
-      </h1>
-      <small>
-        <%=
-          link_to 'Back',
-          :back
-        %>
-        <br />
-        <%=
-          link_to 'Edit Handvalve',
-          edit_handvalve_path(@handvalve),
-          id: "edit_handvalve_#{@handvalve.id}"
-        %>
-        <br />
-        <%=
-          link_to 'Delete Handvalve',
-          handvalve_path(@handvalve),
-          method: :delete,
-          id: "delete_handvalve_#{@handvalve.id}"
-        %>
-        <br />
-      </small>
-    </div>
+<div class="section-heading">
+  <%= @handvalve.tag %>
+</div>
+<div class="item-sub-heading">
+  <div class="item-sub-heading-icon">
+    <i class="fas fa-list-ul"></i>
+  </div>
+  <div class="item-sub-heading-text">
+    Properties
   </div>
 </div>
-<div class="row px-5 neg-mar">
-  <div class="col-sm-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">
-          Metrics<br />
-          <small class="text-muted">Click below to update</small>
-        </h5>
+<div class="section-sub-heading">
+  Click below to edit, or
+  <%=
+    link_to 'edit all fields',
+      edit_handvalve_path(@handvalve),
+      class: 'table-link'
+  %>
+</div>
+<div class="item-properties" id="handvalve-properties">
+  <%= render 'properties' %>
+</div>
+<div class="item-sub-heading">
+  <div class="item-sub-heading-icon">
+    <i class="fas fa-chart-line"></i>
+  </div>
+  <div class="item-sub-heading-text">
+    Metrics
+  </div>
+</div>
+<div class="metrics">
+  <div class="metrics-report">
+    <% @handvalve.attributes.each do |name, value| %>
+      <% if Handvalve.metrics_attributes.include?(name) %>
+        <div class="metrics-description">
+          <%= name.humanize %>
+        </div>
+        <div id="<%= name %>_status_handvalve_<%= @handvalve.id %>">
+          <%=
+            render partial: 'shared/metrics_icon',
+            locals: {
+              record: @handvalve,
+              value: value,
+              name: name
+            }
+          %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="item-sub-heading">
+  <div class="item-sub-heading-icon">
+    <i class="far fa-envelope"></i>
+  </div>
+  <div class="item-sub-heading-text">
+    Requests for Information
+  </div>
+</div>
+<div class="wide-section">
+  <div class="wide-table">
+    <div class="rfi-table-heading-row">
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-hashtag"></i>
+        </div>
+        <div class="table-heading-text">
+          Number
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#numberSort')">
+          <i class="fas fa-sort"></i>
+        </div>
       </div>
-      <ul class="list-group list-group-flush">
-        <% @handvalve.attributes.each do |name, value| %>
-          <% if Handvalve.metrics_attributes.include?(name) %>
-            <li class="list-group-item">
-              <span class="float-left">
-                <%= name.humanize %>
-              </span>
-              <span class="float-right">
-                <div id="<%= name %>_status_handvalve_<%= @handvalve.id %>">
-                  <%=
-                    render partial: 'shared/metric_status',
-                      locals: {
-                      record: @handvalve,
-                      attribute: name,
-                      value: value
-                    }
-                  %>
-                </div>
-              </span>
-            </li>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-clipboard-check"></i>
+        </div>
+        <div class="table-heading-text">
+          Status
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#statusSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="far fa-file"></i>
+        </div>
+        <div class="table-heading-text">
+          Client Document
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#documentSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="far fa-user"></i>
+        </div>
+        <div class="table-heading-text">
+          Send to
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#sendToSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="far fa-dot-circle"></i>
+        </div>
+        <div class="table-heading-text">
+          Work Area
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#areaSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-tags"></i>
+        </div>
+        <div class="table-heading-text">
+          Associated Items
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#itemsSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-align-left"></i>
+        </div>
+        <div class="table-heading-text">
+          RFI
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#rfiSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="far fa-calendar-alt"></i>
+        </div>
+        <div class="table-heading-text">
+          Latest Response
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#responseSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+    </div>
+    <% @handvalve.information_requests.each do |rfi| %>
+      <div class="rfi-table-data-row">
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <%=
+              link_to rfi.rfi_number,
+              information_request_path(rfi),
+              class: 'table-link'
+            %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <div class="rfi-status-badge-<%= rfi_status_button(rfi.answered).downcase %>">
+              <%= rfi_status_button(rfi.answered) %>
+            </div>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <% if rfi.client_document %>
+            <div class="table-data-text table-link" onclick="showDocumentData(event, '#client_document_<%=rfi.client_document.id%>')">
+              <%= rfi.client_document.document_number %>
+            </div>
+          <% else %>
+            <div class="table-data-text">
+              None
+            </div>
           <% end %>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-  <div class="col-sm-8">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Handvalve Data</h5>
-      </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <ul class="list-group ml-3 border-0">
-            <li class="list-group-item border-0">
-              <b>Tag:</b> <%= @handvalve.tag %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Valve Code:</b> <%= @handvalve.valve_code %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Valve Type:</b> <%= @handvalve.valve_type %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Size:</b> <%= @handvalve.size %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Line/Equipment Number:</b> <%= @handvalve.line_number %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Skid:</b> <%= @handvalve.zeton_skid_number %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Level:</b> <%= @handvalve.zeton_skid_level %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Scope:</b> <%= @handvalve.scope %>
-            </li>
-          </ul>
         </div>
-        <div class="col-sm-6">
-          <ul class="list-group ml-3 border-0">
-            <li class="list-group-item border-0">
-              <b>Supplier:</b> <%= @handvalve.supplier %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Manufacturer:</b> <%= @handvalve.manufacturer %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Model:</b> <%= @handvalve.model %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Process Connection:</b> <%= @handvalve.process_connection %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Material of Construction:</b> <%= @handvalve.material_of_construction %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Valve Type:</b> <%= @handvalve.valve_counting_code %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Installation Location:</b> <%= @handvalve.valve_location %>
-            </li>
-            <li class="list-group-item border-0">
-              <b>Zeton PO:</b> <%= @handvalve.zeton_po %>
-            </li>
-          </ul>
+        <div class="table-data-cell">
+          <% if rfi.client_team_member %>
+            <div class="table-data-text table-link" onclick="showDocumentData(event, '#client_team_member_<%= rfi.client_team_member.id %>')">
+              <%= rfi.client_team_member.full_name %>
+            </div>
+          <% else %>
+            <div class="table-data-text table-link">
+              None
+            </div>
+          <% end %>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <%= rfi.area %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <div class="rfi-table-assoc-item">
+              <%= rfi.number_of_associations %> Items
+            </div>
+            <div class="rfi-table-assoc-item">
+            </div>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text table-link" onclick="showDocumentData(event, '#clarification_<%= rfi.id %>')">
+            <%= truncate(rfi.zeton_clarification, length: 38) %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <% if rfi.rfi_responses.any? %>
+            <div class="table-data-text table-link" onclick="showDocumentData(event, '#rfi_response_<%= rfi.rfi_responses.last.id %>')">
+              <%= rfi.rfi_responses.last.created_at.strftime("%b %-d, %Y") %>
+            </div>
+          <% else %>
+            <div class="table-data-text table_link">
+              No responses
+            </div>
+          <% end %>
         </div>
       </div>
-    </div>
-    <div class="card mt-5">
-      <div class="card-body">
-        <h5 class="card-title">
-          Related RFI's
-        </h5>
-        <% if @handvalve.information_requests.any? %>
-          <table>
-            <thead>
-              <th class="p-3">Number</th>
-              <th class="p-3">Zeton Clarification</th>
-            </thead>
-            <tbody>
-              <% @handvalve.information_requests.each do |rfi| %>
-                <tr class="mb-3">
-                  <td class="p-3"><%= link_to rfi.rfi_number, information_request_path(rfi) %></td>
-                  <td class="p-3"><%= rfi.zeton_clarification %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        <% else %>
-          No related RFIs
-        <% end %>
+    <% end %>
+    <div class="table-last-row">
+      <div class="table-last-icon">
+        <i class="fas fa-plus"></i>
       </div>
+      <%=
+        link_to 'Add an RFI',
+          new_information_request_path,
+          class: "table-last-text"
+        %>
     </div>
   </div>
 </div>
+
+<!-- create divs for all client documents -->
+<% @handvalve.information_requests.each do |rfi| %>
+  <% if rfi.client_document %>
+    <div class="client-document hide" id="client_document_<%= rfi.client_document.id %>">
+      <div class='cd-close' onclick="showPopup('#client_document_<%= rfi.client_document.id %>')">
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="client-document-table">
+        <div class="cd-heading">
+          Title
+        </div>
+        <div class="cd-specific">
+          <%= rfi.client_document.document_name %>
+        </div>
+        <div class="cd-heading">
+          Document Number
+        </div>
+        <div class="cd-specific">
+          <%= rfi.client_document.document_number %>
+        </div>
+        <div class="cd-heading">
+          Revision
+        </div>
+        <div class="cd-specific">
+          <%= rfi.client_document.document_revision %>
+        </div>
+        <div class="cd-heading">
+          Date Recevied
+        </div>
+        <div class="cd-specific">
+          <%= rfi.client_document.created_at.strftime("%b %-d, %Y") %>
+        </div>
+        <div class="cd-download">
+          <i class="fa fa-download"></i>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<!-- create divs for all client team members -->
+<% @handvalve.information_requests.each do |rfi| %>
+  <% if rfi.client_team_member %>
+    <div class="client-pop-up hide" id="client_team_member_<%= rfi.client_team_member.id %>">
+      <div class='cd-close' onclick="showPopup('#client_team_member_<%= rfi.client_team_member.id %>')">
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="client-grid">
+        <div class="client-heading">
+          Name
+        </div>
+        <div class="client-specific">
+          <%= rfi.client_team_member.full_name %>
+        </div>
+        <div class="client-heading">
+          Organization
+        </div>
+        <div class="client-specific">
+          <%= rfi.client_team_member.organization %>
+        </div>
+        <div class="client-heading">
+          Email
+        </div>
+        <div class="client-specific">
+          <%= rfi.client_team_member.email %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<!-- create divs for last response -->
+<% @handvalve.information_requests.each do |rfi| %>
+  <% if rfi.rfi_responses.any? %>
+    <div class="rfi-response-pop-up hide" id="rfi_response_<%= rfi.rfi_responses.last.id %>">
+      <div class="clarification-close" onclick="showPopup('#rfi_response_<%= rfi.rfi_responses.last.id %>')">
+        <i class="fas fa-times"></i>
+      </div>
+        <div class="clarification-grid">
+          <div class="clarification-heading">
+            Date received
+          </div>
+          <div class="clarification-specific">
+            <%= rfi.rfi_responses.last.created_at.strftime("%b %-d, %Y") %>
+          </div>
+          <div class="clarification-heading">
+            Organization
+          </div>
+          <div class="clarification-specific">
+            <%= rfi.rfi_responses.last.organization %>
+          </div>
+          <div class="clarification-heading">
+            Received from
+          </div>
+          <div class="clarification-specific">
+            <%= rfi.rfi_responses.last.responder %>
+          </div>
+          <div class="clarification-heading">
+            Response
+          </div>
+          <div class="clarification-specific">
+            <%= rfi.rfi_responses.last.response %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+    
+
+
+<!-- create divs for all clarfications -->
+<% @handvalve.information_requests.each do |rfi| %>
+  <div class="rfi-clarification-pop-up hide" id="clarification_<%= rfi.id %>">
+    <div class='clarification-close' onclick="showPopup('#clarification_<%= rfi.id %>')">
+      <i class="fas fa-times"></i>
+    </div>
+    <div class="clarification-grid">
+      <div class="clarification-heading">
+        Zeton Clarification
+      </div>
+      <div class="clarification-specific">
+        <%= rfi.zeton_clarification %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<!-- create divs for sorting table headings -->
+<div class="sort-pop-up hide" id="numberSort">
+  <div class="sort-ascending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-up"></i>
+    </div>
+    <div class="sort-text">
+      Ascending
+    </div>
+  </div>
+  <div class="sort-descending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-down"></i>
+    </div>
+    <div class="sort-text">
+      Descending
+    </div>
+  </div>
+</div>
+
+<div class="sort-pop-up hide" id="statusSort">
+  <div class="sort-ascending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-up"></i>
+    </div>
+    <div class="sort-text">
+      Ascending
+    </div>
+  </div>
+  <div class="sort-descending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-down"></i>
+    </div>
+    <div class="sort-text">
+      Descending
+    </div>
+  </div>
+</div>
+
+<div class="sort-pop-up hide" id="documentSort">
+  <div class="sort-ascending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-up"></i>
+    </div>
+    <div class="sort-text">
+      Ascending
+    </div>
+  </div>
+  <div class="sort-descending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-down"></i>
+    </div>
+    <div class="sort-text">
+      Descending
+    </div>
+  </div>
+</div>
+
+<div class="sort-pop-up hide" id="sendToSort">
+  <div class="sort-ascending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-up"></i>
+    </div>
+    <div class="sort-text">
+      Ascending
+    </div>
+  </div>
+  <div class="sort-descending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-down"></i>
+    </div>
+    <div class="sort-text">
+      Descending
+    </div>
+  </div>
+</div>
+
+<div class="sort-pop-up hide" id="areaSort">
+  <div class="sort-ascending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-up"></i>
+    </div>
+    <div class="sort-text">
+      Ascending
+    </div>
+  </div>
+  <div class="sort-descending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-down"></i>
+    </div>
+    <div class="sort-text">
+      Descending
+    </div>
+  </div>
+</div>
+
+<div class="sort-pop-up hide" id="itemsSort">
+  <div class="sort-ascending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-up"></i>
+    </div>
+    <div class="sort-text">
+      Ascending
+    </div>
+  </div>
+  <div class="sort-descending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-down"></i>
+    </div>
+    <div class="sort-text">
+      Descending
+    </div>
+  </div>
+</div>
+
+<div class="sort-pop-up hide" id="rfiSort">
+  <div class="sort-ascending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-up"></i>
+    </div>
+    <div class="sort-text">
+      Ascending
+    </div>
+  </div>
+  <div class="sort-descending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-down"></i>
+    </div>
+    <div class="sort-text">
+      Descending
+    </div>
+  </div>
+</div>
+
+<div class="sort-pop-up hide" id="responseSort">
+  <div class="sort-ascending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-up"></i>
+    </div>
+    <div class="sort-text">
+      Ascending
+    </div>
+  </div>
+  <div class="sort-descending">
+    <div class="sort-icon">
+      <i class="fas fa-sort-alpha-down"></i>
+    </div>
+    <div class="sort-text">
+      Descending
+    </div>
+  </div>
+</div>
+

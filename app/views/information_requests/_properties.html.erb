@@ -213,5 +213,41 @@
     <% end %>
   </div>
 </div>
+<div class="item-header" id="mailer-header">
+  <div class="item-header-icon">
+    <i class="far fa-envelope"></i>
+  </div>
+  <div class="item-header-text">
+    Send to Client
+  </div>
+</div>
+<div id="mailer">
+  <div id="mailer-show">
+    <div class="item-specific">
+      <% if @information_request.client_team_member.present? %>
+        <% if @information_request.date_sent.present? %>
+          RFI sent to client on
+          <%= @information_request.date_sent.strftime("%b %-d, %Y") %>.
+          <%=
+            link_to 'Resend?',
+            send_rfi_path(:rfi => @information_request),
+            class: 'table-link'
+          %>
+        <% elsif %>
+          Not yet sent.
+          <%=
+            link_to 'Send now?',
+            send_rfi_path(:rfi => @information_request),
+            class: 'table-link'
+          %>
+        <% end %>
+      <% else %>
+        Add client team member above to email RFI.
+      <% end %>
+    </div>
+  </div>
+</div>
+            
+
 
 

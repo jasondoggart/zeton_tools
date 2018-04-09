@@ -1,188 +1,321 @@
-<div class="dark-header">
-  <div class="row pl-5 pr-5">
-    <div class="col-sm-12">
-      <h1>
-        Equipment
-      </h1>
-      <h5>
-        <%=
-          link_to 'Add new',
-            new_equipment_path,
-            id: 'new_equipment_link'
-        %>
-      </h5>
-      <i class="filter-button fa fa-filter" onClick="toggleFilters()"></i>
+<div class="section-heading">
+  Equipment
+</div>
+<div class="section-sub-heading">
+  Click on an equipment tag to view and update
+</div>
+<div class="table-function-row">
+  <div class="table-function-item" onclick="showPopup('#filter-pop-up')">
+    <i class="fa fa-filter"></i>
+    Filter
+  </div>
+  <div class="table-function-item">
+    <i class="fas fa-download"></i>
+    <%=
+      link_to 'Download as Excel',
+      project_equipment_excel_path(format: :xlsx),
+      class: 'table-link'
+    %>
+  </div>
+  <div class="table-function-item">
+    <i class="fas fa-upload"></i>
+    <%=
+      link_to 'Upload from Excel',
+      new_project_equipment_import_path,
+      class: 'table-link'
+    %>
+  </div>
+</div>
+<div class="filter-pop-up hide" id="filter-pop-up">
+  <div class="filter-row">
+    <div class="filter-select">
+      Select...
+    </div>
+    <div class="filter-params">
+      param
+    </div>
+  </div>
+  <div class="add-new-filter">
+    <div class="new-filter-icon">
+      <i class="fas fa-plus"></i>
+    </div>
+    <div class="new-filter-text">
+      Add new filter
     </div>
   </div>
 </div>
-<div class="row pl-5 pr-5 neg-mar">
-  <div id="filters" class="col-sm-2 filters-close filters mr-3">
-    <h5 class="text-muted">
-      Sort by
-    </h5>
-    <div class="dropdown">
-      <button class="btn-sm btn btn-outline-primary dropdown-toggle"
-              type="button"
-              id="loop_dropdown_button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false">
-        Select...
-      </button>
-      <div class="dropdown-menu"
-           style="height: 200px;
-           overflow: scroll;"
-           aria-labelledby="loop_dropdown_button">
-        <%= link_to 'Type',
-          request.query_parameters.merge(
-            :sorted_by => 'type_' + sort_direction(@sorted_by)
-        ),
-        class: 'dropdown-item' %>
-      <%= link_to 'Tag',
-        request.query_parameters.merge(
-          :sorted_by => 'tag_' + sort_direction(@sorted_by)
-      ),
-      class: 'dropdown-item' %>
+
+<div class="wide-section">
+  <div class="wide-table">
+    <div class="equipment-table-heading-row">
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-tag"></i>
+        </div>
+        <div class="table-heading-text">
+          Tag
+        </div>
+        <div class="table-heading-sort" onclick="showPopup('#tagSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+        <div class="sort-pop-up hide" id="tagSort">
+          <div class="sort-ascending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-up"></i>
+            </div>
+            <div class="sort-text">
+              Ascending
+            </div>
+          </div>
+          <div class="sort-descending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-down"></i>
+            </div>
+            <div class="sort-text">
+              Descending
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="far fa-building"></i>
+        </div>
+        <div class="table-heading-text">
+          Manufacturer
+        </div>
+        <div class="table-heading-sort" onclick="showPopup('#manufacturerSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+        <div class="sort-pop-up hide" id="manufacturerSort">
+          <div class="sort-ascending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-up"></i>
+            </div>
+            <div class="sort-text">
+              Ascending
+            </div>
+          </div>
+          <div class="sort-descending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-down"></i>
+            </div>
+            <div class="sort-text">
+              Descending
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-hashtag"></i>
+        </div>
+        <div class="table-heading-text">
+          Model Number
+        </div>
+        <div class="table-heading-sort" onclick="showPopup('#modelSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+        <div class="sort-pop-up hide" id="modelSort">
+          <div class="sort-ascending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-up"></i>
+            </div>
+            <div class="sort-text">
+              Ascending
+            </div>
+          </div>
+          <div class="sort-descending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-down"></i>
+            </div>
+            <div class="sort-text">
+              Descending
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-align-justify"></i>
+        </div>
+        <div class="table-heading-text">
+          Description
+        </div>
+        <div class="table-heading-sort" onclick="showPopup('#processSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+        <div class="sort-pop-up hide" id="processSort">
+          <div class="sort-ascending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-up"></i>
+            </div>
+            <div class="sort-text">
+              Ascending
+            </div>
+          </div>
+          <div class="sort-descending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-down"></i>
+            </div>
+            <div class="sort-text">
+              Descending
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-certificate"></i>
+        </div>
+        <div class="table-heading-text">
+          Equipment Type
+        </div>
+        <div class="table-heading-sort" onclick="showPopup('#mocSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+        <div class="sort-pop-up hide" id="mocSort">
+          <div class="sort-ascending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-up"></i>
+            </div>
+            <div class="sort-text">
+              Ascending
+            </div>
+          </div>
+          <div class="sort-descending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-down"></i>
+            </div>
+            <div class="sort-text">
+              Descending
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+        <div class="table-heading-text">
+          PO Number
+        </div>
+        <div class="table-heading-sort" onclick="showPopup('#poSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+        <div class="sort-pop-up hide" id="poSort">
+          <div class="sort-ascending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-up"></i>
+            </div>
+            <div class="sort-text">
+              Ascending
+            </div>
+          </div>
+          <div class="sort-descending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-down"></i>
+            </div>
+            <div class="sort-text">
+              Descending
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-bullseye"></i>
+        </div>
+        <div class="table-heading-text">
+          Skid Location
+        </div>
+        <div class="table-heading-sort" onclick="showPopup('#skidSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+        <div class="sort-pop-up hide" id="skidSort">
+          <div class="sort-ascending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-up"></i>
+            </div>
+            <div class="sort-text">
+              Ascending
+            </div>
+          </div>
+          <div class="sort-descending">
+            <div class="sort-icon">
+              <i class="fas fa-sort-alpha-down"></i>
+            </div>
+            <div class="sort-text">
+              Descending
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <h5 class="text-muted mt-3">
-      Filters
-    </h5>
-    <div class="row">
-      <div class="col-12">
-        <%=
-          link_to 'Clear all',
-            project_equipment_path(
-              :sorted_by => 'type asc'
-            ),
-            class: 'text-muted'
-        %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div class="dropdown">
-          <button class="mt-2 btn btn-sm btn-outline-primary dropdown-toggle"
-                  type="button"
-                  id="type_code_dropdown_button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false">
-            Type
-            <% if params[:with_type].present? %>
-              <i class="fa fa-filter"></i>
-            <% end %>
-          </button>
-          <div class="dropdown-menu"
-               style="height: 200px;
-               overflow: scroll;"
-               aria-labelledby="type_code_dropdown_button">
+    <% @equipment.each do |equip| %>
+      <div class="equipment-table-data-row">
+        <div class="table-data-cell">
+          <div class="table-data-text">
             <%=
-              link_to "Show All",
-              project_equipment_path(:with_type => nil),
-              class: 'dropdown-item' %>
-            <% @types.each do |type| %>
-              <%=
-                link_to type,
-                request.query_parameters.merge(:with_type => type),
-                class: "dropdown-item"
+              link_to equip.tag,
+                equipment_path(equip),
+                class: 'table-link'
               %>
-            <% end %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <%= truncate(equip.manufacturer, length: 25) %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <%= equip.model_number %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <%= equip.description %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <%= equip.equipment_type %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <%= equip.zeton_po %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            Add to model
           </div>
         </div>
       </div>
-    </div>
-    <h5 class="text-muted mt-3">
-      Actions
-    </h5>
-    <div class="row">
-      <div class="col-12">
-          <%=
-            link_to 'Download as excel <i class="fa fa-download"></i>'.html_safe,
-              project_equipment_excel_path(format: :xlsx),
-              class: 'btn-sm btn btn-outline-primary mt-2'
-            %>
-          <%=
-            link_to 'Upload from excel <i class="fa fa-upload"></i>'.html_safe,
-              new_project_equipment_import_path,
-              class: 'btn-sm btn btn-outline-primary mt-2'
-            %>
-        </div>
+    <% end %>
+    <div class="table-last-row">
+      <div class="table-last-icon">
+        <i class="fas fa-plus"></i>
       </div>
-  </div>
-  <div class="col-sm">
-    <div class="row">
-      <div class="col-12">
-        <div class="card card-box-shadow mb-5">
-          <div class="card-body mt-0">
-            <% @equipment.each do |equip| %>
-              <div class="border-bottom pb-3">
-                <div class="pt-3 mt-0">
-                  <div class="row pl-3 pr-3">
-                    <div class="col-sm-12">
-                      <h5 class="mb-0">
-                        <%= link_to equip.tag,
-                          equipment_path(equip),
-                          id: "show_equipment_#{equip.id}" %>
-                      </h5>
-                      <span class="badge badge-pill badge-primary">
-                        710-39-110
-                      </span>
-                      <span class="badge badge-pill badge-info">
-                        <%= equip.scope %>
-                      </span>
-                    </div>
-                  </div>
-                  <dl class="row pl-3 pr-3 pt-3">
-                    <dt class="col-sm-3">
-                    Description
-                    </dt>
-                    <dd class="col-sm-9">
-                    <%= equip.description %>
-                    </dd>
-                    <dt class="col-sm-3">
-                    Type
-                    </dt>
-                    <dd class="col-sm-9">
-                    <%= equip.equipment_type %>
-                    </dd>
-                    <dt class="col-sm-3">
-                    Supplier
-                    </dt>
-                    <dd class="col-sm-9">
-                    <%= equip.supplier %>
-                    </dd>
-                    <dt class="col-sm-3">
-                    Manufacturer
-                    </dt>
-                    <dd class="col-sm-9">
-                    <%= equip.manufacturer %>
-                    </dd>
-                    <dt class="col-sm-3">
-                    Model
-                    </dt>
-                    <dd class="col-sm-9">
-                    <%= equip.model_number %>
-                    </dd>
-                    <dt class="col-sm-3">
-                    Zeton PO
-                    </dt>
-                    <dd class="col-sm-9">
-                    <%= equip.zeton_po %>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-            <% end %>
-          </div>
-          <div class="row pl-5 pr-5">
-            <%= will_paginate(
-              @equipment,
-              :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer
-            ) %>
-          </div>
-        </div>
-      </div>
+      <%=
+        link_to 'Add new equipment',
+          new_equipment_path,
+          class: "table-last-text"
+        %>
     </div>
   </div>
+</div>
+
+
+
+
+
+
+<div class="row pl-5 pr-5">
+  <%= will_paginate(
+    @equipment,
+    :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer
+  ) %>
 </div>

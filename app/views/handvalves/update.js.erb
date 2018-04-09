@@ -1,13 +1,14 @@
 <% @handvalve.attributes.each do |name, value| %>
-  <% if @handvalve.metrics_attributes.include?(name) %>
+  <% if Handvalve.metrics_attributes.include?(name) %>
     $("#<%= name %>_status_handvalve_<%= @handvalve.id %>").html(
       "<%=
-        j render partial: 'shared/metric_status',
+        j render partial: 'shared/metrics_icon',
           locals: {
           record: @handvalve,
-          attribute: name,
+          name: name,
           value: value
         }
       %>");
   <% end %>
 <% end %>
+$("#handvalve-properties").html("<%= j render 'properties' %>");

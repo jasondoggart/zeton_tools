@@ -1,4 +1,4 @@
 <%= form_for rfi, remote: true do |f| %>
   <%= f.hidden_field :answered, value: rfi_status_update(rfi.answered) %>
-  <%= f.button rfi_status_button(rfi.answered), class: 'rfi-status rfi-status-' + rfi_status_button(rfi.answered).downcase %>
+  <%= f.button "<i class='far fa-check-circle'></i> #{rfi_status_button(rfi.answered)}".html_safe, class: 'rfi-status rfi-status-' + rfi_status_button(rfi.answered).downcase %>
 <% end %>

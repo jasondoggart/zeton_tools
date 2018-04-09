@@ -1,160 +1,288 @@
 <%= form_for @handvalve do |f| %>
   <% if @handvalve.errors.any? %>
-    <div class="alert alert-warning">
-      The form contains <%= pluralize(@handvalve.errors.count, "error") %>
+    <div class="errors-dialogue">
+      This couldn't be completed because there are <%= pluralize(@handvalve.errors.count, "error") %>.  Please correct these errors below, then resubmit your form.
+      <ul>
+        <% @handvalve.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
     </div>
-    <ul>
-      <% @handvalve.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
   <% end %>
-
-  <div class="row mb-5 pl-5 pr-5">
-    <div class="col-sm-12">
-      <div class="card card-box-shadow p-3 mb-5">
-        <div class="row">
-          <div class="col-sm-6">
-            <ul class="list-group ml-3 border-0">
-              <li class="list-group-item border-0">
-                <div class="form-group row mb-0">
-                  <%= f.label :tag, 'Tag', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
-                  <div class="col-sm-8">
-                    <%= f.text_field :tag, class: 'form-control' %>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item border-0">
-                <div class="form-group row mb-0">
-                  <%= f.label :valve_code, 'Valve Code', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
-                  <div class="col-sm-8">
-                    <%= f.text_field :valve_code, class: 'form-control' %>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item border-0">
-                <div class="form-group row mb-0">
-                  <%= f.label :valve_type, 'Type', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
-                  <div class="col-sm-8">
-                    <%= f.text_field :valve_type, class: 'form-control' %>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item border-0">
-                <div class="form-group row mb-0">
-                  <%= f.label :size, 'Size', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
-                  <div class="col-sm-8">
-                    <%= f.text_field :size, class: 'form-control' %>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item border-0">
-                <div class="form-group row mb-0">
-                  <%= f.label :line_number, 'Line or Equipment No.', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
-                  <div class="col-sm-8">
-                    <%= f.text_field :line_number, class: 'form-control' %>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item border-0">
-                <div class="form-group row mb-0">
-                  <%= f.label :zeton_skid_number, 'Skid', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
-                  <div class="col-sm-8">
-                    <%= f.text_field :zeton_skid_level, class: 'form-control' %>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item border-0">
-                <div class="form-group row mb-0">
-                  <%= f.label :zeton_skid_level, 'Skid Level', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
-                  <div class="col-sm-8">
-                    <%= f.text_field :zeton_skid_level, class: 'form-control' %>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item border-0">
-                <div class="form-group row mb-0">
-                  <%= f.label :scope, 'Scope', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
-                  <div class="col-sm-8">
-                    <%= f.text_field :scope, class: 'form-control' %>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="col-sm-6">
-            <ul class="list-group ml-3 border-0">
-              <li class="list-group-item border-0">
-                <div class="form-group row mb-0">
-                  <%= f.label :supplier, 'Supplier', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
-                  <div class="col-sm-8">
-                    <%= f.text_field :supplier, class: 'form-control' %>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item border-0">
-                <div class="form-group row mb-0">
-                  <%= f.label :manufacturer, 'Manufacturer', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
-                  <div class="col-sm-8">
-                    <%= f.text_field :manufacturer, class: 'form-control' %>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item border-0">
-                <div class="form-group row mb-0">
-                  <%= f.label :model, 'Model Number', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
-                  <div class="col-sm-8">
-                    <%= f.text_field :model, class: 'form-control' %>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item border-0">
-                <div class="form-group row mb-0">
-                  <%= f.label :process_connection, 'Process Connection', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
-                  <div class="col-sm-8">
-                    <%= f.text_field :process_connection, class: 'form-control' %>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item border-0">
-                <div class="form-group row mb-0">
-                  <%= f.label :material_of_construction, 'MOC', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
-                  <div class="col-sm-8">
-                    <%= f.text_field :material_of_construction, class: 'form-control' %>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item border-0">
-                <div class="form-group row mb-0">
-                  <%= f.label :valve_counting_code, 'Item Type', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
-                  <div class="col-sm-8">
-                    <%= f.text_field :valve_counting_code, class: 'form-control' %>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item border-0">
-                <div class="form-group row mb-0">
-                  <%= f.label :valve_location, 'Installation Location', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
-                  <div class="col-sm-8">
-                    <%= f.text_field :valve_location, class: 'form-control' %>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item border-0">
-                <div class="form-group row mb-0">
-                  <%= f.label :zeton_po, 'Zeton PO Number', class: 'pr-0 mr-0 col-sm-4 col-form-label' %>
-                  <div class="col-sm-8">
-                    <%= f.text_field :zeton_po, class: 'form-control' %>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div> 
-        <div class="col-sm-3">
-          <%= f.submit @handvalve.new_record? ? 'Add Handvalve' : 'Update Handvalve', class: 'btn btn-outline-primary' %>
-        </div>
+  <div class="item-properties">
+    <div class="item-header" id="tag">
+      <div class="item-header-icon">
+        <i class="fas fa-tag"></i>
       </div>
+      <%=
+        f.label :tag,
+        'Tag',
+        class: 'item-header-text'
+      %>
     </div>
+    <%=
+      f.text_field :tag,
+      class: 'form-input',
+      placeholder: 'Enter tag',
+      onfocus: "darkLabel('#tag')",
+      onblur: "lightLabel('#tag')"
+    %>
+    <div class="item-header" id="spec">
+      <div class="item-header-icon">
+        <i class="fas fa-hashtag"></i>
+      </div>
+      <%=
+        f.label :valve_code,
+        'Valve Specification',
+        class: 'item-header-text'
+      %>
+    </div>
+    <%=
+      f.text_field :valve_code,
+      class: 'form-input',
+      placeholder: 'Enter valve specification',
+      onfocus: "darkLabel('#spec')",
+      onblur: "lightLabel('#spec')"
+    %>
+    <div class="item-header" id="type">
+      <div class="item-header-icon">
+        <i class="far fa-dot-circle"></i>
+      </div>
+      <%=
+        f.label :valve_type,
+        'Valve Type',
+        class: 'item-header-text'
+      %>
+    </div>
+    <%=
+      f.text_field :valve_type,
+      class: 'form-input',
+      placeholder: 'Enter valve type',
+      onfocus: "darkLabel('#type')",
+      onblur: "lightLabel('#type')"
+    %>
+    <div class="item-header" id="size">
+      <div class="item-header-icon">
+        <i class="fas fa-compress"></i>
+      </div>
+      <%=
+        f.label :size,
+        'Size',
+        class: 'item-header-text'
+      %>
+    </div>
+    <%=
+      f.text_field :size,
+      class: 'form-input',
+      placeholder: 'Enter size',
+      onfocus: "darkLabel('#size')",
+      onblur: "lightLabel('#size')"
+    %>
+    <div class="item-header" id="installed_on">
+      <div class="item-header-icon">
+        <i class="fas fa-map-pin"></i>
+      </div>
+      <%=
+        f.label :line_number,
+        'Installed On',
+        class: 'item-header-text'
+      %>
+    </div>
+    <%=
+      f.text_field :line_number,
+      class: 'form-input',
+      placeholder: 'Enter line installed on',
+      onfocus: "darkLabel('#installed_on')",
+      onblur: "lightLabel('#installed_on')"
+    %>
+    <div class="item-header" id="skid_number">
+      <div class="item-header-icon">
+        <i class="fas fa-bullseye"></i>
+      </div>
+      <%=
+        f.label :zeton_skid_number,
+        'Skid Number',
+        class: 'item-header-text'
+      %>
+    </div>
+    <%=
+      f.text_field :zeton_skid_number,
+      class: 'form-input',
+      placeholder: 'Enter skid number',
+      onfocus: "darkLabel('#skid_number')",
+      onblur: "lightLabel('#skid_number')"
+    %>
+    <div class="item-header" id="skid_level">
+      <div class="item-header-icon">
+        <i class="fas fa-bullseye"></i>
+      </div>
+      <%=
+        f.label :zeton_skid_level,
+        'Skid Level',
+        class: 'item-header-text'
+      %>
+    </div>
+    <%=
+      f.text_field :zeton_skid_level,
+      class: 'form-input',
+      placeholder: 'Enter skid level',
+      onfocus: "darkLabel('#skid_level')",
+      onblur: "lightLabel('#skid_level')"
+    %>
+    <div class="item-header" id="scope">
+      <div class="item-header-icon">
+        <i class="fas fa-hand-point-right"></i>
+      </div>
+      <%=
+        f.label :scope,
+        'Scope',
+        class: 'item-header-text'
+      %>
+    </div>
+    <%=
+      f.text_field :scope,
+      class: 'form-input',
+      placeholder: 'Enter scope',
+      onfocus: "darkLabel('#scope')",
+      onblur: "lightLabel('#scope')"
+    %>
+    <div class="item-header" id="supplier">
+      <div class="item-header-icon">
+        <i class="fas fa-dollar-sign"></i>
+      </div>
+      <%=
+        f.label :supplier,
+        'Supplier',
+        class: 'item-header-text'
+      %>
+    </div>
+    <%=
+      f.text_field :supplier,
+      class: 'form-input',
+      placeholder: 'Enter supplier',
+      onfocus: "darkLabel('#supplier')",
+      onblur: "lightLabel('#supplier')"
+    %>
+    <div class="item-header" id="manufacturer">
+      <div class="item-header-icon">
+        <i class="far fa-building"></i>
+      </div>
+      <%=
+        f.label :manufacturer,
+        'Manufacturer',
+        class: 'item-header-text'
+      %>
+    </div>
+    <%=
+      f.text_field :manufacturer,
+      class: 'form-input',
+      placeholder: 'Enter manufacturer',
+      onfocus: "darkLabel('#manufacturer')",
+      onblur: "lightLabel('#manufacturer')"
+    %>
+    <div class="item-header" id="model">
+      <div class="item-header-icon">
+        <i class="fas fa-hashtag"></i>
+      </div>
+      <%=
+        f.label :model,
+        'Model Number',
+        class: 'item-header-text'
+      %>
+    </div>
+    <%=
+      f.text_field :model,
+      class: 'form-input',
+      placeholder: 'Enter model',
+      onfocus: "darkLabel('#model')",
+      onblur: "lightLabel('#model')"
+    %>
+    <div class="item-header" id="connection">
+      <div class="item-header-icon">
+        <i class="fas fa-wrench"></i>
+      </div>
+      <%=
+        f.label :process_connection,
+        'Process Connection',
+        class: 'item-header-text'
+      %>
+    </div>
+    <%=
+      f.text_field :process_connection,
+      class: 'form-input',
+      placeholder: 'Enter process connection',
+      onfocus: "darkLabel('#connection')",
+      onblur: "lightLabel('#connection')"
+    %>
+    <div class="item-header" id="moc">
+      <div class="item-header-icon">
+        <i class="fas fa-certificate"></i>
+      </div>
+      <%=
+        f.label :material_of_construction,
+        'Material of Construction',
+        class: 'item-header-text'
+      %>
+    </div>
+    <%=
+      f.text_field :material_of_construction,
+      class: 'form-input',
+      placeholder: 'Enter material of construction',
+      onfocus: "darkLabel('#moc')",
+      onblur: "lightLabel('#moc')"
+    %>
+    <div class="item-header" id="statistics">
+      <div class="item-header-icon">
+        <i class="fas fa-signal"></i>
+      </div>
+      <%=
+        f.label :valve_counting_code,
+        'Statistics Counting Code',
+        class: 'item-header-text'
+      %>
+    </div>
+    <%=
+      f.text_field :valve_counting_code,
+      class: 'form-input',
+      placeholder: 'Enter counting code',
+      onfocus: "darkLabel('#statistics')",
+      onblur: "lightLabel('#statistics')"
+    %>
+    <div class="item-header" id="line-number">
+      <div class="item-header-icon">
+        <i class="fas fa-hashtag"></i>
+      </div>
+      <%=
+        f.label :line_number,
+        'Installed On',
+        class: 'item-header-text'
+      %>
+    </div>
+    <%=
+      f.text_field :line_number,
+      class: 'form-input',
+      placeholder: 'Enter line valve is installed on',
+      onfocus: "darkLabel('#line-number')",
+      onblur: "lightLabel('#line-number')"
+    %>
+    <div class="item-header" id="zeton_po">
+      <div class="item-header-icon">
+        <i class="fas fa-shopping-cart"></i>
+      </div>
+      <%=
+        f.label :zeton_po,
+        'PO Number',
+        class: 'item-header-text'
+      %>
+    </div>
+    <%=
+      f.text_field :zeton_po,
+      class: 'form-input',
+      placeholder: 'Enter PO number',
+      onfocus: "darkLabel('#zeton_po')",
+      onblur: "lightLabel('#zeton_po')"
+    %>
+
+    <%= f.submit @handvalve.new_record? ? 'Add Handvalve' : 'Update Handvalve', class: 'form-submit-button' %>
   </div>
 <% end %>

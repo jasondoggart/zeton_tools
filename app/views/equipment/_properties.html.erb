@@ -1,0 +1,88 @@
+<%=
+  render partial: 'shared/item_property',
+  locals: {
+    id: 'tag',
+    icon: '<i class="fas fa-tag"></i>',
+    headerText: 'Tag',
+    record: @equipment,
+    attribute: 'tag',
+    customForm: 'no'
+  }
+%>
+<%=
+  render partial: 'shared/item_property',
+  locals: {
+    id: 'description',
+    icon: '<i class="fas fa-align-justify"></i>',
+    headerText: 'Description',
+    record: @equipment,
+    attribute: 'description',
+    customForm: 'no'
+  }
+%>
+<%=
+  render partial: 'shared/item_property',
+  locals: {
+    id: 'equipment_type',
+    icon: '<i class="far fa-dot-circle"></i>',
+    headerText: 'Equipment Type',
+    record: @equipment,
+    attribute: 'equipment_type',
+    customForm: 'no'
+  }
+%>
+<%=
+  render partial: 'shared/item_property',
+  locals: {
+    id: 'scope',
+    icon: '<i class="far fa-hand-point-right"></i>',
+    headerText: 'Scope',
+    record: @equipment,
+    attribute: 'scope',
+    customForm: 'no'
+  }
+%>
+<%=
+  render partial: 'shared/item_property',
+  locals: {
+    id: 'supplier',
+    icon: '<i class="fas fa-dollar-sign"></i>',
+    headerText: 'Supplier',
+    record: @equipment,
+    attribute: 'supplier',
+    customForm: 'no'
+  }
+%>
+<%=
+  render partial: 'shared/item_property',
+  locals: {
+    id: 'manufacturer',
+    icon: '<i class="far fa-building"></i>',
+    headerText: 'Manufacturer',
+    record: @equipment,
+    attribute: 'manufacturer',
+    customForm: 'no'
+  }
+%>
+<%=
+  render partial: 'shared/item_property',
+  locals: {
+    id: 'model',
+    icon: '<i class="fas fa-hashtag"></i>',
+    headerText: 'Model Number',
+    record: @equipment,
+    attribute: 'model_number',
+    customForm: 'no'
+  }
+%>
+<%=
+  render partial: 'shared/item_property',
+  locals: {
+    id: 'zeton_po',
+    icon: '<i class="fas fa-shopping-cart"></i>',
+    headerText: 'PO Number',
+    record: @equipment,
+    attribute: 'zeton_po',
+    customForm: 'no'
+  }
+%>

@@ -9,13 +9,21 @@
     <i class="fa fa-filter"></i>
     Filter
   </div>
-  <div class="table-function-item" onclick="showPopup('#filter-pop-up')">
-    <i class="fa fa-filter"></i>
-    Download as Excel
+  <div class="table-function-item">
+    <i class="fas fa-download"></i>
+    <%=
+      link_to 'Download as Excel',
+      project_instruments_excel_path(format: :xlsx),
+      class: 'table-link'
+    %>
   </div>
-  <div class="table-function-item" onclick="showPopup('#filter-pop-up')">
-    <i class="fa fa-filter"></i>
-    Upload from Excel
+  <div class="table-function-item">
+    <i class="fas fa-upload"></i>
+    <%=
+      link_to 'Upload from Excel',
+      new_project_instrument_import_path,
+      class: 'table-link'
+    %>
   </div>
 </div>
 <div class="filter-pop-up hide" id="filter-pop-up">

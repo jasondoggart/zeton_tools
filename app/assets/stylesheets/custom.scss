@@ -317,6 +317,15 @@
   align-items: center;
 }
 
+.equipment-table-heading-row {
+  display: grid;
+  grid-template-columns: 150px repeat(2, 200px) repeat(1, 300px) repeat(1, 200px) 250px 200px;
+  border-top: 1px solid rgb(221, 225, 227);
+  border-bottom: 1px solid rgb(221, 225, 227);
+  height: 35px;
+  align-items: center;
+}
+
 .rfi-table-heading-row {
   display: grid;
   grid-template-columns: repeat(6, 200px) 300px 200px;
@@ -379,6 +388,13 @@
 .table-data-row {
   display: grid;
   grid-template-columns: 150px repeat(2, 200px) repeat(1, 250px) repeat(1, 275px) 150px repeat(3, 200px) 250px repeat(3, 200px);
+  border-bottom: 1px solid rgb(221, 225, 227);
+  height: 35px;
+}
+
+.equipment-table-data-row {
+  display: grid;
+  grid-template-columns: 150px repeat(2, 200px) repeat(1, 300px) repeat(1, 200px) 250px 200px;
   border-bottom: 1px solid rgb(221, 225, 227);
   height: 35px;
 }
@@ -1008,15 +1024,15 @@ button:focus {
 
 .rfi-status {
   margin-left: 65px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 15px;
+  padding-right: 15px;
   border: solid 1px #424242;
-  width: 200px;
-  border-radius: 15px;
+  border-radius: 10px;
   text-align: center;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .rfi-status-open {
@@ -1033,8 +1049,19 @@ button:focus {
   cursor: pointer;
 }
 
+.rfi-status-closed:hover {
+  background: #fff0c9;
+  cursor: pointer;
+}
 .item-associations {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
+}
+
+.main-container {
+  margin-left: 65px;
+  margin-right: 65px;
+  font-size: 14px;
+  color: #424242;
 }
