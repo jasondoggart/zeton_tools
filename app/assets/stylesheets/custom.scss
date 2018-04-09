@@ -44,7 +44,8 @@
   left: 250px;
   height: 100vh;
   overflow-y: auto;
-  width: calc(100vw - 250px);
+  width: calc(100% - 250px);
+  max-width: 100%;
 }
 
 .sidebar-1 {
@@ -275,7 +276,7 @@
   font-size: 14px;
   line-height: 21px;
   font-weight: 400;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   margin-left: 65px;
 }
 
@@ -301,6 +302,8 @@
   z-index: 0;
   margin-top: 5px;
   margin-left: 65px;
+  margin-bottom: 50px;
+  padding-bottom: 25px;
   font-weight: 400;
   font-size: 14px;
 }
@@ -717,7 +720,7 @@
   margin-left: 65px;
   margin-right: 65px;
   display: grid;
-  grid-template-columns: 200px 500px;
+  grid-template-columns: 200px 1fr;
   grid-auto-rows: auto;
   align-items: center;
   padding-top: 15px;
@@ -727,7 +730,7 @@
   border-bottom: 1px solid rgb(242, 242, 242);
 }
 
-.instrument-header {
+.item-header {
   display: grid;
   grid-template-columns: 25px 1fr;
   color: #a5a5a5;
@@ -735,15 +738,16 @@
   align-items: center;
 }
 
-.instrument-specific {
+.item-specific {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   color: #424241;
   border-radius: 5px;
+  width: 100%;
 }
 
-.instrument-specific:hover {
+.item-specific:hover {
   background: #EAE9E8;
   cursor: pointer;
 }
@@ -844,7 +848,7 @@
   font-family: inherit;
   font-size: 14px;
   color: #424241;
-  width: 300px;
+  width: 100%;
   padding-bottom: 8px;
   margin-top: 16px;
 }
@@ -860,7 +864,7 @@ button:focus {
     outline: none;
 }
 
-.instrument-header-text {
+.item-header-text {
   margin-bottom: 0;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -878,6 +882,16 @@ button:focus {
   margin-top: 10px;
   width: 150px;
   cursor: pointer;
+  color: #424242;
+}
+
+.form-submit-button:hover {
+  text-decoration: none;
+  color: #424242;
+}
+
+.add-rfi {
+  margin-bottom: 50px;
 }
 
 .form-submit-button:hover {
@@ -894,5 +908,133 @@ button:focus {
 
 .inline-form {
   display: grid;
-  grid-template-columns: 320px auto;
+  grid-template-columns: minmax(320px, 1fr) auto;
+}
+
+.inline-form-submit {
+  margin-left: 20px;
+}
+
+.inline-form-associations {
+  display: grid;
+  grid-template-columns: 200px 200px 200px auto;
+}
+
+.associated-items-list {
+  width: 160px;
+}
+
+.associated-instrument {
+  font-size: 12px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-right: 3px;
+  background: #cae8e4;
+  border-radius: 2px;
+  color: #424242;
+}
+
+.associated-instrument:hover {
+  color: #424242;
+  text-decoration: none;
+}
+
+.associated-handvalve {
+  font-size: 12px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-right: 3px;
+  background: #fff0c9;
+  border-radius: 2px;
+  color: #424242;
+}
+
+.associated-handvalve:hover {
+  color: #424242;
+  text-decoration: none;
+}
+
+.associated-equipment {
+  font-size: 12px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-right: 3px;
+  background: #D5EEF9;
+  border-radius: 2px;
+  color: #424242;
+}
+
+.associated-equipment:hover {
+  color: #424242;
+  text-decoration: none;
+}
+
+.text-area {
+  margin-left: 65px;
+  margin-right: 65px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid rgb(242, 242, 242);
+}
+
+.rfi-response {
+  margin-left: 65px;
+}
+
+.rfi-response-grid {
+  display: grid;
+  grid-template-columns: 200px auto;
+  grid-auto-rows: auto;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(242, 242, 242);
+  margin-bottom: 10px;
+  font-size: 14px;
+  align-items: center;
+}
+
+.rfi-response-header {
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  color: #a5a5a5;
+  align-items: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.rfi-status {
+  margin-left: 65px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: solid 1px #424242;
+  width: 200px;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.rfi-status-open {
+  background: #fff0c9;
+}
+
+.rfi-status-open:hover {
+  background: #cae8e4;
+  cursor: pointer;
+}
+
+.rfi-status-closed {
+  background: #cae8e4;
+  cursor: pointer;
+}
+
+.item-associations {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
 }

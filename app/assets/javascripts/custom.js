@@ -1,4 +1,8 @@
 $(document).ready(function() {
+  showSelect2();
+});
+
+function showSelect2() {
   $('#information_request_instrument_ids').select2({
     placeholder: "Select associated instruments",
     theme: "bootstrap"
@@ -11,7 +15,7 @@ $(document).ready(function() {
     placeholder: "Select associated handvalves",
     theme: "bootstrap"
   });
-});
+}
 
 
 $('#filter-toggle-link').click(function() {

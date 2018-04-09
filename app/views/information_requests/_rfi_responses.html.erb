@@ -1,0 +1,79 @@
+<% if information_request.rfi_responses.any? %>
+  <% information_request.rfi_responses.each do |response| %>
+    <div class="rfi-response-grid">
+      <div class="item-header">
+        <div class="item-header-icon">
+          <i class="far fa-calendar-alt"></i>
+        </div>
+        <div class="item-header-text">
+          Date Received
+        </div>
+      </div>
+      <div class="rfi-response-specific">
+        <%= response.created_at.strftime("%b %-d, %Y") %>
+      </div>
+      <%=
+        render partial: 'shared/item_property',
+          locals: {
+          id: 'response-sent-by-rfi-' + response.id.to_s,
+          icon: '<i class="far fa-user"></i>',
+          headerText: 'Sent By',
+          record: response,
+          attribute: 'responder',
+          customForm: 'no'
+        }
+      %>
+      <%=
+        render partial: 'shared/item_property',
+          locals: {
+          id: 'organization-rfi-' + response.id.to_s,
+          icon: '<i class="far fa-building"></i>',
+          headerText: 'Organization',
+          record: response,
+          attribute: 'organization',
+          customForm: 'no'
+        }
+      %>
+    <div class="item-header" id="rfi-response-header-rfi-<%= response.id %>">
+        <div class="item-header-icon">
+          <i class="fas fa-align-justify"></i>
+        </div>
+        <div class="item-header-text">
+          Response
+        </div>
+      </div>
+      <div id="rfi-response-rfi-<%= response.id %>">
+        <div id="rfi-response-rfi-<%= response.id %>-show">
+          <div class="item-specific" onclick="showInput('#rfi-response-rfi-<%= response.id %>', '#rfi-response-header-rfi-<%= response.id %>')">
+            <%= response.response %>
+          </div>
+        </div>
+        <div id="rfi-response-rfi-<%= response.id %>-form" class="hide">
+          <%= form_for response, remote: true do |f| %>
+            <div class="inline-form">
+              <div class="inline-form-field">
+                <%=
+                  f.text_area :response,
+                    class: 'form-input',
+                    rows: 5
+                  %>
+              </div>
+              <div class="inline-submit">
+                <%= f.submit 'Update', class: 'form-submit-button' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  No responses received
+<% end %>
+<div id="new-rfi-response" class="add-rfi">
+  <%=
+    link_to 'New Response',
+    new_rfi_response_path(:rfi => @information_request),
+    class: 'form-submit-button'
+  %>
+</div>

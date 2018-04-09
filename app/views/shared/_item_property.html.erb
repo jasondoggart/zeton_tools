@@ -1,0 +1,34 @@
+<div class="item-header" id="<%= id %>-header">
+  <div class="item-header-icon">
+    <%= icon.html_safe %>
+  </div>
+  <div class="item-header-text">
+    <%= headerText %>
+  </div>
+</div>
+<div id="<%= id %>">
+  <div id="<%= id %>-show">
+    <%=
+      render partial: 'shared/item_value',
+        locals: {
+        item: "##{id}",
+        record: record,
+        attribute: attribute,
+        header: "##{id}-header"
+      }
+    %>
+  </div>
+  <% if customForm != 'yes' %>
+    <div id="<%= id %>-form" class="hide">
+      <%=
+        render partial: 'shared/inline_item_edit',
+          locals: {
+          record: record,
+          attribute: attribute,
+          item: "##{id}",
+          header: "##{id}-header"
+        }
+      %>
+    </div>
+  <% end %>
+</div>

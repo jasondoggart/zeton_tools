@@ -77,6 +77,11 @@ class InformationRequestsController < ApplicationController
 
   def show
     @information_request = InformationRequest.find(params[:id])
+    @client_team_members = @information_request.project.client_team_members
+    @client_documents = @information_request.project.client_documents
+    @instruments = current_project.instruments
+    @handvalves = current_project.handvalves
+    @equipment = current_project.equipment
   end
 
   private

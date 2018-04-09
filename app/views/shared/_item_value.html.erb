@@ -1,3 +1,7 @@
-<div class="instrument-specific" onclick="showInput('<%= item %>', '<%= header %>')">
-  <%= value %>
+<div class="item-specific" onclick="showInput('<%= item %>', '<%= header %>')">
+  <% if record[attribute.to_sym].present? %>
+    <%= record[attribute.to_sym] %>
+  <% else %>
+    Click to add
+  <% end %>
 </div>

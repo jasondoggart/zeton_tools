@@ -1,0 +1,6 @@
+$("#rfi-responses").html("<%=
+                         j render partial: 'information_requests/rfi_responses',
+                         locals: {
+                           information_request: @rfi_response.information_request
+                         }
+  %>");

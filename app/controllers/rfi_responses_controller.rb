@@ -25,8 +25,13 @@ class RfiResponsesController < ApplicationController
   def update
     @rfi_response = RfiResponse.find(params[:id])
     if @rfi_response.update(rfi_response_params)
-      flash[:success] = "RFI Response Updated"
-      redirect_to information_request_path(@rfi_response.information_request)
+      respond_to do |format|
+        format.html {
+          flash[:success] = "RFI Response Updated"
+          redirect_to information_request_path(@rfi_response.information_request)
+        }
+        format.js
+      end
     else
       flash[:danger] = "RFI could not be updated"
       redirect_to edit_rfi_response_path(@rfi_response)

@@ -1,267 +1,52 @@
-<div class="dark-header">
-  <div class="row pl-5 pr-5">
-    <div class="col-sm-12">
-      <h1>
-        <%= @information_request.rfi_number %>
-      </h1>
-      <small>
-        Created 
-        <%= @information_request.created_at.strftime("%b %-d, %Y") %> 
-        by <%= @information_request.project.user.full_name %>.
-        <br />
-        <% if @information_request.target_date.present? %>
-          Response required by <%= @information_request.target_date.strftime(
-            "%b %-d, %Y"
-          ) %> (
-          <%= pluralize days_from_now(@information_request.target_date), 'day' %>
-          from now)
-        <% end %>
-        <br />
-        <%=
-          link_to 'Back',
-          :back
-        %>
-        <br />
-        <%=
-          link_to 'Edit RFI',
-          edit_information_request_path(@information_request),
-          id: "edit_rfi_#{@information_request.id}"
-        %>
-        <br />
-        <%=
-          link_to 'Delete RFI',
-          information_request_path(@information_request),
-          method: :delete,
-          id: "delete_rfi_#{@information_request.id}",
-          data: {
-            confirm:
-            "Are you sure you want to delete #{@information_request.rfi_number}"
-          }
-        %>
-      </small>
-    </div>
+<div class="section-heading">
+  <%= @information_request.rfi_number %>
+</div>
+<div id="rfi_status_form">
+  <%=
+    render partial: 'rfi_status_form',
+    locals: {
+      rfi: @information_request
+    }
+  %>
+</div>
+<div class="item-sub-heading">
+  <div class="item-sub-heading-icon">
+    <i class="fas fa-list-ul"></i>
+  </div>
+  <div class="item-sub-heading-text">
+    Properties
   </div>
 </div>
-<div class="row px-5 neg-mar">
-  <div class="col-sm-12">
-    <div class="card card-box-shadow mb-3 p-4">
-      <div class="card-body">
-        <% if @information_request.date_sent %>
-          <p class="text-success">
-            Sent to <%= @information_request.client_team_member.full_name %>
-            on <%= @information_request.date_sent %>.
-          </p>
-        <% elsif @information_request.client_team_member %>
-          <p class="text-warning">
-            Not sent yet sent to client.
-            <%=
-              link_to 'Send now?',
-              send_rfi_path(:rfi => @information_request),
-              class: 'text-danger'
-            %>
-          </p>
-        <% else %>
-          <p class="text-warning">
-            Not sent to client yet. Add client team member below to send RFI.
-          </p>
-        <% end %>
-        <h3 class="section-title mt-5">
-          Zeton Clarification
-        </h3>
-        <dl class="row mt-0">
-          <dt class="col-sm-2">Work Area</dt>
-          <dd class="col-sm-10">
-          <%= @information_request.area %>
-          </dd>
-          <dt class="col-sm-2">Clarification</dt>
-          <dd class="col-sm-10">
-            <%= @information_request.zeton_clarification %>
-          </dd>
-        </dl>
-        <h3 class="section-title mt-5">
-          Client
-        </h3>
-        <% if @information_request.client_team_member.present? %>
-          <dl class="row mt-0">
-            <dt class="col-sm-3">Name</dt>
-            <dd class="col-sm-9">
-            <%= @information_request.client_team_member.full_name %>
-            </dd>
-            <dt class="col-sm-3">Email</dt>
-            <dd class="col-sm-9">
-            <%= @information_request.client_team_member.email %>
-            </dd>
-            <dt class="col-sm-3">Date sent</dt>
-            <dd class="col-sm-9">
-            <% if @information_request.date_sent.present? %>
-              <%= @information_request.date_sent.strftime("%b %-d, %Y") %>
-            <% else %>
-              Not yet sent.
-              <%=
-                link_to 'Click to send now',
-                  send_rfi_path(:rfi => @information_request)
-                %>
-            <% end %>
-            </dd>
-          </dl>
-        <% else %>
-          No client team member added
-        <% end %>
-        <h3 class="section-title mt-5">
-          Associated Client Document
-        </h3>
-        <% if @information_request.client_document.present? %>
-          <div class="row">
-            <div class="col-sm-6">
-              <dl class="row">
-                <dt class="col-sm-4">Document Number</dt>
-                <dd class="col-sm-8">
-                <%= @information_request.client_document.document_number %>
-                </dd>
-                <dt class="col-sm-4">Title</dt>
-                <dd class="col-sm-8">
-                <%= @information_request.client_document.document_name %>
-                </dd>
-              </dl>
-            </div>
-            <div class="col-sm-6">
-              <dl class="row">
-                <dt class="col-sm-4">Revision Number</dt>
-                <dd class="col-sm-8">
-                <%= @information_request.client_document.document_revision %>
-                </dd>
-                <dt class="col-sm-4">Section</dt>
-                <dd class="col-sm-8">
-                <%= @information_request.client_document.document_section %>
-                </dd>
-              </dl>
-            </div>
-          </div>
-        <% else %>
-          No document added
-        <% end %>
-        <h3 class="section-title mt-5">
-          Associated Items
-        </h3>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="row">
-              <div class="col-sm-12">
-                <h5 class="section-sub-title">
-                  Instruments
-                </h5>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-12">
-                <% @information_request.instruments.each do |inst| %>
-                  <%= link_to inst.tag,
-                    instrument_path(inst),
-                    class: 'badge badge-pill badge-secondary' %>
-                <% end %>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="row">
-              <div class="col-sm-12">
-                <h5 class="section-sub-title">
-                  Equipment
-                </h5>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-12">
-                <% @information_request.equipment.each do |equip| %>
-                  <%= link_to equip.tag,
-                    equipment_path(equip),
-                    class: 'badge badge-pill badge-secondary' %>
-                <% end %>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="row">
-              <div class="col-sm-12">
-                <h5 class="section-sub-title">
-                  Handvalves
-                  </h4>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-12">
-                <% @information_request.handvalves.each do |valve| %>
-                  <%= link_to valve.tag,
-                    handvalve_path(valve),
-                    class: 'badge badge-pill badge-secondary' %>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <h3 class="section-title mt-5">
-          RFI Responses
-        </h3>
-        <div class="row">
-          <div class="col-sm-12">
-            <% if @information_request.rfi_responses.any? %>
-              <table>
-                <col style="width: 100px">
-                <col style="width: 80px">
-                <col>
-                <col style="width: 80px">
-                <thead>
-                  <tr>
-                    <th class="p-3">Date</th>
-                    <th class="p-3">From</th>
-                    <th class="p-3">Response</th>
-                    <th class="p-3"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% @information_request.rfi_responses.each do |response| %>
-                    <tr class="mt-3">
-                      <td class="p-3">
-                        <%= link_to response.created_at.strftime("%b %-d, %Y"),
-                          rfi_response_path(response) %>
-                      </td>
-                      <td class="p-3">
-                        <%= response.organization %>
-                      </td>
-                      <td class="p-3">
-                        <%= response.response %>
-                      </td>
-                      <td class="p-3">
-                        <%= link_to '<i class="fa fa-pencil"></i>'.html_safe,
-                          edit_rfi_response_path(response),
-                          id: "edit_rfi_response_#{response.id}" %> | 
-                          <%= link_to '<i class="fa fa-trash"></i>'.html_safe,
-                          rfi_response_path(response),
-                          method: :delete,
-                          id: "delete_rfi_response_#{response.id}",
-                          class: 'text-danger' %>
-                      </td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-            <% else %>
-              No responses added yet.
-            <% end %>
-          </div>
-        </div>
-        <div class="row p-3">
-          <div class="col-sm-12">
-            <%= link_to 'Add new response',
-              new_rfi_response_path(:rfi => @information_request),
-              id: 'new_rfi_response',
-              class: 'btn btn-outline-primary btn-sm mr-2' %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="section-sub-heading">
+  Click below to edit, or
+  <%=
+    link_to 'edit all fields',
+      edit_information_request_path(@information_request),
+      class: 'table-link'
+  %>
+</div>
+<div class="item-properties" id="rfi-properties">
+  <%= render 'properties' %>
 </div>
 
+<div class="item-sub-heading">
+  <div class="item-sub-heading-icon">
+    <i class="far fa-comments"></i>
+  </div>
+  <div class="item-sub-heading-text">
+    RFI Responses
   </div>
 </div>
+<div class="section-sub-heading">
+  Click below to edit
+</div>
+
+<div class="rfi-response" id="rfi-responses">
+  <%=
+    render partial: 'rfi_responses',
+    locals: {
+      information_request: @information_request
+    }
+  %>
+</div>
+

@@ -10,14 +10,14 @@
     </div>
   <% end %>
   <div class="item-properties">
-    <div class="instrument-header" id="type">
-      <div class="instrument-header-icon">
+    <div class="item-header" id="type">
+      <div class="item-header-icon">
         <i class="fas fa-bullseye"></i>
       </div>
       <%=
         f.label :type_code,
         'Type',
-        class: 'instrument-header-text'
+        class: 'item-header-text'
       %>
     </div>
     <%=
@@ -27,14 +27,14 @@
       onfocus: "darkLabel('#type')",
       onblur: "lightLabel('#type')"
     %>
-    <div class="instrument-header" id="loop">
-      <div class="instrument-header-icon">
+    <div class="item-header" id="loop">
+      <div class="item-header-icon">
         <i class="fas fa-hashtag"></i>
       </div>
       <%=
         f.label :loop,
         'Loop',
-        class: 'instrument-header-text'
+        class: 'item-header-text'
       %>
     </div>
     <%=
@@ -44,14 +44,14 @@
       onfocus: "darkLabel('#loop')",
       onblur: "lightLabel('#loop')"
     %>
-    <div class="instrument-header" id="vendor">
-      <div class="instrument-header-icon">
+    <div class="item-header" id="vendor">
+      <div class="item-header-icon">
         <i class="fas fa-dollar-sign"></i>
       </div>
       <%=
         f.label :supplier,
         'Vendor',
-        class: 'instrument-header-text'
+        class: 'item-header-text'
       %>
     </div>
     <%=
@@ -61,14 +61,14 @@
       onfocus: "darkLabel('#vendor')",
       onblur: "lightLabel('#vendor')"
     %>
-    <div class="instrument-header" id="manufacturer">
-      <div class="instrument-header-icon">
+    <div class="item-header" id="manufacturer">
+      <div class="item-header-icon">
         <i class="far fa-building"></i>
       </div>
       <%=
         f.label :manufacturer,
         'Manufacturer',
-        class: 'instrument-header-text'
+        class: 'item-header-text'
       %>
     </div>
     <%=
@@ -78,14 +78,14 @@
       onfocus: "darkLabel('#manufacturer')",
       onblur: "lightLabel('#manufacturer')"
     %>
-    <div class="instrument-header" id="model">
-      <div class="instrument-header-icon">
+    <div class="item-header" id="model">
+      <div class="item-header-icon">
         <i class="fas fa-hashtag"></i>
       </div>
       <%=
         f.label :model,
         'Model',
-        class: 'instrument-header-text'
+        class: 'item-header-text'
       %>
     </div>
     <%=
@@ -95,14 +95,14 @@
       onfocus: "darkLabel('#model')",
       onblur: "lightLabel('#model')"
     %>
-    <div class="instrument-header" id="connection">
-      <div class="instrument-header-icon">
+    <div class="item-header" id="connection">
+      <div class="item-header-icon">
         <i class="fas fa-wrench"></i>
       </div>
       <%=
         f.label :process_connection,
         'Process Connection',
-        class: 'instrument-header-text'
+        class: 'item-header-text'
       %>
     </div>
     <%=
@@ -112,14 +112,14 @@
       onfocus: "darkLabel('#connection')",
       onblur: "lightLabel('#connection')"
     %>
-    <div class="instrument-header" id = "moc">
-      <div class="instrument-header-icon">
+    <div class="item-header" id = "moc">
+      <div class="item-header-icon">
         <i class="fas fa-certificate"></i>
       </div>
       <%=
         f.label :material_of_construction,
         'Material of Construction',
-        class: 'instrument-header-text'
+        class: 'item-header-text'
       %>
     </div>
     <%=
@@ -129,14 +129,14 @@
       onfocus: "darkLabel('#moc')",
       onblur: "lightLabel('#moc')"
     %>
-    <div class="instrument-header" id = "range">
-      <div class="instrument-header-icon">
+    <div class="item-header" id = "range">
+      <div class="item-header-icon">
         <i class="fas fa-certificate"></i>
       </div>
       <%=
         f.label :range,
         'Range',
-        class: 'instrument-header-text'
+        class: 'item-header-text'
       %>
     </div>
     <%=
@@ -146,14 +146,14 @@
       onfocus: "darkLabel('#range')",
       onblur: "lightLabel('#range')"
     %>
-    <div class="instrument-header" id = "dcs">
-      <div class="instrument-header-icon">
+    <div class="item-header" id = "dcs">
+      <div class="item-header-icon">
         <i class="fas fa-certificate"></i>
       </div>
       <%=
         f.label :dcs_io_type,
         'DCS I/O Type',
-        class: 'instrument-header-text'
+        class: 'item-header-text'
       %>
     </div>
     <%=
@@ -163,14 +163,14 @@
       onfocus: "darkLabel('#dcs')",
       onblur: "lightLabel('#dcs')"
     %>
-    <div class="instrument-header" id = "po_number">
-      <div class="instrument-header-icon">
+    <div class="item-header" id = "po_number">
+      <div class="item-header-icon">
         <i class="fas fa-certificate"></i>
       </div>
       <%=
         f.label :zeton_po,
         'Zeton PO Number',
-        class: 'instrument-header-text'
+        class: 'item-header-text'
       %>
     </div>
     <%=
@@ -180,14 +180,14 @@
       onfocus: "darkLabel('#po_number')",
       onblur: "lightLabel('#po_number')"
     %>
-    <div class="instrument-header" id = "scope">
-      <div class="instrument-header-icon">
+    <div class="item-header" id = "scope">
+      <div class="item-header-icon">
         <i class="fas fa-certificate"></i>
       </div>
       <%=
         f.label :scope,
         'Item Scope',
-        class: 'instrument-header-text'
+        class: 'item-header-text'
       %>
     </div>
     <%=
@@ -197,14 +197,14 @@
       onfocus: "darkLabel('#scope')",
       onblur: "lightLabel('#scope')"
     %>
-    <div class="instrument-header" id = "mech_elec">
-      <div class="instrument-header-icon">
+    <div class="item-header" id = "mech_elec">
+      <div class="item-header-icon">
         <i class="fas fa-certificate"></i>
       </div>
       <%=
         f.label :mech_elec,
         'Installation Scope',
-        class: 'instrument-header-text'
+        class: 'item-header-text'
       %>
     </div>
     <%=
@@ -214,14 +214,14 @@
       onfocus: "darkLabel('#mech_elec')",
       onblur: "lightLabel('#mech_elec')"
     %>
-    <div class="instrument-header" id = "skid_number">
-      <div class="instrument-header-icon">
+    <div class="item-header" id = "skid_number">
+      <div class="item-header-icon">
         <i class="fas fa-certificate"></i>
       </div>
       <%=
         f.label :zeton_skid_number,
         'Zeton Skid Number',
-        class: 'instrument-header-text'
+        class: 'item-header-text'
       %>
     </div>
     <%=
@@ -231,14 +231,14 @@
       onfocus: "darkLabel('#skid_number')",
       onblur: "lightLabel('#skid_number')"
     %>
-    <div class="instrument-header" id = "skid_level">
-      <div class="instrument-header-icon">
+    <div class="item-header" id = "skid_level">
+      <div class="item-header-icon">
         <i class="fas fa-certificate"></i>
       </div>
       <%=
         f.label :zeton_skid_level,
         'Zeton Skid Level',
-        class: 'instrument-header-text'
+        class: 'item-header-text'
       %>
     </div>
     <%=
@@ -248,14 +248,14 @@
       onfocus: "darkLabel('#skid_level')",
       onblur: "lightLabel('#skid_level')"
     %>
-    <div class="instrument-header" id = "stats">
-      <div class="instrument-header-icon">
+    <div class="item-header" id = "stats">
+      <div class="item-header-icon">
         <i class="fas fa-certificate"></i>
       </div>
       <%=
         f.label :item_type,
         'Item Count Type',
-        class: 'instrument-header-text'
+        class: 'item-header-text'
       %>
     </div>
     <%=

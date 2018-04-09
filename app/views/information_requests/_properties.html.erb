@@ -1,0 +1,217 @@
+<div class="item-header" id="client-team-member-header">
+  <div class="item-header-icon">
+    <i class="far fa-user"></i>
+  </div>
+  <div class="item-header-text">
+    Client Team Member
+  </div>
+</div>
+<div id="client-team-member">
+  <div id="client-team-member-show">
+    <div class="item-specific" onclick="showInput('#client-team-member', '#client-team-member-header')">
+      <% if @information_request.client_team_member %>
+        <%= @information_request.client_team_member.full_name %>
+      <% else %>
+        Click to add
+      <% end %>
+    </div>
+  </div>
+  <div id="client-team-member-form" class="hide">
+    <%= form_for @information_request, remote: true do |f| %>
+      <div class="inline-form">
+        <div class="inline-form-field">
+          <% if @information_request.client_team_member %>
+            <%= f.collection_select :client_team_member_id,
+              @client_team_members,
+              :id,
+              :full_name,
+              {
+                selected: @information_request.client_team_member_id.to_i,
+                include_blank: 'Select client team member'
+              },
+              {class: 'form-input'} %>
+          <% else %>
+            <%= f.collection_select :client_team_member_id,
+              @client_team_members,
+              :id,
+              :full_name,
+              {include_blank: 'Select client team member'},
+              {class: 'form-input'} %>
+          <% end %>
+        </div>
+        <div class="inline-submit">
+          <%= f.submit 'Update', class: 'form-submit-button' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="item-header" id="client-document-header">
+  <div class="item-header-icon">
+    <i class="far fa-file-alt"></i>
+  </div>
+  <div class="item-header-text">
+    Client Document
+  </div>
+</div>
+<div id="client-document">
+  <div id="client-document-show">
+    <div class="item-specific" onclick="showInput('#client-document', '#client-document-header')">
+      <% if @information_request.client_document %>
+        <%= @information_request.client_document.document_name %>
+      <% else %>
+        Click to add
+      <% end %>
+    </div>
+  </div>
+  <div id="client-document-form" class="hide">
+    <%= form_for @information_request, remote: true do |f| %>
+      <div class="inline-form">
+        <div class="inline-form-field">
+          <% if @information_request.client_document %>
+            <%= f.collection_select :client_document_id,
+              @client_documents,
+              :id,
+              :document_name,
+              {
+                selected: @information_request.client_document_id.to_i,
+                include_blank: 'Select client document'
+              },
+              {class: 'form-input'} %>
+          <% else %>
+            <%= f.collection_select :client_document_id,
+              @client_documents,
+              :id,
+              :document_name,
+              {include_blank: 'Select client document'},
+              {class: 'form-input'} %>
+          <% end %>
+        </div>
+        <div class="inline-submit">
+          <%= f.submit 'Update', class: 'form-submit-button' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="item-header" id="associated-items-header">
+  <div class="item-header-icon">
+    <i class="fas fa-tags"></i>
+  </div>
+  <div class="item-header-text">
+    Associated Items
+  </div>
+</div>
+<div id="associated-items">
+  <div id="associated-items-show">
+    <div class="item-specific" onclick="showInput('#associated-items', '#associated-items-header'); showSelect2()">
+      <% if @information_request.number_of_associations > 0 %>
+        <% @information_request.instruments.each do |inst |%>
+          <%=
+            link_to inst.tag,
+            instrument_path(inst),
+            class: 'associated-instrument'
+          %>
+        <% end %>
+        <% @information_request.equipment.each do |equip| %>
+          <%=
+            link_to equip.tag,
+            equipment_path(equip),
+            class: 'associated-equipment'
+          %>
+        <% end %>
+        <% @information_request.handvalves.each do |hv| %>
+          <%=
+            link_to hv.tag,
+            handvalve_path(hv),
+            class: 'associated-handvalve'
+          %>
+        <% end %>
+      <% else %>
+        Click to add
+      <% end %>
+    </div>
+  </div>
+  <div id="associated-items-form" class="hide">
+    <%= form_for @information_request, remote: true do |f| %>
+      <div class="inline-form-associations">
+        <div class="associated-items-list">
+          <%=
+            hidden_field_tag "information_request[instrument_ids][]",
+              nil
+            %>
+          <%=
+            f.select :instrument_ids,
+              @instruments.map{ |i| [i.tag, i.id]},
+              {},
+              multiple: true,
+              class: "form-control"
+            %>
+        </div>
+        <div class="associated-items-list">
+          <%=
+            hidden_field_tag "information_request[equipment_ids][]",
+              nil
+            %>
+          <%= f.select :equipment_ids,
+            @equipment.map{ |i| [i.tag, i.id]},
+            {},
+            multiple: true,
+            class: "form-control"
+          %>
+        </div>
+        <div class="associated-items-list">
+          <%=
+            hidden_field_tag "information_request[handvalves_ids][]",
+              nil
+            %>
+          <%=
+            f.select :handvalve_ids,
+              @handvalves.map{ |i| [i.tag, i.id]},
+              {},
+              multiple: true,
+              class: "form-control"
+            %>
+        </div>
+        <div class="inline-submit">
+          <%= f.submit 'Update', class: 'form-submit-button' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="item-header" id="clarification-header">
+  <div class="item-header-icon">
+    <i class="fas fa-align-justify"></i>
+  </div>
+  <div class="item-header-text">
+    Zeton Clarification
+  </div>
+</div>
+<div id="clarification">
+  <div id="clarification-show">
+    <div class="item-specific" onclick="showInput('#clarification', '#clarification-header')">
+      <%= @information_request.zeton_clarification %>
+    </div>
+  </div>
+  <div id="clarification-form" class="hide">
+    <%= form_for @information_request, remote: true do |f| %>
+      <div class="inline-form">
+        <div class="inline-form-field">
+          <%=
+            f.text_area :zeton_clarification,
+            class: 'form-input',
+            rows: 5
+          %>
+        </div>
+        <div class="inline-submit">
+          <%= f.submit 'Update', class: 'form-submit-button' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
