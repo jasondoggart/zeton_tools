@@ -129,4 +129,5 @@ RSpec.describe Equipment, type: :model do
       expect(Equipment.sorted_by("tag_desc").first.id).to eq(@equip1.id)
     end
   end
+
 end

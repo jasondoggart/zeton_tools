@@ -143,5 +143,19 @@ RSpec.describe Instrument, type: :model do
     end
 
   end
+  describe 'properties_heading' do
+    it 'has an array of property headings that includes only data attributes' do
+      expect(Instrument.data_attributes).to include("type_code")
+    end
+
+    it 'has a hash of property headings that includes their heading text and icons' do
+      expect(Instrument.data_headings).to include(:type_code)
+    end
+
+    it 'has an icon associated with each data attribute' do
+      expect(Instrument.data_headings[:type_code][:icon]).to eq('<i class="fas fa-bullseye"></i>')
+    end
+
+  end
 
 end

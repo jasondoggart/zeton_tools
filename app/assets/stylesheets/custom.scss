@@ -308,9 +308,35 @@
   font-size: 14px;
 }
 
-.table-heading-row {
+.hv-metrics-table-heading-row {
   display: grid;
-  grid-template-columns: 150px repeat(2, 200px) repeat(1, 250px) repeat(1, 275px) 150px repeat(3, 200px) 250px repeat(3, 200px);
+  grid-template-columns:
+    150px repeat(2, 250px)
+    repeat(5, 200px)
+    250px;
+  border-top: 1px solid rgb(221, 225, 227);
+  border-bottom: 1px solid rgb(221, 225, 227);
+  height: 35px;
+  align-items: center;
+}
+
+.equip-metrics-table-heading-row {
+  display: grid;
+  grid-template-columns: 
+    150px repeat(2, 250px)
+    repeat(2, 200px)
+    repeat(4, 250px)
+    repeat(4, 200px)
+    repeat(1, 250px);
+  border-top: 1px solid rgb(221, 225, 227);
+  border-bottom: 1px solid rgb(221, 225, 227);
+  height: 35px;
+  align-items: center;
+}
+
+.inst-metrics-table-heading-row {
+  display: grid;
+  grid-template-columns: 150px repeat(9, 200px) 250px 275px repeat(3, 200px);
   border-top: 1px solid rgb(221, 225, 227);
   border-bottom: 1px solid rgb(221, 225, 227);
   height: 35px;
@@ -336,17 +362,6 @@
 
 }
 
-.table-heading-cell {
-  display: grid;
-  grid-template-columns: 20px 1fr 20px;
-  align-items: center;
-  font-size: 14px;
-  padding-left: 10px;
-  border-right: 1px solid rgb(243, 243, 243);
-  height: 35px;
-
-}
-
 .last-cell {
   border-right: none;
 }
@@ -355,16 +370,6 @@
   display: grid;
   text-align: center;
   color: #a5a5a5;
-  height: 35px;
-  align-items: center;
-}
-
-.table-heading-text {
-  display: grid;
-  color: #999999;
-  margin-left: 10px;
-  padding-right: 35px;
-  white-space: nowrap;
   height: 35px;
   align-items: center;
 }
@@ -385,9 +390,51 @@
   color: #F9F7F3;
 }
 
+.table-heading-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 250px;
+  border-top: 1px solid rgb(221, 225, 227);
+  border-bottom: 1px solid rgb(221, 225, 227);
+  height: 35px;
+  align-items: center;
+}
+
+
 .table-data-row {
   display: grid;
-  grid-template-columns: 150px repeat(2, 200px) repeat(1, 250px) repeat(1, 275px) 150px repeat(3, 200px) 250px repeat(3, 200px);
+  grid-auto-flow: column;
+  grid-template-columns: 250px;
+  border-bottom: 1px solid rgb(221, 225, 227);
+  height: 35px;
+  align-items: center;
+}
+
+.hv-metrics-table-data-row {
+  display: grid;
+  grid-template-columns:
+    150px repeat(2, 250px)
+    repeat(5, 200px)
+    250px;
+  border-bottom: 1px solid rgb(221, 225, 227);
+  height: 35px;
+}
+
+.equip-metrics-table-data-row {
+  display: grid;
+  grid-template-columns: 
+    150px repeat(2, 250px)
+    repeat(2, 200px)
+    repeat(4, 250px)
+    repeat(4, 200px)
+    repeat(1, 250px);
+  border-bottom: 1px solid rgb(221, 225, 227);
+  height: 35px;
+}
+
+.inst-metrics-table-data-row {
+  display: grid;
+  grid-template-columns: 150px repeat(9, 200px) 250px 275px repeat(3, 200px);
   border-bottom: 1px solid rgb(221, 225, 227);
   height: 35px;
 }
@@ -410,16 +457,38 @@
   background: #EAE9E8;
 }
 
-.table-data-cell {
+.table-heading-cell {
   display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto;
+  grid-template-columns: 20px 1fr 20px;
   align-items: center;
   font-size: 14px;
   padding-left: 10px;
   border-right: 1px solid rgb(243, 243, 243);
-  height: auto;
+  height: 35px;
+
 }
+
+
+.table-data-cell {
+  display: grid;
+  width: 250px;
+  align-items: center;
+  font-size: 14px;
+  padding-left: 10px;
+  border-right: 1px solid rgb(243, 243, 243);
+  height: 35px;
+}
+
+.table-heading-text {
+  display: grid;
+  color: #999999;
+  margin-left: 10px;
+  padding-right: 35px;
+  white-space: nowrap;
+  height: 35px;
+  align-items: center;
+}
+
 
 .table-data-text {
   color: #424241;

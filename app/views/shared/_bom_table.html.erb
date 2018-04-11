@@ -1,0 +1,56 @@
+<div class="wide-table">
+  <div class="table-heading-row">
+    <% model.data_headings.each do |name, hash| %>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <%= hash[:icon].html_safe %>
+        </div>
+        <div class="table-heading-text">
+          <%= hash[:title] %>
+        </div>
+        <div class="table-heading-sort" onclick="showPopup('#<%= name %>Sort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="sort-pop-up hide" id="tagSort">
+        <div class="sort-ascending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-up"></i>
+          </div>
+          <div class="sort-text">
+            Ascending
+          </div>
+        </div>
+        <div class="sort-descending">
+          <div class="sort-icon">
+            <i class="fas fa-sort-alpha-down"></i>
+          </div>
+          <div class="sort-text">
+            Descending
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% collection.each do |item| %>
+    <div class="table-data-row">
+      <% item.attributes.each do |name, value| %>
+        <% if model.data_attributes.include?(name) %>
+          <div class="table-data-cell">
+            <div class="table-data-text">
+              <% if name == 'type_code' || name == 'loop' || name == 'tag' %>
+                <%=
+                  link_to truncate(item.public_send(name), length: 30),
+                  item,
+                  class: 'table-link'
+                %>
+              <% else %>
+                <%= truncate(item.public_send(name), length: 30) %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
