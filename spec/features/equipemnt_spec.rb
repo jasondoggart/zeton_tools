@@ -13,10 +13,10 @@ describe "Equipment" do
     visit root_path
     click_link("project_#{@project.id}")
     visit project_equipment_path
-    click_link('new_equipment_link')
+    click_link('new_record_link')
     fill_in('Tag', with: "V-101")
     fill_in('Description', with: "A vessel")
-    fill_in('Equipment type', with: "Vessel")
+    fill_in('Equipment Type', with: "Vessel")
     click_on('Add Equipment')
     expect(current_path).to eq(project_equipment_path)
     expect(Equipment.last.tag).to eq("V-101")
@@ -30,26 +30,11 @@ describe "Equipment" do
     visit root_path
     click_link("project_#{@project.id}")
     equipment = Equipment.create(tag: "V-101", description: "A Vessel", equipment_type: "Vessel", project: @project)
-    visit project_equipment_path
-    click_link("show_equipment_#{equipment.id}")
-    click_link("edit_equipment_#{equipment.id}")
-    fill_in('Tag', with: "V-123")
-    click_on('Update Equipment')
+    visit equipment_path(equipment)
+    fill_in('equipment_tag', with: "V-123")
+    click_on('update-tag')
     expect(current_path).to eq(project_equipment_path)
     expect(equipment.reload.tag).to eq("V-123")
-  end
-
-  it 'can be deleted' do
-    sign_in_with(@user.email, @user.password)
-    visit root_path
-    click_link("project_#{@project.id}")
-    equipment = Equipment.create(tag: "V-101", description: "A Vessel", equipment_type: "Vessel", project: @project)
-    before_count = Equipment.count
-    visit project_equipment_path
-    click_link("show_equipment_#{equipment.id}")
-    click_link("delete_equipment_#{equipment.id}")
-    expect(current_path).to eq(project_equipment_path)
-    expect(Equipment.count).to eq(before_count - 1)
   end
 
   it 'has a show page' do

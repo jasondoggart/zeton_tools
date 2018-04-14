@@ -37,4 +37,8 @@ class ActionItem < ApplicationRecord
     'ZET-AI-' + id.to_s
   end
 
+  def number_of_associations
+    (instruments.count + equipment.count + handvalves.count).to_i
+  end
+
 end

@@ -1,149 +1,221 @@
-<div class="dark-header">
-  <div class="row pl-5 pr-5">
-    <div class="col-sm-12">
-      <h1>
-        Action Items
-      </h1>
-      <h5>
-        <%=
-          link_to 'Add new',
-            new_action_item_path,
-            id: 'new_action_item_link'
-        %>
-      </h5>
-      <i class="filter-button fa fa-filter" onClick="toggleFilters()"></i>
+<div class="section-heading">
+  Action Items
+</div>
+<div class="section-sub-heading">
+  Click on an action item to view and update
+</div>
+<div class="table-function-row">
+  <div class="table-function-item" onclick="showPopup('#filter-pop-up')">
+    <i class="fa fa-filter"></i>
+    Filter
+  </div>
+  <div class="table-function-item">
+    <i class="fas fa-download"></i>
+    <%=
+      link_to 'Download as Excel',
+      project_instruments_excel_path,
+      class: 'table-link'
+    %>
+  </div>
+  <div class="table-function-item">
+    <i class="fa fa-filter"></i>
+    Upload from Excel
+  </div>
+</div>
+<div class="filter-pop-up hide" id="filter-pop-up">
+  <div class="filter-row">
+    <div class="filter-select">
+      Select...
+    </div>
+    <div class="filter-params">
+      param
+    </div>
+  </div>
+  <div class="add-new-filter">
+    <div class="new-filter-icon">
+      <i class="fas fa-plus"></i>
+    </div>
+    <div class="new-filter-text">
+      Add new filter
     </div>
   </div>
 </div>
-
-<div class="row pl-5 pr-5 filters-close" id="filters" style="margin-top: -75px; margin-bottom: 75px;">
-  <div class="col-sm-12">
-    <div class="card card-box-shadow mb-3">
-      <div class="card-body mt-0">
-        <div class="dropdown mt-3 mb-3">
-          <button class="btn btn-outline-primary dropdown-toggle"
-                  type="button"
-                  id="loop_dropdown_button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false">
-            Sort By
-          </button>
-          <div class="dropdown-menu"
-               style="height: 200px;
-               overflow: scroll;"
-               aria-labelledby="loop_dropdown_button">
-            <%= link_to 'Target Date',
-              request.query_parameters.merge(
-                :sorted_by => 'target_date_' + sort_direction(@sorted_by)
-              ),
-              class: 'dropdown-item' %>
-            <%= link_to 'Status',
-              request.query_parameters.merge(
-                :sorted_by => 'status_' + sort_direction(@sorted_by)
-              ),
-              class: 'dropdown-item' %>
-            <%= link_to 'Date Added',
-              request.query_parameters.merge(
-                :sorted_by => 'date_created_' + sort_direction(@sorted_by)
-              ),
-              class: 'dropdown-item' %>
-          </div>
+<div class="wide-section">
+  <div class="wide-table">
+    <div class="table-heading-row">
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-hashtag"></i>
         </div>
-        <a class="btn btn-outline-primary"
-           data-toggle="collapse"
-           href="#collapseExample"
-           role="button"
-           aria-expanded="false"
-           aria-controls="collapseExample">
-          Filters<span class="ml-3"><i class="fa fa-caret-down"></i></span>
-        </a>
-        <div class="collapse" id="collapseExample">
-          <div class="card card-body">
-            <div class="row">
-              <div class="col-4">
-                <%= link_to 'Clear all',
-                  project_action_items_path,
-                  class: 'btn btn-outline-primary btn-sm' %>
-              </div>
-              <div class="col-4">
-                <div class="dropdown">
-                  <button class="btn btn-sm btn-outline-primary dropdown-toggle"
-                          type="button"
-                          id="status_dropdown_button"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false">
-                    Status
-                    <% if params[:with_status].present? %>
-                      <i class="fa fa-filter"></i>
-                    <% end %>
-                  </button>
-                  <div class="dropdown-menu"
-                       style="height: 200px; overflow: scroll;"
-                       aria-labelledby="status_dropdown_button">
-                       <%= link_to "Show All",
-                         project_action_items_path,
-                         class: 'dropdown-item' %>
-                       <%= link_to "Open",
-                         project_action_items_path(:with_status => 0),
-                         class: "dropdown-item" %>
-                       <%= link_to "Closed",
-                         project_action_items_path(:with_status => 1),
-                         class: "dropdown-item" %>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="dropdown">
-                  <button class="btn btn-sm btn-outline-primary dropdown-toggle"
-                          type="button"
-                          id="area_dropdown_button"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false">
-                    Work Area
-                    <% if params[:with_area].present? %>
-                      <i class="fa fa-filter"></i>
-                    <% end %>
-                  </button>
-                  <div class="dropdown-menu"
-                       style="height: 200px; overflow: scroll;"
-                       aria-labelledby="area_dropdown_button">
-                    <%= link_to "Show All",
-                      project_action_items_path,
-                      class: 'dropdown-item' %>
-                    <% @work_areas.each do |area| %>
-                      <%= link_to area,
-                        project_action_items_path(:with_area => area),
-                        class: 'dropdown-item' %>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="table-heading-text">
+          Number
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#numberSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-clipboard-check"></i>
+        </div>
+        <div class="table-heading-text">
+          Status
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#statusSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="far fa-user"></i>
+        </div>
+        <div class="table-heading-text">
+          Assigned to
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#assignedToSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="far fa-dot-circle"></i>
+        </div>
+        <div class="table-heading-text">
+          Work Area
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#areaSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-sort-numeric-down"></i>
+        </div>
+        <div class="table-heading-text">
+          Target Date
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#targetSort')">
+          <i class="far fa-calendar"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="far fa-calendar-check"></i>
+        </div>
+        <div class="table-heading-text">
+          Date Completed
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#dateCompletedSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-tags"></i>
+        </div>
+        <div class="table-heading-text">
+          Associated Items
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#associatedSort')">
+          <i class="fas fa-sort"></i>
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-align-left"></i>
+        </div>
+        <div class="table-heading-text">
+          Action Item
+        </div>
+        <div class="table-heading-sort" onclick="showDocumentData(event, '#actionItemSort')">
+          <i class="fas fa-sort"></i>
         </div>
       </div>
     </div>
+    <% @action_items.each do |ai| %>
+      <div class="table-data-row">
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <%=
+              link_to ai.ai_number,
+              action_item_path(ai),
+              class: 'table-link',
+              id: "show_action_item_#{ai.id}"
+            %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table=-data-text">
+            <div id="action_item_status_form_action_item_<%= ai.id %>">
+              <%= render partial: 'action_items/action_item_status_form',
+                locals: {
+                  action_item: ai
+                }
+              %>
+            </div>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <% if ai.assigned_to %>
+              <%= ai.assigned_to.full_name %>
+            <% else %>
+              Not assigned
+            <% end %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <%= ai.area %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <% if ai.target_date %>
+              <%= ai.target_date.strftime("%b %-d, %Y") %>
+            <% else %>
+              No date provided
+            <% end %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <% if ai.completion_date %>
+              <%= ai.completion_date.strftime("%b %-d, %Y") %>
+            <% else %>
+              Not completed
+            <% end %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <%= ai.number_of_associations %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <%= truncate(ai.title, length: 30) %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="table-last-row">
+      <div class="table-last-icon">
+        <i class="fas fa-plus"></i>
+      </div>
+      <%=
+        link_to 'Add new',
+          new_action_item_path,
+          class: "table-last-text",
+          id: 'new_action_item'
+        %>
+    </div>
   </div>
 </div>
-<div class="row neg-mar px-5">
-  <% @action_items.each do |action_item| %>
-    <%=
-      render partial: 'action_item',
-        locals: { action_item: action_item }
-      %>
-  <% end %>
-</div>
-<div class="row px-5">
-  <div class="col-sm-12">
-    <%=
-      will_paginate(
-      @action_items,
-      :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer
-      )
-    %>
-  </div>
-</div>
+<%=
+  will_paginate(
+    @action_items,
+    :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer
+  )
+%>
 

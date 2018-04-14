@@ -11,7 +11,7 @@ describe 'Instruments' do
     visit root_path
     click_link("project_#{@project.id}")
     visit project_instruments_path
-    click_link('new_instrument_link')
+    click_link('new_record_link')
     fill_in('Type', with: "FE")
     fill_in('Loop', with: "1234")
     click_on('Add Instrument')
@@ -26,40 +26,12 @@ describe 'Instruments' do
     visit root_path
     click_link("project_#{@project.id}")
     instrument = Instrument.create(type_code: "FE", loop: "1234", project: @project)
-    visit project_instruments_path
-    click_link("show_instrument_#{instrument.id}")
+    visit instrument_path(instrument)
     click_link("edit_instrument_#{instrument.id}")
     fill_in('Type', with: "TE")
     click_on('Update Instrument')
     expect(current_path).to eq(project_instruments_path)
     expect(instrument.reload.type_code).to eq("TE")
-  end
-
-  it 'can be updated from the instrument metrics list' do
-    sign_in_with(@user.email, @user.password)
-    visit root_path
-    click_link("project_#{@project.id}")
-    instrument = Instrument.create(type_code: "FE", loop: "1234", project: @project)
-    visit project_instruments_metrics_path
-    click_link("show_instrument_#{instrument.id}")
-    click_link("edit_instrument_#{instrument.id}")
-    fill_in('Type', with: "TE")
-    click_on('Update Instrument')
-    expect(current_path).to eq(project_instruments_path)
-    expect(instrument.reload.type_code).to eq("TE")
-  end
-
-  it 'can be deleted' do
-    sign_in_with(@user.email, @user.password)
-    visit root_path
-    click_link("project_#{@project.id}")
-    instrument = Instrument.create(type_code: "FE", loop: "1234", project: @project)
-    visit project_instruments_path
-    click_link("show_instrument_#{instrument.id}")
-    before_count = Instrument.count
-    click_link("delete_instrument_#{instrument.id}")
-    expect(current_path).to eq(project_instruments_path)
-    expect(Instrument.count).to eq(before_count - 1)
   end
 
   it 'has a show page' do

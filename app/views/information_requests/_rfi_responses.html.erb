@@ -45,7 +45,7 @@
       <div id="rfi-response-rfi-<%= response.id %>">
         <div id="rfi-response-rfi-<%= response.id %>-show">
           <div class="item-specific" onclick="showInput('#rfi-response-rfi-<%= response.id %>', '#rfi-response-header-rfi-<%= response.id %>')">
-            <%= response.response %>
+            <%= link_to response.response %>
           </div>
         </div>
         <div id="rfi-response-rfi-<%= response.id %>-form" class="hide">

@@ -53,4 +53,15 @@
       <% end %>
     </div>
   <% end %>
+  <div class="table-last-row">
+    <div class="table-last-icon">
+      <i class="fas fa-plus"></i>
+    </div>
+    <%=
+      link_to 'Add new',
+        new_record_path,
+        class: "table-last-text",
+        id: 'new_record_link'
+      %>
+  </div>
 </div>

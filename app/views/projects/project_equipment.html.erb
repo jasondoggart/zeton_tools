@@ -50,7 +50,8 @@
     render partial: 'shared/bom_table',
     locals: {
       model: Equipment,
-      collection: @equipment
+      collection: @equipment,
+      new_record_path: new_equipment_path
     }
   %>
 </div>

@@ -14,7 +14,8 @@
   <%=
     link_to 'edit all fields',
       edit_instrument_path(@instrument),
-      class: 'table-link'
+      class: 'table-link',
+      id: "edit_instrument_#{@instrument.id}"
   %>
 </div>
 <div class="item-properties" id="instrument-properties">

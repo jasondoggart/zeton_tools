@@ -49,7 +49,8 @@
     render partial: 'shared/bom_table',
     locals: {
       model: Instrument,
-      collection: @instruments
+      collection: @instruments,
+      new_record_path: new_instrument_path
     }
   %>
 </div>

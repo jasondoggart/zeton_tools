@@ -14,7 +14,8 @@
   <%=
     link_to 'edit all fields',
       edit_handvalve_path(@handvalve),
-      class: 'table-link'
+      class: 'table-link',
+      id: "edit_handvalve_#{@handvalve.id}"
   %>
 </div>
 <div class="item-properties" id="handvalve-properties">

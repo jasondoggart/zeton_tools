@@ -46,7 +46,7 @@
 </div>
 <div class="wide-section">
   <div class="wide-table">
-    <div class="inst-metrics-table-heading-row">
+    <div class="table-heading-row">
       <div class="table-heading-cell">
         <div class="table-heading-icon">
           <i class="fas fa-tag"></i>
@@ -218,7 +218,7 @@
       </div>
     </div>
     <% @instruments.each do |inst| %>
-      <div class="inst-metrics-table-data-row">
+      <div class="table-data-row">
         <div class="table-data-cell">
           <div class="table-data-text">
             <%=
@@ -230,7 +230,7 @@
         </div>
         <% inst.attributes.each do |name, value| %>
           <% if Instrument.metrics_attributes.include?(name) %>
-            <div class="table-data-cell">
+            <div class="metrics-table-data-cell">
               <div id="<%= name %>_status_instrument_<%= inst.id %>" class="table-data-text">
                 <%=
                   render partial: 'shared/metrics_icon',

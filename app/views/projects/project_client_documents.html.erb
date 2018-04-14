@@ -1,75 +1,71 @@
-<div class="row pl-5 pr-5 mb-3 mt-5">
-  <div class="col-sm-12">
-    <h3>
-      Client Documents
-    </h3>
-    <button onclick="toggleFilters()" class="btn btn-sm btn-primary">
-      Filters
-    </button>
-  </div>
+<div class="section-heading">
+  Client Documents
 </div>
-
-<div class="row pl-5 pr-5">
-  <div id="filters" class="col-sm-2 filters-close">
-    <h5 class="text-muted">
-      Sort by
-    </h5>
-    <h5 class="text-muted">
-      Filters
-    </h5>
-    <h5 class="text-muted">
-      Actions
-    </h5>
-  </div>
-  <div class="col-sm">
-    <div class="row">
-      <div class="col-sm-3">
-        <div class="card card-box-shadow mb-3 pt-3 pb-3 text-center">
-          <div class="col-sm-12 h3 text-info">
+<div class="section-sub-heading">
+  Click on a document to view and update
+</div>
+<div class="wide-section">
+  <div class="wide-table">
+    <div class="table-heading-row">
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-hashtag"></i>
+        </div>
+        <div class="table-heading-text">
+          Document Number
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-align-justify"></i>
+        </div>
+        <div class="table-heading-text">
+          Document Name
+        </div>
+      </div>
+      <div class="table-heading-cell">
+        <div class="table-heading-icon">
+          <i class="fas fa-list-ol"></i>
+        </div>
+        <div class="table-heading-text">
+          Document Revision
+        </div>
+      </div>
+    </div>
+    <% @client_documents.each do |doc| %>
+      <div class="table-data-row">
+        <div class="table-data-cell">
+          <div class="table-data-text">
             <%=
-              link_to '<i class="fa fa-plus"></i>'.html_safe,
-              new_client_document_path,
-              id: "new_client_document_link"
+              link_to doc.document_number,
+              client_document_path(doc),
+              class: 'table-link',
+              id: "show_client_document_#{doc.id}"
             %>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-12">
-        <div class="card card-box-shadow mb-5">
-          <div class="card-body mt-0">
-            <% @client_documents.each do |doc| %>
-              <div class="border-bottom pb-3 pt-3 mt-0">
-                <div class="row pl-3 pr-3">
-                  <div class="col-sm-12">
-                    <h5 class-"mb-0">
-                      <%= link_to doc.document_name,
-                        client_document_path(doc),
-                        id: "show_client_document_#{doc.id}" %>
-                    </h5>
-                    <% if doc.document_number %>
-                      <p class="text-muted">
-                      <%= doc.document_number %>
-                      </p>
-                    <% end %>
-                    <% if doc.document_revision %>
-                      <p class="text-muted">
-                      Revision <%= doc.document_revision %>
-                      </p>
-                    <% end %>
-                    <p>
-                    <%= pluralize(doc.information_requests.count, 'Information Request') %> submitted for this document
-                    </p>
-                  </div>
-                </div>
-              </div>
-            <% end %>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <%= doc.document_name %>
+          </div>
+        </div>
+        <div class="table-data-cell">
+          <div class="table-data-text">
+            <%= doc.document_revision %>
           </div>
         </div>
       </div>
+    <% end %>
+    <div class="table-last-row">
+      <div class="table-last-icon">
+        <i class="fas fa-plus"></i>
+      </div>
+      <%=
+        link_to 'Add a document',
+        new_client_document_path,
+        class: "table-last-text",
+        id: 'new_client_document_link'
+      %>
     </div>
   </div>
 </div>
-

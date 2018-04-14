@@ -22,7 +22,8 @@
   <%=
     link_to 'edit all fields',
       edit_information_request_path(@information_request),
-      class: 'table-link'
+      class: 'table-link',
+      id: "edit_rfi_#{@information_request.id}"
   %>
 </div>
 <div class="item-properties" id="rfi-properties">

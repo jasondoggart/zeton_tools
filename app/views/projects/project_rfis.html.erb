@@ -42,7 +42,7 @@
 </div>
 <div class="wide-section">
   <div class="wide-table">
-    <div class="rfi-table-heading-row">
+    <div class="table-heading-row">
       <div class="table-heading-cell">
         <div class="table-heading-icon">
           <i class="fas fa-hashtag"></i>
@@ -133,13 +133,14 @@
       </div>
     </div>
     <% @rfis.each do |rfi| %>
-      <div class="rfi-table-data-row">
+      <div class="table-data-row">
         <div class="table-data-cell">
           <div class="table-data-text">
             <%=
               link_to rfi.rfi_number,
               information_request_path(rfi),
-              class: 'table-link'
+              class: 'table-link',
+              id: "show_rfi_#{rfi.id}"
             %>
           </div>
         </div>
@@ -188,7 +189,7 @@
         </div>
         <div class="table-data-cell">
           <div class="table-data-text table-link" onclick="showDocumentData(event, '#clarification_<%= rfi.id %>')">
-            <%= truncate(rfi.zeton_clarification, length: 38) %>
+            <%= truncate(rfi.zeton_clarification, length: 30) %>
           </div>
         </div>
         <div class="table-data-cell">
@@ -329,7 +330,8 @@
       <%=
         link_to 'Add an RFI',
           new_information_request_path,
-          class: "table-last-text"
+          class: "table-last-text",
+          id: 'new_rfi'
         %>
     </div>
   </div>

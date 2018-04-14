@@ -394,8 +394,6 @@
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 250px;
-  border-top: 1px solid rgb(221, 225, 227);
-  border-bottom: 1px solid rgb(221, 225, 227);
   height: 35px;
   align-items: center;
 }
@@ -404,8 +402,7 @@
 .table-data-row {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 250px;
-  border-bottom: 1px solid rgb(221, 225, 227);
+  grid-auto-columns: 250px;
   height: 35px;
   align-items: center;
 }
@@ -465,16 +462,30 @@
   padding-left: 10px;
   border-right: 1px solid rgb(243, 243, 243);
   height: 35px;
+  border-top: 1px solid rgb(221, 225, 227);
+  border-bottom: 1px solid rgb(221, 225, 227);
 
 }
 
 
 .table-data-cell {
   display: grid;
+  grid-template-columns: auto 1fr;
   width: 250px;
   align-items: center;
   font-size: 14px;
-  padding-left: 10px;
+  border-right: 1px solid rgb(243, 243, 243);
+  border-bottom: 1px solid rgb(221, 225, 227);
+  height: 35px;
+}
+
+.metrics-table-data-cell {
+  display: grid;
+  grid-template-columns: 30px;
+  width: 250px;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
   border-right: 1px solid rgb(243, 243, 243);
   height: 35px;
 }
@@ -492,6 +503,8 @@
 
 .table-data-text {
   color: #424241;
+  width: auto;
+  padding-left: 10px;
 }
 
 .table-last-row {
@@ -500,7 +513,6 @@
   padding-left: 10px;
   font-size: 14px;
   align-items: center;
-  border-bottom: 1px solid rgb(243, 243, 243);
   height: 35px;
 }
 

@@ -14,7 +14,7 @@ describe "Information Request" do
     click_link("project_#{@project.id}")
     visit project_rfis_path
     click_link('new_rfi')
-    fill_in('Zeton Clarification', with: "Clar")
+    fill_in('Clarification', with: "Clar")
     click_on('Add RFI')
     expect(current_path).to eq(project_rfis_path)
     expect(InformationRequest.count).to eq(before_count + 1)
@@ -28,7 +28,7 @@ describe "Information Request" do
     visit project_rfis_path
     click_link("show_rfi_#{rfi.id}")
     click_link("edit_rfi_#{rfi.id}")
-    fill_in('Zeton Clarification', with: "new")
+    fill_in('Clarification', with: "new")
     click_on('Update RFI')
     expect(current_path).to eq(information_request_path(rfi))
     expect(rfi.reload.zeton_clarification).to eq("new")
@@ -42,22 +42,9 @@ describe "Information Request" do
     visit project_rfis_path
     click_link("show_rfi_#{rfi.id}")
     click_link("edit_rfi_#{rfi.id}")
-    fill_in('Zeton Clarification', with: "")
+    fill_in('Clarification', with: "")
     click_on('Update RFI')
     expect(page).to have_content("Updating #{rfi.rfi_number}")
-  end
-
-  it 'can be deleted', js: true do
-    sign_in_with(@user.email, @user.password)
-    visit root_path
-    click_link("project_#{@project.id}")
-    rfi = InformationRequest.create(zeton_clarification: "asdf", project: @project)
-    visit project_rfis_path
-    click_link("show_rfi_#{rfi.id}")
-    page.accept_confirm do
-      click_link("delete_rfi_#{rfi.id}")
-    end
-    expect(current_path).to eq(information_request_path(rfi))
   end
 
   it 'can be viewed in its show page' do
@@ -77,8 +64,8 @@ describe "Information Request" do
     click_link("project_#{@project.id}")
     visit project_rfis_path
     click_link('new_rfi')
-    fill_in('Zeton Clarification', with: "Clar")
-    select(@project.instruments.last.tag, from: 'Instruments')
+    fill_in('Clarification', with: "Clar")
+    select(@project.instruments.last.tag, from: 'information_request_instrument_ids')
     click_on('Add RFI')
     expect(@project.information_requests.last.instruments.last).to eq(Instrument.last)
   end
@@ -90,8 +77,8 @@ describe "Information Request" do
     click_link("project_#{@project.id}")
     visit project_rfis_path
     click_link('new_rfi')
-    fill_in('Zeton Clarification', with: "Clar")
-    select(@project.equipment.last.tag, from: 'Equipment')
+    fill_in('Clarification', with: "Clar")
+    select(@project.equipment.last.tag, from: 'information_request_equipment_ids')
     click_on('Add RFI')
     expect(@project.information_requests.last.equipment.last).to eq(Equipment.last)
   end
