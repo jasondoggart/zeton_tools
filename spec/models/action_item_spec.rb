@@ -15,10 +15,6 @@ RSpec.describe ActionItem, type: :model do
       expect(@action_item).to_not be_valid
     end
 
-    it 'cannot be created without without a title' do
-      @action_item.title = ''
-      expect(@action_item).to_not be_valid
-    end
 
     it 'cannot be created without a description' do
       @action_item.description = ''

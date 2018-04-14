@@ -1,230 +1,151 @@
 <%= form_for @action_item do |f| %>
-
-  <div class="row pl-5 pr-5 neg-mar">
-    <div class="col-sm-12">
-      <div class="card card-box-shadow mb-3">
-        <% if @action_item.errors.any? %>
-          <div class="alert alert-warning">
-            The form contains <%= pluralize(@action_item.errors.count, "error") %>
-            <ul>
-              <% @action_item.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-              <% end %>
-            </ul>
-          </div>
+  <% if @action_item.errors.any? %>
+    <div class="errors-dialogue">
+      This couldn't be completed because there are <%= pluralize(@action_item.errors.count, "error") %>.  Please correct these errors below, then resubmit your form.
+      <ul>
+        <% @action_item.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
         <% end %>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="form-group">
-                <%= f.label :title, '<b>Title</b>'.html_safe %>
-                <%= f.text_field :title, class: 'form-control' %>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="from-group">
-                <%= f.label :description, 'Action Item' %>
-                <%= f.text_area :description, class: 'form-control', rows: 5 %>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <% if !@action_item.new_record? %>
-              <div class="col-sm-4">
-                <div class="form-group">
-                  <%= f.label :creator_id, '<b>Created By</b>'.html_safe,
-                    for: 'action_item_creator' %>
-                  <%= f.collection_select :creator_id,
-                    current_project.users,
-                    :id,
-                    :full_name,
-                    {prompt: true, selected: @action_item.creator_id.to_i},
-                    {class: 'form-control'} %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-          <div class="row mt-4">
-            <div class="col-sm-3">
-              <div class="form-group">
-                <%= f.label :target_date, '<b>Target Date</b>'.html_safe %>
-                <% if @action_item.new_record? %>
-                  <%= f.text_field :target_date,
-                    class: 'form-control',
-                    data: {
-                      provide: 'datepicker',
-                      'date-format' => 'yyyy-mm-dd',
-                      'date-autoclose' => 'true'
-                    } %>
-                <% else %>
-                  <%= f.text_field :target_date,
-                    class: 'form-control',
-                    data: {
-                      provide: 'datepicker',
-                      'date-format' => 'yyyy-mm-dd',
-                      'date-autoclose' => 'true'
-                    },
-                    value:  @action_item.target_date.strftime("%b %-d, %Y") %>
-                <% end %>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <%= f.label :priority,
-                  '<b>Priority</b>'.html_safe,
-                  for: 'action_item_priority' %>
-                <%= f.select :priority,
-                  @priorities,
-                  {},
-                  {class: 'form-control'} %>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <%= f.label :area,
-                  '<b>Area</b>'.html_safe,
-                  for: 'action_item_area' %>
-                <%= f.select :area,
-                  @work_areas,
-                  {},
-                  {class: 'form-control'} %>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <%= 
-                  f.label :sent_by,
-                    '<b>Sent By</b> (Email, Phone...)'.html_safe
-                  %>
-                <%=
-                  f.text_field :sent_by, class: 'form-control'
-                %>
-              </div>
-            </div>
-          </div>
-          <div class="row mt-4">
-            <% if !@action_item.new_record? %>
-              <div class="col-sm-4">
-                <div class="form-group">
-                  <%= f.label :status, '<b>Status</b>'.html_safe,
-                    for: 'action_item_status' %>
-                  <%= f.select :status,
-                    [["Open", 0], ["Closed", 1]],
-                    {},
-                    {class: 'form-control'} %>
-                </div>
-              </div>
-              <div class="col-sm-4">
-                <div class="form-group">
-                  <%= f.label :completion_date,
-                    '<b>Date Completed</b>'.html_safe %>
-                  <% if @action_item.completion_date.present? %>
-                    <%= f.text_field :completion_date,
-                      class: 'form-control',
-                      data: {
-                        provide: 'datepicker',
-                        'date-format' => 'yyyy-mm-dd',
-                        'date-autoclose' => 'true'
-                      },
-                      value: @action_item.completion_date.strftime("%b %-d, %Y")%>
-                  <% else %>
-                    <%= f.text_field :completion_date,
-                      class: 'form-control',
-                      data: {
-                        provide: 'datepicker',
-                        'date-format' => 'yyyy-mm-dd',
-                        'date-autoclose' => 'true'
-                      } %>
-                <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-                </div>
-              </div>
-            <% end %>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <%= f.label :assigned_to_id,
-                  '<b>Assigned To</b>'.html_safe %>
-                <% if @action_item.assigned_to %>
-                  <%= f.collection_select :assigned_to_id,
-                    current_project.users.uniq,
-                    :id,
-                    :full_name,
-                    {selected: @action_item.assigned_to_id.to_i},
-                    {class: "form-control"} %>
-                <% else %>
-                  <%= f.collection_select :assigned_to_id,
-                    current_project.users.uniq,
-                    :id,
-                    :full_name,
-                    {prompt: true},
-                    {class: "form-control"} %>
-                <% end %>
-              </div>
-            </div>
-          </div>
-
-          <h5 class="card-title mt-5">Association Items</h5>
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="form-group">
-                <%= hidden_field_tag "action_item[instrument_ids][]", nil %>
-                <%= f.label :instrument_ids,
-                  '<b>Associated Instruments</b>'.html_safe %>
-                <% if @instruments %>
-                  <%= f.select :instrument_ids,
-                    @instruments.map{ |i| [i.tag, i.id]}, {},
-                    multiple: true,
-                    class: 'form-control' %>
-                <% else %>
-                  No Instruments Added yet
-                <% end %>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <%= hidden_field_tag "action_item[equipment_ids][]", nil %>
-                <%= f.label :equipment_ids,
-                  '<b>Associated Equipment</b>'.html_safe %>
-                <% if @equipment %>
-                  <%= f.select :equipment_ids,
-                    @equipment.map{ |i| [i.tag, i.id]}, {},
-                    multiple: true,
-                    class: 'form-control' %>
-                <% else %>
-                  No Equipment Added yet
-                <% end %>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <%= hidden_field_tag "action_item[handvalve_ids][]", nil %>
-                <%= f.label :handvalve_ids,
-                  '<b>Associated Handvalves</b>'.html_safe %>
-                <% if @handvalves %>
-                  <%= f.select :handvalve_ids,
-                    @handvalves.map{ |i| [i.tag, i.id]}, {},
-                    multiple: true,
-                    class: 'form-control' %>
-                <% else %>
-                  No Handvalves Added Yet
-                <% end %>
-              </div>
-            </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col-sm-3">
-              <%= f.submit @action_item.new_record? ?
-                'Add Action Item' :
-                'Update Action Item',
-                class: 'btn btn-outline-primary' %>
-              <%= link_to "Cancel", :back, class: 'text-muted ml-3' %>
-            </div>
-          </div>
-        </div>
+  <div class="item-properties">
+    <div class="item-header" id="assigned_to">
+      <div class="item-header-icon">
+        <i class="fas fa-user"></i>
+      </div>
+      <%=
+        f.label :assigned_to,
+        'Assigned To',
+        class: 'item-header-tet'
+      %>
+    </div>
+    <%=
+      f.collection_select :assigned_to_id,
+      current_project.users.uniq,
+      :id,
+      :full_name,
+      {
+        selected: @action_item.assigned_to_id.to_i,
+        include_blank: 'Select team member'
+      },
+      {class: 'form-input'}
+    %>
+    <div class="item-header" id="target_date">
+      <div class="item-header-icon">
+        <i class="far fa-calendar-alt"></i>
+      </div>
+      <%=
+        f.label :target_date,
+        'Target Date',
+        class: 'item-header-tet'
+      %>
+    </div>
+    <%=
+      f.text_field :target_date,
+        class: 'form-input',
+        data: {
+          provide: 'datepicker',
+          'date-format' => 'yyyy-mm-dd',
+          'date-autoclose' => 'true'
+      }
+    %>
+    <div class="item-header" id="priority">
+      <div class="item-header-icon">
+        <i class="fas fa-sort-numeric-down"></i>
+      </div>
+      <%=
+        f.label :priority,
+        'Priority',
+        class: 'item-header-tet'
+      %>
+    </div>
+    <%=
+      f.select :priority,
+      @priorities,
+      {},
+      {class: 'form-input'}
+    %>
+    <div class="item-header" id="area-header">
+      <div class="item-header-icon">
+        <i class="fas fa-bullseye"></i>
+      </div>
+      <%=
+        f.label :area,
+        'Area',
+        class: 'item-header-tet'
+      %>
+    </div>
+    <%=
+      f.select :area,
+      @work_areas,
+      {},
+      {class: 'form-input'}
+    %>
+    <div class="item-header" id="associated-items-header">
+      <div class="item-header-icon">
+        <i class="fas fa-tags"></i>
+      </div>
+      <div class="item-header-text">
+        Associated Items
       </div>
     </div>
+    <div class="item-associations">
+      <%=
+        hidden_field_tag "action_item[instrument_ids][]",
+        nil
+      %>
+      <%=
+        f.select :instrument_ids,
+        @instruments.map{ |i| [i.tag, i.id]},
+        {},
+        multiple: true,
+        class: "form-control"
+      %>
+      <%=
+        hidden_field_tag "action_item[equipment_ids][]",
+        nil
+      %>
+      <%= f.select :equipment_ids,
+        @equipment.map{ |i| [i.tag, i.id]},
+        {},
+        multiple: true,
+        class: "form-control"
+      %>
+      <%=
+        hidden_field_tag "action_item[handvalves_ids][]",
+        nil
+      %>
+      <%=
+        f.select :handvalve_ids,
+        @handvalves.map{ |i| [i.tag, i.id]},
+        {},
+        multiple: true,
+        class: "form-control"
+      %>
+    </div>
+    <div class="item-header" id="description-header">
+      <div class="item-header-icon">
+        <i class="fas fa-align-justify"></i>
+      </div>
+      <%=
+        f.label :description,
+        'Action Item',
+        class: 'item-header-text'
+      %>
+    </div>
+    <%=
+      f.text_area :description,
+      class: 'form-input',
+      rows: 5
+    %>
+    <%=
+      f.submit @action_item.new_record? ?
+      'Add Action Item' :
+      'Update Action Item',
+      class: 'form-submit-button'
+    %>
   </div>
 <% end %>
 

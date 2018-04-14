@@ -10,12 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180313122114) do
+ActiveRecord::Schema.define(version: 20180414211208) do
 
   create_table "action_items", force: :cascade do |t|
     t.integer "priority"
     t.string "area"
-    t.text "title"
     t.datetime "target_date"
     t.datetime "completion_date"
     t.string "sent_by"

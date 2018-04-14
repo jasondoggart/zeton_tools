@@ -18,7 +18,7 @@ describe "Action Item" do
     visit project_action_items_path
     click_link("new_action_item")
     select('Process', from: "Area")
-    fill_in('Title', with: "The title")
+    fill_in('action_item_description', with: "The title")
     fill_in('Action Item', with: "The action item text")
     click_on('Add Action Item')
     expect(current_path).to eq(project_action_items_path)
@@ -37,13 +37,11 @@ describe "Action Item" do
     visit root_path
     click_link("project_#{@project.id}")
     action_item = FactoryBot.create(:action_item, project: @project)
-    visit project_action_items_path
-    click_link("show_action_item_#{action_item.id}")
-    click_link("edit_action_item_#{action_item.id}")
-    fill_in('Title', with: "New title")
+    visit edit_action_item_path(action_item)
+    fill_in('action_item_description', with: "New title")
     click_on("Update Action Item")
     expect(current_path).to eq(project_action_items_path)
-    expect(action_item.reload.title).to eq("New title")
+    expect(action_item.reload.description).to eq("New title")
   end
 
 
@@ -55,9 +53,8 @@ describe "Action Item" do
     visit project_action_items_path
     click_link('new_action_item')
     select('Process', from: "Area")
-    fill_in('Title', with: "The title")
     fill_in('Action Item', with: "The action item text")
-    select(@project.instruments.last.tag, from: 'Associated Instruments')
+    select(@project.instruments.last.tag, from: 'action_item_instrument_ids')
     click_on('Add Action Item')
     expect(@project.action_items.last.instruments.last).to eq(Instrument.last)
   end
@@ -70,9 +67,8 @@ describe "Action Item" do
     visit project_action_items_path
     click_link('new_action_item')
     select('Process', from: "Area")
-    fill_in('Title', with: "The title")
     fill_in('Action Item', with: "The action item text")
-    select(@project.equipment.last.tag, from: 'Associated Equipment')
+    select(@project.equipment.last.tag, from: 'action_item_equipment_ids')
     click_on('Add Action Item')
     expect(@project.action_items.last.equipment.last).to eq(Equipment.last)
   end
@@ -85,9 +81,8 @@ describe "Action Item" do
     visit project_action_items_path
     click_link('new_action_item')
     select('Process', from: "Area")
-    fill_in('Title', with: "The title")
     fill_in('Action Item', with: "The action item text")
-    select(@project.handvalves.last.tag, from: 'Associated Handvalves')
+    select(@project.handvalves.last.tag, from: 'action_item_handvalve_ids')
     click_on('Add Action Item')
     expect(@project.action_items.last.handvalves.last).to eq(Handvalve.last)
   end
