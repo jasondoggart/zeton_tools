@@ -1,0 +1,311 @@
+<div class="item-header" id="assigned-to-header">
+  <div class="item-header-icon">
+    <i class="far fa-user"></i>
+  </div>
+  <div class="item-header-text">
+    Assigned To
+  </div>
+</div>
+<div id="assigned-to">
+  <div id="assigned-to-show">
+    <div class="item-specific" onclick="showInput('#assigned-to', '#assigned-to-header')">
+      <% if action_item.assigned_to %>
+        <%= action_item.assigned_to.full_name %>
+      <% else %>
+        Click to add
+      <% end %>
+    </div>
+  </div>
+  <div id="assigned-to-form" class="hide">
+    <%= form_for action_item, remote: true do |f| %>
+      <div class="inline-form">
+        <div class="inline-form-field">
+          <% if action_item.assigned_to_id %>
+            <%= f.collection_select :assigned_to_id,
+              current_project.users.uniq,
+              :id,
+              :full_name,
+              {
+                selected: action_item.assigned_to_id.to_i,
+                include_blank: 'Select team member'
+              },
+              {class: 'form-input'} %>
+          <% else %>
+            <%= f.collection_select :assigned_to_id,
+              current_project.users.uniq,
+              :id,
+              :full_name,
+              {include_blank: 'Select team member'},
+              {class: 'form-input'} %>
+          <% end %>
+        </div>
+        <div class="inline-submit">
+          <%= f.submit 'Update', class: 'form-submit-button' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="item-header" id="target-date-header">
+  <div class="item-header-icon">
+    <i class="far fa-calendar"></i>
+  </div>
+  <div class="item-header-text">
+    Target Date
+  </div>
+</div>
+<div id="target-date">
+  <div id="target-date-show">
+    <div class="item-specific" onclick="showInput('#target-date', '#target-date-header')">
+      <% if action_item.target_date %>
+        <%= action_item.target_date.strftime("%b %-d, %Y") %>
+      <% else %>
+        Click to add
+      <% end %>
+    </div>
+  </div>
+  <div id="target-date-form" class="hide">
+    <%= form_for action_item, remote: true do |f| %>
+      <div class="inline-form">
+        <div class="inline-form-field">
+          <% if action_item.target_date %>
+            <%=
+              f.text_field :target_date,
+              class: 'form-input',
+              data: {
+                provide: 'datepicker',
+                'date-format' => 'yyyy-mm-dd',
+                'date-autoclose' => 'true'
+              },
+              value:  action_item.target_date.strftime("%b %-d, %Y")
+            %>
+          <% else %>
+            <%=
+              f.text_field :target_date,
+              class: 'form-input',
+              data: {
+                provide: 'datepicker',
+                'date-format' => 'yyyy-mm-dd',
+                'date-autoclose' => 'true'
+              }
+            %>
+          <% end %>
+        </div>
+        <div class="inline-submit">
+          <%= f.submit 'Update', class: 'form-submit-button' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="item-header" id="completion-date-header">
+  <div class="item-header-icon">
+    <i class="far fa-calendar-check"></i>
+  </div>
+  <div class="item-header-text">
+    Completion Date
+  </div>
+</div>
+<div id="completion-date">
+  <div id="completion-date-show">
+    <div class="item-specific" onclick="showInput('#completion-date', '#completion-date-header')">
+      <% if action_item.completion_date %>
+        <%= action_item.completion_date.strftime("%b %-d, %Y") %>
+      <% else %>
+        Not yet completed
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="item-header" id="priority-header">
+  <div class="item-header-icon">
+    <i class="fas fa-sort-numeric-down"></i>
+  </div>
+  <div class="item-header-text">
+    Priority
+  </div>
+</div>
+<div id="priority">
+  <div id="priority-show">
+    <div class="item-specific" onclick="showInput('#priority', '#priority-header')">
+      <% if action_item.priority %>
+        <%= action_item.priority %>
+      <% else %>
+        Click to add
+      <% end %>
+    </div>
+  </div>
+  <div id="priority-form" class="hide">
+    <%= form_for action_item, remote: true do |f| %>
+      <div class="inline-form">
+        <div class="inline-form-field">
+          <%=
+            f.select :priority,
+            priorities,
+            {},
+            {class: 'form-input'}
+          %>
+        </div>
+        <div class="inline-submit">
+          <%= f.submit 'Update', class: 'form-submit-button' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="item-header" id="area-header">
+  <div class="item-header-icon">
+     <i class="fas fa-bullseye"></i>
+  </div>
+  <div class="item-header-text">
+    Area
+  </div>
+</div>
+<div id="area">
+  <div id="area-show">
+    <div class="item-specific" onclick="showInput('#area', '#area-header')">
+      <% if action_item.area %>
+        <%= action_item.area %>
+      <% else %>
+        Click to add
+      <% end %>
+    </div>
+  </div>
+  <div id="area-form" class="hide">
+    <%= form_for action_item, remote: true do |f| %>
+      <div class="inline-form">
+        <div class="inline-form-field">
+          <%=
+            f.select :area,
+            work_areas,
+            {},
+            {class: 'form-input'}
+          %>
+        </div>
+        <div class="inline-submit">
+          <%= f.submit 'Update', class: 'form-submit-button' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="item-header" id="associated-items-header">
+  <div class="item-header-icon">
+    <i class="fas fa-tags"></i>
+  </div>
+  <div class="item-header-text">
+    Associated Items
+  </div>
+</div>
+<div id="associated-items">
+  <div id="associated-items-show">
+    <div class="item-specific" onclick="showInput('#associated-items', '#associated-items-header'); showSelect2()">
+      <% if action_item.number_of_associations > 0 %>
+        <% action_item.instruments.each do |inst |%>
+          <%=
+            link_to inst.tag,
+            instrument_path(inst),
+            class: 'associated-instrument'
+          %>
+        <% end %>
+        <% action_item.equipment.each do |equip| %>
+          <%=
+            link_to equip.tag,
+            equipment_path(equip),
+            class: 'associated-equipment'
+          %>
+        <% end %>
+        <% action_item.handvalves.each do |hv| %>
+          <%=
+            link_to hv.tag,
+            handvalve_path(hv),
+            class: 'associated-handvalve'
+          %>
+        <% end %>
+      <% else %>
+        Click to add
+      <% end %>
+    </div>
+  </div>
+  <div id="associated-items-form" class="hide">
+    <%= form_for action_item, remote: true do |f| %>
+      <div class="inline-form-associations">
+        <div class="associated-items-list">
+          <%=
+            hidden_field_tag "action_item[instrument_ids][]",
+              nil
+            %>
+          <%=
+            f.select :instrument_ids,
+              instruments.map{ |i| [i.tag, i.id]},
+              {},
+              multiple: true,
+              class: "form-control"
+            %>
+        </div>
+        <div class="associated-items-list">
+          <%=
+            hidden_field_tag "action_item[equipment_ids][]",
+              nil
+            %>
+          <%= f.select :equipment_ids,
+            equipment.map{ |i| [i.tag, i.id]},
+            {},
+            multiple: true,
+            class: "form-control"
+          %>
+        </div>
+        <div class="associated-items-list">
+          <%=
+            hidden_field_tag "action_item[handvalves_ids][]",
+              nil
+            %>
+          <%=
+            f.select :handvalve_ids,
+              handvalves.map{ |i| [i.tag, i.id]},
+              {},
+              multiple: true,
+              class: "form-control"
+            %>
+        </div>
+        <div class="inline-submit">
+          <%= f.submit 'Update', class: 'form-submit-button' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="item-header" id="description-header">
+  <div class="item-header-icon">
+    <i class="fas fa-align-justify"></i>
+  </div>
+  <div class="item-header-text">
+    Description
+  </div>
+</div>
+<div id="description">
+  <div id="description-show">
+    <div class="item-specific" onclick="showInput('#description', '#description-header')">
+      <%= @action_item.description %>
+    </div>
+  </div>
+  <div id="description-form" class="hide">
+    <%= form_for @action_item, remote: true do |f| %>
+      <div class="inline-form">
+        <div class="inline-form-field">
+          <%=
+            f.text_area :description,
+            class: 'form-input',
+            rows: 5
+          %>
+        </div>
+        <div class="inline-submit">
+          <%= f.submit 'Update', class: 'form-submit-button' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+

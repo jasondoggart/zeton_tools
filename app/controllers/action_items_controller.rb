@@ -30,6 +30,12 @@ class ActionItemsController < ApplicationController
 
   def show
     @action_item = ActionItem.find(params[:id])
+    @project_team_members = current_project.users.uniq
+    @priorities = ActionItem::PRIORITIES
+    @work_areas = WORK_AREAS
+    @instruments = current_project.instruments
+    @handvalves = current_project.handvalves
+    @equipment = current_project.equipment
   end
 
   def edit
@@ -45,6 +51,9 @@ class ActionItemsController < ApplicationController
     @action_item = ActionItem.find(params[:id])
     @work_areas = WORK_AREAS
     @priorities = ActionItem::PRIORITIES
+    @instruments = current_project.instruments
+    @handvalves = current_project.handvalves
+    @equipment = current_project.equipment
     change_completion_date = action_item_status_changed?
     if action_item_closed
       completion_date = Time.now

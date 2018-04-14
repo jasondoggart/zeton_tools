@@ -1,3 +1,20 @@
 $("#action_item_status_form_action_item_<%= @action_item.id %>").html(
   "<%= j render partial: 'action_item_status_form',
   locals: {action_item: @action_item} %>");
+$("#action_item_status_form").html(
+  "<%= j render partial: 'action_items_status_form_large',
+  locals: {
+    action_item: @action_item
+  } %>");
+$("#action-item-properties").html(
+  "<%= j render partial: 'properties',
+    locals: {
+      action_item: @action_item,
+      priorities: @priorities,
+      work_areas: @work_areas,
+      instruments: @instruments,
+      equipment: @equipment,
+      handvalves: @handvalves
+    }
+  %>");
+

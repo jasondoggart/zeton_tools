@@ -15,6 +15,18 @@ function showSelect2() {
     placeholder: "Select associated handvalves",
     theme: "bootstrap"
   });
+  $('#action_item_instrument_ids').select2({
+    placeholder: "Select associated instruments",
+    theme: "bootstrap"
+  });
+  $('#action_item_equipment_ids').select2({
+    placeholder: "Select associated equipment",
+    theme: "bootstrap"
+  });
+  $('#action_item_handvalve_ids').select2({
+    placeholder: "Select associated handvalves",
+    theme: "bootstrap"
+  });
 }
 
 

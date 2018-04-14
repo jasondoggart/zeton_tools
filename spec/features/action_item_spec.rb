@@ -46,17 +46,6 @@ describe "Action Item" do
     expect(action_item.reload.title).to eq("New title")
   end
 
-  it 'can be deleted' do
-    visit root_path
-    click_link("project_#{@project.id}")
-    action_item = FactoryBot.create(:action_item, project: @project)
-    before_count = ActionItem.count
-    visit project_action_items_path
-    click_link("show_action_item_#{action_item.id}")
-    click_link("delete_action_item_#{action_item.id}")
-    expect(current_path).to eq(project_action_items_path)
-    expect(ActionItem.count).to eq(before_count - 1)
-  end
 
   it 'can have instruments associated with it through the new path' do
     @project.instruments.create(type_code: "FE", loop: "1004")
